@@ -5,7 +5,7 @@ export function Header() {
   return (
     <section className='flex'>
       <div className='logo'>
-        <img src={logo} />
+        <img src={logo} alt="logo"/>
       </div>
 
       <div className='nav_anchors '>

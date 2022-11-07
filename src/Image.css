@@ -1,5 +1,30 @@
+.imageSection img{
+    width: 100%;
+    filter: brightness(45%);
+}
+
 .imageSection{
     position: relative;
+}
+
+.imageInfo{
+    position: absolute;
+    top: 10%;
+    right: 50%;
+    transform: translate(50%,50%);
+    font-size: 5rem;
+    text-align: center;
+    color: white;
+}
+
+.woodColor{
+    color: #985e26;
+    font-weight: bold;
+}
+
+.ekoColor{
+    font-weight: bold;
+    color: #6bbe45;
 }
 
 .imageButtons{
@@ -9,16 +34,18 @@
     top: 50%;
     right: 50%;
     transform: translate(50%,50%);
-    /* margin-top: 100px; */
+    margin-top: 100px;
 }
 
 .imageButtons button{
     font-size: 1.3rem;
     width: 250px;
     height: 60px;
+    cursor: pointer;
 }
 
 .imageButtons button:first-of-type{
+    filter: brightness(100%);
     border: transparent;
     border-radius: 50px;
     background-color: rgba(48, 48, 230, 0.8);
@@ -29,4 +56,17 @@
 .imageButtons button:first-of-type:hover{
     transition: 200ms ease-in;
     background-color: rgba(48, 48, 230,1);
+}
+
+.imageButtons button:last-of-type{
+    border: 2px solid white;
+    color: white;
+    border-radius: 50px;
+    transition: 300ms ease-out;
+    background-color: rgba(200, 200, 200, 0.2);   
+}
+
+.imageButtons button:last-of-type:hover{
+    transition: 200ms ease-in;
+    background-color: rgba(200, 200, 200, 0.5);
 }

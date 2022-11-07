@@ -4,7 +4,14 @@ import './Image.css'
 export function Image() {
   return (
     <section className='imageSection'>
-      <img src={warehousePhoto} width="100%" />
+      <div>
+      <img src={warehousePhoto} alt="backgroundPhoto" />
+      </div>
+
+    <div className='imageInfo'>
+      <p>Mabis <span className='woodColor'>Wood</span><span className='ekoColor'> Eko</span>,</p>
+      <p>The best pelets in town.</p>
+    </div>
 
     <div className='imageButtons'>
       <button>Our Products</button>

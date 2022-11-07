@@ -1,0 +1,16 @@
+.cardsAll{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    height: 200px;
+    text-align: center;
+    border: 1px solid black;
+    gap: 10px;
+}

@@ -12,8 +12,8 @@
       "title":"Product 2",
       "kg":"15",
       "price":"200",
-      "currency": "RON",
-      "image":"./src/resources/hello.png",
+      "currency":"RON",
+      "image":"/resources/hello.png",
       "id": 2
     },
     {
@@ -21,7 +21,7 @@
       "kg":"15",
       "price":"200",
       "currency": "RON",
-      "image":"./src/resources/peletsProductImage.png",
+      "image":"/resources/hello.png",
       "id": 3
     }
   ]

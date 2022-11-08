@@ -11,9 +11,11 @@
     position: absolute;
     top: 10%;
     right: 50%;
+    width: 100%;
     transform: translate(50%,50%);
     font-size: 5rem;
     text-align: center;
+    word-wrap: normal;
     color: white;
 }
 

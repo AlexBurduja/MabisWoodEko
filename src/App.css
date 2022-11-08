@@ -4,6 +4,10 @@
   font-family: "Montserrat";
 }
 
+body{
+  height: 1500px;
+}
+
 @font-face {
   font-family: "Montserrat";
   src: url(https://fonts.google.com/specimen/Montserrat);

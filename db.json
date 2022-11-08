@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "title":"Product 1",
+      "kg":"15",
+      "price":"200",
+      "currency": "RON",
+      "image": "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+      "id": 1
+    },
+    {
+      "title":"Product 2",
+      "kg":"15",
+      "price":"200",
+      "currency": "RON",
+      "image":"./src/resources/hello.png",
+      "id": 2
+    },
+    {
+      "title":"Pellets Product 3",
+      "kg":"15",
+      "price":"200",
+      "currency": "RON",
+      "image":"./src/resources/peletsProductImage.png",
+      "id": 3
+    }
+  ]
+}

@@ -5,22 +5,30 @@ section header{
 }
 
 .gridUl{
-    display: grid;
-    place-content: center; 
-    gap: 15px;
+    display: grid;  
+    place-items: center;
+}
+
+@media (min-width: 760px){
+    .gridUl{
+        grid-template-columns: repeat(2,1fr);
+    }
 }
 
 
 
-
 .cardDiv{
+    display: flex;
+    flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px .8125rem, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    width: 25rem;
-    height: 40rem;
     list-style-type: none;
     text-align: center;
     position: relative;
     border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 29rem;
+    height: 32rem;
 }
 
 .cardDiv h2{
@@ -30,10 +38,8 @@ section header{
 
 
 .cardDiv img { 
-    height: auto;
-    width: auto;
-    max-width: 20vw;
-    max-height: 20vw;
+    width: 50%;
+    height: 50%;
 }
 
 .cardDiv p::after{
@@ -66,7 +72,9 @@ content: " Kg";
     width: 12.63vw;
     height: 2.12vw;
     cursor: pointer;
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    position: relative;
 }
 
 .cardDiv button:hover{

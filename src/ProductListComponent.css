@@ -7,11 +7,13 @@ section header{
 .gridUl{
     display: grid;  
     place-items: center;
+    margin-top: 2%;
+    gap: 35px;
 }
 
 @media (min-width: 760px){
     .gridUl{
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 

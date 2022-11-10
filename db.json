@@ -1,27 +1,27 @@
 {
   "products": [
     {
-      "title":"Product 1",
+      "title":"Produs 1 Peleti",
       "kg":"15",
       "price":"200",
       "currency": "RON",
-      "image": "https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+      "image": "/resources/productImage.png",
       "id": 1
     },
     {
-      "title":"Product 2",
+      "title":"Produs 2 Peleti",
       "kg":"15",
       "price":"200",
       "currency":"RON",
-      "image":"/resources/hello.png",
+      "image":"/resources/productImage.png",
       "id": 2
     },
     {
-      "title":"Pellets Product 3",
+      "title":"Produs 3 Peleti",
       "kg":"15",
       "price":"200",
       "currency": "RON",
-      "image":"/resources/hello.png",
+      "image":"/resources/productImage.png",
       "id": 3
     }
   ]

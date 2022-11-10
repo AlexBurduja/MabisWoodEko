@@ -1,4 +1,4 @@
-import warehousePhoto from './resources/warehouse.jpg';
+import warehousePhoto from "./publicResources/warehouse.jpg"
 import './Image.css'
 
 export function Image() {

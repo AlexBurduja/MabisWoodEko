@@ -1,0 +1,60 @@
+section header{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.gridUl{
+    display: grid;
+    justify-content: center;
+    margin: 0 auto; 
+}
+
+
+.cardDiv{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px .8125rem, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    width: 400px;
+    height: 40rem;
+    list-style-type: none;
+    text-align: center;
+    position: relative;
+}
+
+.cardDiv h2{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+.cardDiv img {
+    height: auto; 
+    width: auto; 
+    width: 20vw; 
+    height: 20vw;
+}
+
+.cardDiv p::before{
+content: "Kg : ";
+}
+
+.cardDiv p{
+    position: absolute;
+    font-size: 20px;
+    bottom: 20px;
+    left: 20px;
+}
+
+.cardDiv span{
+    position: absolute;
+    font-size: 20px;
+    bottom: 20px;
+    right: 20px;
+}
+
+.cardDiv button{
+    border: transparent;
+    background-color: rgb(48, 48, 230);
+    color: white;
+    width: 200px;
+    height: 40px;
+}

@@ -5,6 +5,7 @@
     align-items: center;
     gap: 10px;
     bottom: 40px;
+    flex-wrap: wrap;
 }
 
 .card{

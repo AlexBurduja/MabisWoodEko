@@ -6,10 +6,11 @@ section header{
 
 .gridUl{
     display: grid;
-    justify-content: center;
-    margin: 0 auto; 
+    place-content: center; 
     gap: 15px;
 }
+
+
 
 
 .cardDiv{
@@ -28,11 +29,11 @@ section header{
 }
 
 
-.cardDiv img {
-    height: auto; 
-    width: auto; 
-    width: 20vw; 
-    height: 20vw;
+.cardDiv img { 
+    height: auto;
+    width: auto;
+    max-width: 20vw;
+    max-height: 20vw;
 }
 
 .cardDiv p::after{

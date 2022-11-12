@@ -2,7 +2,7 @@ import './App.css';
 import { Header } from './Header.js';
 import { Image } from './Image';
 import { ImageCards } from './ImageCards';
-import { ProductListComponent } from './ProductListComponent';
+import { ProductListComponent } from './ProductListComponent';      
 
 function App() {
   return (

@@ -5,17 +5,15 @@ section header{
 }
 
 .gridUl{
-    display: grid;  
+    display: grid;
     place-items: center;
+    place-content: center;
     margin-top: 2%;
+    grid-template-columns: repeat(auto-fit, minmax(450px,1fr));
     gap: 35px;
+    width: 100%;
 }
 
-@media (min-width: 760px){
-    .gridUl{
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
 
 
 
@@ -24,13 +22,12 @@ section header{
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px .8125rem, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     list-style-type: none;
-    text-align: center;
     position: relative;
     border-radius: 30px;
     justify-content: center;
     align-items: center;
-    width: 29rem;
-    height: 32rem;
+    width: 65%;
+    height: 105%;
 }
 
 .cardDiv h2{
@@ -69,18 +66,26 @@ content: " Kg";
     background-color: white;
     color: rgb(48, 48, 230);
     font-weight: bold;
-    font-size: 20px;
+    font-size: 0.9rem;
     font-family: inherit;
-    width: 12.63vw;
-    height: 2.12vw;
+    /* width: 12.63vw; */
+    /* height: 2.12vw; */
+    width: 30%;
+    height: 10%;
     cursor: pointer;
     margin-top: 30px;
     margin-bottom: 60px;
     position: relative;
+    bottom: 0;
 }
 
 .cardDiv button:hover{
     background-color: rgb(48, 48, 230);
     color: white;
     border: 2px solid black;
+}
+
+.listComponent header{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }

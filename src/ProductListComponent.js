@@ -3,31 +3,34 @@ import { ProductCardComponent } from "./ProductCardComponent";
 import "./ProductListComponent.css"
 
 export function ProductListComponent() {
+
   const url = "http://localhost:3001";
-  const endpoint = "/products";
-  const [movies, setMovies] = useState([]);
+  const endpoint = "/product";
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetch(url + endpoint)
       .then((response) => response.json())
-      .then((moviesFromServer) => setMovies(moviesFromServer));
+      .then((productsFromServer) => setProducts(productsFromServer));
   }, []);
 
   return (
-    <section>
+    <section className='listComponent'>
       <header>Products</header>
       <div className='gridUl'>
-        {movies.map((movie) => {
+        {products.map((product) => {
           return (
             <ProductCardComponent
-              Title={movie.title}
-              Kg={movie.kg}
-              Currency={movie.currency}
-              Price={movie.price}
-              Image={movie.image}>
+              Title={product.title}
+              Kg={product.kg}
+              Currency={product.currency}
+              Price={product.price}
+              Image={product.image}
+              id = {product.id}
+              key = {product.id}> 
             </ProductCardComponent>
           );
-        })}
+        })};
       </div>
     </section>
   );

@@ -1,51 +1,51 @@
 {
   "product": [
     {
-      "title":"Peleti",
-      "kg":"15",
-      "price":"200",
-      "currency": "RON",
+      "title": "Peleti",
+      "kg": "212",
+      "price": "",
+      "currency": "EUR",
       "image": "/resources/productImage.png",
       "id": 1
     },
     {
-      "title":"Bricheti",
-      "kg":"15",
-      "price":"200",
-      "currency":"EUR",
-      "image":"/resources/productImage2.png",
+      "title": "Bricheti",
+      "kg": "15",
+      "price": "200",
+      "currency": "EUR",
+      "image": "/resources/productImage2.png",
       "id": 2
     },
     {
-      "title":"Produs 3 Peleti",
-      "kg":"15",
-      "price":"200",
+      "title": "Produs 3 Peleti",
+      "kg": "15",
+      "price": "200",
       "currency": "RON",
-      "image":"/resources/productImage.png",
+      "image": "/resources/productImage.png",
       "id": 3
     },
     {
-      "title":"Produs 3 Peleti",
-      "kg":"15",
-      "price":"200",
+      "title": "Produs 3 Peleti",
+      "kg": "15",
+      "price": "200",
       "currency": "RON",
-      "image":"/resources/productImage.png",
+      "image": "/resources/productImage.png",
       "id": 4
     },
     {
-      "title":"Produs 3 Peleti",
-      "kg":"15",
-      "price":"200",
+      "title": "Produs 3 Peleti",
+      "kg": "15",
+      "price": "200",
       "currency": "RON",
-      "image":"/resources/productImage.png",
+      "image": "/resources/productImage.png",
       "id": 5
     },
     {
-      "title":"Produs 3 Peleti",
-      "kg":"15",
-      "price":"200",
+      "title": "Produs 3 Peleti",
+      "kg": "15",
+      "price": "200",
       "currency": "RON",
-      "image":"/resources/productImage.png",
+      "image": "/resources/productImage.png",
       "id": 6
     }
   ]

@@ -22,7 +22,7 @@ export function Header() {
 
 <div className='hamburger'>
     <input type="checkbox" id="navi-toggle" className="checkbox" />
-    <label Htmlfor="navi-toggle" class="button">
+    <label htmlFor="navi-toggle" class="button">
       <span className="icon">&nbsp;</span>
     </label>
     <div className="background">&nbsp;</div>

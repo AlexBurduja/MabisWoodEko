@@ -26,12 +26,11 @@
 }
 
 .button {
-  position: relative;
   background-color: white;
   height: 5rem;
   width: 5rem;
   border-radius: 50%;
-  position: absolute;
+  position: fixed;
   top: 1vh; 
   right: 5vw; 
   z-index: 2000;
@@ -80,8 +79,7 @@
   font-size: 36px;
 }
 
-/*
-Experiemental (might add it or not) 
+ 
 .link:link,
 .link:visited {
   display: inline-block;
@@ -99,7 +97,7 @@ Experiemental (might add it or not)
   );
   background-size: 220%;
   transition: all 0.4s;
-} */
+}
 
 .link:hover,
 .link:active {
@@ -110,6 +108,7 @@ Experiemental (might add it or not)
 .checkbox:checked ~ .background {
   transform: scale(80);
 }
+
 .checkbox:checked ~ .nav {
   opacity: 1;
   width: 100%;

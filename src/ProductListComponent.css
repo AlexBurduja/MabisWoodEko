@@ -14,9 +14,6 @@ section header{
     width: 100%;
 }
 
-
-
-
 .cardDiv{
     display: flex;
     flex-direction: column;
@@ -41,9 +38,6 @@ section header{
     height: 50%;
 }
 
-.cardDiv p::after{
-content: " Kg";
-}
 
 .cardDiv p{
     position: absolute;

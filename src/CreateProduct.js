@@ -7,9 +7,39 @@ export function CreateProduct(props){
   const productDetailUrl = 'http://localhost:3001';
   const endpoint = "/product";
 
+  const [title, setTitle] = useState();
+  const [price, setPrice] = useState();
+  const [kg, setKg] = useState();
+  const [currency, setCurrency] = useState();
 
+  useEffect(() => {
+    fetch(productDetailUrl + endpoint + "/" + id)
+    .then((response) => response.json())
+    .then((product) => {
+      setTitle(product.title);
+      setPrice(product.price);
+      setKg(product.kg)
+      setCurrency(product.currency)
+    }) 
+  }, [])
 
-  function submit() {
+  function titleChange(event){
+    setTitle(event.target.value);
+  }
+
+  function priceChange(event){
+    setPrice(event.target.value);
+  }
+
+  function kgChange(event){
+    setKg(event.target.value);
+  }
+
+  function currencyChange(event){
+    setCurrency(event.target.value);
+  }
+
+  function submit(event) {
     const body = {
       title:Title,
       kg:Kg,
@@ -52,16 +82,16 @@ export function CreateProduct(props){
             <div className="modal-content-inputs">
 
               <label for="title">Title :</label>
-              <input id="title" value={Title} ></input>
+              <input id="title" value={Title} onChange={titleChange}></input>
 
               <label for="kg">Kg :</label>
-              <input id="kg" value={Kg} ></input>
+              <input id="kg" value={Kg} onChange={kgChange}></input>
 
               <label for="price">Price :</label>
-              <input id="price" value={Price} ></input>
+              <input id="price" value={Price} onChange={priceChange}></input>
 
               <label for="currency">Currency :</label>
-              <input id="currency" value={Currency} ></input>
+              <input id="currency" value={Currency} onChange={currencyChange}></input>
             </div>
 
             <button className="modal-content-button_save" onClick={submit}>Save Changes</button>

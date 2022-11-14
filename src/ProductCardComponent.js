@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./ProductCardComponent.css"
 import "./CreateProduct"
-import { CreateProduct } from "./CreateProduct";
 
 /// Modal
 

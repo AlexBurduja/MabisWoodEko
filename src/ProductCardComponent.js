@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./ProductCardComponent.css"
+import "./CreateProduct"
+import { CreateProduct } from "./CreateProduct";
 
 /// Modal
 
@@ -17,6 +19,7 @@ export function ProductCardComponent(props) {
   } else {
     document.body.classList.remove('active-modal')
   }
+
 
   ///// End of Modal
 

@@ -1,0 +1,76 @@
+[debug] [2022-11-15T19:49:24.240Z] ----------------------------------------------------------------------
+[debug] [2022-11-15T19:49:24.241Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --token //091iqdvHRHPKnCgYIARAAGAkSNwF-L9Ir5N5yJw63I_mrrWMzWDeq0UflaUEBSyy5F9YInIhQCxgwBnjnlmHZbyuSMHceGGQR_hc
+[debug] [2022-11-15T19:49:24.242Z] CLI Version:   11.16.0
+[debug] [2022-11-15T19:49:24.242Z] Platform:      win32
+[debug] [2022-11-15T19:49:24.242Z] Node Version:  v16.18.0
+[debug] [2022-11-15T19:49:24.243Z] Time:          Tue Nov 15 2022 21:49:24 GMT+0200 (Eastern European Standard Time)
+[debug] [2022-11-15T19:49:24.244Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-15T19:49:24.312Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-15T19:49:24.312Z] > authorizing via --token option
+[warn] !  Authenticating with `--token` is deprecated and will be removed in a future major version of `firebase-tools`. Instead, use a service account key with `GOOGLE_APPLICATION_CREDENTIALS`: https://cloud.google.com/docs/authentication/getting-started 
+[debug] [2022-11-15T19:49:24.314Z] [iam] checking project pelets-project for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-11-15T19:49:24.315Z] > refreshing access token with scopes: []
+[debug] [2022-11-15T19:49:24.317Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-11-15T19:49:24.317Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-15T19:49:24.457Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2022-11-15T19:49:24.457Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-15T19:49:24.457Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/pelets-project:testIamPermissions [none]
+[debug] [2022-11-15T19:49:24.457Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/pelets-project:testIamPermissions x-goog-quota-user=projects/pelets-project
+[debug] [2022-11-15T19:49:24.457Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pelets-project:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-15T19:49:25.267Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/pelets-project:testIamPermissions 401
+[debug] [2022-11-15T19:49:25.267Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pelets-project:testIamPermissions {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"ACCESS_TOKEN_TYPE_UNSUPPORTED","metadata":{"method":"google.cloudresourcemanager.v1.Projects.TestIamPermissions","service":"cloudresourcemanager.googleapis.com"}}]}}
+[debug] [2022-11-15T19:49:25.268Z] [iam] error while checking permissions, command may fail: FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2022-11-15T19:49:25.268Z] > refreshing access token with scopes: []
+[debug] [2022-11-15T19:49:25.269Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-11-15T19:49:25.269Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-15T19:49:25.378Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2022-11-15T19:49:25.378Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-15T19:49:25.379Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pelets-project [none]
+[debug] [2022-11-15T19:49:25.493Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pelets-project 401
+[debug] [2022-11-15T19:49:25.493Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pelets-project {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2022-11-15T19:49:25.493Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2022-11-15T19:49:25.601Z] FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+    at responseToError (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:49:12)
+    at RetryOperation._fn (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:288:77)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[error] 
+[error] Error: Failed to get Firebase project pelets-project. Please make sure the project exists and your account has permission to access it.
+[debug] [2022-11-15T19:49:54.081Z] ----------------------------------------------------------------------
+[debug] [2022-11-15T19:49:54.083Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --token //091iqdvHRHPKnCgYIARAAGAkSNwF-L9Ir5N5yJw63I_mrrWMzWDeq0UflaUEBSyy5F9YInIhQCxgwBnjnlmHZbyuSMHceGGQR_hc
+[debug] [2022-11-15T19:49:54.083Z] CLI Version:   11.16.0
+[debug] [2022-11-15T19:49:54.083Z] Platform:      win32
+[debug] [2022-11-15T19:49:54.083Z] Node Version:  v16.18.0
+[debug] [2022-11-15T19:49:54.084Z] Time:          Tue Nov 15 2022 21:49:54 GMT+0200 (Eastern European Standard Time)
+[debug] [2022-11-15T19:49:54.084Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-15T19:49:54.151Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-15T19:49:54.151Z] > authorizing via --token option
+[warn] !  Authenticating with `--token` is deprecated and will be removed in a future major version of `firebase-tools`. Instead, use a service account key with `GOOGLE_APPLICATION_CREDENTIALS`: https://cloud.google.com/docs/authentication/getting-started 
+[debug] [2022-11-15T19:49:54.152Z] [iam] checking project pelets-project for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-11-15T19:49:54.154Z] > refreshing access token with scopes: []
+[debug] [2022-11-15T19:49:54.155Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-11-15T19:49:54.155Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-15T19:49:54.316Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2022-11-15T19:49:54.317Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-15T19:49:54.317Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/pelets-project:testIamPermissions [none]
+[debug] [2022-11-15T19:49:54.317Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/pelets-project:testIamPermissions x-goog-quota-user=projects/pelets-project
+[debug] [2022-11-15T19:49:54.317Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pelets-project:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-15T19:49:55.128Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/pelets-project:testIamPermissions 401
+[debug] [2022-11-15T19:49:55.128Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pelets-project:testIamPermissions {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"ACCESS_TOKEN_TYPE_UNSUPPORTED","metadata":{"method":"google.cloudresourcemanager.v1.Projects.TestIamPermissions","service":"cloudresourcemanager.googleapis.com"}}]}}
+[debug] [2022-11-15T19:49:55.129Z] [iam] error while checking permissions, command may fail: FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2022-11-15T19:49:55.129Z] > refreshing access token with scopes: []
+[debug] [2022-11-15T19:49:55.130Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-11-15T19:49:55.130Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-15T19:49:55.258Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 400
+[debug] [2022-11-15T19:49:55.258Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-15T19:49:55.259Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pelets-project [none]
+[debug] [2022-11-15T19:49:55.403Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pelets-project 401
+[debug] [2022-11-15T19:49:55.403Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pelets-project {"error":{"code":401,"message":"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.","status":"UNAUTHENTICATED"}}
+[debug] [2022-11-15T19:49:55.403Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2022-11-15T19:49:55.514Z] FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+    at responseToError (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:49:12)
+    at RetryOperation._fn (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:288:77)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[error] 
+[error] Error: Failed to get Firebase project pelets-project. Please make sure the project exists and your account has permission to access it.

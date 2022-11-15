@@ -21,6 +21,7 @@ function App() {
           <ImageCards />
           <CreateProduct />
           <ProductListComponent />
+          <Footer />
           </>
           }
           ></Route>
@@ -31,4 +32,8 @@ function App() {
 
 export default App;
 
-
+function Footer() {
+  return (
+    <section></section>
+  )
+}

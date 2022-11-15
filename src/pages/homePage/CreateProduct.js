@@ -1,16 +1,19 @@
+import { upload } from "@testing-library/user-event/dist/upload";
 import { useState, useEffect } from "react";
+import "./CreateProduct.css"
 
 export function CreateProduct(props){
   
-  const { Title, Kg, Price, Currency, id} = props;
+  const { Title, Kg, Price, Currency} = props;
 
   const productDetailUrl = 'http://localhost:3001';
   const endpoint = "/product";
 
-  const [title, setTitle] = useState();
-  const [price, setPrice] = useState();
-  const [kg, setKg] = useState();
-  const [currency, setCurrency] = useState();
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [kg, setKg] = useState('');
+  const [currency, setCurrency] = useState('');
+  const [image, setImage] = useState('');
 
   useEffect(() => {
     fetch(productDetailUrl + endpoint)
@@ -39,14 +42,19 @@ export function CreateProduct(props){
     setCurrency(event.target.value);
   }
 
+  function imageChange(event){
+    setImage(event.target.value);
+  }
+
   function submit(event) {
     event.preventDefault();
 
     const body = {
-      title:Title,
-      kg:Kg,
-      price:Price,
-      currency:Currency,
+      title:title,
+      kg:kg,
+      price:price,
+      currency:currency,
+      image: image
     }
 
     fetch(productDetailUrl + endpoint, {
@@ -55,7 +63,7 @@ export function CreateProduct(props){
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
-    })
+    }) 
   }
 
 
@@ -69,6 +77,20 @@ export function CreateProduct(props){
     document.body.classList.add('active-modal')
   } else {
     document.body.classList.remove('active-modal')
+  };
+
+  function hello(){
+    const image_input = document.querySelector("#image_input");
+    let uploaded_image = "";
+  
+    image_input.addEventListener("change", function(){
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        uploaded_image = reader.result;
+        document.querySelector("#display_image").style.backgroundImage= `url(${uploaded_image})`;
+      });
+      reader.readAsDataURL(this.files[0]);
+    });
   }
 
   return (
@@ -84,16 +106,19 @@ export function CreateProduct(props){
             <div className="modal-content-inputs">
 
               <label for="title">Title :</label>
-              <input id="title" value={title} onChange={titleChange}></input>
+              <input id="title" value={Title} onChange={titleChange}></input>
 
               <label for="kg">Kg :</label>
-              <input id="kg" value={kg} onChange={kgChange}></input>
+              <input id="kg" value={Kg} onChange={kgChange}></input>
 
               <label for="price">Price :</label>
-              <input id="price" value={price} onChange={priceChange}></input>
+              <input id="price" value={Price} onChange={priceChange}></input>
 
               <label for="currency">Currency :</label>
-              <input id="currency" value={currency} onChange={currencyChange}></input>
+              <input id="currency" value={Currency} onChange={currencyChange}></input>
+
+              <input onClick={hello} type="file" id="image_input" accept="image/png, image/jpg" value={image} onChange={imageChange}></input>
+              <div id="display_image"></div>
             </div>
 
             <button className="modal-content-button_save" onClick={submit}>Save Changes</button>

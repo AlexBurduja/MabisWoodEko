@@ -1,4 +1,4 @@
-import logo from './publicResources/logoMabis.svg';
+import logo from '../../publicResources/logoMabis.svg';
 import './CssHeader.css'
 
 export function Header() {
@@ -30,11 +30,11 @@ export function Header() {
 
       <nav className="nav">
         <ul className="list">
-          <li className="item"> <a className="link"> Home </a> </li>
-          <li className="item"> <a className="link"> About </a> </li>
-          <li className="item"> <a className="link"> Products </a> </li>
-          <li className="item"> <a className="link"> Reviews </a> </li>
-          <li className="item"> <a className="link"> Contact </a> </li>
+          <li className="item"> <a href="https://www.google.com" className="link"> Home </a> </li>
+          <li className="item"> <a href="https://www.google.com" className="link"> About </a> </li>
+          <li className="item"> <a href="https://www.google.com" className="link"> Products </a> </li>
+          <li className="item"> <a href="https://www.google.com" className="link"> Reviews </a> </li>
+          <li className="item"> <a href="https://www.google.com" className="link"> Contact </a> </li>
         </ul>
       </nav>
 </div>  

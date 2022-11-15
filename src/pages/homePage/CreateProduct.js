@@ -1,9 +1,9 @@
-import { upload } from "@testing-library/user-event/dist/upload";
 import { useState, useEffect } from "react";
 import "./CreateProduct.css"
+import 'animate.css';
 
 export function CreateProduct(props){
-  
+
   const { Title, Kg, Price, Currency} = props;
 
   const productDetailUrl = 'http://localhost:3001';
@@ -63,7 +63,8 @@ export function CreateProduct(props){
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
-    }) 
+    })
+    window.onclick.reload();
   }
 
 
@@ -78,54 +79,57 @@ export function CreateProduct(props){
   } else {
     document.body.classList.remove('active-modal')
   };
-
-  function hello(){
-    const image_input = document.querySelector("#image_input");
-    let uploaded_image = "";
   
-    image_input.addEventListener("change", function(){
-      const reader = new FileReader();
-      reader.addEventListener("load", () => {
-        uploaded_image = reader.result;
-        document.querySelector("#display_image").style.backgroundImage= `url(${uploaded_image})`;
-      });
-      reader.readAsDataURL(this.files[0]);
-    });
-  }
-
   return (
+    
     <>
-      <button onClick={toggleModal2}>Create</button>
+    <div className="createProductButtonWrapper">
+      <button className="createProductButton" onClick={toggleModal2}>Create Product</button>
+    </div>
+
       {modal2 && (
         <div className="modal">
           <div onClick={toggleModal2} className="overlay"></div>
-          <div className="modal-content">
-            <h1>Modal</h1>
-            <p className="modal-content_p">Here you can change anything that you want regarding your product.</p>
+            <div className="modal-content ">
+              <h1 >Create product.</h1>
+              <p className="modal-content_p">All fields need to be completed.</p>
 
-            <div className="modal-content-inputs">
+                <div className="modal-content-inputs">
 
-              <label for="title">Title :</label>
-              <input id="title" value={Title} onChange={titleChange}></input>
+                    <div className="modal-content-inputs_div">
+                      <label for="title">Title :</label>
+                      <input id="title" value={Title} onChange={titleChange} required></input>
+                    </div>
 
-              <label for="kg">Kg :</label>
-              <input id="kg" value={Kg} onChange={kgChange}></input>
+                    <div className="modal-content-inputs_div">
+                      <label for="kg">Kg :</label>
+                      <input id="kg" value={Kg} onChange={kgChange} required></input>
+                    </div>
 
-              <label for="price">Price :</label>
-              <input id="price" value={Price} onChange={priceChange}></input>
+                    <div className="modal-content-inputs_div">
+                      <label for="price">Price :</label>
+                      <input id="price" value={Price} onChange={priceChange} required></input>
+                    </div>
 
-              <label for="currency">Currency :</label>
-              <input id="currency" value={Currency} onChange={currencyChange}></input>
+                    <div className="modal-content-inputs_div">
+                      <label for="currency">Currency :</label>
+                      <input id="currency" value={Currency} onChange={currencyChange} required></input>
+                    </div>
 
-              <input onClick={hello} type="file" id="image_input" accept="image/png, image/jpg" value={image} onChange={imageChange}></input>
-              <div id="display_image"></div>
+                    <div className="modal-content-inputs_div">
+                      <label for="input">Image :</label>
+                      <input type="url" id="input" value={image} onChange={imageChange} required></input>
+                    </div>
+
+                </div>
+
+                <div className="modal-content-button_create">
+              <button type="submit" className="modal-content-button_save" onClick={submit}>Create Product</button>
+                </div>
+              <button className="close-modal" onClick={toggleModal2}>
+                X
+              </button>
             </div>
-
-            <button className="modal-content-button_save" onClick={submit}>Save Changes</button>
-            <button className="close-modal" onClick={toggleModal2}>
-              X
-            </button>
-          </div>
         </div>
       )}
     </>

@@ -47,6 +47,9 @@
       "currency": "RON",
       "image": "/resources/productImage.png",
       "id": 6
+    },
+    {
+      "id": 7
     }
   ]
 }

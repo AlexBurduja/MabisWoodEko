@@ -1,12 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./ProductCardComponent.css"
-import "./CreateProduct"
 import 'animate.css';
+import { updateDoc, doc } from 'firebase/firestore';
+import { db } from "../../firebase-config"
 
 /// Modal
 
 export function ProductCardComponent(props) {
-  const { Title, Kg, Price, Currency, Image, id} = props;
+
+  const { Title , Kg, Currency, Price, Image, Id } = props
+
+    // const productDetailUrl = 'http://localhost:3001';
+    // const endpoint = "/product"
+  
+
 
   const [modal, setModal] = useState(false);
 
@@ -19,71 +26,83 @@ export function ProductCardComponent(props) {
   } else {
     document.body.classList.remove('active-modal')
   }
-
-
+  
+  
   ///// End of Modal
 
-  const productDetailUrl = 'http://localhost:3001';
-  const endpoint = "/product"
 
-  const [title, setTitle] = useState();
-  const [price, setPrice] = useState();
-  const [kg, setKg] = useState();
-  const [currency, setCurrency] = useState();
+  // useEffect(() => {
+  //   fetch(productDetailUrl + endpoint + "/" + id)
+  //   .then((response) => response.json())
+  //   .then((product) => {
+  //     setTitle(product.title);
+  //     setPrice(product.price);
+  //     setKg(product.kg)
+  //     setCurrency(product.currency)
+  //   }) 
+  // }, [])
 
-  useEffect(() => {
-    fetch(productDetailUrl + endpoint + "/" + id)
-    .then((response) => response.json())
-    .then((product) => {
-      setTitle(product.title);
-      setPrice(product.price);
-      setKg(product.kg)
-      setCurrency(product.currency)
-    }) 
-  }, [])
+  // function submit(event) {
+  //   event.preventDefault();
+
+  //   const body = {
+  //     title : title,
+  //     kg : kg,
+  //     price : price,
+  //     currency : currency
+  //   };
+
+  //   fetch(productDetailUrl + endpoint + "/" + id,{
+  //     method: "PATCH",
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(body)
+  //   } )
+  // }
+  
+  // function deleteItem() {
+  //   fetch (productDetailUrl + endpoint + "/" + id , {
+  //     method: "DELETE"
+  //   })
+  // }
+
+  const [newTitle, setNewTitle] = useState("")
+  const [newCurrency, setNewCurrency] = useState("")
+  const [newImage, setNewImage] = useState("")
+  const [newPrice, setNewPrice] = useState(0)
+  const [newKg, setNewKg] = useState(0)
 
   function titleChange(event){
-    setTitle(event.target.value);
-  }
-
-  function priceChange(event){
-    setPrice(event.target.value);
-  }
-
-  function kgChange(event){
-    setKg(event.target.value);
+    setNewTitle(event.target.value)
   }
 
   function currencyChange(event){
-    setCurrency(event.target.value);
+    setNewCurrency(event.target.value)
   }
 
-  function submit(event) {
-    event.preventDefault();
-
-    const body = {
-      title : title,
-      kg : kg,
-      price : price,
-      currency : currency
-    };
-
-    fetch(productDetailUrl + endpoint + "/" + id,{
-      method: "PATCH",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    } )
-  }
-  
-  function deleteItem() {
-    fetch (productDetailUrl + endpoint + "/" + id , {
-      method: "DELETE"
-    })
+  function imageChange(event){
+    setNewImage(event.target.value)
   }
 
-  
+  function priceChange(event){
+    setNewPrice(event.target.value)
+  }
+
+  function kgChange(event){
+    setNewKg(event.target.value)
+  }
+
+
+  const editProduct = async (id) => {
+    const userDoc = doc(db, "products", id)
+    const newFields = { title: newTitle, currency:newCurrency, image:newImage, price:newPrice, kg:newKg }
+    await updateDoc(userDoc, newFields);
+  }
+
+  function editProductButton() {
+    editProduct(Id ,Title, Image, Kg, Price, Currency)}
+
   return (
         <>
     <div className="cardDiv">
@@ -110,28 +129,33 @@ export function ProductCardComponent(props) {
                     
                     <div className="modal-content-inputs_div">
                     <label for="title">Title :</label>
-                    <input id="title" value={title} onChange={titleChange}></input>
+                    <input id="title" defaultValue={Title} onChange={titleChange} ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                     <label for="kg">Kg :</label>
-                    <input id="kg" value={kg} onChange={kgChange}></input>
+                    <input id="kg" defaultValue={Kg} onChange={kgChange}  ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                     <label for="price">Price :</label>
-                    <input id="price" value={price} onChange={priceChange}></input>
+                    <input id="price" defaultValue={Price} onChange={priceChange}  ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                     <label for="currency">Currency :</label>
-                    <input id="currency" value={currency} onChange={currencyChange}></input>
+                    <input id="currency" defaultValue={Currency} onChange={currencyChange} ></input>
+                    </div>
+
+                    <div className="modal-content-inputs_div">
+                    <label for="image">Image :</label>
+                    <input id="image" defaultValue={Image} onChange={imageChange} ></input>
                     </div>
                   </div>
 
                   <div className="modal-content-buttons">
-                  <button onClick={deleteItem} className="modal-content-button_delete">Delete Item</button>
-                  <button className="modal-content-button_save" onClick={submit} >Save Changes</button>
+                  <button  className="modal-content-button_delete">Delete Item</button>
+                  <button className="modal-content-button_save" onClick={editProductButton} >Save Changes</button>
                   </div>
                   
                   <button className="close-modal" onClick={toggleModal}>

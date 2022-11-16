@@ -1,73 +1,112 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./CreateProduct.css"
 import 'animate.css';
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../firebase-config";
 
-export function CreateProduct(props){
 
-  const { Title, Kg, Price, Currency} = props;
+export function CreateProduct(){
 
-  const productDetailUrl = 'http://localhost:3001';
-  const endpoint = "/product";
+  // const { Title, Kg, Price, Currency} = props;
 
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [kg, setKg] = useState('');
-  const [currency, setCurrency] = useState('');
-  const [image, setImage] = useState('');
+  // const productDetailUrl = 'http://localhost:3001';
+  // const endpoint = "/product";
 
-  useEffect(() => {
-    fetch(productDetailUrl + endpoint)
-    .then((response) => response.json())
-    .then((product) => {
-      setTitle(product.title);
-      setPrice(product.price);
-      setKg(product.kg)
-      setCurrency(product.currency)
-    }) 
-  }, [])
+  // const [title, setTitle] = useState('');
+  // const [price, setPrice] = useState('');
+  // const [kg, setKg] = useState('');
+  // const [currency, setCurrency] = useState('');
+  // const [image, setImage] = useState('');
+
+  // useEffect(() => {
+  //   fetch(productDetailUrl + endpoint)
+  //   .then((response) => response.json())
+  //   .then((product) => {
+  //     setTitle(product.title);
+  //     setPrice(product.price);
+  //     setKg(product.kg)
+  //     setCurrency(product.currency)
+  //   }) 
+  // }, [])
+
+  // function titleChange(event){
+  //   setTitle(event.target.value);
+  // }
+
+  // function priceChange(event){
+  //   setPrice(event.target.value);
+  // }
+
+  // function kgChange(event){
+  //   setKg(event.target.value);
+  // }
+
+  // function currencyChange(event){
+  //   setCurrency(event.target.value);
+  // }
+
+  // function imageChange(event){
+  //   setImage(event.target.value);
+  // }
+
+  // function submit(event) {
+  //   event.preventDefault();
+
+  //   const body = {
+  //     title:title,
+  //     kg:kg,
+  //     price:price,
+  //     currency:currency,
+  //     image: image
+  //   }
+
+  //   fetch(productDetailUrl + endpoint, {
+  //     method: "POST",
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(body)
+  //   })
+  //   window.onclick.reload();
+  // }
+  
+  const [newTitle, setNewTitle] = useState("")
+  const [newCurrency, setNewCurrency] = useState("")
+  const [newImage, setNewImage] = useState("")
+  const [newPrice, setNewPrice] = useState(0)
+  const [newKg, setNewKg] = useState(0)
+
+  
+  const productCollection = collection(db, "products")
+
+    /// Create
+  const createProduct = async () => {
+    await addDoc(productCollection, {title: newTitle, currency:newCurrency, image:newImage, price:newPrice, kg:newKg})
+  }
 
   function titleChange(event){
-    setTitle(event.target.value);
-  }
-
-  function priceChange(event){
-    setPrice(event.target.value);
-  }
-
-  function kgChange(event){
-    setKg(event.target.value);
+    setNewTitle(event.target.value)
   }
 
   function currencyChange(event){
-    setCurrency(event.target.value);
+    setNewCurrency(event.target.value)
   }
 
   function imageChange(event){
-    setImage(event.target.value);
+    setNewImage(event.target.value)
   }
 
-  function submit(event) {
-    event.preventDefault();
-
-    const body = {
-      title:title,
-      kg:kg,
-      price:price,
-      currency:currency,
-      image: image
-    }
-
-    fetch(productDetailUrl + endpoint, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    })
-    window.onclick.reload();
+  function priceChange(event){
+    setNewPrice(event.target.value)
   }
 
+  function kgChange(event){
+    setNewKg(event.target.value)
+  }
 
+  ///ends create
+
+  
   const [modal2, setModal2] = useState(false);
 
   const toggleModal2 = () => {
@@ -98,33 +137,33 @@ export function CreateProduct(props){
 
                     <div className="modal-content-inputs_div">
                       <label for="title">Title :</label>
-                      <input id="title" value={Title} onChange={titleChange} required></input>
+                      <input id="title" onChange={titleChange} onChangerequired></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                       <label for="kg">Kg :</label>
-                      <input id="kg" value={Kg} onChange={kgChange} required></input>
+                      <input id="kg" type="number" onChange={kgChange} required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                       <label for="price">Price :</label>
-                      <input id="price" value={Price} onChange={priceChange} required></input>
+                      <input id="price" type="number" onChange={priceChange} required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                       <label for="currency">Currency :</label>
-                      <input id="currency" value={Currency} onChange={currencyChange} required></input>
+                      <input id="currency" onChange={currencyChange} required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                       <label for="input">Image :</label>
-                      <input type="url" id="input" value={image} onChange={imageChange} required></input>
+                      <input type="url" onChange={imageChange} id="input" required></input>
                     </div>
 
                 </div>
 
                 <div className="modal-content-button_create">
-              <button type="submit" className="modal-content-button_save" onClick={submit}>Create Product</button>
+              <button type="submit" onClick={createProduct} className="modal-content-button_save">Create Product</button>
                 </div>
               <button className="close-modal" onClick={toggleModal2}>
                 X

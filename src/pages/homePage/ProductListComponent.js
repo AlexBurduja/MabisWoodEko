@@ -33,7 +33,7 @@ export function ProductListComponent() {
         setProducts(data.docs.map((doc) =>({...doc.data(), id: doc.id})))
       };
       getProducts();
-    }, [])
+    }, [productCollection])
 
   ///Get ends
 

@@ -1,18 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./ProductCardComponent.css"
 import 'animate.css';
-import { updateDoc, doc } from 'firebase/firestore';
-import { db } from "../../firebase-config"
 
 /// Modal
 
 export function ProductCardComponent(props) {
 
-  const { title ,kg, currency,  price, image,id } = props
+  const { title ,kg, currency,  price, image, id } = props
 
-    // const productDetailUrl = 'http://localhost:3001';
-    // const endpoint = "/product"
-  
+    const productDetailUrl = 'http://localhost:3001';
+    const endpoint = "/product"
 
 
   const [modal, setModal] = useState(false);
@@ -28,87 +25,88 @@ export function ProductCardComponent(props) {
   }
   
   
+  const [newTitle, setTitle] = useState('')
+  const [newCurrency, setCurrency] = useState('')
+  const [newPrice, setPrice] = useState('')
+  const [newKg, setKg] = useState('')
+  const [newImage, setImage] = useState('')
   ///// End of Modal
 
 
-  // useEffect(() => {
-  //   fetch(productDetailUrl + endpoint + "/" + id)
-  //   .then((response) => response.json())
-  //   .then((product) => {
-  //     setTitle(product.title);
-  //     setPrice(product.price);
-  //     setKg(product.kg)
-  //     setCurrency(product.currency)
-  //   }) 
-  // }, [])
+  useEffect(() => {
+    fetch(productDetailUrl + endpoint + "/" + id)
+    .then((response) => response.json())
+    .then((product) => {
+      setTitle(product.title);
+      setPrice(product.price);
+      setKg(product.kg)
+      setCurrency(product.currency)
+      setImage(product.image)
+    }) 
+  }, [])
 
-  // function submit(event) {
-  //   event.preventDefault();
+  function submit(event) {
+    event.preventDefault();
   
-  //   const body = {
-  //     title : title,
-  //     kg : kg,
-  //     price : price,
-  //     currency : currency
-  //   };
+    const body = {
+      title : newTitle,
+      kg : newKg,
+      price : newPrice,
+      currency : newCurrency,
+      image : newImage
+    };
 
-  //   fetch("https://pelets-project-default-rtdb.europe-west1.firebasedatabase.app/product/" + Id + ".json",{
-  //     method: "PATCH",
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(body)
-  //   } )
-  // }
+    fetch(productDetailUrl + endpoint + "/" + id ,{
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    } )
+  }
   
-  // function deleteItem() {
-  //   fetch (productDetailUrl + endpoint + "/" + id , {
-  //     method: "DELETE"
-  //   })
-  // }
-
-  const [newTitle, setNewTitle] = useState(title)
-  const [newCurrency, setNewCurrency] = useState(currency)
-  const [newPrice, setNewPrice] = useState(price)
-  const [newKg, setNewKg] = useState(kg)
-  const [newImage, setNewImage] = useState(image)
+  function deleteItem() {
+    fetch (productDetailUrl + endpoint + "/" + id , {
+      method: "DELETE"
+    })
+  }
 
     function titleChange(event){
-    setNewTitle(event.target.value)
+    setTitle(event.target.value)
   }
 
   function currencyChange(event){
-    setNewCurrency(event.target.value)
+    setCurrency(event.target.value)
   }
 
   function imageChange(event){
-    setNewImage(event.target.value)
+    setImage(event.target.value)
   }
 
   function priceChange(event){
-    setNewPrice(event.target.value)
+    setPrice(event.target.value)
   }
 
   function kgChange(event){
-    setNewKg(event.target.value)
+    setKg(event.target.value)
   }
 
+  //Firebase api edit
+  // const editProduct = async (id) => {
+  //   const userDoc = doc(db, "products", id)
+  //   await updateDoc(userDoc, {
+  //     title : newTitle,
+  //     price : newPrice,
+  //     currency : newCurrency,
+  //     kg : newKg ,
+  //     image : newImage
+  //   });
+  // }
 
-  const editProduct = async (id) => {
-    const userDoc = doc(db, "products", id)
-    await updateDoc(userDoc, {
-      title : newTitle,
-      price : newPrice,
-      currency : newCurrency,
-      kg : newKg ,
-      image : newImage
-    });
-  }
 
-
-  function editProductButton() {
-    editProduct(id, title, image, kg, price, currency)
-  }
+  // function editProductButton() {
+  //   editProduct(id, title, image, kg, price, currency)
+  // }
 
   return (
         <>
@@ -136,7 +134,7 @@ export function ProductCardComponent(props) {
                     
                     <div className="modal-content-inputs_div">
                     <label for="title">Title :</label>
-                    <input id="title" defaultValue={title} onChange={titleChange}  ></input>
+                    <input id="title" value={newTitle} onChange={titleChange}  ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
@@ -161,8 +159,8 @@ export function ProductCardComponent(props) {
                   </div>
 
                   <div className="modal-content-buttons">
-                  <button  className="modal-content-button_delete">Delete Item</button>
-                  <button className="modal-content-button_save" onClick={editProductButton} >Save Changes</button>
+                  <button  className="modal-content-button_delete" onClick={deleteItem}>Delete Item</button>
+                  <button className="modal-content-button_save" onClick={submit} >Save Changes</button>
                   </div>
                   
                   <button className="close-modal" onClick={toggleModal}>

@@ -8,7 +8,7 @@ import { db } from "../../firebase-config"
 
 export function ProductCardComponent(props) {
 
-  const { Title , Kg, Currency, Price, Image, Id } = props
+  const { title ,kg, currency,  price, image,id } = props
 
     // const productDetailUrl = 'http://localhost:3001';
     // const endpoint = "/product"
@@ -67,11 +67,11 @@ export function ProductCardComponent(props) {
   //   })
   // }
 
-  const [newTitle, setNewTitle] = useState("")
-  const [newCurrency, setNewCurrency] = useState("")
-  const [newPrice, setNewPrice] = useState(0)
-  const [newKg, setNewKg] = useState(0)
-  const [newImage, setNewImage] = useState("")
+  const [newTitle, setNewTitle] = useState(title)
+  const [newCurrency, setNewCurrency] = useState(currency)
+  const [newPrice, setNewPrice] = useState(price)
+  const [newKg, setNewKg] = useState(kg)
+  const [newImage, setNewImage] = useState(image)
 
     function titleChange(event){
     setNewTitle(event.target.value)
@@ -93,10 +93,6 @@ export function ProductCardComponent(props) {
     setNewKg(event.target.value)
   }
 
-  function imageChange(event){
-    setNewImage(event.target.value)
-  }
-
 
   const editProduct = async (id) => {
     const userDoc = doc(db, "products", id)
@@ -104,25 +100,25 @@ export function ProductCardComponent(props) {
       title : newTitle,
       price : newPrice,
       currency : newCurrency,
-      kg : newKg
-
+      kg : newKg ,
+      image : newImage
     });
   }
 
 
   function editProductButton() {
-    editProduct(Id, Title, Image, Kg, Price, Currency)
+    editProduct(id, title, image, kg, price, currency)
   }
 
   return (
         <>
     <div className="cardDiv">
-        <h2>{Title}</h2>
-        <img src={Image} alt="productImage" />
+        <h2>{title}</h2>
+        <img src={image} alt="productImage" />
 
         <button>Add to cart</button>
-        <p>{Kg} Kg</p>
-        <span>{Price} {Currency}</span>
+        <p>{kg} Kg</p>
+        <span>{price} {currency}</span>
 
         <button onClick={toggleModal} className="btn-modal">
           Edit
@@ -140,27 +136,27 @@ export function ProductCardComponent(props) {
                     
                     <div className="modal-content-inputs_div">
                     <label for="title">Title :</label>
-                    <input id="title" defaultValue={Title} onChange={titleChange}  ></input>
+                    <input id="title" defaultValue={title} onChange={titleChange}  ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                     <label for="kg">Kg :</label>
-                    <input id="kg" defaultValue={Kg}  onChange={kgChange} ></input>
+                    <input id="kg" defaultValue={kg}  onChange={kgChange} ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                     <label for="price">Price :</label>
-                    <input id="price" defaultValue={Price} onChange={priceChange}  ></input>
+                    <input id="price" defaultValue={price} onChange={priceChange}  ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                     <label for="currency">Currency :</label>
-                    <input id="currency" defaultValue={Currency} onChange={currencyChange} ></input>
+                    <input id="currency" defaultValue={currency} onChange={currencyChange} ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                     <label for="image">Image :</label>
-                    <input id="image" defaultValue={Image} onChange={imageChange} ></input>
+                    <input id="image" defaultValue={image} onChange={imageChange} ></input>
                     </div>
                   </div>
 

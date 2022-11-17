@@ -16,16 +16,16 @@ export function ProductListComponent() {
   //     .then((productsFromServer) => setProducts(productsFromServer));
   // }, []);
 
-  const [products, setProducts] = useState([])
-  const productCollection = collection(db, "products")
-
-// useEffect(() => {
-//   fetch('https://pelets-project-default-rtdb.europe-west1.firebasedatabase.app/product.json')
-//     .then((response) => response.json())
-//     .then((productsFromServer) => setProducts(productsFromServer))
-// }, []);
-
-  /// Get
+  
+  // useEffect(() => {
+    //   fetch('https://pelets-project-default-rtdb.europe-west1.firebasedatabase.app/product.json')
+    //     .then((response) => response.json())
+    //     .then((productsFromServer) => setProducts(productsFromServer))
+    // }, []);
+    
+    /// Get
+    const [products, setProducts] = useState([])
+    const productCollection = collection(db, "products")
 
     useEffect(() => {
       const getProducts = async () => {
@@ -44,12 +44,12 @@ export function ProductListComponent() {
         {products.map((product) => {
           return (
               <ProductCardComponent
-              Title={product.title}
-              Kg={product.kg}
-              Currency={product.currency}
-              Price={product.price}
-              Image={product.image}
-              Id={product.id}>
+              title={product.title}
+              kg={product.kg}
+              currency={product.currency}
+              price={product.price}
+              image={product.image}
+              id={product.id}>
               </ProductCardComponent>
           );
         })};

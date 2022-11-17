@@ -81,7 +81,7 @@ export function CreateProduct(){
 
     /// Create
   const createProduct = async () => {
-    await addDoc(productCollection, {title: newTitle, currency:newCurrency, image:newImage, price:newPrice, kg:newKg})
+    await addDoc(productCollection, {title: newTitle, currency : newCurrency, image : newImage, price : newPrice, kg : newKg})
   }
 
   function titleChange(event){

@@ -44,7 +44,7 @@ export function ProductCardComponent(props) {
 
   // function submit(event) {
   //   event.preventDefault();
-
+  
   //   const body = {
   //     title : title,
   //     kg : kg,
@@ -52,7 +52,7 @@ export function ProductCardComponent(props) {
   //     currency : currency
   //   };
 
-  //   fetch(productDetailUrl + endpoint + "/" + id,{
+  //   fetch("https://pelets-project-default-rtdb.europe-west1.firebasedatabase.app/product/" + Id + ".json",{
   //     method: "PATCH",
   //     headers: {
   //       'Content-Type': 'application/json'
@@ -69,11 +69,11 @@ export function ProductCardComponent(props) {
 
   const [newTitle, setNewTitle] = useState("")
   const [newCurrency, setNewCurrency] = useState("")
-  const [newImage, setNewImage] = useState("")
   const [newPrice, setNewPrice] = useState(0)
   const [newKg, setNewKg] = useState(0)
+  const [newImage, setNewImage] = useState("")
 
-  function titleChange(event){
+    function titleChange(event){
     setNewTitle(event.target.value)
   }
 
@@ -93,15 +93,26 @@ export function ProductCardComponent(props) {
     setNewKg(event.target.value)
   }
 
+  function imageChange(event){
+    setNewImage(event.target.value)
+  }
+
 
   const editProduct = async (id) => {
     const userDoc = doc(db, "products", id)
-    const newFields = { title: newTitle, currency:newCurrency, image:newImage, price:newPrice, kg:newKg }
-    await updateDoc(userDoc, newFields);
+    await updateDoc(userDoc, {
+      title : newTitle,
+      price : newPrice,
+      currency : newCurrency,
+      kg : newKg
+
+    });
   }
 
+
   function editProductButton() {
-    editProduct(Id ,Title, Image, Kg, Price, Currency)}
+    editProduct(Id, Title, Image, Kg, Price, Currency)
+  }
 
   return (
         <>
@@ -129,12 +140,12 @@ export function ProductCardComponent(props) {
                     
                     <div className="modal-content-inputs_div">
                     <label for="title">Title :</label>
-                    <input id="title" defaultValue={Title} onChange={titleChange} ></input>
+                    <input id="title" defaultValue={Title} onChange={titleChange}  ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                     <label for="kg">Kg :</label>
-                    <input id="kg" defaultValue={Kg} onChange={kgChange}  ></input>
+                    <input id="kg" defaultValue={Kg}  onChange={kgChange} ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">

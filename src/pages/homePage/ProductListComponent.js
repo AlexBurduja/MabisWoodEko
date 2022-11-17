@@ -19,16 +19,22 @@ export function ProductListComponent() {
   const [products, setProducts] = useState([])
   const productCollection = collection(db, "products")
 
+// useEffect(() => {
+//   fetch('https://pelets-project-default-rtdb.europe-west1.firebasedatabase.app/product.json')
+//     .then((response) => response.json())
+//     .then((productsFromServer) => setProducts(productsFromServer))
+// }, []);
 
-  /// Get 
-  useEffect(() => {
-    const getProducts = async () => {
-      const data = await getDocs(productCollection);
-      setProducts(data.docs.map((doc) =>({...doc.data(), id: doc.id})))
-    };
+  /// Get
 
-    getProducts();
-  }, [])
+    useEffect(() => {
+      const getProducts = async () => {
+        const data = await getDocs(productCollection);
+        setProducts(data.docs.map((doc) =>({...doc.data(), id: doc.id})))
+      };
+      getProducts();
+    }, [])
+
   ///Get ends
 
   return (

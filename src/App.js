@@ -9,6 +9,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";    
+import { PreFooter } from './pages/homePage/PreFooter';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <ImageCards />
           <CreateProduct />
           <ProductListComponent />
-          <Footer />
+          <PreFooter />
           </>
           }
           ></Route>
@@ -32,8 +33,4 @@ function App() {
 
 export default App;
 
-function Footer() {
-  return (
-    <section></section>
-  )
-}
+

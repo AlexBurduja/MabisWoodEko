@@ -101,7 +101,6 @@ export function ProductCardComponent(props) {
     .then(response => response.json)
     .then (cartProducts => {
       const [ cartProduct ] = cartProducts; 
-      console.log(cartProduct)
 
       if (cartProduct) {
 

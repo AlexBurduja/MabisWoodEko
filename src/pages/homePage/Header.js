@@ -1,5 +1,6 @@
 import logo from '../../publicResources/logoMabis.svg';
 import './CssHeader.css'
+import { ShoppingCart } from './ShoppingCart';
 
 export function Header() {
 
@@ -18,6 +19,9 @@ export function Header() {
         <a href='#'>Contact</a>
       </div>
     </div>
+
+    <ShoppingCart>
+    </ShoppingCart>
 
 
 <div className='hamburger'>

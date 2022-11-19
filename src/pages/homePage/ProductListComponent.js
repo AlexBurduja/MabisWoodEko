@@ -37,7 +37,6 @@ export function ProductListComponent() {
     // }, [productCollection])
 
   ///Get ends
-
   return (
     <section className='listComponent'>
       <header>Products</header>

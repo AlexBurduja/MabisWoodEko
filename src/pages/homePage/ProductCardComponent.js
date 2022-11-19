@@ -98,7 +98,7 @@ export function ProductCardComponent(props) {
   function createCart() {
 
     fetch(`${cartUrl}/?productId=${id}`)
-    .then(response => response.json)
+    .then(response => response.json())
     .then (cartProducts => {
       const [ cartProduct ] = cartProducts; 
 
@@ -117,7 +117,7 @@ export function ProductCardComponent(props) {
         fetch(`${cartUrl}`, {
           method: "POST",
   
-          body: JSON.stringify({ productId: id, quantity: 1 }),
+          body: JSON.stringify({ productId: id, productTitle: title ,quantity: 1 }),
   
           headers: {
             'Content-Type': 'application/json'
@@ -128,6 +128,7 @@ export function ProductCardComponent(props) {
     })
 
   };
+    
 
   //Firebase api edit
   // const editProduct = async (id) => {
@@ -151,7 +152,6 @@ export function ProductCardComponent(props) {
     <div className="cardDiv">
         <h2>{title}</h2>
         <img src={image} alt="productImage" />
-
         <button onClick={createCart}>Add to cart</button>
         <p>{kg} Kg</p>
         <span>{price} {currency}</span>

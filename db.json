@@ -42,5 +42,17 @@
     }
   ],
   "cart": [
+    {
+      "productId": 2,
+      "productTitle": "Bricheti",
+      "quantity": 6,
+      "id": 1
+    },
+    {
+      "productId": 3,
+      "productTitle": "Produs 3 Peleti",
+      "quantity": 3,
+      "id": 2
+    }
   ]
 }

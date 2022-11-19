@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RiShoppingCartLine } from 'react-icons/ri'
 
 export function ShoppingCart() {
@@ -7,9 +7,11 @@ export function ShoppingCart() {
 
 
   ///Fetch Get RestApi
-  fetch('http://localhost:3001/cart')
-    .then((response) => response.json())
-    .then((cartFromServer) => setCart(cartFromServer));
+  useEffect(() => {
+    fetch('http://localhost:3001/cart')
+      .then((response) => response.json())
+      .then((cartFromServer) => setCart(cartFromServer));
+  }, [])
 
   return (
     <section>

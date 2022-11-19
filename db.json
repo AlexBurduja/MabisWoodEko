@@ -22,7 +22,7 @@
       "price": "200",
       "currency": "RON",
       "image": "/resources/productImage.png",
-      "id": 5
+      "id": 3
     },
     {
       "title": "Produs 3 Peleti",
@@ -30,7 +30,18 @@
       "price": "200",
       "currency": "RON",
       "image": "/resources/productImage.png",
-      "id": 6
+      "id": 4
+    },
+    {
+      "title": "Produs 3 Peleti",
+      "kg": "15",
+      "price": "200",
+      "currency": "RON",
+      "image": "/resources/productImage.png",
+      "id": 5
     }
+  ],
+  "cart": [
+    
   ]
 }

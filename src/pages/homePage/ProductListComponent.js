@@ -52,8 +52,8 @@ export function ProductListComponent() {
               image={product.image}
               id={product.id}>
               </ProductCardComponent>
-          );
-        })};
+          )
+        })}
       </div>
     </section>
   );

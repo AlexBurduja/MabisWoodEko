@@ -91,6 +91,45 @@ export function ProductCardComponent(props) {
     setKg(event.target.value)
   }
 
+  /// CART
+
+  const cartUrl = 'http://localhost:3001/cart'
+
+  function createCart() {
+
+    fetch(`${cartUrl}/?productId=${id}`)
+    .then(response => response.json)
+    .then (cartProducts => {
+      const [ cartProduct ] = cartProducts; 
+      console.log(cartProduct)
+
+      if (cartProduct) {
+
+          fetch(`${cartUrl}/${cartProduct.id}`, {
+            method: "PATCH",
+            body: JSON.stringify({ quantity: cartProduct.quantity + 1 }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+        
+      } else {
+        
+        fetch(`${cartUrl}`, {
+          method: "POST",
+  
+          body: JSON.stringify({ productId: id, quantity: 1 }),
+  
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+      }
+    })
+
+  };
+
   //Firebase api edit
   // const editProduct = async (id) => {
   //   const userDoc = doc(db, "products", id)
@@ -114,7 +153,7 @@ export function ProductCardComponent(props) {
         <h2>{title}</h2>
         <img src={image} alt="productImage" />
 
-        <button>Add to cart</button>
+        <button onClick={createCart}>Add to cart</button>
         <p>{kg} Kg</p>
         <span>{price} {currency}</span>
 
@@ -169,6 +208,6 @@ export function ProductCardComponent(props) {
             </div>
           </div>
         )}
-        </>
-  );
+      </>
+  )
 }

@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import "./ShoppingCartPage.css"
 
-export function ShoppingCartPage() {
+export function ShoppingCartPage(props) {
+
 
   const [products, setProducts] = useState([])
 
@@ -17,30 +18,22 @@ export function ShoppingCartPage() {
   }, [])
 
 
+
   return (
     <section>
-      <h1>Your cart</h1>
-        <div className='tableHeader'>
-          <p>Image</p>
-          <p>Title</p>
-          <p>Price</p>
-          <p>Quantity</p>
-        </div>
       {products.map((item) => {
-      return (
-        <section>
-          <div className='cartItems'>
-            <div>
-            <img src={item.productImage} width='200px' alt="Product image should've been here, if not, write us an email!" />
-            </div>
+        return (
+        <div className='cartItems'>
+            <img src={item.productImage} alt="Product image should've been here, if not, write us an email!" />
 
-            <p>{item.productTitle}</p>
-            <p>{item.productPrice}</p>
-            <p></p>
+            <p className='productTitle'>{item.productTitle}</p>
+            <p className='productTotalPrice'>{item.productPrice} {item.productCurrency}</p>
+            <p className='productKg'>{item.productKg} Kg</p>
+            <p className='productTotalPriceQty'>Total Price for {item.quantity} {item.productTitle}: {item.productPrice * item.quantity} {item.productCurrency}</p>
           </div>
-      </section>
+
       )
-      })}
+    })}
     </section>
-  );
+  )
 }

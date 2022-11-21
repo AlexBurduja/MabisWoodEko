@@ -1,14 +1,6 @@
 {
   "product": [
     {
-      "title": "Peleti",
-      "kg": "212",
-      "price": "300",
-      "currency": "EUR",
-      "image": "/resources/productImage.png",
-      "id": 1
-    },
-    {
       "title": "Bricheti",
       "kg": "200",
       "price": "200",
@@ -17,9 +9,9 @@
       "id": 2
     },
     {
-      "title": "Produs 3 Peleti",
-      "kg": "15",
-      "price": "200",
+      "title": "Peleti",
+      "kg": "150",
+      "price": "100",
       "currency": "RON",
       "image": "/resources/productImage.png",
       "id": 3
@@ -41,25 +33,5 @@
       "id": 5
     }
   ],
-  "cart": [
-    {
-      "products": [
-        {
-          "productId": 1,
-          "productTitle": "Peleti",
-          "productImage": "/resources/productImage.png",
-          "productPrice": "300",
-          "quantity": 1
-        },
-        {
-          "productId": 2,
-          "productTitle": "Bricheti",
-          "productImage": "/resources/productImage2.png",
-          "productPrice": "200",
-          "quantity": 1
-        }
-      ],
-      "id": 1
-    }
-  ]
+  "cart": []
 }

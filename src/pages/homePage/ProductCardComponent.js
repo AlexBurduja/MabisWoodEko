@@ -45,7 +45,7 @@ export function ProductCardComponent(props) {
       setCurrency(product.currency)
       setImage(product.image)
     }) 
-  })
+  }, [id])
 
   function submit(event) {
     event.preventDefault();
@@ -115,6 +115,8 @@ export function ProductCardComponent(props) {
             productTitle: title, 
             productImage: image, 
             productPrice: price, 
+            productCurrency: currency,
+            productKg : kg,
             quantity: 1 })
           }
           updateCart(cart.id, cart.products);
@@ -164,7 +166,9 @@ export function ProductCardComponent(props) {
           productId: id, 
           productTitle: title, 
           productImage: image, 
-          productPrice: price, 
+          productPrice: price,
+          productCurrency: currency,
+          productKg : kg,
           quantity: 1
         }
       ] }),
@@ -217,7 +221,7 @@ export function ProductCardComponent(props) {
                     
                     <div className="modal-content-inputs_div">
                     <label for="title">Title :</label>
-                    <input id="title" value={newTitle} onChange={titleChange}  ></input>
+                    <input id="title" defaultValue={title} onChange={titleChange}  ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">

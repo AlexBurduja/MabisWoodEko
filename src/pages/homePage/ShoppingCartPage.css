@@ -1,13 +1,32 @@
-.tableHeader{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-}
-
 .cartItems{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
+    flex-direction: column;
+    position: relative;
+    width: 50%;
+    border: 1px solid black;
+    margin-top: 1.25rem;
+    margin-left: 1.25rem;
+    background-color: rgba(128, 128, 128, 0.05);
+}
+
+
+
+.cartItems img{
+    position: relative;
+    width: 200px;
+    left: 0;
+}
+
+.cartItems p:first-of-type{
+    position: absolute;
+    right: 50%;
+    font-size: 20px;
+    top: .625rem;
+}
+
+.cartItems p:nth-of-type(2){
+    position: absolute;
+    right: 50%;
+    bottom: 0;
+    font-size: 20px;
 }

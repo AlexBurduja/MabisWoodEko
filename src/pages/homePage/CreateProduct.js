@@ -1,110 +1,70 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./CreateProduct.css"
 import 'animate.css';
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../firebase-config";
 
 
 export function CreateProduct(){
 
-  // const { Title, Kg, Price, Currency} = props;
+  const productDetailUrl = 'http://localhost:3001';
+  const endpoint = "/product";
 
-  // const productDetailUrl = 'http://localhost:3001';
-  // const endpoint = "/product";
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [kg, setKg] = useState('');
+  const [currency, setCurrency] = useState('');
+  const [image, setImage] = useState('');
 
-  // const [title, setTitle] = useState('');
-  // const [price, setPrice] = useState('');
-  // const [kg, setKg] = useState('');
-  // const [currency, setCurrency] = useState('');
-  // const [image, setImage] = useState('');
-
-  // useEffect(() => {
-  //   fetch(productDetailUrl + endpoint)
-  //   .then((response) => response.json())
-  //   .then((product) => {
-  //     setTitle(product.title);
-  //     setPrice(product.price);
-  //     setKg(product.kg)
-  //     setCurrency(product.currency)
-  //   }) 
-  // }, [])
-
-  // function titleChange(event){
-  //   setTitle(event.target.value);
-  // }
-
-  // function priceChange(event){
-  //   setPrice(event.target.value);
-  // }
-
-  // function kgChange(event){
-  //   setKg(event.target.value);
-  // }
-
-  // function currencyChange(event){
-  //   setCurrency(event.target.value);
-  // }
-
-  // function imageChange(event){
-  //   setImage(event.target.value);
-  // }
-
-  // function submit(event) {
-  //   event.preventDefault();
-
-  //   const body = {
-  //     title:title,
-  //     kg:kg,
-  //     price:price,
-  //     currency:currency,
-  //     image: image
-  //   }
-
-  //   fetch(productDetailUrl + endpoint, {
-  //     method: "POST",
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(body)
-  //   })
-  //   window.onclick.reload();
-  // }
-  
-  const [newTitle, setNewTitle] = useState("")
-  const [newCurrency, setNewCurrency] = useState("")
-  const [newImage, setNewImage] = useState("")
-  const [newPrice, setNewPrice] = useState(0)
-  const [newKg, setNewKg] = useState(0)
-
-  
-  const productCollection = collection(db, "products")
-
-    /// Create
-  const createProduct = async () => {
-    await addDoc(productCollection, {title: newTitle, currency : newCurrency, image : newImage, price : newPrice, kg : newKg})
-  }
+  useEffect(() => {
+    fetch(productDetailUrl + endpoint)
+    .then((response) => response.json())
+    .then((product) => {
+      setTitle(product.title);
+      setPrice(product.price);
+      setKg(product.kg)
+      setCurrency(product.currency)
+    }) 
+  }, [])
 
   function titleChange(event){
-    setNewTitle(event.target.value)
-  }
-
-  function currencyChange(event){
-    setNewCurrency(event.target.value)
-  }
-
-  function imageChange(event){
-    setNewImage(event.target.value)
+    setTitle(event.target.value);
   }
 
   function priceChange(event){
-    setNewPrice(event.target.value)
+    setPrice(event.target.value);
   }
 
   function kgChange(event){
-    setNewKg(event.target.value)
+    setKg(event.target.value);
   }
 
-  ///ends create
+  function currencyChange(event){
+    setCurrency(event.target.value);
+  }
+
+  function imageChange(event){
+    setImage(event.target.value);
+  }
+
+  function submit(event) {
+    event.preventDefault();
+
+    const body = {
+      title:title,
+      kg:kg,
+      price:price,
+      currency:currency,
+      image: image
+    }
+
+    fetch(productDetailUrl + endpoint, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    window.onclick.reload();
+  }
 
   
   const [modal2, setModal2] = useState(false);
@@ -163,7 +123,7 @@ export function CreateProduct(){
                 </div>
 
                 <div className="modal-content-button_create">
-              <button type="submit" onClick={createProduct} className="modal-content-button_save">Create Product</button>
+              <button type="submit" onClick={submit} className="modal-content-button_save">Create Product</button>
                 </div>
               <button className="close-modal" onClick={toggleModal2}>
                 X

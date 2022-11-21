@@ -43,16 +43,23 @@
   ],
   "cart": [
     {
-      "productId": 2,
-      "productTitle": "Bricheti",
-      "quantity": 6,
+      "products": [
+        {
+          "productId": 1,
+          "productTitle": "Peleti",
+          "productImage": "/resources/productImage.png",
+          "productPrice": "300",
+          "quantity": 1
+        },
+        {
+          "productId": 2,
+          "productTitle": "Bricheti",
+          "productImage": "/resources/productImage2.png",
+          "productPrice": "200",
+          "quantity": 1
+        }
+      ],
       "id": 1
-    },
-    {
-      "productId": 3,
-      "productTitle": "Produs 3 Peleti",
-      "quantity": 3,
-      "id": 2
     }
   ]
 }

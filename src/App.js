@@ -10,33 +10,36 @@ import {
   Route,
 } from "react-router-dom";    
 import { PreFooter } from './pages/homePage/PreFooter';
-import { useEffect } from 'react';
-import { ProductCardComponent } from './pages/homePage/ProductCardComponent';
 import { ShoppingCart } from './pages/homePage/ShoppingCart';
+import { ShoppingCartPage } from './pages/homePage/ShoppingCartPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={
-          <>
-          <Header>
-            <ShoppingCart />
-          </Header>
-          <Image />
-          <ImageCards />
-          <CreateProduct />
-          <ProductListComponent />
-          <PreFooter />
-          
-          </>
-          }
-          ></Route>
+            <>
+              <Header >
+                <ShoppingCart />
+              </Header>
+              <Image />
+              <ImageCards />
+              <CreateProduct />
+              <ProductListComponent />
+              <PreFooter />
+            </>
+          }></Route>
+
+          <Route path='/cart' element={
+            <>
+              <Header />
+              <ShoppingCartPage />
+              <PreFooter />
+            </>
+          }></Route>
       </Routes>
     </BrowserRouter>
   )
 }
 
 export default App;
-
-

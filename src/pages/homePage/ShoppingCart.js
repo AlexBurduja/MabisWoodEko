@@ -8,21 +8,24 @@ export function ShoppingCart() {
 
   ///Fetch Get RestApi
   useEffect(() => {
-    fetch('http://localhost:3001/cart')
+    fetch('http://localhost:3001/cart/1')
       .then((response) => response.json())
       .then((cartFromServer) => setCart(cartFromServer));
   }, [])
 
+
   return (
+   <a href='/cart'>
     <section>
       <RiShoppingCartLine />
       {cart.map((item) => {
         return (
-         <div>
+          <div>
           <p>{item.quantity}</p>
          </div> 
-        );
-      })}
-    </section>
+    );
+  })}
+  </section>
+  </a>
   );
 }

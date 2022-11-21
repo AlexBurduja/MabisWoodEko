@@ -12,6 +12,8 @@ export function ProductCardComponent(props) {
     const endpoint = "/product"
 
 
+
+
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
@@ -43,7 +45,7 @@ export function ProductCardComponent(props) {
       setCurrency(product.currency)
       setImage(product.image)
     }) 
-  }, [])
+  })
 
   function submit(event) {
     event.preventDefault();
@@ -97,39 +99,82 @@ export function ProductCardComponent(props) {
 
   function createCart() {
 
-    fetch(`${cartUrl}/?productId=${id}`)
+    fetch(cartUrl)
     .then(response => response.json())
-    .then (cartProducts => {
-      const [ cartProduct ] = cartProducts; 
+    .then(cartList => {
+      const [cart] = cartList;
 
-      if (cartProduct) {
-
-          fetch(`${cartUrl}/${cartProduct.id}`, {
-            method: "PATCH",
-            body: JSON.stringify({ quantity: cartProduct.quantity + 1 }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
-        
-      } else {
-        
-        fetch(`${cartUrl}`, {
-          method: "POST",
-  
-          body: JSON.stringify({ productId: id, productTitle: title ,quantity: 1 }),
-  
-          headers: {
-            'Content-Type': 'application/json'
+      if (cart) {
+        const productInCart = cart.products.find((product) => product.productId === id)
+        if (productInCart) {
+          productInCart.quantity = productInCart.quantity + 1; 
+          
+        } else {
+          cart.products.push({ 
+            productId: id, 
+            productTitle: title, 
+            productImage: image, 
+            productPrice: price, 
+            quantity: 1 })
           }
-        });
+          updateCart(cart.id, cart.products);
 
+      } else {
+        createAndAddToCart();
       }
+
     })
 
-  };
-    
 
+
+    // fetch(`${cartUrl}/?productId=${id}`)
+    // .then(response => response.json())
+    // .then (cartProducts => {
+    //   const [ cartProduct ] = cartProducts; 
+
+    //   if (cartProduct) {
+
+    //       updateQuantity(cartProduct);
+        
+    //   } else {
+        
+    //     addToCart();
+
+    //   }
+    // })
+
+
+    function updateCart(cartId, products) {
+      fetch(`${cartUrl}/${cartId}`, {
+        method: "PATCH",
+        body: JSON.stringify({ products }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    }
+
+    function createAndAddToCart() {
+      fetch(`${cartUrl}`, {
+        method: "POST",
+
+        body: JSON.stringify({ products: 
+      [
+        {
+          productId: id, 
+          productTitle: title, 
+          productImage: image, 
+          productPrice: price, 
+          quantity: 1
+        }
+      ] }),
+
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    }
+  };
   //Firebase api edit
   // const editProduct = async (id) => {
   //   const userDoc = doc(db, "products", id)

@@ -4,13 +4,17 @@ import "./ShoppingCartPage.css"
 
 export function ShoppingCartPage() {
 
-  const [cart, setCart] = useState([])
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     fetch('http://localhost:3001/cart')
       .then((response) => response.json())
-      .then((cartFromServer) => setCart(cartFromServer));
-  }, []);
+      .then((cartList) => {
+        const [ cart ] = cartList
+
+        setProducts(cart.products)
+      });
+  }, [])
 
 
   return (
@@ -22,7 +26,7 @@ export function ShoppingCartPage() {
           <p>Price</p>
           <p>Quantity</p>
         </div>
-      {cart.map((item) => {
+      {products.map((item) => {
       return (
         <section>
           <div className='cartItems'>

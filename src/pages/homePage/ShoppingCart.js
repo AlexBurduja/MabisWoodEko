@@ -3,14 +3,17 @@ import { RiShoppingCartLine } from 'react-icons/ri'
 
 export function ShoppingCart() {
 
-  const [cart, setCart] = useState([]);
-
+const [products, setProducts] = useState([]);
 
   ///Fetch Get RestApi
   useEffect(() => {
-    fetch('http://localhost:3001/cart/1')
+    fetch('http://localhost:3001/cart')
       .then((response) => response.json())
-      .then((cartFromServer) => setCart(cartFromServer));
+      .then((cartList) => {
+        const [ cart ] = cartList
+
+        setProducts(cart.products)
+      });
   }, [])
 
 
@@ -18,7 +21,7 @@ export function ShoppingCart() {
    <a href='/cart'>
     <section>
       <RiShoppingCartLine />
-      {cart.map((item) => {
+      {products.map((item) => {
         return (
           <div>
           <p>{item.quantity}</p>

@@ -5,6 +5,7 @@ import 'animate.css';
 
 export function CreateProduct(){
 
+
   const productDetailUrl = 'http://localhost:3001';
   const endpoint = "/product";
 

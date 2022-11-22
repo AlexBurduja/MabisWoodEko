@@ -12,8 +12,6 @@ export function ProductCardComponent(props) {
     const endpoint = "/product"
 
 
-
-
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
@@ -104,11 +102,12 @@ export function ProductCardComponent(props) {
     .then(cartList => {
       const [cart] = cartList;
 
+      
       if (cart) {
         const productInCart = cart.products.find((product) => product.productId === id)
+        
         if (productInCart) {
           productInCart.quantity = productInCart.quantity + 1; 
-          
         } else {
           cart.products.push({ 
             productId: id, 
@@ -124,7 +123,6 @@ export function ProductCardComponent(props) {
       } else {
         createAndAddToCart();
       }
-
     })
 
 

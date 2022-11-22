@@ -1,9 +1,15 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { useRef, useState } from 'react';
 import logo from '../../publicResources/logoMabis.svg';
 import './CssHeader.css'
 import "./ShoppingCart.js" 
 import { ShoppingCart } from './ShoppingCart.js';
 
 export function Header() {
+
+  // const ref =useRef();
+  // ref.current.classList.toggle('underline');
+  // ref.current.classList.toggle('underline');
 
   return (
     <section className='flex'>
@@ -13,12 +19,12 @@ export function Header() {
 
     <div className='desktopAnchors'>
       <div className='nav_anchors '>
-        <a href='/'>Home</a>
-        <a href='/'>About</a>
-        <a href='/'>Products</a>
-        <a href='/'>Reviews</a>
-        <a href='/'>Contact</a>
-      </div>
+        <a href='#'>Home</a>
+        <a href='#' >About</a>
+        <a href='#'>Products</a>
+        <a href='#'>Reviews</a>
+        <a href='#'>Contact</a>
+        </div>
     </div>
 
  <ShoppingCart></ShoppingCart>

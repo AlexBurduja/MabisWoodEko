@@ -38,11 +38,13 @@ export function Header() {
 
 
       <nav className="nav">
-           <NavLink className={activeClassHamburger} to='/'>Home</NavLink>
-           <NavLink className={activeClassHamburger} to='/cart'>About</NavLink> 
-           <NavLink className={activeClassHamburger} to='/b'>Products</NavLink> 
-           <NavLink className={activeClassHamburger} to='/c'>Reviews</NavLink> 
-           <NavLink className={activeClassHamburger} to='/d'>Contact</NavLink> 
+        <ul className="list">
+          <li className="item"> <NavLink className={activeClassHamburger} to='/'>Home</NavLink> </li>
+          <li className="item"> <NavLink className={activeClassHamburger} to='/cart'>About</NavLink> </li>
+          <li className="item"> <NavLink className={activeClassHamburger} to='/b'>Products</NavLink> </li>
+          <li className="item"> <NavLink className={activeClassHamburger} to='/c'>Reviews</NavLink> </li>
+          <li className="item"> <NavLink className={activeClassHamburger} to='/d'>Contact</NavLink> </li>
+        </ul>
       </nav>
 </div>  
 

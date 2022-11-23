@@ -1,17 +1,17 @@
 table{
     text-align: center;
-    width: 70%;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.05);
     margin-bottom: 0.5%;
     border: 1px solid black;
-    margin: 2% 15%;
+    margin: 2% 5%;
     transition:  500ms ease-out;
     position: relative;
 }
 
 th,td{
-    padding: 2% 0;
-    font-size: 20px;
+    padding: 2% 10px;
+    font-size: 1em;
 }
 
 th{
@@ -34,6 +34,22 @@ table:hover{
     bottom: 10px;
 }
 
+ .wrapper{
+    display:flex;
+    flex-direction: row;
+    width: 90%;
+    margin-left: 10%;
+    gap: 20px;
+}
+
+.cartPageLeftSection{
+    display: flex;
+    flex: 50%;
+    align-items: center;
+    flex-direction: column;
+}
+
+
 .wrapper h1{
     text-align: center;
     margin-top: 3.125rem;
@@ -54,22 +70,35 @@ table:hover{
     display: none;
 }
 
+.deliveryAddress{
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    flex: 40%;
+}
+
+.deliveryAddress_header h3{
+    margin-top: 1rem;  
+    width: 25em;
+}
+
 .deliveryAddress_inputs{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 30px;
+    gap: 10px;
+    margin-top: 1rem;
 }
 
 .deliveryAddress_inputs__input{
     position: relative;
-    width: 250px;
+    width: 400px;
 }
 .deliveryAddress_inputs__input input {
     width: 100%;
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     outline: none;
     color: grey;
@@ -93,17 +122,17 @@ table:hover{
     transform: translateX(10px) translateY(-7px);
     font-size: 0.75em;
     padding: 0 10px;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
+    border-left: 1px solid rgba(48, 48, 230,1);
+    border-bottom: 1px solid rgba(48, 48, 230,1);
+    border-top: 1px solid rgba(48, 48, 230,1);
+    border-right: 1px solid rgba(48, 48, 230,1);
     background-color: white;
     letter-spacing: 0.2em;
 }
 
 .deliveryAddress_inputs__input input:focus,
 .deliveryAddress_inputs__input input:valid {
-    border: 1px solid black;
+    border: 1px solid rgba(48, 48, 230,1);
 }
 
 @media  (max-width: 770px) {
@@ -145,3 +174,17 @@ table:hover{
     }
  
 }
+
+.input2{
+    display: flex;
+    gap: 5px;
+}
+
+.lastNameInput{
+    position: relative;
+}
+
+.towninput{
+    display: flex;
+    gap: 5px;
+  }

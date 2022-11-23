@@ -1,15 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import logo from '../../publicResources/logoMabis.svg';
 import './CssHeader.css'
-import "./ShoppingCart.js" 
+import "./ShoppingCart.js"
 import { ShoppingCart } from './ShoppingCart.js';
 
 export function Header() {
 
-  // const ref =useRef();
-  // ref.current.classList.toggle('underline');
-  // ref.current.classList.toggle('underline');
+  const activeClass = ({isActive}) => isActive ? "underline" : {};
 
   return (
     <section className='flex'>
@@ -19,15 +17,15 @@ export function Header() {
 
     <div className='desktopAnchors'>
       <div className='nav_anchors '>
-        <a href='#'>Home</a>
-        <a href='#' >About</a>
-        <a href='#'>Products</a>
-        <a href='#'>Reviews</a>
-        <a href='#'>Contact</a>
+        <NavLink className={activeClass} to='/'>Home</NavLink>
+        <NavLink className={activeClass} to='/cart'>About</NavLink>
+        <NavLink className={activeClass} to='/b'>Products</NavLink>
+        <NavLink className={activeClass} to='/c'>Reviews</NavLink>
+        <NavLink className={activeClass} to='/d'>Contact</NavLink>
         </div>
     </div>
 
- <ShoppingCart></ShoppingCart>
+    <ShoppingCart></ShoppingCart>
 
 <div className='hamburger'>
     <input type="checkbox" id="navi-toggle" className="checkbox" />

@@ -13,9 +13,8 @@ export function ShoppingCartPage() {
     .then((cartList) => {
       const [ cart ] = cartList
 
-
       setProducts(cart.products)
-      }, [] )});
+  })}, [] );
     
 
 

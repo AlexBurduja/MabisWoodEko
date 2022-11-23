@@ -1,7 +1,12 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { RiShoppingCartLine } from 'react-icons/ri'
+import { NavLink } from 'react-router-dom';
 
 export function ShoppingCart() {
+
+  const CartContext = createContext();
+
+  const [cart, setCart] = useState("0 items")
 
 const [products, setProducts] = useState([]);
 
@@ -18,17 +23,17 @@ const [products, setProducts] = useState([]);
 
 
   return (
-   <a href='/cart'>
+   <NavLink to='/cart'>
     <section>
       <RiShoppingCartLine />
       {products.map((item) => {
         return (
           <div>
-          <p>{item.quantity}</p>
-         </div> 
-    );
-  })}
-  </section>
-  </a>
+            <p>{item.quantity}</p>
+          </div>
+            );
+          })}
+    </section>
+  </NavLink>
   );
 }

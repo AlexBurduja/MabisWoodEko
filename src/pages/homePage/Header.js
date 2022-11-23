@@ -7,7 +7,9 @@ import { ShoppingCart } from './ShoppingCart.js';
 
 export function Header() {
 
-  const activeClass = ({isActive}) => isActive ? "underline" : {};
+  const activeClass = ({isActive}) => isActive ? "activeClassNav" : {};
+
+  const activeClassHamburger = ({isActiveHamburger}) => isActiveHamburger ? "activeClassHamburger" : "link";
 
   return (
     <section className='flex'>
@@ -36,13 +38,11 @@ export function Header() {
 
 
       <nav className="nav">
-        <ul className="list">
-          <li className="item"> <a href="https://www.google.com" className="link"> Home </a> </li>
-          <li className="item"> <a href="https://www.google.com" className="link"> About </a> </li>
-          <li className="item"> <a href="https://www.google.com" className="link"> Products </a> </li>
-          <li className="item"> <a href="https://www.google.com" className="link"> Reviews </a> </li>
-          <li className="item"> <a href="https://www.google.com" className="link"> Contact </a> </li>
-        </ul>
+           <NavLink className={activeClassHamburger} to='/'>Home</NavLink>
+           <NavLink className={activeClassHamburger} to='/cart'>About</NavLink> 
+           <NavLink className={activeClassHamburger} to='/b'>Products</NavLink> 
+           <NavLink className={activeClassHamburger} to='/c'>Reviews</NavLink> 
+           <NavLink className={activeClassHamburger} to='/d'>Contact</NavLink> 
       </nav>
 </div>  
 

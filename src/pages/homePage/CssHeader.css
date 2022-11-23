@@ -83,7 +83,7 @@
 .link:link,
 .link:visited {
   display: inline-block;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 300;
   padding: 1rem 2rem;
   color: white;
@@ -203,6 +203,17 @@
     }
 }
 
-.underline{
+.activeClassNav{
   border-bottom: 3px solid rgba(48, 48, 230,1);
+}
+
+.activeClassHamburger{
+  font-size: 1.5rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

@@ -37,22 +37,24 @@ export function ProductListComponent() {
     // }, [productCollection])
 
   ///Get ends
+  
+  
   return (
     <section className='listComponent'>
       <header>Products</header>
       <div className='gridUl'>
         {products.map((product) => {
-          return (
-              <ProductCardComponent
-              title={product.title}
-              kg={product.kg}
-              currency={product.currency}
-              price={product.price}
-              image={product.image}
-              id={product.id}>
-              </ProductCardComponent>
-          )
-        })}
+            return (
+                <ProductCardComponent
+                title={product.title}
+                kg={product.kg}
+                currency={product.currency}
+                price={product.price}
+                image={product.image}
+                id={product.id}>
+                </ProductCardComponent>
+            )
+          })}
       </div>
     </section>
   );

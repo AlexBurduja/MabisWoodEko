@@ -7,14 +7,14 @@ export function ShoppingCartPage() {
   const [products, setProducts] = useState([])
      
 
-  useEffect(() => {
-    fetch('http://localhost:3001/cart')
-    .then((response) => response.json())
-    .then((cartList) => {
-      const [ cart ] = cartList
+      useEffect(() => {
+        fetch('http://localhost:3001/cart')
+        .then((response) => response.json())
+        .then((cartList) => {
+          const [ cart ] = cartList
 
-      setProducts(cart.products)
-  })}, [] );
+          setProducts(cart.products)
+      })}, [] );
     
 
 
@@ -99,7 +99,52 @@ export function ShoppingCartPage() {
           </section>
       )
 })}
-      <p></p>
+    <div className='deliveryAddress'>
+      <div className='deliveryAddress_header'>
+        <h1>2. DELIVERY ADDRESS</h1>
+        <h3>Please check that all the informations are valid and correct, Thanks!</h3>
+        <h5>All fields required.</h5>
+      </div>
+
+      <div className="deliveryAddress_inputs">
+
+        <div className='deliveryAddress_inputs__input' >
+          <input type="email" required="required" ></input>
+          <span>Email Address</span>
+        </div>
+
+        <div className='deliveryAddress_inputs__input' >
+          <input type="text" required="required"></input>
+          <span>First name</span>
+        </div>
+        
+        <div className='deliveryAddress_inputs__input' >
+          <input type="text" required="required"></input>
+          <span>Last name</span>
+        </div>
+
+        <div className='deliveryAddress_inputs__input' >
+          <input type="text" required="required"></input>
+          <span>Telephone</span>
+        </div>
+        
+        <div className='deliveryAddress_inputs__input' >
+          <input type="text" required="required"></input>
+          <span>Delivery Address</span>
+        </div>
+
+        <div className='deliveryAddress_inputs__input' >
+          <input type="text" required="required"></input>
+          <span>Country</span>
+        </div>
+
+        <div className='deliveryAddress_inputs__input' >
+          <input type="text" required="required"></input>
+          <span>Town</span>
+        </div>
+
+      </div>
+    </div>
     </section>
   )
   }

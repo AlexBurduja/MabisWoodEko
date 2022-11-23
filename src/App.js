@@ -12,9 +12,11 @@ import {
 import { PreFooter } from './pages/homePage/PreFooter';
 import { ShoppingCart } from './pages/homePage/ShoppingCart';
 import { ShoppingCartPage } from './pages/homePage/ShoppingCartPage';
+import { CartContextProvider } from './pages/homePage/context/CartContext'
 
 function App() {
   return (
+  <CartContextProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={
@@ -39,6 +41,7 @@ function App() {
           }></Route>
       </Routes>
     </BrowserRouter>
+  </CartContextProvider>
   )
 }
 

@@ -1,12 +1,9 @@
-import { createContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { RiShoppingCartLine } from 'react-icons/ri'
 import { NavLink } from 'react-router-dom';
+import CartContext from './context/CartContext';
 
 export function ShoppingCart() {
-
-  const CartContext = createContext();
-
-  const [cart, setCart] = useState("0 items")
 
 const [products, setProducts] = useState([]);
 
@@ -19,7 +16,8 @@ const [products, setProducts] = useState([]);
 
         setProducts(cart.products)
       });
-  }, [])
+    }, [])
+    
 
 
   return (

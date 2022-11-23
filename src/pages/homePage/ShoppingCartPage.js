@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from 'react';
 import "./ShoppingCartPage.css"
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 
 export function ShoppingCartPage() {
 
@@ -18,12 +16,21 @@ export function ShoppingCartPage() {
           setProducts(cart.products)
       })}, [] );
 
-      let productQuantity = products.map(function (product){
-        return product.productPrice * product.quantity
-      })
+      // let productQuantity = products.map(function (product){
+      //   return product.productPrice * product.quantity
+      // })
 
+      const totalPrice = products.reduce((acc,cur) => {
+        return acc + cur.quantity * cur.productPrice
+      }, 0)
       
-      console.log(productQuantity)
+      console.log(totalPrice)
+
+      const totalQuantity = products.reduce((acc,cur) => {
+        return acc+ cur.quantity
+      }, 0)
+
+      console.log(totalQuantity)
 
 
   return (

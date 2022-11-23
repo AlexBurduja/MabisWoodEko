@@ -62,15 +62,6 @@
           "productCurrency": "RON",
           "productKg": "15",
           "quantity": 1
-        },
-        {
-          "productId": 5,
-          "productTitle": "Peleti Grad B",
-          "productImage": "/resources/productImage.png",
-          "productPrice": "200",
-          "productCurrency": "RON",
-          "productKg": "15",
-          "quantity": 1
         }
       ],
       "id": 1

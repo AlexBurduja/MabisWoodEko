@@ -17,6 +17,14 @@ export function ShoppingCartPage() {
           setProducts(cart.products)
       })}, [] );
 
+      function ProductCount () {
+        if (totalQuantity === 1){
+          return <p>{totalQuantity} product</p>
+        } else {
+          return <p>{totalQuantity} products</p>
+        }
+      }
+
       // let productQuantity = products.map(function (product){
       //   return product.productPrice * product.quantity
       // })
@@ -76,6 +84,10 @@ export function ShoppingCartPage() {
           </section>
       )
     })}
+      <div className='productCartFooter'>
+        <ProductCount />
+        <p>Total: {totalPrice} RON</p>
+      </div>
     </section>
     <section className='deliveryAddress'>
       <div className='deliveryAddress_wrapper'>
@@ -145,24 +157,43 @@ export function ShoppingCartPage() {
         <section className='checkoutTab'>
           <div className='checkoutTab_header'>
             <h1>3. CHECKOUT</h1>
-            <h3>Final process!</h3>
+            <h3>Order summary</h3>
           </div>
 
+          <section className='doamneAjuta'>
           {products.map((item) => {
-              return (
-                <>
-                  <img src={item.productImage} alt="product image" width="50px"></img>
-                  <p>{item.productTitle}</p>
-                  <p>{item.quantity}</p>
-                  <p>{item.quantity * item.productPrice}</p>
-                </>
-              )
-          })}
-        </section>
+            return (
+              <section className='productCheckoutPage'>
+                  <div className='imageQuantity'>
+                    <img src={item.productImage} alt="product image" width="100px"></img>
+                    <p>{item.quantity}</p>
+                  </div>
+                
+                  <p className='productCheckoutPage_Title'>{item.productTitle}</p>
+                  <p>{item.quantity * item.productPrice} {item.productCurrency}</p>
+                </section>
+                )
+              })}
+              <div className='productCheckoutPage_footer'>
+                  <h1>Total</h1>
+                <div>
+                  <p>Products: {totalQuantity}</p>
+                  <p>Sub-total: {totalPrice} RON</p>
+                </div>
 
-    </section>
+                <div className='deliveryOptions'>
+                  <label for="delivery">Delivery </label>
+                  <select id='delivery'>
+                    <option value="standard">Standard Delivery</option>
+                    <option value="premium">Premium Delivery</option>
+                  </select>
+                </div>
+              </div>
+                </section>    
+          </section>
+      </section>
 
-    </section>
-    </>
+  </section>
+</>
   )
   }

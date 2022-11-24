@@ -1,0 +1,12 @@
+section .cartSectionn{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+}
+
+#cartNavlink {
+    font-size: 20px;
+    text-decoration: none;
+}
+

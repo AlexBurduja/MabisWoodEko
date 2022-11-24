@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { useEffect, useState } from 'react';
 import "./ShoppingCartPage.css"
+import { AiOutlineShopping } from 'react-icons/ai'
 
 export function ShoppingCartPage() {
 
@@ -34,86 +35,48 @@ export function ShoppingCartPage() {
 
 
   return (
+    <>
+    <div className='pageHeader'>
+    <h1>Your cart</h1>
+    <AiOutlineShopping />
+    </div>
     <section className='wrapper'>
       <section className='cartPageLeftSection'>
       <h1>1. REVIEW YOUR ORDER </h1>
       <h3>Please check that you have the right quantity of every single item to avoid confusions at checkout, Thanks!</h3>
-
       {products.map((item) => {
         return (
-          <>
-            <table className='desktopTable'>
-              <tr className='firstRow'>
-                <th>Image</th>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Kilograms</th>
-                <th>Total Price of {item.quantity} "{item.productTitle}"</th>
-              </tr>
+          <section className='cartProductShowFlex'>
+              <div>
+                <img src={item.productImage} width="200vw" alt="product image"></img>
+              </div>
 
-              <tr className='hover'>
-                <td>
-              <img src={item.productImage} className="tableImg" width="100px" alt="Product image should've been here, if not, write us an email!" />
-                </td>
-                <td>
-              {item.productTitle}
-                </td>
-                <td>
-              {item.quantity}
-                </td>
-                <td>
-              {item.productPrice} {item.productCurrency}
-                </td>
-                <td>
-              {item.productKg}
-                </td>
-                <td>
-              {item.productPrice * item.quantity} {item.productCurrency}
-                </td>
-              </tr>
-        </table>
+            <div className='row'>
+              <div className='column'>
+                {item.productTitle}
+                <p>{item.productKg} Kg</p>
+              </div>
 
-            <table className='mobileTable'>
-              <tr>
-                <th>Image</th>
-                  <td>
-                    <img src={item.productImage} className="mobileTableImg" alt="Product image should've been here, if not, write us an email!" />
-                  </td>
-              </tr>
-              <tr>
-                <th>Product</th>
-                  <td>
-                    {item.productTitle}
-                  </td>
-              </tr>
-              <tr>
-                <th>Quantity</th>
-                  <td>
-                    {item.quantity}
-                  </td>
-              </tr>
-              <tr>
-                <th>Price</th>
-                  <td>
-                    {item.productPrice} {item.productCurrency}
-                  </td>
-              </tr>
-              <tr>
-                <th>Kilograms</th>
-                  <td>
-                    {item.productKg}
-                  </td>
-              </tr>
-              <tr>
-                <th>Total Price of {item.quantity} "{item.productTitle}"
-                </th>
-                  <td>
-                    {item.productPrice * item.quantity} {item.productCurrency}
-                  </td>
-              </tr>
-            </table>
-            </>
+              <div className='column'>
+                <p>Each</p>
+                {item.productPrice} {item.productCurrency}
+              </div>
+
+              <div className='column'>
+                <p>Quantity</p>
+                {item.quantity}
+              </div>
+
+              <div className='column'>
+                <p>Total</p>
+                {item.quantity * item.productPrice} {item.productCurrency}
+              </div>
+
+              <div className='cartProductShowButtons'>
+                <button>Remove</button>
+              </div>
+            </div>
+          </section>
       )
     })}
     </section>
@@ -188,7 +151,7 @@ export function ShoppingCartPage() {
           {products.map((item) => {
               return (
                 <>
-                  <img src={item.productImage} width="50px"></img>
+                  <img src={item.productImage} alt="product image" width="50px"></img>
                   <p>{item.productTitle}</p>
                   <p>{item.quantity}</p>
                   <p>{item.quantity * item.productPrice}</p>
@@ -200,5 +163,6 @@ export function ShoppingCartPage() {
     </section>
 
     </section>
+    </>
   )
   }

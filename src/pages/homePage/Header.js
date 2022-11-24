@@ -27,14 +27,16 @@ export function Header() {
         </div>
     </div>
 
-    <ShoppingCart></ShoppingCart>
+    <div className='desktopCart'> 
+      <ShoppingCart></ShoppingCart>
+    </div>
 
-<div className='hamburger'>
-    <input type="checkbox" id="navi-toggle" className="checkbox" />
-    <label htmlFor="navi-toggle" class="button">
-      <span className="icon">&nbsp;</span>
-    </label>
-    <div className="background">&nbsp;</div>
+    <div className='hamburger'>
+        <input type="checkbox" id="navi-toggle" className="checkbox" />
+        <label htmlFor="navi-toggle" class="button">
+          <span className="icon">&nbsp;</span>
+        </label>
+      <div className="background">&nbsp;</div>
 
 
       <nav className="nav">
@@ -44,6 +46,7 @@ export function Header() {
           <li className="item"> <NavLink className={activeClassHamburger} to='/b'>Products</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/c'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/d'>Contact</NavLink> </li>
+          <li className="item mobileCart"> <NavLink className={activeClassHamburger} to='/cart'> <ShoppingCart /> </NavLink> </li>
         </ul>
       </nav>
 </div>  

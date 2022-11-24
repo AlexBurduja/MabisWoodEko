@@ -25,6 +25,7 @@ section header{
     align-items: center;
     width: 65%;
     height: 105%;
+    background-color: white;
 }
 
 .cardDiv h2{

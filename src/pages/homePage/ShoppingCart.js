@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
 import { RiShoppingCartLine } from 'react-icons/ri'
 import { NavLink } from 'react-router-dom';
-import CartContext from './context/CartContext';
+import { useState, useEffect } from 'react';
+import "./ShoppingCart.css"
+
 
 export function ShoppingCart() {
 
@@ -18,19 +19,25 @@ const [products, setProducts] = useState([]);
       });
     }, [])
     
+    const totalQ = products.reduce((acc,curr) => {
+      return acc + curr.quantity
+    }, 0)
 
+    console.log(totalQ)
+
+    function ProductCount () {
+      if (totalQ === 1){
+        return <p>{totalQ} product</p>
+      } else {
+        return <p>{totalQ} products</p>
+      }
+    }
 
   return (
-   <NavLink to='/cart'>
-    <section>
+   <NavLink to='/cart' id='cartNavlink'>
+    <section className='cartSectionn'>
       <RiShoppingCartLine />
-      {products.map((item) => {
-        return (
-          <div>
-            <p>{item.quantity}</p>
-          </div>
-            );
-          })}
+          <ProductCount />
     </section>
   </NavLink>
   );

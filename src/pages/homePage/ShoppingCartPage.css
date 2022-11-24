@@ -282,23 +282,55 @@ table:hover{
     font-weight: bold;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
+}
+
+.totalQuantityPrice span{
+    color: rgba(48, 48, 230, 1);
+}
+
+.totalQuantityPrice{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
 }
 
 .deliveryOptions{
     display: flex;
     flex-direction: column;
-    width: 200px;
     gap: 5px;
 }
 
 .deliveryOptions select{
+    width: 245px;
     font-family: inherit;
     border: 1px solid grey;
 }
 
 .deliveryOptions select:active{
     border: 1px solid grey;
+}
+.deliveryOptions button {
+    width: 100%;
+    height: 3.125rem;
+    background-color: rgba(48, 48, 230,1);
+    border: transparent;
+    color: white;
+    font-family: inherit;
+}
+
+.deliveryFooter{
+    margin-top: 20px;
+}
+
+.react-icons{
+    margin-top: 10px;
+    font-size: 40px;
+    color: rgba(48, 48, 230,1);
 }
 /* under 1400px */
 

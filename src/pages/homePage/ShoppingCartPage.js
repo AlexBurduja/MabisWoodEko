@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
+import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 
 export function ShoppingCartPage() {
 
@@ -176,9 +177,9 @@ export function ShoppingCartPage() {
               })}
               <div className='productCheckoutPage_footer'>
                   <h1>Total</h1>
-                <div>
-                  <p>Products: {totalQuantity}</p>
-                  <p>Sub-total: {totalPrice} RON</p>
+                <div className='totalQuantityPrice'>
+                  <p>Products: <span>{totalQuantity}</span></p>
+                  <p>Sub-total: <span>{totalPrice}</span> RON</p>
                 </div>
 
                 <div className='deliveryOptions'>
@@ -187,6 +188,13 @@ export function ShoppingCartPage() {
                     <option value="standard">Standard Delivery</option>
                     <option value="premium">Premium Delivery</option>
                   </select>
+                  <button>CHECKOUT</button>
+                  <div className='deliveryFooter'>
+                    <p>WE ACCEPT:</p>
+                    <div className='react-icons'>
+                    <FaCcApplePay /> <FaCcPaypal /> <FaCcVisa /> <FaCcAmazonPay /> <FaCcAmex />
+                    </div>
+                  </div>
                 </div>
               </div>
                 </section>    

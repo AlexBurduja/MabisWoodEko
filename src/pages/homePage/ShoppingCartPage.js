@@ -24,14 +24,10 @@ export function ShoppingCartPage() {
       const totalPrice = products.reduce((acc,cur) => {
         return acc + cur.quantity * cur.productPrice
       }, 0)
-      
-      console.log(totalPrice)
 
       const totalQuantity = products.reduce((acc,cur) => {
         return acc+ cur.quantity
       }, 0)
-
-      console.log(totalQuantity)
 
 
   return (
@@ -48,12 +44,12 @@ export function ShoppingCartPage() {
         return (
           <section className='cartProductShowFlex'>
               <div>
-                <img src={item.productImage} width="200vw" alt="product image"></img>
+                <img src={item.productImage} width="150vw" alt="product image"></img>
               </div>
 
             <div className='row'>
               <div className='column'>
-                {item.productTitle}
+                <p>{item.productTitle}</p>
                 <p>{item.productKg} Kg</p>
               </div>
 
@@ -72,15 +68,17 @@ export function ShoppingCartPage() {
                 {item.quantity * item.productPrice} {item.productCurrency}
               </div>
 
-              <div className='cartProductShowButtons'>
+            </div>
+
+            <div className='cartProductShowButtons'>
                 <button>Remove</button>
-              </div>
             </div>
           </section>
       )
     })}
     </section>
     <section className='deliveryAddress'>
+      <div className='deliveryAddress_wrapper'>
     <div className='deliveryAddress_header'>
         <h1>2. DELIVERY ADDRESS</h1>
         <h3>Please check that all the informations are valid and correct, Thanks!</h3>
@@ -139,6 +137,8 @@ export function ShoppingCartPage() {
           </div>
 
         </div>
+        
+      </div>
 
       </div>
 

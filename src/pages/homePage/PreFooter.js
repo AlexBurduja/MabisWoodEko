@@ -5,16 +5,14 @@ import { FaTiktok  } from 'react-icons/fa'
 export function PreFooter() {
   return (
     <section className="preFSection">
-      <div className="preFSection_div">
-
-        <div className="preFSection_div-text">
-          <p>Keep up with our work!</p>
-        </div>    
+      <div className="preFSection_div">    
 
         <div className="preFSection_div-email">
           <label for="email">Sign up to the newsletter!</label>
-          <input id="email" type="email"></input>
-          <button type="submit">Sign me in!</button>
+          <div>
+            <input id="email" type="email"></input>
+            <button type="submit">Sign me in!</button>
+          </div>  
         </div>
 
         <div className="preFSection_div-icons">

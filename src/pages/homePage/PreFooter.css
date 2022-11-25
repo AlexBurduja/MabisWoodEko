@@ -1,7 +1,7 @@
 .preFSection{
-    margin-top: 5%; 
+    margin-top: 10%; 
     background-color: rgba(48, 48, 230, 0.8);
-    width: 100%;
+    width: 100vw;
     height: 5rem;
     display: inline-block;
 }
@@ -9,7 +9,7 @@
 .preFSection_div{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 0 2%;
     align-items: center;
     height: 100%;
@@ -20,10 +20,10 @@
     text-decoration: none;
 }
 
+
 .preFIcon{
     color: rgb(17, 12, 92);
     margin-left: 1.25rem;
-    font-size: 3vw
 }
 
 .preFSection_div-text{
@@ -31,6 +31,12 @@
     font-size: 3vw;
     width: 100%;
     font-weight: bold;
+}
+
+.preFSection_div-email{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .preFSection_div-email label{
@@ -45,14 +51,14 @@
     background-color: rgba(255, 255, 255, 0.2);
     border: transparent;
     height: 20px;
-    border-radius: 20px;
-    width: 50%;
+    border-radius: 10px;
+    width: 100px;
 }
 
 .preFSection_div-email button {
     display: inline;
     height: 1.25rem;
-    width: 35%;
+    width: 80px;
     border-radius: 20px;
     border: transparent;
     margin-left: 10px;

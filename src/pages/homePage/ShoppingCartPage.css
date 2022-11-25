@@ -321,6 +321,7 @@ table:hover{
     border: transparent;
     color: white;
     font-family: inherit;
+    cursor: pointer;
 }
 
 .deliveryFooter{
@@ -331,6 +332,9 @@ table:hover{
     margin-top: 10px;
     font-size: 40px;
     color: rgba(48, 48, 230,1);
+}
+.columnProductTitle{
+    width: 130px;
 }
 /* under 1400px */
 

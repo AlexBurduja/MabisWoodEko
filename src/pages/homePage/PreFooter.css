@@ -23,12 +23,13 @@
 .preFIcon{
     color: rgb(17, 12, 92);
     margin-left: 1.25rem;
-    font-size: 1%
+    font-size: 3vw
 }
 
 .preFSection_div-text{
     color: rgb(17, 12, 92);
-    font-size: 1rem;
+    font-size: 3vw;
+    width: 100%;
     font-weight: bold;
 }
 
@@ -49,8 +50,8 @@
 
 .preFSection_div-email button {
     display: inline;
-    height: 20px;
-    width: 80px;
+    height: 1.25rem;
+    width: 5rem;
     border-radius: 20px;
     border: transparent;
     margin-left: 10px;

@@ -58,7 +58,7 @@ export function ShoppingCartPage() {
 
             <div className='row'>
               <div className='column'>
-                <p>{item.productTitle}</p>
+                <p className='columnProductTitle'>{item.productTitle}</p>
                 <p>{item.productKg} Kg</p>
               </div>
 

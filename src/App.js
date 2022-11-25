@@ -30,6 +30,7 @@ function App() {
               <ProductListComponent />
               <PreFooter />
             </>
+            
           }></Route>
 
           <Route path='/cart' element={

@@ -59,7 +59,7 @@
           "productPrice": "200",
           "productCurrency": "RON",
           "productKg": "20",
-          "quantity": 2
+          "quantity": 10
         },
         {
           "productId": 5,
@@ -68,7 +68,7 @@
           "productPrice": "200",
           "productCurrency": "RON",
           "productKg": "15",
-          "quantity": 5
+          "quantity": 10
         },
         {
           "productId": 6,
@@ -77,31 +77,13 @@
           "productPrice": "200",
           "productCurrency": "RON",
           "productKg": "15",
-          "quantity": 9
+          "quantity": 10
         },
         {
           "productId": 3,
           "productTitle": "Peleti",
           "productImage": "/resources/productImage.png",
           "productPrice": "100",
-          "productCurrency": "RON",
-          "productKg": "15",
-          "quantity": 10
-        },
-        {
-          "productId": 4,
-          "productTitle": "Peleti Grad A",
-          "productImage": "/resources/productImage.png",
-          "productPrice": "200",
-          "productCurrency": "RON",
-          "productKg": "15",
-          "quantity": 30
-        },
-        {
-          "productId": 7,
-          "productTitle": "Peleti Grad B",
-          "productImage": "/resources/productImage.png",
-          "productPrice": "200",
           "productCurrency": "RON",
           "productKg": "15",
           "quantity": 10

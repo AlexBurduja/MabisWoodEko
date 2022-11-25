@@ -1,63 +1,43 @@
-.preFSection{
-    margin-top: 10%; 
-    background-color: rgba(48, 48, 230, 0.8);
-    width: 100vw;
-    height: 5rem;
-    display: inline-block;
+.preFooterWrapper{
+    margin-top: 10%;
+    background-color: rgba(48, 48, 230, 1);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 50px;
 }
 
-.preFSection_div{
+.preFooter_title{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.preFooter_newsletter button{
+    border-radius: 10px;
+    width: 70px;
+    border: transparent;
+    margin-left: 5px;
+}
+
+.preFooter_newsletter label{
+    font-weight: bold;
+}
+
+.preFooter_newsletter input {
+    border-radius: 10px;
+    border: transparent;
+    margin-left: 5px;
+    padding: 0 5px;
+}
+
+.preFooter_newsletter input:active {
+    border: transparent;
+}
+
+.preFooter_icons{
+    font-size: 150%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    padding: 0 2%;
-    align-items: center;
-    height: 100%;
-    width: 100%;
+    gap: 1vw;
 }
-
-.preFSection_div-Icons a{
-    text-decoration: none;
-}
-
-
-.preFIcon{
-    color: rgb(17, 12, 92);
-    margin-left: 1.25rem;
-    font-size: 5vw;
-}
-
-.preFSection_div-email{
-    display: flex;
-    flex-direction: column;
-    font-size: 2.3vw;
-}
-
-.preFSection_div-email label{
-    margin-right: 20px;
-}
-
-.preFSection_div-email  {
-    display: flex;
-}
-
-.preFSection_div-email input {
-    background-color: rgba(255, 255, 255, 0.2);
-    border: transparent;
-    height: 20px;
-    border-radius: 10px;
-    width: 100px;
-}
-
-.preFSection_div-email button {
-    display: inline;
-    height: 1.25rem;
-    width: 15vw;
-    font-size: 2vw;
-    text-align: center;
-    border-radius: 20px;
-    border: transparent;
-    margin-left: 10px;
-
-}
-

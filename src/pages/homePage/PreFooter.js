@@ -4,23 +4,29 @@ import { FaTiktok  } from 'react-icons/fa'
 
 export function PreFooter() {
   return (
-    <section className="preFSection">
-      <div className="preFSection_div">    
+    <section className="preFooterWrapper">
+      <div className="preFooter_title">
+        <p>Keep up with our work!</p>
+      </div>
 
-        <div className="preFSection_div-email">
-          <label for="email">Sign up to the newsletter!</label>
-          <div>
-            <input id="email" type="email"></input>
-            <button type="submit">Sign me in!</button>
-          </div>  
+      <div className="preFooter_newsletter">
+        <label for="newsletter">Sign up to our newsletter</label>
+        <input type="email" id="newsletter"></input>
+        <button>Submit</button>
+      </div>
+
+      <div className="preFooter_icons">
+        <div>
+        <BsFacebook /> 
         </div>
 
-        <div className="preFSection_div-icons">
-          <a href="#"><BsInstagram  className="preFIcon"/></a>
-          <a href="#"><BsFacebook className="preFIcon" /></a>
-          <a href="#"><FaTiktok className="preFIcon" /></a>
+        <div>
+        <BsInstagram /> 
         </div>
 
+        <div>
+        <FaTiktok />
+        </div>
       </div>
     </section>
   );

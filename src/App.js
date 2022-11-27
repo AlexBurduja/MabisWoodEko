@@ -13,6 +13,7 @@ import { PreFooter } from './pages/homePage/PreFooter';
 import { ShoppingCart } from './pages/homePage/ShoppingCart';
 import { ShoppingCartPage } from './pages/homePage/ShoppingCartPage';
 import { CartContextProvider } from './pages/homePage/context/CartContext'
+import { SingleProductPage } from './pages/homePage/SingleProductPage';
 
 function App() {
   return (
@@ -40,6 +41,14 @@ function App() {
               <PreFooter />
             </>
           }></Route>
+
+          <Route path='/products/:id' element={
+            <>
+              <Header />
+              <SingleProductPage />
+              <PreFooter />
+            </>
+          }></Route>
       </Routes>
     </BrowserRouter>
   </CartContextProvider>
@@ -47,3 +56,4 @@ function App() {
 }
 
 export default App;
+

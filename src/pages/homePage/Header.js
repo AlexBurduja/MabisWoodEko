@@ -21,7 +21,7 @@ export function Header() {
       <div className='nav_anchors '>
         <NavLink className={activeClass} to='/'>Home</NavLink>
         <NavLink className={activeClass} to='/cart'>About</NavLink>
-        <NavLink className={activeClass} to='/b'>Products</NavLink>
+        <NavLink className={activeClass} to='/products'>Products</NavLink>
         <NavLink className={activeClass} to='/c'>Reviews</NavLink>
         <NavLink className={activeClass} to='/d'>Contact</NavLink>
         </div>

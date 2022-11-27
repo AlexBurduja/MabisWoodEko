@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./ProductCardComponent.css"
 import 'animate.css';
+import { Link } from "react-router-dom";
 
 /// Modal
 
@@ -199,9 +200,12 @@ export function ProductCardComponent(props) {
     <div className="cardDiv">
         <h2>{title}</h2>
         <img src={image} alt="productImage" />
-        <button onClick={createCart}>Add to cart</button>
         <p>{kg} Kg</p>
         <span>{price} {currency}</span>
+
+        <button onClick={createCart}>Add to cart</button>
+        OR
+        <Link to={`/products/${id}`}><button>View More</button></Link>
 
         <button onClick={toggleModal} className="btn-modal">
           Edit

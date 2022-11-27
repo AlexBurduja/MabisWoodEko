@@ -41,3 +41,17 @@
     flex-direction: row;
     gap: 1vw;
 }
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+}
+
+@media (max-width: 950px ) {
+    .preFooter_newsletter{
+        display: none   ;
+    }
+
+    .preFooter_title{
+        font-size: 4.5vw;
+    }
+}

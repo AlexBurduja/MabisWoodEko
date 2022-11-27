@@ -6,7 +6,8 @@
       "price": "200",
       "currency": "EUR",
       "image": "/resources/productImage2.png",
-      "id": 2
+      "description": "Bricheti bla bla",
+      "id": 1
     },
     {
       "title": "Peleti",
@@ -14,10 +15,18 @@
       "price": "100",
       "currency": "RON",
       "image": "/resources/productImage.png",
-      "id": 3
+      "id": 2
     },
     {
       "title": "Peleti Grad A",
+      "kg": "15",
+      "price": "200",
+      "currency": "RON",
+      "image": "/resources/productImage.png",
+      "id": 3
+    },
+    {
+      "title": "Peleti Grad B",
       "kg": "15",
       "price": "200",
       "currency": "RON",
@@ -25,7 +34,7 @@
       "id": 4
     },
     {
-      "title": "Peleti Grad B",
+      "title": "Peleti Grad A",
       "kg": "15",
       "price": "200",
       "currency": "RON",
@@ -33,20 +42,12 @@
       "id": 5
     },
     {
-      "title": "Peleti Grad A",
-      "kg": "15",
-      "price": "200",
-      "currency": "RON",
-      "image": "/resources/productImage.png",
-      "id": 6
-    },
-    {
       "title": "Peleti Grad B",
       "kg": "15",
       "price": "200",
       "currency": "RON",
       "image": "/resources/productImage.png",
-      "id": 7
+      "id": 6
     }
   ],
   "cart": [

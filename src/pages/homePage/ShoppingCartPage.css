@@ -108,6 +108,7 @@ table:hover{
     outline: none;
     color: grey;
     font-size: 1em;
+    font-family: inherit;
 }
 
 .deliveryAddress_inputs__input span {

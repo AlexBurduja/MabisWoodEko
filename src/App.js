@@ -14,6 +14,7 @@ import { ShoppingCart } from './pages/homePage/ShoppingCart';
 import { ShoppingCartPage } from './pages/homePage/ShoppingCartPage';
 import { CartContextProvider } from './pages/homePage/context/CartContext'
 import { SingleProductPage } from './pages/homePage/SingleProductPage';
+import { ContactForm } from './pages/homePage/ContactForm';
 
 function App() {
   return (
@@ -49,6 +50,14 @@ function App() {
               <PreFooter />
             </>
           }></Route>
+
+          <Route path='/contact' element={
+            <>
+              <Header />
+              <ContactForm />
+              <PreFooter />
+            </>
+          }></Route>
       </Routes>
     </BrowserRouter>
   </CartContextProvider>
@@ -56,4 +65,5 @@ function App() {
 }
 
 export default App;
+
 

@@ -20,14 +20,14 @@ export function Header() {
     <div className='desktopAnchors'>
       <div className='nav_anchors '>
         <NavLink className={activeClass} to='/'>Home</NavLink>
-        <NavLink className={activeClass} to='/cart'>About</NavLink>
-        <NavLink className={activeClass} to='/products'>Products</NavLink>
+        <NavLink className={activeClass} to='/e'>About</NavLink>
+        <NavLink className={activeClass} to='/a'>Products</NavLink>
         <NavLink className={activeClass} to='/c'>Reviews</NavLink>
-        <NavLink className={activeClass} to='/d'>Contact</NavLink>
+        <NavLink className={activeClass} to='/contact'>Contact</NavLink>
         </div>
     </div>
 
-    <div className='desktopCart'> 
+    <div className='desktopCart'>
       <ShoppingCart></ShoppingCart>
     </div>
 

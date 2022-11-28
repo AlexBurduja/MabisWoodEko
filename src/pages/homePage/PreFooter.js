@@ -1,7 +1,6 @@
 import "./PreFooter.css"
 import { BsInstagram, BsFacebook,  } from 'react-icons/bs'
 import { FaTiktok  } from 'react-icons/fa'
-import { NavLink } from "react-router-dom";
 
 export function PreFooter() {
   return (

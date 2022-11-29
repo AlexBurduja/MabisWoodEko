@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ProductCardComponent.css"
 import 'animate.css';
-import { Link } from "react-router-dom";
 
 /// Modal
 
@@ -106,7 +105,7 @@ export function ProductCardComponent(props) {
       
       if (cart) {
         const productInCart = cart.products.find((product) => product.productId === id)
-        
+          
         if (productInCart) {
           productInCart.quantity = productInCart.quantity + 1; 
         } else {
@@ -194,6 +193,7 @@ export function ProductCardComponent(props) {
   // function editProductButton() {
   //   editProduct(id, title, image, kg, price, currency)
   // }
+
 
   return (
         <>

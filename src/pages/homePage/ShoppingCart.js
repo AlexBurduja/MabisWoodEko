@@ -23,7 +23,6 @@ const [products, setProducts] = useState([]);
       return acc + curr.quantity
     }, 0)
 
-    console.log(totalQ)
 
     function ProductCount () {
       if (totalQ === 1){

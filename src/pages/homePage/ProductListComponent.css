@@ -40,7 +40,7 @@ section header{
 }
 
 
-.cardDiv p{
+.kgP{
     position: absolute;
     font-size: 20px;
     bottom: 20px;
@@ -48,7 +48,7 @@ section header{
     font-weight: bold;
 }
 
-.cardDiv span{
+.priceCurrencyP{
     position: absolute;
     font-size: 20px;
     bottom: 20px;
@@ -63,8 +63,6 @@ section header{
     font-weight: bold;
     font-size: 0.9rem;
     font-family: inherit;
-    /* width: 12.63vw; */
-    /* height: 2.12vw; */
     width: 30%;
     height: 10%;
     cursor: pointer;
@@ -72,6 +70,23 @@ section header{
     margin-bottom: 60px;
     position: relative;
     bottom: 0;
+}
+
+.cardDiv .viewMoreButton{
+    color: rgb(48, 48, 230);
+    font-weight: bold;
+    border: 2px solid black;
+    width: 30%;
+    font-size: 0.9rem;
+    padding: 3% 0;
+    text-align: center;
+    text-decoration: none;
+}
+
+.cardDiv .viewMoreButton:hover{
+    background-color: rgb(48, 48, 230);
+    color: white;
+    border: 2px solid black;
 }
 
 .cardDiv button:hover{

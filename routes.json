@@ -1,0 +1,4 @@
+{
+    "/product*" : "/660/product$1",
+    "/cart*": "/660/cart$1"
+}

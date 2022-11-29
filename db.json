@@ -96,5 +96,12 @@
       ],
       "id": 1
     }
+  ],
+  "users": [
+    {
+      "email": "test@yahoo.com",
+      "password": "$2a$10$GpPBTDZVVfVHe15niCypWub1pDmdmasKg6dJEr7SeF6d6ap.Yt4D6",
+      "id": 1
+    }
   ]
 }

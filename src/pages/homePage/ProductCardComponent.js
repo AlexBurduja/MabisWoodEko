@@ -200,14 +200,14 @@ export function ProductCardComponent(props) {
     <div className="cardDiv">
         <h2>{title}</h2>
         <img src={image} alt="productImage" />
-        <p>{kg} Kg</p>
-        <span>{price} {currency}</span>
+        <p className="kgP">{kg} Kg</p>
+        <p className="priceCurrencyP">{price} {currency}</p>
 
-        <button onClick={createCart}>Add to cart</button>
-        OR
-        <Link to={`/products/${id}`}><button>View More</button></Link>
+        <button  className="cardDivButton" onClick={createCart}>Add to cart</button>
+        
+        <a href={`/products/${id}`} className="viewMoreButton"> View More </a>
 
-        <button onClick={toggleModal} className="btn-modal">
+        <button onClick={toggleModal} className="btn-modal cardDivButton">
           Edit
         </button>
     </div>

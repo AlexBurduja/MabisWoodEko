@@ -1,66 +1,43 @@
 import './App.css';
-import { CreateProduct } from './pages/homePage/CreateProduct';
-import { Header } from './pages/homePage/Header.js';
-import { Image } from './pages/homePage/Image';
-import { ImageCards } from './pages/homePage/ImageCards';
-import { ProductListComponent } from './pages/homePage/ProductListComponent';
 import {
   BrowserRouter,
   Routes,
   Route,
-} from "react-router-dom";    
-import { PreFooter } from './pages/homePage/PreFooter';
-import { ShoppingCart } from './pages/homePage/ShoppingCart';
-import { ShoppingCartPage } from './pages/homePage/ShoppingCartPage';
-import { CartContextProvider } from './pages/homePage/context/CartContext'
-import { SingleProductPage } from './pages/homePage/SingleProductPage';
-import { ContactForm } from './pages/homePage/ContactForm';
+} from "react-router-dom";
+import { Homepage } from './pages/homePage/Homepage'
+import { CartPage } from './pages/homePage/CartPage'
+import { ProductPage } from './pages/homePage/ProductPage'
+import { ContactPage } from './pages/homePage/ContactPage'
+import { Login } from './pages/auth/Login';
+import React, { useEffect, useState } from 'react';
+
+export const AuthContext = React.createContext();
 
 function App() {
+  const [auth, setAuth] = useState(JSON.parse(window.localStorage.getItem('auth')) || {} )
+
+  useEffect(() => {
+    window.localStorage.setItem('auth', JSON.stringify(auth));
+
+    console.log(auth)
+  }, [auth]);
+
   return (
-  <CartContextProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={
-            <>
-              <Header >
-                <ShoppingCart />
-              </Header>
-              <Image />
-              <ImageCards />
-              <CreateProduct />
-              <ProductListComponent />
-              <PreFooter />
-            </>
-            
-          }></Route>
+    <AuthContext.Provider value={ { auth, setAuth} }>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={ <Homepage /> }></Route>
 
-          <Route path='/cart' element={
-            <>
-              <Header />
-              <ShoppingCartPage />
-              <PreFooter />
-            </>
-          }></Route>
+            <Route path='/cart' element={ <CartPage /> }></Route>
 
-          <Route path='/products/:id' element={
-            <>
-              <Header />
-              <SingleProductPage />
-              <PreFooter />
-            </>
-          }></Route>
+            <Route path='/products/:id' element={ <ProductPage /> }></Route>
 
-          <Route path='/contact' element={
-            <>
-              <Header />
-              <ContactForm />
-              <PreFooter />
-            </>
-          }></Route>
-      </Routes>
-    </BrowserRouter>
-  </CartContextProvider>
+            <Route path='/contact' element={ <ContactPage /> }></Route>
+
+            <Route path ='login' element={ <Login /> }></Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthContext.Provider>
   )
 }
 

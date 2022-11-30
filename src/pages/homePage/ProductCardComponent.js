@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./ProductCardComponent.css"
 import 'animate.css';
-import { Link } from "react-router-dom";
+import { AuthContext } from "../../App";
 
 /// Modal
 
 export function ProductCardComponent(props) {
 
   const { title ,kg, currency,  price, image, id } = props
+
+  
 
     const productDetailUrl = 'http://localhost:3001';
     const endpoint = "/product"
@@ -33,9 +35,14 @@ export function ProductCardComponent(props) {
   const [newImage, setImage] = useState('')
   ///// End of Modal
 
+  const {auth} = useContext(AuthContext)
 
   useEffect(() => {
-    fetch(productDetailUrl + endpoint + "/" + id)
+    fetch(productDetailUrl + endpoint + "/" + id, {
+      headers: {
+        'Authorization': `Bearer ${auth.accessToken}`
+      }
+    })
     .then((response) => response.json())
     .then((product) => {
       setTitle(product.title);

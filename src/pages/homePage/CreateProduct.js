@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./CreateProduct.css"
 import 'animate.css';
+import { AuthContext } from "../../App";
 
 
 export function CreateProduct(){
@@ -15,8 +16,14 @@ export function CreateProduct(){
   const [currency, setCurrency] = useState('');
   const [image, setImage] = useState('');
 
+  const {auth} = useContext(AuthContext)
+
   useEffect(() => {
-    fetch(productDetailUrl + endpoint)
+    fetch(productDetailUrl + endpoint, {
+      headers: {
+        'Authorization': `Bearer ${auth.accessToken}`
+      }
+    })
     .then((response) => response.json())
     .then((product) => {
       setTitle(product.title);

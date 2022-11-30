@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../App";
 import "./SingleProductPage.css"
 
 export function SingleProductPage() {
@@ -8,8 +9,14 @@ export function SingleProductPage() {
   let { id } = useParams();
   const [productDetails, setproductDetails] = useState({})
 
+  const { auth } = useContext(AuthContext)
+  
   useEffect(() => {
-    fetch(`${url}/${id}`)
+    fetch(`${url}/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${auth.accessToken}`
+      }
+    })
     .then((response) => response.json())
     .then((product) => setproductDetails(product))
   }, [])

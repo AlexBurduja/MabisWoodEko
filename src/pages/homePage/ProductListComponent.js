@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../App';
 import { ProductCardComponent } from "./ProductCardComponent";
 import "./ProductListComponent.css"
 
@@ -8,13 +9,18 @@ export function ProductListComponent() {
   const endpoint = "/product";
   const [products, setProducts] = useState([]);
 
+  const { auth } = useContext(AuthContext)
 
   ///Fetch Get RestApi
   useEffect(() => {
-    fetch(url + endpoint)
+    fetch(url + endpoint, {
+      headers: {
+        'Authorization': `Bearer ${auth.accessToken}`
+      }
+    })
       .then((response) => response.json())
       .then((productsFromServer) => setProducts(productsFromServer));
-  }, []);
+  }, [auth]);
 
   
   // Fetch Get FirebaseApi

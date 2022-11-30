@@ -1,16 +1,23 @@
 import { RiShoppingCartLine } from 'react-icons/ri'
 import { NavLink } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import "./ShoppingCart.css"
+import { AuthContext } from '../../App';
 
 
 export function ShoppingCart() {
 
 const [products, setProducts] = useState([]);
 
+const { auth } = useContext(AuthContext)
+
   ///Fetch Get RestApi
   useEffect(() => {
-    fetch('http://localhost:3001/cart')
+    fetch('http://localhost:3001/cart', {
+      headers: {
+        'Authorization': `Bearer ${auth.accessToken}`
+      }
+    })
       .then((response) => response.json())
       .then((cartList) => {
         const [ cart ] = cartList

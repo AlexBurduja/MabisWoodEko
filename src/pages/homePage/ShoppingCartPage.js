@@ -4,11 +4,10 @@ import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 
-export function ShoppingCartPage() {
+export function ShoppingCartPage(props) {
 
   const [products, setProducts] = useState([])
-     
-
+  
       useEffect(() => {
         fetch('http://localhost:3001/cart')
         .then((response) => response.json())
@@ -17,6 +16,7 @@ export function ShoppingCartPage() {
 
           setProducts(cart.products)
       })}, [] );
+
 
       function ProductCount () {
         if (totalQuantity === 1){
@@ -69,7 +69,7 @@ export function ShoppingCartPage() {
 
               <div className='column'>
                 <p>Quantity</p>
-                {item.quantity}
+                <button>-</button> {item.quantity} <button>+</button>
               </div>
 
               <div className='column'>

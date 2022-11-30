@@ -113,7 +113,7 @@ export function ProductCardComponent(props) {
       
       if (cart) {
         const productInCart = cart.products.find((product) => product.productId === id)
-        
+          
         if (productInCart) {
           productInCart.quantity = productInCart.quantity + 1; 
         } else {
@@ -201,6 +201,7 @@ export function ProductCardComponent(props) {
   // function editProductButton() {
   //   editProduct(id, title, image, kg, price, currency)
   // }
+
 
   return (
         <>

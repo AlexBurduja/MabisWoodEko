@@ -6,10 +6,6 @@
       "price": "200",
       "currency": "EUR",
       "image": "/resources/productImage2.png",
-      "image2": "/resources/productImage.png",
-      "image3": "/resources/productImage2.png",
-      "image4": "/resources/productImage.png",
-      "image5": "/resources/productImage2.png",
       "description": "Bricheti bla bla",
       "id": 1
     },

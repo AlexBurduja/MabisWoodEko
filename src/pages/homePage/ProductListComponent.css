@@ -82,6 +82,24 @@ section header{
     margin-bottom: 60px;
     text-align: center;
     text-decoration: none;
+    opacity: 0;
+}
+
+.cardDiv .opacity {
+    color: rgb(48, 48, 230);
+    font-weight: bold;
+    border: 2px solid black;
+    width: 30%;
+    font-size: 0.9rem;
+    padding: 3% 0;
+    margin-bottom: 60px;
+    text-align: center;
+    text-decoration: none;
+    opacity: 1;
+}
+
+.cardDiv:hover + .cardDiv .viewMoreButton:first-of-type {
+    opacity: 1;
 }
 
 .cardDiv button:hover{

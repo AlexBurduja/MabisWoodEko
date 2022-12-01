@@ -13,9 +13,9 @@ const { auth } = useContext(AuthContext)
 
   ///Fetch Get RestApi
   useEffect(() => {
-    fetch('http://localhost:3001/cart', {
-      headers: {
-        'Authorization': `Bearer ${auth.accessToken}`
+    fetch('http://localhost:3001/cart' ,{
+      headers : {
+        Authorization : `Bearer ${auth.accessToken}`
       }
     })
       .then((response) => response.json())
@@ -24,7 +24,7 @@ const { auth } = useContext(AuthContext)
 
         setProducts(cart.products)
       });
-    }, [])
+    }, [auth.accessToken])
     
     const totalQ = products.reduce((acc,curr) => {
       return acc + curr.quantity

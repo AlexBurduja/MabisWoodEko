@@ -88,7 +88,10 @@ export function ProductCardComponent(props) {
   function deleteItem() {
     if(auth.user.admin) {
       fetch (productDetailUrl + endpoint + "/" + id , {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+          Authorization : `Bearer ${auth.accessToken}`
+        }
       })
     }
   }
@@ -226,10 +229,9 @@ export function ProductCardComponent(props) {
         <p className="priceCurrencyP">{price} {currency}</p>
 
         <button  className="cardDivButton" onClick={createCart}>Add to cart</button>
-        
-        {isHovering &&
-          <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
-        }
+
+    
+      <a href={`/products/${id}`} className={isHovering ? "opacity" : "viewMoreButton"}> View more </a>
 
       {
         auth.user.admin &&

@@ -21,7 +21,7 @@ export function CreateProduct(){
   useEffect(() => {
     fetch(productDetailUrl + endpoint, {
       headers: {
-        'Authorization': `Bearer ${auth.accessToken}`
+        Authorization : `Bearer ${auth.accessToken}`
       }
     })
     .then((response) => response.json())
@@ -90,9 +90,11 @@ export function CreateProduct(){
   return (
     
     <>
-    <div className="createProductButtonWrapper">
-      <button className="createProductButton" onClick={toggleModal2}>Create Product</button>
-    </div>
+    {auth.user.admin &&
+      <div className="createProductButtonWrapper">
+        <button className="createProductButton" onClick={toggleModal2}>Create Product</button>
+      </div>
+    }
 
       {modal2 && (
         <div className="modal">

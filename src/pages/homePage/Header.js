@@ -1,11 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useContext } from 'react';
+import { FiLogOut } from 'react-icons/fi';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../App';
 import logo from '../../publicResources/logoMabis.svg';
 import './CssHeader.css'
 import "./ShoppingCart.js"
 import { ShoppingCart } from './ShoppingCart.js';
 
 export function Header() {
+
+  const { auth, logOut } = useContext(AuthContext)
 
   const activeClass = ({isActive}) => isActive ? "activeClassNav" : {};
 
@@ -15,6 +20,12 @@ export function Header() {
     <section className='flex'>
       <div className='logo'>
         <img src={logo} alt="logo"/>
+      </div>
+
+      <div>
+        <p>Hi, {auth?.user?.email}</p>
+
+        <button onClick={logOut}>Log Out</button>
       </div>
 
     <div className='desktopAnchors'>

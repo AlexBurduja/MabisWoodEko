@@ -15,12 +15,13 @@ export function ProductListComponent() {
   useEffect(() => {
     fetch(url + endpoint, {
       headers: {
-        'Authorization': `Bearer ${auth.accessToken}`
+        Authorization : `Bearer ${auth.accessToken}`
+
       }
     })
       .then((response) => response.json())
       .then((productsFromServer) => setProducts(productsFromServer));
-  }, [auth]);
+  }, []);
 
   
   // Fetch Get FirebaseApi

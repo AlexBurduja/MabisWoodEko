@@ -4,7 +4,7 @@ import { Image } from './Image';
 import { ImageCards } from './ImageCards';
 import { ProductListComponent } from './ProductListComponent';
 import { PreFooter } from './PreFooter';
-import { ShoppingCart } from './ShoppingCart';
+import { ShoppingCart } from "../cartPage/ShoppingCart";
 
 export function Homepage() {
 

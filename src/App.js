@@ -5,9 +5,9 @@ import {
   Route,
 } from "react-router-dom";
 import { Homepage } from './pages/homePage/Homepage'
-import { CartPage } from './pages/homePage/CartPage'
-import { ProductPage } from './pages/homePage/ProductPage'
-import { ContactPage } from './pages/homePage/ContactPage'
+import { CartPage } from './pages/cartPage/CartPage'
+import { ProductPage } from './pages/productPage/ProductPage'
+import { ContactPage } from './pages/contactPage/ContactPage'
 import { Login } from './pages/auth/Login';
 import { AuthContextProvider } from './pages/auth/auth-context';
 import React from 'react';
@@ -46,8 +46,8 @@ function App() {
             </CanNavigate>
             }></Route>
 
-            <Route path ='login' element={ <Login /> }></Route>
-            <Route path ='register' element= { <Register/> }></Route>
+            <Route path ='/login' element={ <Login /> }></Route>
+            <Route path ='/register' element= { <Register/> }></Route>
         </Routes>
     </AuthContextProvider>
       </BrowserRouter>

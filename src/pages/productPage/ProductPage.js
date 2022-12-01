@@ -1,5 +1,5 @@
-import { Header } from './Header.js';
-import { PreFooter } from './PreFooter';
+import { Header } from '../homePage/Header.js';
+import { PreFooter } from '../homePage/PreFooter';
 import { SingleProductPage } from './SingleProductPage';
 
 

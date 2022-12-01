@@ -1,5 +1,5 @@
-import { Header } from './Header.js';
-import { PreFooter } from './PreFooter';
+import { Header } from '../homePage/Header';
+import { PreFooter } from '../homePage/PreFooter';
 import { ContactForm } from './ContactForm';
 
 

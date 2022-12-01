@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../App';
 import logo from '../../publicResources/logoMabis.svg';
 import './CssHeader.css'
-import "./ShoppingCart.js"
-import { ShoppingCart } from './ShoppingCart.js';
+import "../cartPage/ShoppingCart"
+import { ShoppingCart } from '../cartPage/ShoppingCart';
 
 export function Header() {
 

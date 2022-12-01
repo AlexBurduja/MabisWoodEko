@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
+import './loginCss.css'
 
 
 export function Login(){
@@ -9,6 +10,8 @@ export function Login(){
 
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+
+    const [errorMsg, setErrorMsg] = useState('')
 
     const { auth, setAuth } = useContext(AuthContext)
 
@@ -48,12 +51,27 @@ export function Login(){
             },
             body : JSON.stringify(body)
         })
-        .then ((response) => response.json())
-        .then ((response) => {
-            setAuth(response);
-            navigate('/')
-        });
-    }
+        // .then ((response) => response.json())
+        // .then ((response) => {
+        //   if( response.status === 400){
+        //     console.log("acc not found")
+        //   } else {
+        //     setAuth(response)
+        //     navigate("/")
+        //   }
+        // })
+
+        .then(response => {
+          if (response.status === 400){
+            setErrorMsg('Account not found')
+            // throw new Error('invalid credentials');
+          } return response
+        })
+        .then(response => response.json())
+        .then(response => setAuth(response))
+        .then( () => navigate("/"))
+  };
+    
 
     function validateEmail(email){
         // eslint-disable-next-line no-control-regex
@@ -121,25 +139,32 @@ export function Login(){
       }
 
     return (
-        <form onSubmit={onSubmit} noValidate>
+      <section className="loginWrapper">
+                    <h1>{errorMsg}</h1>
+        <div className="wrapperOfWrapper">
+          <h1>Welcome to Mabis <span className="woodColor">Wood</span> <span className="ekoColor">Eko</span>!</h1>
+            <form onSubmit={onSubmit} className="loginForm" noValidate>
+                <div className="inputBoxes">
+                    <input id="email" type="text" onChange={emailChangeHandler} required></input>
+                    <span>Email</span>
+                    <p className="error">{emailError}</p>
+                </div>
+
+                <div className="inputBoxes">
+                    <input id="password" type="password" onChange={passwordChangeHandler} required></input>
+                    <span>Password</span>
+                    <p className="error">{passwordError}</p>
+                </div>
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
             <div>
-                <label htmlFor="email">Email</label>
-                <input id="email" type="email" onChange={emailChangeHandler}></input>
-                <p>{emailError}</p>
+                Don't have an account? <Link to="/register">Register</Link>
             </div>
-
-
-            <div>
-                <label htmlFor="password">Password</label>
-                <input id="password" type="password" onChange={passwordChangeHandler}></input>
-                <p>{passwordError}</p>
-            </div>
-
-            <button type="submit">
-                Login
-            </button>
-
-            <Link to="/register">Register</Link>
-        </form>
+        </div>
+      </section>
     )
 }

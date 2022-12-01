@@ -1,130 +1,120 @@
-.btn-modal {
-  padding: 10px 20px;
-  display: block;
-  margin: 100px auto 0;
-  font-size: 18px;
+section header{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
 }
 
-.modal, .overlay {
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
-  z-index: 1;
+.gridUl{
+    display: grid;
+    place-items: center;
+    place-content: center;
+    margin-top: 2%;
+    grid-template-columns: repeat(auto-fit, minmax(450px,1fr));
+    gap: 55px;
+    width: 100%;
 }
 
-.overlay {
-  background: rgba(49,49,49,0.8);
+.cardDiv{
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px .8125rem, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    list-style-type: none;
+    position: relative;
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 65%;
+    height: 105%;
+    background-color: white;
 }
 
-.modal-content {
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
-  line-height: 1.4;
-  background: white;
-  padding: 14px 28px;
-  border-radius: 3px;
-  max-width: 600px;
-  min-width: 300px;
-  z-index: 2;
+.cardDiv h2{
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 
-.close-modal {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  font-size: 20px;
-  color: red;
-  background-color: white;
-  border: transparent;
-  cursor: pointer;
+.cardDiv img { 
+    width: 50%;
+    height: 50%;
 }
 
-.modal-content-inputs{
-  display: flex;
-  flex-direction: column;
-  gap:15px;
-  margin-top: 30px;
+
+.kgP{
+    position: absolute;
+    font-size: 20px;
+    bottom: 20px;
+    left: 20px;
+    font-weight: bold;
 }
 
-.modal-content h1,
-.modal-content p{
-  margin-top: 10px;
-  text-align: center;
+.priceCurrencyP{
+    position: absolute;
+    font-size: 20px;
+    bottom: 20px;
+    right: 20px;
+    font-weight: bold;
 }
 
-.modal-content-inputs input{
-
-  background-color: transparent;
-  border-radius: 0;
-  border: none;
-
-  height: 20px;
-
-
-  font-family: inherit;
-  font-size: inherit;
-  outline: none;
-  padding: 5px 5px;
-  width: 100%;
+.cardDiv button{
+    border: 2px black solid;
+    background-color: white;
+    color: rgb(48, 48, 230);
+    font-weight: bold;
+    font-size: 0.9rem;
+    font-family: inherit;
+    width: 30%;
+    height: 10%;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    bottom: 0;
 }
 
-.modal-content-inputs label{
-  padding: 5px 5px;
+.cardDiv .viewMoreButton{
+    color: rgb(48, 48, 230);
+    font-weight: bold;
+    border: 2px solid black;
+    width: 30%;
+    font-size: 0.9rem;
+    padding: 3% 0;
+    margin-bottom: 60px;
+    text-align: center;
+    text-decoration: none;
+    opacity : 0;
+    transition: 300ms ease-out
 }
 
-.modal-content-inputs_div label{
-  display: block;
-  cursor: pointer;
+.cardDiv:hover .viewMoreButton:first-of-type {
+    transition: 300ms ease-in;
+    opacity: 1;
 }
 
-.modal-content-inputs_div{
-  border: 1px solid rgba(208, 208, 208, 0.5);
-  cursor: pointer;
+/* .cardDiv .opacity {
+    color: rgb(48, 48, 230);
+    font-weight: bold;
+    border: 2px solid black;
+    width: 30%;
+    font-size: 0.9rem;
+    padding: 3% 0;
+    margin-bottom: 60px;
+    text-align: center;
+    text-decoration: none;
+    opacity: 1;
+} */
+
+.cardDiv:hover .viewMoreButton:first-of-type {
+    opacity: 1;
 }
 
-.modal-content-inputs_div:nth-child(1):hover,
-.modal-content-inputs_div:nth-child(2):hover,
-.modal-content-inputs_div:nth-child(3):hover,
-.modal-content-inputs_div:nth-child(4):hover,
-.modal-content-inputs_div:nth-child(5):hover{
-  border: 1px solid black; 
+.cardDiv button:hover{
+    background-color: rgb(48, 48, 230);
+    color: white;
+    border: 2px solid black;
 }
 
-.modal-content-buttons{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 30px;
-}
-
-.modal-content-buttons button{
-  border: 1px solid black;
-  color:  rgba(48, 48, 230, 1);
-  background-color: transparent;
-  font-family: inherit;
-  font-weight: bold;
-  font-size: 15px;
-  padding: 5px 5px;
-  cursor: pointer;
-}
-
-.modal-content-buttons button:hover{
-  background-color: rgba(48, 48, 230, 1);
-  color: white;
-}
-
-.modal-content-inputs_div:nth-child(1),
-.modal-content-inputs_div:nth-child(2),
-.modal-content-inputs_div:nth-child(3),
-.modal-content-inputs_div:nth-child(4),
-.modal-content-inputs_div:nth-child(5){
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+.listComponent header{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }

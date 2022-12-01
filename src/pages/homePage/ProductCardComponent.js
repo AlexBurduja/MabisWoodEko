@@ -231,7 +231,7 @@ export function ProductCardComponent(props) {
         <button  className="cardDivButton" onClick={createCart}>Add to cart</button>
 
     
-      <a href={`/products/${id}`} className={isHovering ? "opacity" : "viewMoreButton"}> View more </a>
+      <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
 
       {
         auth.user.admin &&

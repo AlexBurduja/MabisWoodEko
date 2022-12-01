@@ -10,8 +10,7 @@ export function AuthContextProvider(props) {
 
     useEffect(() => {
       window.localStorage.setItem('auth', JSON.stringify(auth));
-  
-      console.log(auth)
+      
     }, [auth]);
 
     function logOut() {

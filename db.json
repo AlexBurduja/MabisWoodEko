@@ -97,7 +97,14 @@
     {
       "email": "test@yahoo.com",
       "password": "$2a$10$LNp4lKQk.xRFxTTwbtCJ2.PCtUllrEmVQVDvlTR3Yr6oA.lLbhvNi",
+      "username": "Bitu",
       "id": 1
+    },
+    {
+      "email": "carla.grigorescu@yahoo.com",
+      "password": "$2a$10$VGj.m3mmYvp1EfyjbIQz7uZd3OlEUMkc.SRwhv1ckAUlKUtW/mpx6",
+      "username": "Bita",
+      "id": 2
     }
   ]
 }

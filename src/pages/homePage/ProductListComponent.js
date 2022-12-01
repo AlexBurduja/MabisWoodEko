@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../App';
 import { ProductCardComponent } from "./ProductCardComponent";
-import "./ProductListComponent.css"
+import "./ProductCardComponentModal.css"
 
 export function ProductListComponent() {
 

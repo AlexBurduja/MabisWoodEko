@@ -23,7 +23,7 @@ export function Header() {
       </div>
 
       <div>
-        <p>Hi, {auth?.user?.email}</p>
+        <p>Hi, {auth?.user?.username}</p>
 
         <button onClick={logOut}>Log Out</button>
       </div>

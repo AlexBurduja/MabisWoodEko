@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
 
 
@@ -73,7 +73,7 @@ export function Login(){
           '!', '@', '#', '$', '%', '^', '&', '*'
         ];
     
-        if (!(password.length <= 6)) {
+        if (!(password.length >= 6)) {
           setPasswordError('Password must contain at least 6 characters');
     
           return false;
@@ -138,6 +138,8 @@ export function Login(){
             <button type="submit">
                 Login
             </button>
+
+            <Link to="/register">Register</Link>
         </form>
     )
 }

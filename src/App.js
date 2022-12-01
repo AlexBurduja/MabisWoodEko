@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
 import { Homepage } from './pages/homePage/Homepage'
 import { CartPage } from './pages/homePage/CartPage'
@@ -11,21 +10,11 @@ import { ProductPage } from './pages/homePage/ProductPage'
 import { ContactPage } from './pages/homePage/ContactPage'
 import { Login } from './pages/auth/Login';
 import { AuthContextProvider } from './pages/auth/auth-context';
-import React, { useContext } from 'react';
+import React from 'react';
+import { CanNavigate } from './pages/auth/CanNavigate';
+import { Register } from './pages/auth/Register';
 
 export const AuthContext = React.createContext();
-
-function CanNavigate({ children }) {
-  const { auth } = useContext(AuthContext)
-
-  if(auth?.accessToken){
-    return ( children )
-  } else {
-    return <Navigate to="/login" replace={true} />
-  }
-}
-
-
 
 function App() {
 
@@ -58,6 +47,7 @@ function App() {
             }></Route>
 
             <Route path ='login' element={ <Login /> }></Route>
+            <Route path ='register' element= { <Register/> }></Route>
         </Routes>
     </AuthContextProvider>
       </BrowserRouter>
@@ -65,5 +55,6 @@ function App() {
 }
 
 export default App;
+
 
 

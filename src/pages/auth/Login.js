@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
 
 
@@ -10,6 +11,8 @@ export function Login(){
     const [passwordError, setPasswordError] = useState('')
 
     const { auth, setAuth } = useContext(AuthContext)
+
+    const navigate = useNavigate();
 
     function passwordChangeHandler(event){
         setPassword(event.target.value)
@@ -48,6 +51,7 @@ export function Login(){
         .then ((response) => response.json())
         .then ((response) => {
             setAuth(response);
+            navigate('/')
         });
     }
 

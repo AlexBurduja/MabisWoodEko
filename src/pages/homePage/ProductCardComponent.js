@@ -17,6 +17,18 @@ export function ProductCardComponent(props) {
 
   const [modal, setModal] = useState(false);
 
+  const [isHovering, setIsHovering] = useState(false)
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  }
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  }
+
+
+
   const toggleModal = () => {
     setModal(!modal)
   };
@@ -74,9 +86,11 @@ export function ProductCardComponent(props) {
   }
   
   function deleteItem() {
-    fetch (productDetailUrl + endpoint + "/" + id , {
-      method: "DELETE"
-    })
+    if(auth.user.admin) {
+      fetch (productDetailUrl + endpoint + "/" + id , {
+        method: "DELETE"
+      })
+    }
   }
 
     function titleChange(event){
@@ -205,7 +219,7 @@ export function ProductCardComponent(props) {
 
   return (
         <>
-    <div className="cardDiv">
+    <div className="cardDiv" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
         <h2>{title}</h2>
         <img src={image} alt="productImage" />
         <p className="kgP">{kg} Kg</p>
@@ -213,11 +227,14 @@ export function ProductCardComponent(props) {
 
         <button  className="cardDivButton" onClick={createCart}>Add to cart</button>
         
-        <a href={`/products/${id}`} className="viewMoreButton"> View More </a>
+        {isHovering &&
+          <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
+        }
 
-        <button onClick={toggleModal} className="btn-modal cardDivButton">
-          Edit
-        </button>
+      {
+        auth.user.admin &&
+        <button onClick={toggleModal} className="btn-modal cardDivButton">Edit</button>
+      }
     </div>
 
         {modal && (

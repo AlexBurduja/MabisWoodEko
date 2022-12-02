@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../App';
+import "./Register.css"
+import { motion } from 'framer-motion';
 
 
 
@@ -129,27 +131,38 @@ function validatePassword(password) {
 
 
   return (
-    <form onSubmit={onSubmits}>
-      <div>
-        <label htmlFor='username'>Username</label>
-        <input id="username" type="text" onChange={usernameChangeHandler}></input>
+<div className='registerWrapper'>
+  <form className='registerForm' onSubmit={onSubmits}>
+    <h1>Register</h1>
+
+      <div className="inputBoxes">
+        <input id="username" type="text" onChange={usernameChangeHandler} required></input>
+        <span htmlFor='username'>Username</span>
       </div>
 
-
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="email" onChange={emailChangeHandler}></input>
-        <p>{emailError}</p>
+      <div className='inputBoxes'>
+          <input id="email" type="text" onChange={emailChangeHandler} required></input>
+          <span>Email</span>
+          <p className="error">{emailError}</p>
       </div>
 
+      <div className="inputBoxes">
+          <input id="password" type="password" onChange={passwordChangeHandler} required></input>
+          <span>Password</span>
+          <p className="error">{passwordError}</p>
+        </div>
 
-      <div>
-        <label htmlFor="password">Password</label>
-        <input id="password" type="password" onChange={passwordChangeHandler}></input>
-        <p>{passwordError}</p>      
-      </div>
+        <motion.button 
+                type="submit"
+                className="submitButtonRegister"
+                whileHover={{scale: 1.2}}
+                whileTap={{scale:0.9}}
+                >
+                    Register
+          </motion.button>
 
-      <button type='submit'>Register</button>
+          <p>Already have an account? <Link to="/login">Login</Link></p>
     </form>
+</div>
   );
 }

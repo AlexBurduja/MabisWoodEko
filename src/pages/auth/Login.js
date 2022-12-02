@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
+import { AnimatePresence, motion } from "framer-motion";
 import './loginCss.css'
 
 
@@ -63,8 +64,15 @@ export function Login(){
 
         .then(response => {
           if (response.status === 400){
-            setErrorMsg('Account not found')
-            // throw new Error('invalid credentials');
+            setErrorMsg('Email or Password is incorrect!')
+
+            
+            setTimeout(() =>{
+              setErrorMsg('')
+            }, 3000)
+
+            throw new Error('invalid credentials');
+
           } return response
         })
         .then(response => response.json())
@@ -138,9 +146,10 @@ export function Login(){
         return false;
       }
 
+
     return (
-      <section className="loginWrapper">
-                    <h1>{errorMsg}</h1>
+    <section className="loginWrapper">
+      <h1 className="errorMsgAccNotFound">{errorMsg}</h1>
         <div className="wrapperOfWrapper">
           <h1>Welcome to Mabis <span className="woodColor">Wood</span> <span className="ekoColor">Eko</span>!</h1>
             <form onSubmit={onSubmit} className="loginForm" noValidate>
@@ -156,9 +165,14 @@ export function Login(){
                     <p className="error">{passwordError}</p>
                 </div>
 
-                <button type="submit">
+                <motion.button 
+                type="submit"
+                className="submitButtonLogin"
+                whileHover={{scale: 0.99}}
+                whileTap={{scale:0.9}}
+                >
                     Login
-                </button>
+                  </motion.button>
 
             </form>
             <div>

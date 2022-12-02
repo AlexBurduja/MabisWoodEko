@@ -1,9 +1,3 @@
-/* .loginWrapper{
-    position: absolute;
-    left: 50%;
-    bottom: 50%;
-    transform: translate(-50%,50%);
-} */
 
 .loginWrapper{
     display: flex;
@@ -84,5 +78,19 @@
     text-align: center;
     color: red;
     transition: width 200ms ease-in;
+}
+
+.errorMsgAccNotFound{
+    color: red;
+}   
+
+.submitButtonLogin{
+    border-radius: 20px;
+    border: transparent;
+    height: 40px;
+    background: linear-gradient(-135deg, rgb(100,100,230), rgb(43,43,230));
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 20px;
 }
 

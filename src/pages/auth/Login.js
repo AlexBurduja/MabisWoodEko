@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
 import { AnimatePresence, motion } from "framer-motion";
 import './loginCss.css'
-
+import logo from "../../publicResources/logoMabis.svg"
 
 export function Login(){
     const [email, setEmail] = useState('')
@@ -151,8 +151,31 @@ export function Login(){
     <section className="loginWrapper">
       <h1 className="errorMsgAccNotFound">{errorMsg}</h1>
         <div className="wrapperOfWrapper">
-          <h1>Welcome to Mabis <span className="woodColor">Wood</span> <span className="ekoColor">Eko</span>!</h1>
+
+        <div className="leftRegion">
+
+        <div>
+          <img className="loginLogo" src={logo}></img>
+        </div>
+
+        <div>
+          <p>Welcome!</p>
+        </div>
+
+        <div>
+          Log in to have full access!
+        </div>
+
+        <div>
+          <p>www.mabiswoodeko.com</p>
+        </div>
+          
+        </div>
+
             <form onSubmit={onSubmit} className="loginForm" noValidate>
+
+          <h1>Log in</h1>
+
                 <div className="inputBoxes">
                     <input id="email" type="text" onChange={emailChangeHandler} required></input>
                     <span>Email</span>
@@ -174,10 +197,10 @@ export function Login(){
                     Login
                   </motion.button>
 
-            </form>
             <div>
                 Don't have an account? <Link to="/register">Register</Link>
             </div>
+            </form>
         </div>
       </section>
     )

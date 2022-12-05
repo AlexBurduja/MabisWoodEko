@@ -1,15 +1,22 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
+import { AuthContext } from '../../App';
 
 export function ShoppingCartPage(props) {
 
   const [products, setProducts] = useState([])
-  
+  const { auth } = useContext(AuthContext)
+
+
       useEffect(() => {
-        fetch('http://localhost:3001/cart')
+        fetch('http://localhost:3001/cart', {
+          headers : {
+            Authorization : `Bearer ${auth.accessToken}`
+          }
+        })
         .then((response) => response.json())
         .then((cartList) => {
           const [ cart ] = cartList

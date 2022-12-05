@@ -60,7 +60,7 @@
           "productPrice": "200",
           "productCurrency": "RON",
           "productKg": "20",
-          "quantity": 10
+          "quantity": 11
         },
         {
           "productId": 5,
@@ -88,6 +88,15 @@
           "productCurrency": "RON",
           "productKg": "15",
           "quantity": 10
+        },
+        {
+          "productId": 1,
+          "productTitle": "Bricheti",
+          "productImage": "/resources/productImage2.png",
+          "productPrice": "200",
+          "productCurrency": "EUR",
+          "productKg": "20",
+          "quantity": 1
         }
       ],
       "id": 1
@@ -99,6 +108,12 @@
       "password": "$2a$10$yrqc8DOwOWpl8NlTAJdKEOVBAcE2OkyNDlBc6cC9dhoahOCM30qkS",
       "username": "Alexo",
       "id": 1
+    },
+    {
+      "email": "carla.grigorescu@yahoo.com",
+      "password": "$2a$10$7tciG2b5wFsAwsfakPZsOOVEeqacYMdrfzs8kLwQvcuIrnhvbdWzm",
+      "username": "Bita",
+      "id": 2
     }
   ]
 }

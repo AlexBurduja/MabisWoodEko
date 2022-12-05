@@ -22,11 +22,6 @@ export function Header() {
         <img src={logo} alt="logo"/>
       </div>
 
-      <div>
-        <p>Hi, {auth?.user?.username}</p>
-
-        <button onClick={logOut}>Log Out</button>
-      </div>
 
     <div className='desktopAnchors'>
       <div className='nav_anchors '>
@@ -41,6 +36,11 @@ export function Header() {
       <ShoppingCart></ShoppingCart>
     </div>
 
+      <div className='headerLogin'>
+        <p>Hi, {auth?.user?.username}</p>
+        <button className='logoutButtonHeader' onClick={logOut}>Log Out</button>
+      </div>
+
     <div className='hamburger'>
         <input type="checkbox" id="navi-toggle" className="checkbox" />
         <label htmlFor="navi-toggle" class="button">
@@ -51,12 +51,14 @@ export function Header() {
 
       <nav className="nav">
         <ul className="list">
+          <p className="loginListP">Hi, {auth?.user?.username}</p>
           <li className="item"> <NavLink className={activeClassHamburger} to='/'>Home</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/cart'>About</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/b'>Products</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/c'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/d'>Contact</NavLink> </li>
           <li className="item mobileCart"> <NavLink className={activeClassHamburger} to='/cart'> <ShoppingCart /> </NavLink> </li>
+          <button className='logoutButtonHeader' onClick={logOut}>Log Out</button>
         </ul>
       </nav>
 </div>  

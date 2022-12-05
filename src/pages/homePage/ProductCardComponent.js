@@ -47,12 +47,12 @@ export function ProductCardComponent(props) {
   const [newImage, setImage] = useState('')
   ///// End of Modal
 
-  const {auth} = useContext(AuthContext)
+  const { auth } = useContext( AuthContext )
 
   useEffect(() => {
     fetch(productDetailUrl + endpoint + "/" + id, {
       headers: {
-        'Authorization': `Bearer ${auth.accessToken}`
+        Authorization : `Bearer ${auth.accessToken}`
       }
     })
     .then((response) => response.json())
@@ -122,7 +122,11 @@ export function ProductCardComponent(props) {
 
   function createCart() {
 
-    fetch(cartUrl)
+    fetch(cartUrl, {
+      headers: {
+        Authorization : `Bearer ${auth.accessToken}`
+      }
+    })
     .then(response => response.json())
     .then(cartList => {
       const [cart] = cartList;
@@ -174,7 +178,8 @@ export function ProductCardComponent(props) {
         method: "PATCH",
         body: JSON.stringify({ products }),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization : `Bearer ${auth.accessToken}`
         }
       });
     }
@@ -197,7 +202,8 @@ export function ProductCardComponent(props) {
       ] }),
 
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization : `Bearer ${auth.accessToken}`
         }
       });
     }

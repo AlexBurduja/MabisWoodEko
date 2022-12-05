@@ -53,7 +53,7 @@ export function ContactForm() {
         <h1>Contact Us</h1>
         <form onSubmit={sendEmail}>
         
-        <div className='deliveryAddress_inputs__input' >
+        <div className='deliveryAddress_inputs__input contactinput' >
           <input type="text" required="required" name="subject" ></input>
           <span>Subject</span>
         </div>

@@ -13,6 +13,7 @@ import { AuthContextProvider } from './pages/auth/auth-context';
 import React from 'react';
 import { CanNavigate } from './pages/auth/CanNavigate';
 import { Register } from './pages/auth/Register';
+import { ProfilePage } from './pages/auth/ProfilePage.js';
 
 export const AuthContext = React.createContext();
 
@@ -46,8 +47,9 @@ function App() {
             </CanNavigate>
             }></Route>
 
-            <Route path ='/login' element={ <Login /> }></Route>
-            <Route path ='/register' element= { <Register/> }></Route>
+            <Route path = '/profile' element={ <ProfilePage /> } ></Route>
+            <Route path = '/login' element={ <Login /> }></Route>
+            <Route path = '/register' element= { <Register/> }></Route>
         </Routes>
     </AuthContextProvider>
       </BrowserRouter>

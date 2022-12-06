@@ -35,6 +35,7 @@ export function Register() {
     const body = {
       email : email,
       password : password,
+      confirmPassword : password,
       username : username
     };
 

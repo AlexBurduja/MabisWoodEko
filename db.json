@@ -105,17 +105,10 @@
   "users": [
     {
       "email": "burduja_alex14@yahoo.com",
-      "password": "$2a$10$TpJpDcEbdf6HaupoGoZe5.7CtHiCaKPT9P8Xy6.fgB4zoRVFSA9eC",
+      "password": "$2a$10$dGKqWrJ6iQci5LYpfS/pOuMWOBcrGwsoJOGNjQq.BGCDLbg9qzMZa",
       "confirmPassword": "Alexandru1002!",
       "username": "Alexo",
       "id": 1
-    },
-    {
-      "email": "alex20011508@gmail.com",
-      "password": "$2a$10$Pht9XiVpnq6adQ265Bnea.RvuIxErzz6Kb4GnLfXIwPDu7Wq.pf9.",
-      "confirmPassword": "Alexandru1002!",
-      "username": "_justalexo",
-      "id": 2
     }
   ]
 }

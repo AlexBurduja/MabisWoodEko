@@ -4,7 +4,9 @@ import { FaTiktok  } from 'react-icons/fa'
 
 export function PreFooter() {
   return (
-    <section className="preFooterWrapper">
+    <section className="preFooterWrapperSecond">
+      <div className="preFooterWrapper">
+
       <div className="preFooter_title">
         <p>Keep up with our work!</p>
       </div>
@@ -27,6 +29,8 @@ export function PreFooter() {
         <div>
         <a href="https://www.tiktok.com" rel="noreferrer" target="_blank"><FaTiktok /></a>
         </div>
+      </div>
+              
       </div>
     </section>
   );

@@ -1,3 +1,5 @@
+
+
 .modal3{
     height: 320px;
     width: 100%;
@@ -5,22 +7,29 @@
     position: absolute;
 }
 
-.modal3Buttons{
-    width: 90%;
-    position: absolute;
+.modal3ButtonsWrapper{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 40px;
-    bottom: 30px;
+    align-items: center;
+}
+
+.modal3Buttons{
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    gap: 50px;
 }
 
 .modal3Buttons button{
     border: transparent;
     background: linear-gradient(to right, red, #e84701);
-    width: 5vw;
-    height: 5vh;
+    width: 8vw;
+    height: 4vh;
     cursor: pointer;
+    text-align: center;
+    font-family: inherit;
+    font-size: 1.5vw;
 }
 
 .profileError{
@@ -32,15 +41,26 @@
     display: flex;
     height: 100%;
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 35px;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+    
+}
+
+.profilePageh1{
+    text-align: center;
+    margin-top: 20px;
 }
 
 .profilePageSection_div{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    padding: 30px;
 }
 
 .profilePageSection_div form {
@@ -49,16 +69,15 @@
     gap: 10px;
 }
 
-
 form label{
     position: relative;
     width: 100px;
     top: 20px;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 form input{
-    width: 200px;
+    width: 250px;
     height: 40px;
     font-family: inherit;
     color: black;
@@ -80,3 +99,33 @@ form input{
     font-family: inherit;
     font-weight: bold;
 }
+
+.profilePageSection_divL{
+    width: 25vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: linear-gradient(-135deg, white 2%, rgb(42,42,230) 98%);
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.profilePageSection_divL p{
+    font-size: 20px;
+}
+
+@media (max-width:1000px){
+    .profilePageSection{
+        flex-direction: column;
+    }
+
+    .profilePageSection_divL{
+        width: 80%;
+    }
+
+    .profilePageSection_divL p{
+        font-size: 3.5vw;
+    }
+}
+

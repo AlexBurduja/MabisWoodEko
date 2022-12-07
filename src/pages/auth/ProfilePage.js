@@ -38,15 +38,15 @@ export function ProfilePage() {
         
         setEmailError('');
         setPasswordError('');
-        // setUsernameError('');
+        setUsernameError('');
     
         const emailValid = validateEmail(email)
     
-        const passwordValid = validatePassword(password);
+        const passwordValid = validatePassword(confirmPassword);
         
-        // const usernameValid = validateUsername(username);
+        const usernameValid = validateUsername(username);
     
-        if (!emailValid || !passwordValid) {
+        if (!emailValid || !passwordValid || !usernameValid) {
             return ;
         }
   
@@ -79,50 +79,50 @@ function validateEmail(email){
     return emailValid;
 }
 
-// function validateUsername(username){
-//     const specialCharacterList = ['!', '@', '#', '$', '%', '^', '&', '*']
 
-//     if(!(username.length <=15)){
-//         setUsernameError("Usernames need to have 15 characters or less!")
+function validateUsername(username){
+  const specialCharacterList = [
+    '!', '@', '#', '$', '%', '^', '&', '*'
+  ];
 
-//         return false
-//     }
+  function constainsNumber(str){
+    return /\d/.test(str)
+  }
 
-//     let hasNumberCharacter = false;
-//     let hasSpecialCharacter = false;
+    if(!(username.length <=15)){
+        setUsernameError("Usernames need to have 15 characters or less!")
 
-//     for(let letter of username) {
-        
-//       if (typeof Number(letter) === 'number') {
-//         hasNumberCharacter = true;
-//       }
+      return false
+    }
 
-//       if (specialCharacterList.includes(letter)) {
-//         hasSpecialCharacter = true;
-//       }
-//     }
+    for(let letter of username){
 
-//     if (!hasNumberCharacter) {
-//         setUsernameError("Number characters")
-//     }
+   if(specialCharacterList.includes(letter)){
+      setUsernameError("Username cannot contain special characters")
 
-//     if (!hasSpecialCharacter) {
-//         setUsernameError("Special Characters")
-//     }
-    
-//     return false;
-// }
+      return false
+  }
+
+  if(constainsNumber(username)){
+    setUsernameError("Username cannot contain numbers!")
+
+    return false
+  }
+}
+
+  return true;
+}
 
 function validatePassword(password) {
     const specialCharacterList = [
       '!', '@', '#', '$', '%', '^', '&', '*'
     ];
 
-    // if (!(password.length >= 6)) {
-    //   setPasswordError('Password must contain at least 6 characters');
+    if (!(password.length >= 6)) {
+      setPasswordError('Password must contain at least 6 characters');
 
-    //   return false;
-    // }
+      return false;
+    }
 
     let hasUpperCaseCharacter = false;
     let hasNumberCharacter = false;
@@ -202,8 +202,19 @@ if(modalSubmitButton) {
     return (
         <>
         <Header />
+            <h1 className="profilePageh1">{auth.user.username}'s Profile Page</h1>
             <section className="profilePageSection">
-            <h1>{auth.user.username}'s Profile Page</h1>
+            
+            <div className="profilePageSection_divL">
+              
+              <h2>Informations regarding profile changes!</h2>
+              
+              <p>If you wish to edit your profile credentials, change the fields to what your new credentials want to be, after that, click the "EDIT" button, then, you need to confirm your new credentials, and that is it! You are good to go!</p>
+              
+              <p>After confirmation, you will be redirected to the login page in order to log in with your NEW credentials!</p>
+
+            </div>
+            
             <div className="profilePageSection_div">
                 <form onSubmit={handleSubmit}>
                     
@@ -216,11 +227,12 @@ if(modalSubmitButton) {
                         <label htmlFor="password">Password</label>
                         <input type="text" id="password" defaultValue={auth.user.confirmPassword} onChange={changePassword}></input>
 
-                    <button type="button" onClick={toggleModalSubmitButton}> Edit </button>
                 </form>
-
+                
+                <button type="button" onClick={toggleModalSubmitButton}> Edit </button>
                 <button onClick={toggleModalDeleteButton}>Delete</button>
             </div>
+
 
 
                 {modalSubmitButton && (
@@ -242,9 +254,11 @@ if(modalSubmitButton) {
                         <p>Your new password: {confirmPassword}</p>
                         <p className="profileError">{passwordError}</p>
 
-                    <div className="modal3Buttons"> 
+                    <div className="modal3ButtonsWrapper"> 
+                      <div className="modal3Buttons">
                         <button type="submit" onClick={handleSubmit} >Confirm</button>
                         <button onClick={toggleModalSubmitButton}>Cancel</button>
+                      </div>
                     </div>
                     </div>
 

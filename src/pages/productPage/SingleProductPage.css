@@ -1,12 +1,19 @@
 .product{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 150px;
+    flex-direction: row-reverse;
 }
 
 .product-img img {
-    width: 25vw;
+    width: 15vw;
+}
+
+.productDescription{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 400px;
 }
 
 .productInfo {
@@ -15,4 +22,8 @@
     height: 100%;
     font-size: 2vh;
     gap: 25px;
+}
+
+.productInfo {
+    
 }

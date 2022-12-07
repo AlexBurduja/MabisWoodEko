@@ -30,16 +30,19 @@ export function SingleProductPage() {
     
     <section>
       <div className="product">
+
+        <div className="productDescription">
+          <p>{productDetails.description}</p>
+        </div>
         
         <div className="product-img">
           <img src={productDetails.image} alt="productImage" onClick={myFunction}/>
         </div>
 
         <div className="productInfo">
-            <h1>Title : {productDetails.title}</h1>
-            <p>Kg : {productDetails.kg} </p>
-            <p>Price: {productDetails.price} {productDetails.currency}</p>
-            <p>Description : {productDetails.description} </p>
+            <h1>{productDetails.title}</h1>
+            <p>{productDetails.kg} Kg </p>
+            <p>{productDetails.price} {productDetails.currency}</p>
         </div>
       
       </div>

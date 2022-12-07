@@ -5,7 +5,7 @@ import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 import { AuthContext } from '../../App';
 
-export function ShoppingCartPage(props) {
+export function ShoppingCartPage() {
 
   const [products, setProducts] = useState([])
   const { auth } = useContext(AuthContext)
@@ -45,9 +45,23 @@ export function ShoppingCartPage(props) {
         return acc+ cur.quantity
       }, 0)
 
+      function removeHandler(){
+        fetch(`http://localhost:3001/cart/id`, {
+          method: "DELETE",
+          headers : {
+            Authorization : `Bearer ${auth.accessToken}`
+          }
+        })
+      }
 
-  return (
-    <>
+      function ShoppingCartPage() {
+        if(totalQuantity === 0) {
+          return (
+            <h1 className='emptyCartText'>Your Cart is Empty</h1>
+          )
+        } else {
+          return (
+            <>
     <div className='pageHeader'>
     <h1>Your cart</h1>
     <AiOutlineShopping />
@@ -87,7 +101,7 @@ export function ShoppingCartPage(props) {
             </div>
 
             <div className='cartProductShowButtons'>
-                <button>Remove</button>
+                <button onClick={removeHandler}>Remove</button>
             </div>
           </section>
       )
@@ -207,8 +221,13 @@ export function ShoppingCartPage(props) {
                 </section>    
           </section>
       </section>
-
   </section>
 </>
+          )
+        }
+      }
+
+  return (
+    <ShoppingCartPage />
   )
   }

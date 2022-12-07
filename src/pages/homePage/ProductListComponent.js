@@ -16,7 +16,6 @@ export function ProductListComponent() {
     fetch(url + endpoint, {
       headers: {
         Authorization : `Bearer ${auth.accessToken}`
-
       }
     })
       .then((response) => response.json())

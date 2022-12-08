@@ -12,6 +12,7 @@
     "@uploadcare/react-widget": "^2.2.0",
     "animate.css": "^4.1.1",
     "bcrypt": "^5.1.0",
+    "count-lines-of-code": "^1.0.6",
     "emailjs-com": "^3.2.0",
     "firebase": "^9.14.0",
     "framer-motion": "^7.6.17",

@@ -9,11 +9,15 @@
     width: 15vw;
 }
 
+/* .product-img img:hover{
+    transition: 100ms ease-in;
+    
+} */
+
 .productDescription{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 400px;
 }
 
 .productInfo {
@@ -24,6 +28,16 @@
     gap: 25px;
 }
 
-.productInfo {
+.productInfo p:nth-of-type(1) {
+    font-size: 15px;
+}
+
+.productInfo p:nth-of-type(2) {
+    font-size: 25px;
+}
+
+.productInfo button {
+    border: transparent;
     
+    height: 50px;
 }

@@ -75,15 +75,17 @@ export function ProductCardComponent(props) {
       currency : newCurrency,
       image : newImage
     };
-
+if(auth.user.admin){
     fetch(productDetailUrl + endpoint + "/" + id ,{
       method: "PATCH",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization : `Bearer ${auth.accessToken}`
       },
       body: JSON.stringify(body)
     } )
   }
+}
   
   function deleteItem() {
     if(auth.user.admin) {
@@ -130,11 +132,10 @@ export function ProductCardComponent(props) {
     .then(response => response.json())
     .then(cartList => {
       const [cart] = cartList;
-
       
       if (cart) {
         const productInCart = cart.products.find((product) => product.productId === id)
-          
+
         if (productInCart) {
           productInCart.quantity = productInCart.quantity + 1; 
         } else {
@@ -199,7 +200,8 @@ export function ProductCardComponent(props) {
           productKg : kg,
           quantity: 1
         }
-      ] }),
+      ],
+    user : auth.user.id}),
 
         headers: {
           'Content-Type': 'application/json',
@@ -208,6 +210,7 @@ export function ProductCardComponent(props) {
       });
     }
   };
+
   //Firebase api edit
   // const editProduct = async (id) => {
   //   const userDoc = doc(db, "products", id)

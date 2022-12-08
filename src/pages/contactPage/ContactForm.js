@@ -53,23 +53,23 @@ export function ContactForm() {
         <h1>Contact Us</h1>
         <form onSubmit={sendEmail}>
         
-        <div className='deliveryAddress_inputs__input contactinput' >
-          <input type="text" required="required" name="subject" ></input>
+        <div className='rightSide_inputs__input' >
+          <input type="text" required="required" name="subject" autoComplete="off" ></input>
           <span>Subject</span>
         </div>
           
-        <div className='deliveryAddress_inputs__input' >
+        <div className='rightSide_inputs__input' >
           <input name="name" type="text" required="required" ></input>
           <span>Full Name</span>
         </div>
 
-        <div className='deliveryAddress_inputs__input' >
+        <div className='rightSide_inputs__input' >
           <input name="email" type="text" required="required" ></input>
           <span>Email</span>
         </div>
 
-        <div className='deliveryAddress_inputs__input' >
-          <input name="message" type="text" required="required"></input>
+        <div className='rightSide_inputs__input' >
+          <input name="message" type="text" required="required" autoComplete="off"></input>
           <span>Message</span>
         </div>
 

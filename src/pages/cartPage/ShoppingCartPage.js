@@ -12,7 +12,7 @@ export function ShoppingCartPage() {
 
 
       useEffect(() => {
-        fetch('http://localhost:3001/cart', {
+        fetch(`http://localhost:3001/cart?user=${auth.user.id}`, {
           headers : {
             Authorization : `Bearer ${auth.accessToken}`
           }

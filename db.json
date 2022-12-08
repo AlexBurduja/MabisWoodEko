@@ -4,7 +4,7 @@
       "title": "Bricheti",
       "kg": "20",
       "price": "200",
-      "currency": "EUR",
+      "currency": "RON",
       "image": "/resources/productImage2.png",
       "description": "Bricheti bla bla",
       "id": 1
@@ -34,35 +34,28 @@
       "id": 4
     },
     {
-      "title": "Peleti Grad A",
+      "title": "Peleti Grad AA",
       "kg": "15",
       "price": "200",
       "currency": "RON",
       "image": "/resources/productImage.png",
       "id": 5
-    },
-    {
-      "title": "Peleti Grad B",
-      "kg": "15",
-      "price": "200",
-      "currency": "RON",
-      "image": "/resources/productImage.png",
-      "id": 6
     }
   ],
   "cart": [
     {
       "products": [
         {
-          "productId": 1,
-          "productTitle": "Bricheti",
-          "productImage": "/resources/productImage2.png",
-          "productPrice": "200",
-          "productCurrency": "EUR",
-          "productKg": "20",
+          "productId": 2,
+          "productTitle": "Peleti",
+          "productImage": "/resources/productImage.png",
+          "productPrice": "100",
+          "productCurrency": "RON",
+          "productKg": "15",
           "quantity": 2
         }
       ],
+      "user": 2,
       "id": 1
     }
   ],
@@ -72,7 +65,15 @@
       "password": "$2a$10$dGKqWrJ6iQci5LYpfS/pOuMWOBcrGwsoJOGNjQq.BGCDLbg9qzMZa",
       "confirmPassword": "Alexandru1002!",
       "username": "Alexo",
+      "admin": true,
       "id": 1
+    },
+    {
+      "email": "alex20011508@gmail.com",
+      "password": "$2a$10$mXfJTogY3ts.HzTt8gGmdelFI.P0ZC8wwShr1hjTENwFYDQ4I72BK",
+      "confirmPassword": "Alexandru1002!",
+      "username": "Alexo2",
+      "id": 2
     }
   ]
 }

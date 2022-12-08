@@ -64,14 +64,17 @@ export function CreateProduct(){
       image: image
     }
 
-    fetch(productDetailUrl + endpoint, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    })
-    window.onclick.reload();
+    if(auth.user.admin){
+      fetch(productDetailUrl + endpoint, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization : `Bearer ${auth.accessToken}`
+        },
+        body: JSON.stringify(body)
+      })
+      window.onclick.reload();
+    }
   }
 
   

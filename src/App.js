@@ -47,7 +47,12 @@ function App() {
             </CanNavigate>
             }></Route>
 
-            <Route path = '/profile' element={ <ProfilePage /> } ></Route>
+            <Route path = '/profile' element={ 
+            <CanNavigate> 
+              <ProfilePage /> 
+            </CanNavigate>
+              } ></Route>
+          
             <Route path = '/login' element={ <Login /> }></Route>
             <Route path = '/register' element= { <Register/> }></Route>
         </Routes>

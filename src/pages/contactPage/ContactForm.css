@@ -6,7 +6,6 @@
     justify-content: space-around;
     width: 70%;
     margin-left: 15%;
-    height: 500px;
     border-radius: 30px;
     margin-top: 5%;
 }
@@ -60,10 +59,6 @@
     margin-bottom: 50px;
 }
 
-.contactinput input{
-    width: 100%;
-}
-
 .rightSide button {
     width: 100%;
     border: transparent; 
@@ -74,12 +69,83 @@
     height: 35px;
     border-radius: 20px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .leftSide_footer_icons{
     display: flex;
     flex-direction: row;
     font-size: 25px;
-    gap: 100px;
 }
 
+.rightSide_inputs__input{
+    position: relative;
+    width: 90%;
+}
+
+.rightSide_inputs__input input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    outline: none;
+    color: grey;
+    font-size: 1em;
+    font-family: inherit;
+}
+
+.rightSide_inputs__input span {
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    color: grey;
+    text-transform: uppercase;
+    transition: 300ms ease;
+}
+
+.rightSide_inputs__input input:focus ~ span, 
+.rightSide_inputs__input input:valid ~ span {
+    color: black;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.75em;
+    padding: 0 10px;
+    border-left: 1px solid rgba(48, 48, 230,1);
+    border-bottom: 1px solid rgba(48, 48, 230,1);
+    border-top: 1px solid rgba(48, 48, 230,1);
+    border-right: 1px solid rgba(48, 48, 230,1);
+    background-color: white;
+    letter-spacing: 0.2em;
+}
+
+.rightSide_inputs__input input:focus,
+.rightSide_inputs__input input:valid {
+    border: 1px solid rgba(48, 48, 230,1);
+}
+
+@media(max-width:900px){
+    .contactFormWrapper{
+        flex-direction: column;
+        height: 100%;
+        width: 90%;
+        margin: 0;
+        margin-left: 5%;
+    }
+
+    .rightSide{
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .leftSide{
+        width: 90%;
+        margin-left: 5%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 50px;
+        font-size: 2.5vw;
+    }
+
+}

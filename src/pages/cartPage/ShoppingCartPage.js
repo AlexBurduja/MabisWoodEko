@@ -230,4 +230,4 @@ export function ShoppingCartPage() {
   return (
     <ShoppingCartPage />
   )
-  }
+}

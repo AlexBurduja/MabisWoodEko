@@ -124,7 +124,7 @@ if(auth.user.admin){
 
   function createCart() {
 
-    fetch(cartUrl, {
+    fetch(`${cartUrl}?user=${auth.user.id}`, {
       headers: {
         Authorization : `Bearer ${auth.accessToken}`
       }

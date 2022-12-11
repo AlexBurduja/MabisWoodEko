@@ -4,6 +4,7 @@ import { AuthContext } from "../../App";
 import { AnimatePresence, motion } from "framer-motion";
 import './loginCss.css'
 import logo from "../../publicResources/logoMabis.svg"
+import Particle from "../../particlesJS/particleJsComponent";
 
 export function Login(){
     const [email, setEmail] = useState('')
@@ -148,7 +149,9 @@ export function Login(){
 
 
     return (
-    <section className="loginWrapper">
+      <>
+      <section className="loginWrapper">
+        <Particle />
       <h1 className="errorMsgAccNotFound">{errorMsg}</h1>
         <div className="wrapperOfWrapper">
 
@@ -203,5 +206,6 @@ export function Login(){
             </form>
         </div>
       </section>
+    </>
     )
 }

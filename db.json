@@ -55,8 +55,23 @@
           "quantity": 2
         }
       ],
-      "user": 2,
+      "user": 1,
       "id": 1
+    },
+    {
+      "products": [
+        {
+          "productId": 2,
+          "productTitle": "Peleti",
+          "productImage": "/resources/productImage.png",
+          "productPrice": "100",
+          "productCurrency": "RON",
+          "productKg": "15",
+          "quantity": 1
+        }
+      ],
+      "user": 2,
+      "id": 2
     }
   ],
   "users": [

@@ -140,6 +140,10 @@
     font-size: 20px;
 }
 
+div #tsparticles {
+    z-index: 1;
+}
+
 @media (max-width:1000px) {
     .leftRegion{
         display:none;

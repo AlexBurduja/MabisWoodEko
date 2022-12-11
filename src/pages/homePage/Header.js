@@ -8,6 +8,7 @@ import logo from '../../publicResources/logoMabis.svg';
 import './CssHeader.css'
 import "../cartPage/ShoppingCart"
 import { ShoppingCart } from '../cartPage/ShoppingCart';
+import Particle from '../../particlesJS/particleJsComponent';
 
 export function Header() {
 

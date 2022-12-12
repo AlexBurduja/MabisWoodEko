@@ -14,6 +14,7 @@ import React from 'react';
 import { CanNavigate } from './pages/auth/CanNavigate';
 import { Register } from './pages/auth/Register';
 import { ProfilePage } from './pages/auth/ProfilePage.js';
+import { ReviewPage } from './pages/reviewPage/ReviewPage';
 
 export const AuthContext = React.createContext();
 
@@ -44,6 +45,12 @@ function App() {
             <Route path='/contact' element={ 
             <CanNavigate>
               <ContactPage />
+            </CanNavigate>
+            }></Route>
+
+            <Route path='/reviews' element={ 
+            <CanNavigate>
+              <ReviewPage />
             </CanNavigate>
             }></Route>
 

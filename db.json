@@ -90,5 +90,20 @@
       "username": "Alexo2",
       "id": 2
     }
+  ],
+
+  "reviews": [
+    {
+      "reviewText" : "10/10",
+      "reviewRating": 2,
+      "user": 1,
+      "id" : 1
+    },
+    { 
+      "reviewText" : "11/10",
+      "reviewRating": 4,
+      "user": 2,
+      "id" : 2
+    }
   ]
 }

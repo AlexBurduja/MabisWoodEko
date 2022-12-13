@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import React from "react"
-import { RiContactsBookLine } from "react-icons/ri";
+import { IoMdTennisball } from "react-icons/io";
 
 
 export function ReviewPageComponent() {
@@ -10,40 +10,43 @@ export function ReviewPageComponent() {
     useEffect(() => {
         fetch("http://localhost:3001/reviews")
         .then(response => response.json())
-        .then((reviewList) => { setReviews(reviewList) 
-            
-            function Rating() {
-                for(let i = 0; i < reviewList.length; i++){
-                    let obj = reviewList[i]
-                    console.log(obj.reviewRating)
-                    
-                    if (obj.reviewRating === 2) {
-                        return <p>Hey</p>
-                    } else {
-                        return <p>Plm</p>
-                    }
-    
-                }
-            }
+        .then((reviewList) => {
+            setReviews(reviewList)
 
-            
         })}, [] ); 
+
+    const Hello = () => {
+        return (
+            reviews.map(item =>
+                {
+                    if(item.reviewRating === 2){
+                      return   <p>Second</p>
+                    }
+                    
+                    if (item.reviewRating === 1) {
+                        return <p>First</p>
+                    }
+            }
+        )
+    )
+}
+    
+        
+        
+               
+    
+
 
     return(
         <>
         {reviews.map((item) => {
             return (
                 <>
-
-                <p>
-                    {item.reviewText}
-                </p>
-
-                <p>
-                    {item.reviewRating}
-                </p>
-                
-                <Rating />
+                <div>
+                    <p>{item.reviewText}</p>
+                    <p>{item.reviewRating}</p>
+                </div>
+                <Hello />
                 </>
             )
         })}

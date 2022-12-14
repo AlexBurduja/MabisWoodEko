@@ -1,0 +1,104 @@
+.stars{
+    color: #FFD700;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    font-size: 25px;
+    word-break: break-word;
+}
+
+.reviewForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    gap: 10px;
+}
+
+.reviewInputBoxes{
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+}
+
+.reviewInputBoxes input{
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid black;
+    background-color: #fff;
+    border-radius: 5px;
+    color: black;
+    outline: none;
+    font-size: 1em;
+}
+
+.reviewInputBoxes span{
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1.5em;
+    color: black;
+    text-transform: uppercase;
+    transition: 100ms ease-in;
+}
+
+.reviewInputBoxes input:valid ~ span,
+.reviewInputBoxes input:focus ~ span {
+    color: black;
+    background-color: white;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    font-weight: 500;
+    transform: translateX(10px) translateY(-7px);
+    padding: 0px 10px;
+    font-size: 1em;
+}
+
+.reviewForm select{
+    width: 350px;
+    height: 50px;
+    font-size: 20px;
+    font-family: inherit;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 200ms ease-in;
+    border: 1px solid black;
+    padding: 0 1em 0 0;
+}
+
+.reviewForm button {
+    width: 350px;
+    border: transparent;
+    background: linear-gradient(-105deg, rgb(43,43,250), black);
+    border-radius: 10px;
+    height: 30px;
+    font-size: 20px;
+    color: white;
+}
+
+.reviewGrid{
+    display: grid;
+    justify-items: center;
+    place-items: center;
+    margin-top: 100px;
+    grid-template-columns: repeat(auto-fit, minmax(550px,0.5fr));
+    gap: 100px;
+}
+
+.reviewRatingSection{
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    height: 100px;
+}

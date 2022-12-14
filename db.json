@@ -77,33 +77,62 @@
   "users": [
     {
       "email": "burduja_alex14@yahoo.com",
-      "password": "$2a$10$dGKqWrJ6iQci5LYpfS/pOuMWOBcrGwsoJOGNjQq.BGCDLbg9qzMZa",
-      "confirmPassword": "Alexandru1002!",
+      "password": "$2a$10$opdCLZYAzbadP8PdHX29DONT1frDGpGDMiRLUyUpatdxVU.COEcpC",
+      "firstName": "Burduja",
+      "lastName": "Alexandru",
       "username": "Alexo",
-      "admin": true,
+      "confirmPassword": "Alexandru1002!",
+      "id": 1
+    }
+  ],
+  "reviews": [
+    {
+      "reviewText": "hai ca merge",
+      "reviewRating": "2",
+      "user": "Burduja",
       "id": 1
     },
     {
-      "email": "alex20011508@gmail.com",
-      "password": "$2a$10$mXfJTogY3ts.HzTt8gGmdelFI.P0ZC8wwShr1hjTENwFYDQ4I72BK",
-      "confirmPassword": "Alexandru1002!",
-      "username": "Alexo2",
+      "reviewText": "Eu zic ca e bine",
+      "reviewRating": "2",
+      "user": "Burduja",
       "id": 2
-    }
-  ],
-
-  "reviews": [
-    {
-      "reviewText" : "10/10",
-      "reviewRating": 2,
-      "user": 1,
-      "id" : 1
     },
-    { 
-      "reviewText" : "11/10",
-      "reviewRating": 1,
-      "user": 2,
-      "id" : 2
+    {
+      "reviewText": "Sunteti forta",
+      "reviewRating": "3",
+      "user": "Burduja",
+      "id": 3
+    },
+    {
+      "reviewText": "ce ma place mami la caldura",
+      "reviewRating": "4",
+      "user": "Burduja",
+      "id": 4
+    },
+    {
+      "reviewText": "hai pa",
+      "reviewRating": "5",
+      "user": "Burduja",
+      "id": 5
+    },
+    {
+      "reviewText": "va pup ",
+      "reviewRating": "1",
+      "user": "Burduja",
+      "id": 6
+    },
+    {
+      "reviewText": "baaaaaaaaaaaaaaaaaaaaaaaaa",
+      "reviewRating": "1",
+      "user": "Burduja",
+      "id": 7
+    },
+    {
+      "reviewText": "sa va iau neamu in pWla",
+      "reviewRating": "5",
+      "user": "Burduja",
+      "id": 8
     }
   ]
 }

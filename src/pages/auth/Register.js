@@ -10,6 +10,8 @@ export function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [firstName, setFirstName ] = useState('')
+  const [lastName, setLastName ] = useState('')
 
   
   const [emailError, setEmailError] = useState('')
@@ -33,10 +35,12 @@ export function Register() {
     }
     
     const body = {
+      firstName: firstName,
+      lastName: lastName,
+      username : username,
       email : email,
       password : password,
-      confirmPassword : password,
-      username : username
+      confirmPassword : password
     };
 
     fetch("http://localhost:3001/register", {
@@ -62,6 +66,14 @@ export function Register() {
 
   function usernameChangeHandler(event){
     setUsername(event.target.value)
+  }
+
+  function firstNameChangeHandler(event){
+    setFirstName(event.target.value)
+  }
+
+  function lastNameChangeHandler(event){
+    setLastName(event.target.value)
   }
 
   function validateEmail(email){
@@ -135,6 +147,16 @@ function validatePassword(password) {
 <div className='registerWrapper'>
   <form className='registerForm' onSubmit={onSubmits}>
     <h1>Register</h1>
+
+      <div className="inputBoxes">
+        <input id="firstName" type="text" onChange={firstNameChangeHandler} required></input>
+        <span htmlFor='firstName'>First name</span>
+      </div>
+
+      <div className="inputBoxes">
+        <input id="lastName" type="text" onChange={lastNameChangeHandler} required></input>
+        <span htmlFor='lastName'>Last name</span>
+      </div>
 
       <div className="inputBoxes">
         <input id="username" type="text" onChange={usernameChangeHandler} required></input>

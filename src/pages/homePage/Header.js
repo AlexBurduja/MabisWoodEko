@@ -29,7 +29,7 @@ export function Header() {
       <div className='nav_anchors '>
         <NavLink className={activeClass} to='/'>Home</NavLink>
         <NavLink className={activeClass} to='/e'>About</NavLink>
-        <NavLink className={activeClass} to='/products'>Products</NavLink>
+        <NavLink className={activeClass} to='/reviews'>Reviews</NavLink>
         <NavLink className={activeClass} to='/contact'>Contact</NavLink>
         </div>
     </div>
@@ -63,7 +63,7 @@ export function Header() {
           <p className="loginListP">Hi, {auth?.user?.username}</p>
           <li className="item"> <NavLink className={activeClassHamburger} to='/'>Home</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/cart'>About</NavLink> </li>
-          <li className="item"> <NavLink className={activeClassHamburger} to='/b'>Products</NavLink> </li>
+          <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/d'>Contact</NavLink> </li>
           <li className="item mobileCart"> <NavLink className={activeClassHamburger} to='/cart'> <ShoppingCart /> </NavLink> </li>
           <button className='logoutButtonHeader' onClick={logOut}>Log Out</button>

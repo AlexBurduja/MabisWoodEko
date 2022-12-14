@@ -24,9 +24,8 @@ export function ReviewPageComponent() {
 
         })}, [] );
 
-        
         const [text, setText] = useState("");
-
+        const [title, setTitle] = useState("")
         
 function textChange(event){
     setText(event.target.value)
@@ -36,13 +35,20 @@ function ratingChange(event){
     setSelected(event.target.value)
 }
 
+function titleChange(event){
+    setTitle(event.target.value)
+}
+
 function postHandler(event){
     event.preventDefault()
     
     const body = {
+        reviewTitle: title,
         reviewText: text,
         reviewRating: selected,
-        user: auth.user.firstName
+        userFirstName: auth.user.firstName,
+        userLastName: auth.user.lastName,
+        user: auth.user.id
     }
 
     fetch("http://localhost:3001/reviews", {
@@ -55,6 +61,7 @@ function postHandler(event){
     })
 }
 
+// auth.user.lastName + " " + Array.from(auth.user.firstName)[0]
 
 const Hello = () => {
     return (
@@ -63,10 +70,18 @@ const Hello = () => {
                 if (item.reviewRating === "1") {
                     return (
                         <section className="reviewRatingSection">
-                        {item.user} said
+                        <div className="reviewRatingSection_username">
+                            <p>
+                                {item.userLastName + " " + Array.from(item.userFirstName)[0]+"."} <span>said  
+                            </span></p> 
+                        </div>
                         
-                        <div>
-                        {item.reviewText}    
+                        <div className="reviewRatingSection_title">
+                            {item.reviewTitle}
+                        </div>
+
+                        <div className="reviewRatingSection_text">
+                            {item.reviewText}    
                         </div>
 
                         <div className="stars">
@@ -79,10 +94,18 @@ const Hello = () => {
                 if(item.reviewRating === "2"){
                   return  (
                     <section className="reviewRatingSection">
-                        {item.user} said
+                        <div className="reviewRatingSection_username">
+                            <p >
+                                {item.userLastName + " " + Array.from(item.userFirstName)[0]+"."} <span>said  
+                            </span></p> 
+                        </div>
                         
-                        <div>
-                        {item.reviewText}    
+                        <div className="reviewRatingSection_title">
+                            {item.reviewTitle}
+                        </div>
+
+                        <div className="reviewRatingSection_text">
+                            {item.reviewText}    
                         </div>
 
                     <div className="stars">
@@ -96,10 +119,18 @@ const Hello = () => {
                 if(item.reviewRating === "3"){
                     return (
                         <section className="reviewRatingSection">
-                        {item.user} said
+                        <div className="reviewRatingSection_username">
+                            <p >
+                                {item.userLastName + " " + Array.from(item.userFirstName)[0]+"."} <span>said  
+                            </span></p> 
+                        </div>
                         
-                        <div>
-                        {item.reviewText}    
+                        <div className="reviewRatingSection_title">
+                            {item.reviewTitle}
+                        </div>
+
+                        <div className="reviewRatingSection_text">
+                            {item.reviewText}    
                         </div>
                             
                         <div className="stars">
@@ -113,10 +144,18 @@ const Hello = () => {
                 if(item.reviewRating === "4"){
                     return (
                         <section className="reviewRatingSection">
-                        {item.user} said
+                        <div className="reviewRatingSection_username">
+                            <p >
+                                {item.userLastName + " " + Array.from(item.userFirstName)[0]+"."} <span>said  
+                            </span></p> 
+                        </div>
                         
-                        <div>
-                        {item.reviewText}    
+                        <div className="reviewRatingSection_title">
+                            {item.reviewTitle}
+                        </div>
+
+                        <div className="reviewRatingSection_text">
+                            {item.reviewText}    
                         </div>
 
                         <div className="stars">
@@ -129,10 +168,18 @@ const Hello = () => {
                 if(item.reviewRating === "5"){
                     return(
                         <section className="reviewRatingSection">
-                        {item.user} said
+                        <div className="reviewRatingSection_username">
+                            <p >
+                                {item.userLastName + " " + Array.from(item.userFirstName)[0]+"."} <span>said  
+                            </span></p> 
+                        </div>
                         
-                        <div>
-                        {item.reviewText}    
+                        <div className="reviewRatingSection_title">
+                            {item.reviewTitle}
+                        </div>
+
+                        <div className="reviewRatingSection_text">
+                            {item.reviewText}    
                         </div>
 
                         <div className="stars">
@@ -163,8 +210,13 @@ const [selected, setSelected] = useState(options[0])
                 <div className="reviewForm">
                 
                 <div className="reviewInputBoxes">
+                    <input id="text" type="text" onChange={titleChange} required></input>
+                    <span>Title</span>
+                </div>
+                
+                <div className="reviewInputBoxes">
                     <input id="text" type="text" onChange={textChange} required></input>
-                    <span>text</span>
+                    <span>Text</span>
                 </div>
 
                 <select onChange={ratingChange} required>

@@ -83,56 +83,35 @@
       "username": "Alexo",
       "confirmPassword": "Alexandru1002!",
       "id": 1
+    },
+    {
+      "email": "carla.grigorescu@yahoo.com",
+      "password": "$2a$10$32eflT1LrgjAMJkEIbgOO.X/m/EU/hKyGTyWKkMaHEyIjl4D2YSOa",
+      "firstName": "Carla",
+      "lastName": "Grigorescu",
+      "username": "CarlaUnicorn",
+      "confirmPassword": "Carla789@",
+      "id": 2
     }
   ],
   "reviews": [
     {
-      "reviewText": "hai ca merge",
-      "reviewRating": "2",
-      "user": "Burduja",
+      "reviewTitle": "Te bet",
+      "reviewText": "Te bet bitu mut din sufet si din ninima si veau sa lamai cu mine pentlu totdeauna, mutumec, te bet!",
+      "reviewRating": "5",
+      "userFirstName": "Burduja",
+      "userLastName": "Alexandru",
+      "user": 1,
       "id": 1
     },
     {
-      "reviewText": "Eu zic ca e bine",
-      "reviewRating": "2",
-      "user": "Burduja",
+      "reviewTitle": "Te bet",
+      "reviewText": "Te bet bita mut pentu ca eci mic si ai nevoie meleu sa te ajut si sa te spijin, eci cea mai buna bita din toaaaaaaaaaaaaaata galasia! Bet",
+      "reviewRating": "5",
+      "userFirstName": "Carla",
+      "userLastName": "Grigorescu",
+      "user": 2,
       "id": 2
-    },
-    {
-      "reviewText": "Sunteti forta",
-      "reviewRating": "3",
-      "user": "Burduja",
-      "id": 3
-    },
-    {
-      "reviewText": "ce ma place mami la caldura",
-      "reviewRating": "4",
-      "user": "Burduja",
-      "id": 4
-    },
-    {
-      "reviewText": "hai pa",
-      "reviewRating": "5",
-      "user": "Burduja",
-      "id": 5
-    },
-    {
-      "reviewText": "va pup ",
-      "reviewRating": "1",
-      "user": "Burduja",
-      "id": 6
-    },
-    {
-      "reviewText": "baaaaaaaaaaaaaaaaaaaaaaaaa",
-      "reviewRating": "1",
-      "user": "Burduja",
-      "id": 7
-    },
-    {
-      "reviewText": "sa va iau neamu in pWla",
-      "reviewRating": "5",
-      "user": "Burduja",
-      "id": 8
     }
   ]
 }

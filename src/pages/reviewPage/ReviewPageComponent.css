@@ -1,5 +1,6 @@
 .stars{
     color: #FFD700;
+    font-size: 40px;
 }
 
 .header{
@@ -90,15 +91,53 @@
 .reviewGrid{
     display: grid;
     justify-items: center;
-    place-items: center;
+    justify-content: center;
     margin-top: 100px;
-    grid-template-columns: repeat(auto-fit, minmax(550px,0.5fr));
+    grid-template-columns: repeat(auto-fit, minmax(450px,0.5fr));
     gap: 100px;
 }
 
 .reviewRatingSection{
     display: flex;
+    position: relative;
     flex-direction: column;
-    width: 150px;
-    height: 100px;
+    justify-content: center;
+    width: 65%;
+    height: 280px;
+    text-align: center;
+    gap: 25px;
+    background-color: #e0e0e0;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    transition: .3s;
+}
+
+.reviewRatingSection:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    opacity: 1;
+}
+
+.reviewRatingSection_text{
+    font-size: 20px;
+}
+
+
+div .reviewRatingSection_username{
+    font-size: 30px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+.reviewRatingSection_title{
+    margin-top: 50px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.reviewRatingSection_username p{
+    font-weight: bold;
+}
+
+.reviewRatingSection_username p span{
+    font-weight: normal;
 }

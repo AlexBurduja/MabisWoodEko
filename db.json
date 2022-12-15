@@ -6,7 +6,7 @@
       "price": "200",
       "currency": "RON",
       "image": "/resources/productImage2.png",
-      "description": "Bricheti bla bla",
+      "description": "Bricheti lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem   ",
       "id": 1
     },
     {
@@ -52,7 +52,34 @@
           "productPrice": "100",
           "productCurrency": "RON",
           "productKg": "15",
-          "quantity": 2
+          "quantity": 11
+        },
+        {
+          "productId": 3,
+          "productTitle": "Peleti Grad A",
+          "productImage": "/resources/productImage.png",
+          "productPrice": "200",
+          "productCurrency": "RON",
+          "productKg": "15",
+          "quantity": 1
+        },
+        {
+          "productId": 1,
+          "productTitle": "Bricheti",
+          "productImage": "/resources/productImage2.png",
+          "productPrice": "200",
+          "productCurrency": "RON",
+          "productKg": "20",
+          "quantity": 1
+        },
+        {
+          "productId": 5,
+          "productTitle": "Peleti Grad AA",
+          "productImage": "/resources/productImage.png",
+          "productPrice": "200",
+          "productCurrency": "RON",
+          "productKg": "15",
+          "quantity": 1
         }
       ],
       "user": 1,
@@ -96,8 +123,8 @@
   ],
   "reviews": [
     {
-      "reviewTitle": "Te bet",
-      "reviewText": "Te bet bitu mut din sufet si din ninima si veau sa lamai cu mine pentlu totdeauna, mutumec, te bet!",
+      "reviewTitle": "dsdsads",
+      "reviewText": "dasdasdasdas",
       "reviewRating": "5",
       "userFirstName": "Burduja",
       "userLastName": "Alexandru",
@@ -105,13 +132,22 @@
       "id": 1
     },
     {
-      "reviewTitle": "Te bet",
-      "reviewText": "Te bet bita mut pentu ca eci mic si ai nevoie meleu sa te ajut si sa te spijin, eci cea mai buna bita din toaaaaaaaaaaaaaata galasia! Bet",
-      "reviewRating": "5",
-      "userFirstName": "Carla",
-      "userLastName": "Grigorescu",
-      "user": 2,
+      "reviewTitle": "dasd",
+      "reviewText": "ddsdsd",
+      "reviewRating": "1",
+      "userFirstName": "Burduja",
+      "userLastName": "Alexandru",
+      "user": 1,
       "id": 2
+    },
+    {
+      "reviewTitle": "",
+      "reviewText": "asddsadas",
+      "reviewRating": "3",
+      "userFirstName": "Burduja",
+      "userLastName": "Alexandru",
+      "user": 1,
+      "id": 3
     }
   ]
 }

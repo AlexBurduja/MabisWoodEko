@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import "./ProductCardComponent.css"
 import 'animate.css';
 import { AuthContext } from "../../App";
-
 /// Modal
 
 export function ProductCardComponent(props) {
@@ -122,7 +121,7 @@ if(auth.user.admin){
 
   const cartUrl = 'http://localhost:3001/cart'
 
-  function createCart() {
+   function createCart() {
 
     fetch(`${cartUrl}?user=${auth.user.id}`, {
       headers: {
@@ -154,6 +153,7 @@ if(auth.user.admin){
         createAndAddToCart();
       }
     })
+
 
 
 
@@ -297,3 +297,4 @@ if(auth.user.admin){
       </>
   )
 }
+

@@ -5,6 +5,7 @@ import "./SingleProductPage.css"
 import { motion } from "framer-motion";
 
 export function SingleProductPage() {
+
   const url = "http://localhost:3001/product"
 
   let { id } = useParams();
@@ -21,6 +22,7 @@ export function SingleProductPage() {
     .then((response) => response.json())
     .then((product) => setproductDetails(product))
   }, [])
+
   
   return (
     
@@ -46,7 +48,7 @@ export function SingleProductPage() {
             <motion.button 
             whileHover={{scale: 1.1}}
             whileTap={{scale: 0.9}}>
-                Add to Cart
+                Back to all products
             </motion.button>
         </div>
       

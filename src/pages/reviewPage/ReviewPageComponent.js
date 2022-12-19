@@ -5,16 +5,17 @@ import { AuthContext } from "../../App";
 import "./ReviewPageComponent.css"
 import { useParams } from "react-router-dom";
 
-export function ReviewPageComponent() {
+export function ReviewPageComponent(props) {
+
+    const { allData } = props
+    console.log(allData?.userFirstName.slice(0,1))
 
     const [reviews, setReviews] = useState([])
-
-    let id = useParams()
 
     const { auth } = useContext(AuthContext)
 
     useEffect(() => {
-        fetch("http://localhost:3001/reviews",{
+        fetch("http://localhost:3001/reviews/",{
         headers:{
             Authorization : `Bearer ${auth.accessToken}`
         }
@@ -52,7 +53,7 @@ function postHandler(event){
         user: auth.user.id
     }
 
-    fetch(`http://localhost:3001/reviews/` + id, {
+    fetch(`http://localhost:3001/reviews`, {
         method: "POST",
         headers: {
             "Content-Type" : "application/json",
@@ -65,144 +66,142 @@ function postHandler(event){
 
 
 
-function deleteHandler() {
-     fetch(`http://localhost:3001/reviews/` + id,{
+function deleteHandler(id) {
+     fetch(`http://localhost:3001/reviews/${props.id}`,{
             
                  method: "DELETE"
              })
 }
+// console.log(lastName + " " + firstName.slice(0,1))
 
-function Hello(){
-    return (
-        reviews.map(item => {
-                    if (item.reviewRating === "1") {
-                        return (
-                            <section className="reviewRatingSection">
-                            <div className="reviewRatingSection_username">
-                                <p>
-                                    {item.userLastName + " " + Array.from(item.userFirstName)[0]+"."} <span>said  
-                                </span></p> 
-                            </div>
+// console.log( lastName + " " + Array.from(firstName[0]) + "."  )
+
+// function Hello(){
+//                     if ({rating} === "1") {
+//                         return (
+//                             <section className="reviewRatingSection">
+//                             <div className="reviewRatingSection_username">
+//                                 <p>
+//                                     {{lastName} + " " + Array.from({firstName}[0]) +"."} <span>said  
+//                                 </span></p> 
+//                             </div>
                             
-                            <div className="reviewRatingSection_title">
-                                {item.reviewTitle}
-                            </div>
+//                             <div className="reviewRatingSection_title">
+//                                 {item.reviewTitle}
+//                             </div>
 
-                            <div className="reviewRatingSection_text">
-                                {item.reviewText}    
-                            </div>
+//                             <div className="reviewRatingSection_text">
+//                                 {item.reviewText}    
+//                             </div>
 
-                            <div className="stars">
-                            <RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine /><RiStarLine />
-                            </div>
-                            <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
-                            </section>
-                        )
-                    }
+//                             <div className="stars">
+//                             <RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine /><RiStarLine />
+//                             </div>
+//                             <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
+//                             </section>
+//                         )
+//                     }
 
-                    if(item.reviewRating === "2"){
-                    return  (
-                        <section className="reviewRatingSection">
-                            <div className="reviewRatingSection_username">
-                                <p >
-                                    {item.userLastName + " " + Array.from(item.userFirstName)[0]+"."} <span>said  
-                                </span></p> 
-                            </div>
+//                     if({rating} === "2"){
+//                     return  (
+//                         <section className="reviewRatingSection">
+//                             <div className="reviewRatingSection_username">
+//                                 <p >
+//                                     {{lastName} + " " + Array.from{firstName}[0]+"." <span>said  
+//                                 </span></p> 
+//                             </div>
                             
-                            <div className="reviewRatingSection_title">
-                                {item.reviewTitle}
-                            </div>
+//                             <div className="reviewRatingSection_title">
+//                                 {item.reviewTitle}
+//                             </div>
 
-                            <div className="reviewRatingSection_text">
-                                {item.reviewText}    
-                            </div>
+//                             <div className="reviewRatingSection_text">
+//                                 {item.reviewText}    
+//                             </div>
 
-                        <div className="stars">
-                            <RiStarFill /><RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine />
-                        </div>
-                        <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
-                        </section>
-                        )
-                    }
+//                         <div className="stars">
+//                             <RiStarFill /><RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine />
+//                         </div>
+//                         <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
+//                         </section>
+//                         )
+//                     }
 
-                    if(item.reviewRating === "3"){
-                        return (
-                            <section className="reviewRatingSection">
-                            <div className="reviewRatingSection_username">
-                                <p >
-                                    {item.userLastName + " " + Array.from(item.userFirstName)[0]+"."} <span>said  
-                                </span></p> 
-                            </div>
+//                     if({rating} === "3"){
+//                         return (
+//                             <section className="reviewRatingSection">
+//                             <div className="reviewRatingSection_username">
+//                                 <p >
+//                                     {{lastName} + " " + Array.from{firstName}[0]+"." <span>said  
+//                                 </span></p> 
+//                             </div>
                             
-                            <div className="reviewRatingSection_title">
-                                {item.reviewTitle}
-                            </div>
+//                             <div className="reviewRatingSection_title">
+//                                 {item.reviewTitle}
+//                             </div>
 
-                            <div className="reviewRatingSection_text">
-                                {item.reviewText}    
-                            </div>
+//                             <div className="reviewRatingSection_text">
+//                                 {item.reviewText}    
+//                             </div>
                                 
-                            <div className="stars">
-                                <RiStarFill /><RiStarFill /><RiStarFill /><RiStarLine /><RiStarLine />
-                            </div>
-                            <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
-                            </section>
-                        )
-                    }
+//                             <div className="stars">
+//                                 <RiStarFill /><RiStarFill /><RiStarFill /><RiStarLine /><RiStarLine />
+//                             </div>
+//                             <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
+//                             </section>
+//                         )
+//                     }
 
-                    if(item.reviewRating === "4"){
-                        return (
-                            <section className="reviewRatingSection">
-                            <div className="reviewRatingSection_username">
-                                <p >
-                                    {item.userLastName + " " + Array.from(item.userFirstName)[0]+"."} <span>said  
-                                </span></p> 
-                            </div>
+//                     if({rating} === "4"){
+//                         return (
+//                             <section className="reviewRatingSection">
+//                             <div className="reviewRatingSection_username">
+//                                 <p >
+//                                     {{lastName} + " " + Array.from{firstName}[0]+"." <span>said  
+//                                 </span></p> 
+//                             </div>
                             
-                            <div className="reviewRatingSection_title">
-                                {item.reviewTitle}
-                            </div>
+//                             <div className="reviewRatingSection_title">
+//                                 {item.reviewTitle}
+//                             </div>
 
-                            <div className="reviewRatingSection_text">
-                                {item.reviewText}    
-                            </div>
+//                             <div className="reviewRatingSection_text">
+//                                 {item.reviewText}    
+//                             </div>
 
-                            <div className="stars">
-                                <RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill /><RiStarLine />
-                            </div>
-                            <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
-                            </section>
-                        )
-                    }
+//                             <div className="stars">
+//                                 <RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill /><RiStarLine />
+//                             </div>
+//                             <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
+//                             </section>
+//                         )
+//                     }
 
-                    if(item.reviewRating === "5"){
-                        return(
-                            <section className="reviewRatingSection">
-                            <div className="reviewRatingSection_username">
-                                <p >
-                                    {item.userLastName + " " + Array.from(item.userFirstName)[0]+"."} <span>said  
-                                </span></p> 
-                            </div>
+//                     if({rating} === "5"){
+//                         return(
+//                             <section className="reviewRatingSection">
+//                             <div className="reviewRatingSection_username">
+//                                 <p >
+//                                     { lastName + " " + Array.from {firstName}[0]+"." } <span>said  
+//                                 </span></p> 
+//                             </div>
                             
-                            <div className="reviewRatingSection_title">
-                                {item.reviewTitle}
-                            </div>
+//                             <div className="reviewRatingSection_title">
+//                                 {item.reviewTitle}
+//                             </div>
 
-                            <div className="reviewRatingSection_text">
-                                {item.reviewText}    
-                            </div>
+//                             <div className="reviewRatingSection_text">
+//                                 {item.reviewText}    
+//                             </div>
 
-                            <div className="stars">
-                                <RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill />
-                            </div>
-                            <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
-                            </section>
-                        )
-                    }
-                }
-            )
-    )
-};
+//                             <div className="stars">
+//                                 <RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill />
+//                             </div>
+//                             <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
+//                             </section>
+//                         )
+//                     }
+// };
 
 const options = ["1","2","3","4","5"]
 const [selected, setSelected] = useState(options[0])
@@ -239,9 +238,9 @@ const [selected, setSelected] = useState(options[0])
                     <button onClick={postHandler}>Post</button>
                 </div>
 
-                <div className="reviewGrid">
+                {/* <div className="reviewGrid">
                         <Hello />                
-                </div>
+                </div> */}
 
                 </section>
         </section>

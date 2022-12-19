@@ -123,8 +123,8 @@
   ],
   "reviews": [
     {
-      "reviewTitle": "dsdsads",
-      "reviewText": "dasdasdasdas",
+      "reviewTitle": "Salut",
+      "reviewText": "E tare",
       "reviewRating": "5",
       "userFirstName": "Burduja",
       "userLastName": "Alexandru",
@@ -132,22 +132,13 @@
       "id": 1
     },
     {
-      "reviewTitle": "dasd",
-      "reviewText": "ddsdsd",
+      "reviewTitle": "Bine ca v am gasit",
+      "reviewText": "e tare rau de tot",
       "reviewRating": "1",
       "userFirstName": "Burduja",
       "userLastName": "Alexandru",
       "user": 1,
       "id": 2
-    },
-    {
-      "reviewTitle": "",
-      "reviewText": "asddsadas",
-      "reviewRating": "3",
-      "userFirstName": "Burduja",
-      "userLastName": "Alexandru",
-      "user": 1,
-      "id": 3
-    }
+    } 
   ]
 }

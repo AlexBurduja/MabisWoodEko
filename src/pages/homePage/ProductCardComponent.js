@@ -8,7 +8,7 @@ export function ProductCardComponent(props) {
 
   const { title ,kg, currency,  price, image, id } = props
 
-  
+
 
     const productDetailUrl = 'http://localhost:3001';
     const endpoint = "/product"

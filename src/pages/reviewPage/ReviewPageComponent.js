@@ -7,8 +7,8 @@ import { useParams } from "react-router-dom";
 
 export function ReviewPageComponent(props) {
 
-    const { allData } = props
-    console.log(allData?.userFirstName.slice(0,1))
+    const { firstName } = props
+    console.log(firstName?.slice(0,1))
 
     const [reviews, setReviews] = useState([])
 

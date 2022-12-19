@@ -19,11 +19,10 @@ export function Reviewpagesomething(){
         {review.map((reviews) => {
             return (
                 <ReviewPageComponent
-                allData = {reviews}
                 reviewTitle={reviews.reviewTitle}
                 reviewText = {reviews.reviewText}
                 rating = {reviews.reviewRating}
-                firstName={reviews.userFirstName}
+                firstName={reviews?.userFirstName}
                 lastName={reviews.userLastName}
                 id={reviews.id}>
                 </ReviewPageComponent>

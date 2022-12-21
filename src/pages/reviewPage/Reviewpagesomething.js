@@ -15,6 +15,44 @@ export function Reviewpagesomething(){
 
 
     return (
+<>
+        <section className="mainSection">
+        <div className="header">
+            <h1>Review Page</h1>
+            <h4>Here you can see how everyone reviewed our services!</h4>
+            <h4>Be sure to leave one yourself by completing the form below!</h4>
+        </div>
+                <section>
+
+                <div className="reviewForm">
+                
+                <div className="reviewInputBoxes">
+                    <input id="text" type="text"  required></input>
+                    <span>Title</span>
+                </div>
+                
+                <div className="reviewInputBoxes">
+                    <input id="text" type="text" required></input>
+                    <span>Text</span>
+                </div>
+
+                <select required>
+                    <option value="1">★</option>
+                    <option value="2">★★</option>
+                    <option value="3">★★★</option>
+                    <option value="4">★★★★</option>
+                    <option value="5">★★★★★</option>
+                </select>
+
+                    <button >Post</button>
+                </div>
+
+                {/* <div className="reviewGrid">
+                        <Hello />                
+                </div> */}
+
+                </section>
+        </section>    
         <div>
         {review.map((reviews) => {
             return (
@@ -29,5 +67,6 @@ export function Reviewpagesomething(){
             )
         })}
         </div>
+</>
     )
 }

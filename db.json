@@ -130,15 +130,6 @@
       "userLastName": "Alexandru",
       "user": 1,
       "id": 1
-    },
-    {
-      "reviewTitle": "Bine ca v am gasit",
-      "reviewText": "e tare rau de tot",
-      "reviewRating": "1",
-      "userFirstName": "Burduja",
-      "userLastName": "Alexandru",
-      "user": 1,
-      "id": 2
-    } 
+    }
   ]
 }

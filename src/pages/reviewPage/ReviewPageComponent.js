@@ -8,23 +8,11 @@ import { useParams } from "react-router-dom";
 export function ReviewPageComponent(props) {
 
     const { firstName } = props
-    console.log(firstName?.slice(0,1))
 
     const [reviews, setReviews] = useState([])
 
     const { auth } = useContext(AuthContext)
 
-    useEffect(() => {
-        fetch("http://localhost:3001/reviews/",{
-        headers:{
-            Authorization : `Bearer ${auth.accessToken}`
-        }
-    })
-        .then(response => response.json())
-        .then((reviewList) => {
-            setReviews(reviewList)
-            
-        })}, [] );
 
         const [text, setText] = useState("");
         const [title, setTitle] = useState("")
@@ -72,9 +60,6 @@ function deleteHandler(id) {
                  method: "DELETE"
              })
 }
-// console.log(lastName + " " + firstName.slice(0,1))
-
-// console.log( lastName + " " + Array.from(firstName[0]) + "."  )
 
 // function Hello(){
 //                     if ({rating} === "1") {
@@ -203,46 +188,13 @@ function deleteHandler(id) {
 //                     }
 // };
 
+console.log(title)
 const options = ["1","2","3","4","5"]
 const [selected, setSelected] = useState(options[0])
 
     return(
-        <section className="mainSection">
-        <div className="header">
-            <h1>Review Page</h1>
-            <h4>Here you can see how everyone reviewed our services!</h4>
-            <h4>Be sure to leave one yourself by completing the form below!</h4>
-        </div>
-                <section>
-
-                <div className="reviewForm">
-                
-                <div className="reviewInputBoxes">
-                    <input id="text" type="text" onChange={titleChange} required></input>
-                    <span>Title</span>
-                </div>
-                
-                <div className="reviewInputBoxes">
-                    <input id="text" type="text" onChange={textChange} required></input>
-                    <span>Text</span>
-                </div>
-
-                <select onChange={ratingChange} required>
-                    <option value="1">★</option>
-                    <option value="2">★★</option>
-                    <option value="3">★★★</option>
-                    <option value="4">★★★★</option>
-                    <option value="5">★★★★★</option>
-                </select>
-
-                    <button onClick={postHandler}>Post</button>
-                </div>
-
-                {/* <div className="reviewGrid">
-                        <Hello />                
-                </div> */}
-
-                </section>
-        </section>
+        <>
+        <p>{firstName}</p>
+        </>
     )
 }

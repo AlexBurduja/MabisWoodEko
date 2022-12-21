@@ -66,7 +66,7 @@ export function Header() {
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/d'>Contact</NavLink> </li>
           <li className="item mobileCart"> <NavLink className={activeClassHamburger} to='/cart'> <ShoppingCart /> </NavLink> </li>
-          <button className='logoutButtonHeader' onClick={logOut}>Log Out</button>
+          <button className='logoutButtonHamburger' onClick={logOut}>Log Out</button>
         </ul>
       </nav>
 </div>  

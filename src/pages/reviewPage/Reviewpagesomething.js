@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useEffect, useState } from "react"
+import { AuthContext } from "../../App"
 import { ReviewPageComponent } from "./ReviewPageComponent"
 
 
@@ -12,6 +13,47 @@ export function Reviewpagesomething(){
         .then(response => response.json())
         .then ((reviews) => setReview(reviews))
     }, [])
+
+    const { auth } = useContext(AuthContext)
+    const [text, setText] = useState("");
+    const [title, setTitle] = useState("");
+    const options = ["1","2","3","4","5"];
+    const [selected, setSelected] = useState(options[0]);
+    
+function textChange(event){
+setText(event.target.value)
+}
+
+function ratingChange(event){
+setSelected(event.target.value)
+}
+
+function titleChange(event){
+setTitle(event.target.value)
+}
+
+function postHandler(event){
+event.preventDefault()
+
+const body = {
+    reviewTitle: title,
+    reviewText: text,
+    reviewRating: selected,
+    userFirstName: auth.user.firstName,
+    userLastName: auth.user.lastName,
+    user: auth.user.id
+}
+
+fetch(`http://localhost:3001/reviews`, {
+    method: "POST",
+    headers: {
+        "Content-Type" : "application/json",
+        Authorization : `Bearer ${auth.accessToken}`
+    },
+    body: JSON.stringify(body)
+})
+window.location.reload();
+}
 
 
     return (
@@ -27,16 +69,16 @@ export function Reviewpagesomething(){
                 <div className="reviewForm">
                 
                 <div className="reviewInputBoxes">
-                    <input id="text" type="text"  required></input>
+                    <input id="text" type="text" onChange={titleChange} required></input>
                     <span>Title</span>
                 </div>
                 
                 <div className="reviewInputBoxes">
-                    <input id="text" type="text" required></input>
+                    <input id="text" type="text" onChange={textChange} required></input>
                     <span>Text</span>
                 </div>
 
-                <select required>
+                <select onChange={ratingChange} required>
                     <option value="1">★</option>
                     <option value="2">★★</option>
                     <option value="3">★★★</option>
@@ -44,16 +86,11 @@ export function Reviewpagesomething(){
                     <option value="5">★★★★★</option>
                 </select>
 
-                    <button >Post</button>
+                    <button onClick={postHandler}>Post</button>
                 </div>
-
-                {/* <div className="reviewGrid">
-                        <Hello />                
-                </div> */}
-
                 </section>
         </section>    
-        <div>
+        <div className="reviewGrid">
         {review.map((reviews) => {
             return (
                 <ReviewPageComponent

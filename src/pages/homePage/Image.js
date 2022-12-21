@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import warehousePhoto from "../../publicResources/warehouse.jpg"
 import './Image.css'
 
@@ -14,8 +15,8 @@ export function Image() {
     </div>
 
     <div className='imageButtons'>
-      <button>Our Products</button>
-      <button>Contact Us</button>
+      <button>About us</button>
+      <button><NavLink to="/contact"> Contact Us </NavLink></button>
     </div>
     </section>
   );

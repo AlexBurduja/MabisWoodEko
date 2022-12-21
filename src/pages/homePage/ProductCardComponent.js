@@ -231,7 +231,7 @@ if(auth.user.admin){
 
   return (
         <>
-    <div className="cardDiv" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
+    <div id="product" className="cardDiv" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
         <h2>{title}</h2>
         <img src={image} alt="productImage" />
         <p className="kgP">{kg} Kg</p>

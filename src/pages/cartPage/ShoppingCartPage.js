@@ -5,7 +5,13 @@ import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 import { AuthContext } from '../../App';
 
-export function ShoppingCartPage() {
+export function ShoppingCartPage(props) {
+
+  const { quantity, id, title, cartId } = props
+
+  console.log(cartId)
+
+  
 
   const [products, setProducts] = useState([])
   const { auth } = useContext(AuthContext)
@@ -24,7 +30,6 @@ export function ShoppingCartPage() {
           setProducts(cart.products)
       })}, [] );
 
-
       function ProductCount () {
         if (totalQuantity === 1){
           return <p>{totalQuantity} product</p>
@@ -32,10 +37,6 @@ export function ShoppingCartPage() {
           return <p>{totalQuantity} products</p>
         }
       }
-
-      // let productQuantity = products.map(function (product){
-      //   return product.productPrice * product.quantity
-      // })
 
       const totalPrice = products.reduce((acc,cur) => {
         return acc + cur.quantity * cur.productPrice
@@ -46,7 +47,7 @@ export function ShoppingCartPage() {
       }, 0)
 
       function removeHandler(){
-        fetch(`http://localhost:3001/cart/id`, {
+        fetch(`http://localhost:3001/cart/${cartId}`, {
           method: "DELETE",
           headers : {
             Authorization : `Bearer ${auth.accessToken}`
@@ -90,7 +91,7 @@ export function ShoppingCartPage() {
 
               <div className='column'>
                 <p>Quantity</p>
-                <button>-</button> {item.quantity} <button>+</button>
+                {item.quantity}
               </div>
 
               <div className='column'>
@@ -99,14 +100,11 @@ export function ShoppingCartPage() {
               </div>
 
             </div>
-
-            <div className='cartProductShowButtons'>
-                <button onClick={removeHandler}>Remove</button>
-            </div>
           </section>
       )
     })}
       <div className='productCartFooter'>
+      <button className="emptyCartButton" onClick={removeHandler}>Empty Cart</button>
         <ProductCount />
         <p>Total: {totalPrice} RON</p>
       </div>

@@ -6,7 +6,7 @@
       "price": "200",
       "currency": "RON",
       "image": "/resources/productImage2.png",
-      "description": "Bricheti lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem   ",
+      "description": "Bricheti lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem",
       "id": 1
     },
     {
@@ -15,6 +15,7 @@
       "price": "100",
       "currency": "RON",
       "image": "/resources/productImage.png",
+      "description": "Bla bla peleti lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
       "id": 2
     },
     {
@@ -23,6 +24,7 @@
       "price": "200",
       "currency": "RON",
       "image": "/resources/productImage.png",
+      "description": "Bricheti lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem",
       "id": 3
     },
     {
@@ -31,6 +33,7 @@
       "price": "200",
       "currency": "RON",
       "image": "/resources/productImage.png",
+      "description": "Bricheti lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem",
       "id": 4
     },
     {
@@ -39,6 +42,7 @@
       "price": "200",
       "currency": "RON",
       "image": "/resources/productImage.png",
+      "description": "Bricheti lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem",
       "id": 5
     }
   ],
@@ -46,7 +50,7 @@
   "users": [
     {
       "email": "burduja_alex14@yahoo.com",
-      "password": "$2a$10$opdCLZYAzbadP8PdHX29DONT1frDGpGDMiRLUyUpatdxVU.COEcpC",
+      "password": "$2a$10$qrkowUOGFGvS6V5Sm6XVM.Kn2jspNPA5GFy9W6RA/5KwGlK.Q3M5a",
       "firstName": "Burduja",
       "lastName": "Alexandru",
       "username": "Alexo",
@@ -56,7 +60,7 @@
     },
     {
       "email": "carla.grigorescu@yahoo.com",
-      "password": "$2a$10$32eflT1LrgjAMJkEIbgOO.X/m/EU/hKyGTyWKkMaHEyIjl4D2YSOa",
+      "password": "$2a$10$PwB2gvKQuAB6255bUP8D2OwaDqjt/HQNn.Ul4sIvlTfFB.V6uK4de",
       "firstName": "Grigorescu",
       "lastName": "Carla",
       "username": "CarlaUnicorn",

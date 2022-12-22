@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../App';
 import "./Register.css"
 import { motion } from 'framer-motion';
+import { AiOutlineEye } from 'react-icons/ai';
 
 
 
@@ -18,6 +19,12 @@ export function Register() {
   const [passwordError, setPasswordError] = useState('')
 
   const { auth, setAuth } = useContext(AuthContext);
+
+  const [passwordShow, setPasswordShow] = useState(false)
+  
+  const togglePassword = () => {
+    setPasswordShow(!passwordShow)    
+  }
 
   const navigate = useNavigate();
 
@@ -170,9 +177,10 @@ function validatePassword(password) {
       </div>
 
       <div className="inputBoxes">
-          <input id="password" type="password" onChange={passwordChangeHandler} required></input>
+          <input id="password" type={passwordShow ? "text" : "password"} onChange={passwordChangeHandler} required></input>
           <span>Password</span>
           <p className="error">{passwordError}</p>
+          <p className="eyeIcon" onClick={togglePassword}><AiOutlineEye/></p>
         </div>
 
         <motion.button 

@@ -6,7 +6,7 @@ import { AuthContext } from "../../App";
 
 export function ProductCardComponent(props) {
 
-  const { title ,kg, currency,  price, image, id } = props
+  const { title ,kg, currency,  price, image, description, id } = props
 
 
 
@@ -44,6 +44,7 @@ export function ProductCardComponent(props) {
   const [newPrice, setPrice] = useState('')
   const [newKg, setKg] = useState('')
   const [newImage, setImage] = useState('')
+  const [newDescription, setDescription] = useState('')
   ///// End of Modal
 
   const { auth } = useContext( AuthContext )
@@ -61,6 +62,7 @@ export function ProductCardComponent(props) {
       setKg(product.kg)
       setCurrency(product.currency)
       setImage(product.image)
+      setDescription(product.description)
     }) 
   }, [id])
 
@@ -72,6 +74,7 @@ export function ProductCardComponent(props) {
       kg : newKg,
       price : newPrice,
       currency : newCurrency,
+      description: newDescription,
       image : newImage
     };
 if(auth.user.admin){
@@ -117,6 +120,9 @@ if(auth.user.admin){
     setKg(event.target.value)
   }
 
+  function descriptionChange(event){
+    setDescription(event.target.value)
+  }
   /// CART
 
   const cartUrl = 'http://localhost:3001/cart'
@@ -275,6 +281,11 @@ if(auth.user.admin){
                     <div className="modal-content-inputs_div">
                     <label for="currency">Currency :</label>
                     <input id="currency" defaultValue={currency} onChange={currencyChange} ></input>
+                    </div>
+
+                    <div className="modal-content-inputs_div">
+                    <label for="descrption">Description :</label>
+                    <input id="descrption" defaultValue={description} onChange={descriptionChange} ></input>
                     </div>
 
                     <div className="modal-content-inputs_div">

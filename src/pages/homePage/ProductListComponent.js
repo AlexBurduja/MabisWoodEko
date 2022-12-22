@@ -57,6 +57,7 @@ export function ProductListComponent() {
                 currency={product.currency}
                 price={product.price}
                 image={product.image}
+                description = {product.description}
                 id={product.id}>
                 </ProductCardComponent>
             )

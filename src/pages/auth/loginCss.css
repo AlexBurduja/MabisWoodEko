@@ -140,6 +140,14 @@
     font-size: 20px;
 }
 
+.eyeIcon{
+    font-size: 25px;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    cursor: pointer;
+}
+
 div #tsparticles {
     z-index: 1;
 }

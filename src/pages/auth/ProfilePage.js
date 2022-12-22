@@ -13,15 +13,27 @@ export function ProfilePage() {
 
     const [ username, setUsername ] = useState(auth.user.username)
     const [ password, setPassword ] = useState(auth.user.password)
+    const [ firstName, setFirstName] = useState(auth.user.firstName)
+    const [ lastName, setLastName] = useState(auth.user.lastName)
     const [ email, setEmail ] = useState(auth.user.email)
     const [ confirmPassword, setConfirmPassword] = useState(auth.user.confirmPassword)
 
     const [ passwordError, setPasswordError ] = useState('')
     const [ emailError, setEmailError ] = useState('')
     const [ usernameError, setUsernameError ] = useState('')
+    const [ firstNameError, setFirstNameError ] = useState('')
+    const [ lastNameError, setLastNameError ] = useState('')
 
     function changeUsername(event) {
         setUsername(event.target.value)
+    }
+
+    function changeFirstName(event){
+      setFirstName(event.target.value)
+    }
+
+    function changeLastName(event){
+      setLastName(event.target.value)
     }
 
     function changePassword(event) {
@@ -39,18 +51,26 @@ export function ProfilePage() {
         setEmailError('');
         setPasswordError('');
         setUsernameError('');
+        setLastNameError('');
+        setFirstNameError('');
     
         const emailValid = validateEmail(email)
     
         const passwordValid = validatePassword(confirmPassword);
         
         const usernameValid = validateUsername(username);
+
+        // const firstnameValid = validateFirstName(firstName)
+
+        // const lastnameValid = validateLastName(lastName)
     
         if (!emailValid || !passwordValid || !usernameValid) {
             return ;
         }
   
     const body = {
+      firstName : firstName,
+      lastName : lastName,
       username : username,
       password : password,
       email : email,
@@ -65,6 +85,7 @@ export function ProfilePage() {
       body: JSON.stringify(body)
     } )
 }
+
 
 function validateEmail(email){
     // eslint-disable-next-line no-control-regex
@@ -85,7 +106,7 @@ function validateUsername(username){
     '!', '@', '#', '$', '%', '^', '&', '*'
   ];
 
-  function constainsNumber(str){
+  function containsNumber(str){
     return /\d/.test(str)
   }
 
@@ -103,7 +124,7 @@ function validateUsername(username){
       return false
   }
 
-  if(constainsNumber(username)){
+  if(containsNumber(username)){
     setUsernameError("Username cannot contain numbers!")
 
     return false
@@ -218,6 +239,12 @@ if(modalSubmitButton) {
             <div className="profilePageSection_div">
                 <form onSubmit={handleSubmit}>
                     
+                        <label htmlFor="firstName">Firstname</label>
+                        <input type="text" id="firstName" defaultValue={auth.user.firstName} onChange={changeFirstName}></input>
+                        
+                        <label htmlFor="lastName">Lastname</label>
+                        <input type="text" id="lastName" defaultValue={auth.user.lastName} onChange={changeLastName}></input>
+                        
                         <label htmlFor="username">Username</label>
                         <input type="text" id="username" defaultValue={auth.user.username} onChange={changeUsername}></input>
 
@@ -246,9 +273,12 @@ if(modalSubmitButton) {
                     <div>
                         <h1>These will be your new credentials!</h1>
                     </div>
-
+                        <p>Your new Firstname: {firstName}</p>
+                        <p className="profileError">{firstNameError}</p>
+                        <p>Your new Lastname: {lastName}</p>
+                        <p className="profileError">{lastNameError}</p>
                         <p>Your new username: {username}</p>
-                        <p>{usernameError}</p>
+                        <p className="profileError">{usernameError}</p>
                         <p>Your new email: {email}</p>
                         <p className="profileError">{emailError}</p>
                         <p>Your new password: {confirmPassword}</p>

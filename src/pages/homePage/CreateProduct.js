@@ -15,6 +15,7 @@ export function CreateProduct(){
   const [kg, setKg] = useState('');
   const [currency, setCurrency] = useState('');
   const [image, setImage] = useState('');
+  const [description, setDescription] = useState('');
 
   const {auth} = useContext(AuthContext)
 
@@ -53,6 +54,10 @@ export function CreateProduct(){
     setImage(event.target.value);
   }
 
+  function descriptionChange(event){
+    setDescription(event.target.value)
+  }
+
   function submit(event) {
     event.preventDefault();
 
@@ -61,7 +66,8 @@ export function CreateProduct(){
       kg:kg,
       price:price,
       currency:currency,
-      image: image
+      image: image,
+      description : description
     }
 
     if(auth.user.admin){
@@ -109,28 +115,33 @@ export function CreateProduct(){
                 <div className="modal-content-inputs">
 
                     <div className="modal-content-inputs_div">
-                      <label for="title">Title :</label>
+                      <label htmlFor="title">Title :</label>
                       <input id="title" onChange={titleChange} onChangerequired></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
-                      <label for="kg">Kg :</label>
+                      <label htmlFor="kg">Kg :</label>
                       <input id="kg" type="number" onChange={kgChange} required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
-                      <label for="price">Price :</label>
+                      <label htmlFor="price">Price :</label>
                       <input id="price" type="number" onChange={priceChange} required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
-                      <label for="currency">Currency :</label>
+                      <label htmlFor="currency">Currency :</label>
                       <input id="currency" onChange={currencyChange} required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
-                      <label for="input">Image :</label>
-                      <input type="url" onChange={imageChange} id="input" required></input>
+                      <label htmlFor="description">Description :</label>
+                      <input id="description" onChange={descriptionChange} required></input>
+                    </div>
+
+                    <div className="modal-content-inputs_div">
+                      <label htmlFor="image">Image :</label>
+                      <input type="url" onChange={imageChange} id="image" required></input>
                     </div>
 
                 </div>

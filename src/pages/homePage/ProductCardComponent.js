@@ -137,7 +137,7 @@ if(auth.user.admin){
     .then(response => response.json())
     .then(cartList => {
       const [cart] = cartList;
-      
+
       if (cart) {
         const productInCart = cart.products.find((product) => product.productId === id)
 
@@ -159,8 +159,6 @@ if(auth.user.admin){
         createAndAddToCart();
       }
     })
-
-
 
 
     // fetch(`${cartUrl}/?productId=${id}`)

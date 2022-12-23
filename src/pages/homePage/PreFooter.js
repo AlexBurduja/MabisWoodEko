@@ -12,7 +12,7 @@ export function PreFooter() {
       </div>
 
       <div className="preFooter_newsletter">
-        <label for="newsletter">Sign up to our newsletter</label>
+        <label htmlFor="newsletter">Sign up to our newsletter</label>
         <input type="email" id="newsletter"></input>
         <button>Submit</button>
       </div>

@@ -52,7 +52,7 @@ export function Header() {
 
     <div className='hamburger'>
         <input type="checkbox" id="navi-toggle" className="checkbox" />
-        <label htmlFor="navi-toggle" class="button">
+        <label htmlFor="navi-toggle" className="button">
           <span className="icon">&nbsp;</span>
         </label>
       <div className="background">&nbsp;</div>
@@ -60,11 +60,11 @@ export function Header() {
 
       <nav className="nav">
         <ul className="list">
-          <p className="loginListP">Hi, {auth?.user?.username}</p>
           <li className="item"> <NavLink className={activeClassHamburger} to='/'>Home</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/cart'>About</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
-          <li className="item"> <NavLink className={activeClassHamburger} to='/d'>Contact</NavLink> </li>
+          <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>Contact</NavLink> </li>
+          <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{auth.user.username}'s Profile</NavLink> </li>
           <li className="item mobileCart"> <NavLink className={activeClassHamburger} to='/cart'> <ShoppingCart /> </NavLink> </li>
           <button className='logoutButtonHamburger' onClick={logOut}>Log Out</button>
         </ul>

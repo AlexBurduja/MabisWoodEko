@@ -58,7 +58,8 @@ export function ProductListComponent() {
                 price={product.price}
                 image={product.image}
                 description = {product.description}
-                id={product.id}>
+                id={product.id}
+                key={product.id}>
                 </ProductCardComponent>
             )
           })}

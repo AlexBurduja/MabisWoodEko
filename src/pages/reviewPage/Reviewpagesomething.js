@@ -99,7 +99,8 @@ window.location.reload();
                 rating = {reviews.reviewRating}
                 firstName={reviews?.userFirstName}
                 lastName={reviews.userLastName}
-                id={reviews.id}>
+                id={reviews.id}
+                key={reviews.id}>
                 </ReviewPageComponent>
             )
         })}

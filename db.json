@@ -46,7 +46,23 @@
       "id": 5
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "products": [
+        {
+          "productId": 2,
+          "productTitle": "Peleti",
+          "productImage": "/resources/productImage.png",
+          "productPrice": "100",
+          "productCurrency": "RON",
+          "productKg": "15",
+          "quantity": 5
+        }
+      ],
+      "user": 1,
+      "id": 1
+    }
+  ],
   "users": [
     {
       "email": "burduja_alex14@yahoo.com",

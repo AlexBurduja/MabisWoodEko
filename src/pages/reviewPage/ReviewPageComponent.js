@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import React from "react"
 import { RiStarFill, RiStarLine } from "react-icons/ri";
 import { AuthContext } from "../../App";
 import "./ReviewPageComponent.css"
-import { useParams } from "react-router-dom";
 
 export function ReviewPageComponent(props) {
 

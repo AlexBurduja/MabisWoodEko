@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import './loginCss.css'
 import logo from "../../publicResources/logoMabis.svg"
-import Particle from "../../particlesJS/particleJsComponent";
-import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai"
+import ParticlesBackground from "../../particlesJS/particleJsComponent";
 
 export function Login(){
     const [email, setEmail] = useState('')
@@ -59,20 +59,9 @@ export function Login(){
             },
             body : JSON.stringify(body)
         })
-        // .then ((response) => response.json())
-        // .then ((response) => {
-        //   if( response.status === 400){
-        //     console.log("acc not found")
-        //   } else {
-        //     setAuth(response)
-        //     navigate("/")
-        //   }
-        // })
-
         .then(response => {
           if (response.status === 400){
             setErrorMsg('Email or Password is incorrect!')
-
             
             setTimeout(() =>{
               setErrorMsg('')
@@ -156,8 +145,8 @@ export function Login(){
 
     return (
       <>
+      <ParticlesBackground />
       <section className="loginWrapper">
-        <Particle />
       <h1 className="errorMsgAccNotFound">{errorMsg}</h1>
         <div className="wrapperOfWrapper">
 

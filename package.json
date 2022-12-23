@@ -28,7 +28,7 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "react-social-icons": "^5.15.0",
-    "react-tsparticles": "^2.6.0",
+    "react-tsparticles": "^2.7.0",
     "react-uploader": "^2.1.0",
     "tsparticles": "^2.6.0",
     "uploadcare-widget": "^3.20.0",

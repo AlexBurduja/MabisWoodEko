@@ -4,6 +4,7 @@ import { AuthContext } from '../../App';
 import "./Register.css"
 import { motion } from 'framer-motion';
 import { AiOutlineEye } from 'react-icons/ai';
+import ParticlesBackground from '../../particlesJS/particleJsComponent';
 
 
 
@@ -148,10 +149,8 @@ function validatePassword(password) {
   return false;
 }
 
-
-
-  return (
-<div className='registerWrapper'>
+function Register(){
+  <div className='registerWrapper'>
   <form className='registerForm' onSubmit={onSubmits}>
     <h1>Register</h1>
 
@@ -187,6 +186,55 @@ function validatePassword(password) {
                 type="submit"
                 className="submitButtonRegister"
                 whileHover={{scale: 1.2}}
+                whileTap={{scale:0.9}}
+                >
+                    Register
+          </motion.button>
+
+          <p>Already have an account? <Link to="/login">Login</Link></p>
+    </form>
+</div>
+}
+
+
+  return (
+<div className='registerWrapper'>
+<ParticlesBackground />
+  <form className='registerForm' onSubmit={onSubmits}>
+    <h1>Register</h1>
+
+      <div className="inputBoxes">
+        <input id="firstName" type="text" onChange={firstNameChangeHandler} required></input>
+        <span htmlFor='firstName'>First name</span>
+      </div>
+
+      <div className="inputBoxes">
+        <input id="lastName" type="text" onChange={lastNameChangeHandler} required></input>
+        <span htmlFor='lastName'>Last name</span>
+      </div>
+
+      <div className="inputBoxes">
+        <input id="username" type="text" onChange={usernameChangeHandler} required></input>
+        <span htmlFor='username'>Username</span>
+      </div>
+
+      <div className='inputBoxes'>
+          <input id="email" type="text" onChange={emailChangeHandler} required></input>
+          <span>Email</span>
+          <p className="error">{emailError}</p>
+      </div>
+
+      <div className="inputBoxes">
+          <input id="password" type={passwordShow ? "text" : "password"} onChange={passwordChangeHandler} required></input>
+          <span>Password</span>
+          <p className="error">{passwordError}</p>
+          <p className="eyeIcon" onClick={togglePassword}><AiOutlineEye/></p>
+        </div>
+
+        <motion.button 
+                type="submit"
+                className="submitButtonRegister"
+                whileHover={{scale: 1.1}}
                 whileTap={{scale:0.9}}
                 >
                     Register

@@ -44,6 +44,15 @@
       "image": "/resources/productImage.png",
       "description": "Bricheti lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem",
       "id": 5
+    },
+    {
+      "title": "Tocatura Lemn",
+      "kg": "15",
+      "price": "300",
+      "currency": "RON",
+      "image": "/resources/productImage.png",
+      "description": "Tocatura Lemn Stejar",
+      "id": 6
     }
   ],
   "cart": [
@@ -61,6 +70,39 @@
       ],
       "user": 1,
       "id": 1
+    },
+    {
+      "products": [
+        {
+          "productId": 1,
+          "productTitle": "Bricheti",
+          "productImage": "/resources/productImage2.png",
+          "productPrice": "200",
+          "productCurrency": "RON",
+          "productKg": "20",
+          "quantity": 2
+        },
+        {
+          "productId": 2,
+          "productTitle": "Peleti",
+          "productImage": "/resources/productImage.png",
+          "productPrice": "100",
+          "productCurrency": "RON",
+          "productKg": "15",
+          "quantity": 4
+        },
+        {
+          "productId": 3,
+          "productTitle": "Peleti Grad A",
+          "productImage": "/resources/productImage.png",
+          "productPrice": "200",
+          "productCurrency": "RON",
+          "productKg": "15",
+          "quantity": 2
+        }
+      ],
+      "user": 3,
+      "id": 2
     }
   ],
   "users": [
@@ -82,6 +124,16 @@
       "username": "CarlaUnicorn",
       "confirmPassword": "Carla789@",
       "id": 2
+    },
+    {
+      "email": "burduja_dan@yahoo.com",
+      "password": "$2a$10$BE6ZfuCQFFezocxmM80J3uHKu2CaOwoQCQ/pF0DS2k96Qhr5uRa.e",
+      "firstName": "Burduja",
+      "lastName": "Dumitru",
+      "username": "Mabis",
+      "confirmPassword": "Dan888!",
+      "admin": true,
+      "id": 3
     }
   ],
   "reviews": [
@@ -129,6 +181,15 @@
       "userLastName": "Grigorescu",
       "user": 2,
       "id": 6
+    },
+    {
+      "reviewTitle": "Mi-a placut",
+      "reviewText": "Foarte frumos",
+      "reviewRating": "5",
+      "userFirstName": "Burduja",
+      "userLastName": "Dumitru",
+      "user": 3,
+      "id": 7
     }
   ]
 }

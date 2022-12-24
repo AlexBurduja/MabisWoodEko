@@ -118,18 +118,18 @@ export function ShoppingCartPage() {
 
       <div className="deliveryAddress_inputs">
         <div className='deliveryAddress_inputs__input' >
-          <input type="text" required="required" ></input>
+          <input type="text" required="required" defaultValue={auth.user.email} ></input>
           <span>Email Address</span>
         </div>
 
         <div className='deliveryAddress_inputs__input input2' >
           <div>
-            <input type="text" required="required"></input>
+            <input type="text" required="required" defaultValue={auth.user.firstName}></input>
             <span>First name</span>
           </div>
 
           <div className='lastNameInput'>
-            <input type="text" required="required"></input>
+            <input type="text" required="required" defaultValue={auth.user.lastName}></input>
             <span>Last name</span>
           </div>
         </div>

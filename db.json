@@ -5,7 +5,7 @@
       "kg": "20",
       "price": "200",
       "currency": "RON",
-      "image": "/resources/productImage2.png",
+      "image": "/resources/productImage.png",
       "description": "Bricheti lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem",
       "id": 1
     },
@@ -46,7 +46,7 @@
       "id": 5
     },
     {
-      "title": "Tocatura Lemn",
+      "title": "Peleti Grad AB",
       "kg": "15",
       "price": "300",
       "currency": "RON",

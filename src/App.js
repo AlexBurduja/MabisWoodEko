@@ -15,7 +15,6 @@ import { CanNavigate } from './pages/auth/CanNavigate';
 import { Register } from './pages/auth/Register';
 import { ProfilePage } from './pages/auth/ProfilePage.js';
 import { ReviewPage } from './pages/reviewPage/ReviewPage';
-import { Particle } from './Particle';
 
 export const AuthContext = React.createContext();
 
@@ -70,3 +69,4 @@ function App() {
 }
 
 export default App;
+

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import "./ProductCardComponent.css"
 import 'animate.css';
 import { AuthContext } from "../../App";
+import { AiFillEdit } from "react-icons/ai";
 /// Modal
 
 export function ProductCardComponent(props) {
@@ -232,7 +233,6 @@ if(auth.user.admin){
   //   editProduct(id, title, image, kg, price, currency)
   // }
 
-
   return (
         <>
     <div id="product" className="cardDiv" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
@@ -248,7 +248,7 @@ if(auth.user.admin){
 
       {
         auth.user.admin &&
-        <button onClick={toggleModal} className="btn-modal cardDivButton">Edit</button>
+        <button onClick={toggleModal} className="edit-btn">< AiFillEdit /></button>
       }
     </div>
 

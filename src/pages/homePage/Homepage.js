@@ -5,12 +5,13 @@ import { ImageCards } from './ImageCards';
 import { ProductListComponent } from './ProductListComponent';
 import { PreFooter } from './PreFooter';
 import { ShoppingCart } from "../cartPage/ShoppingCart";
+import { Footer } from './Footer';
 
 export function Homepage() {
 
   return (
     <>
-      <Header>
+      <Header >
         <ShoppingCart />
       </Header>
       <Image />
@@ -18,6 +19,7 @@ export function Homepage() {
       <CreateProduct />
       <ProductListComponent />
       <PreFooter />
+      <Footer />
     </>
   );
 }

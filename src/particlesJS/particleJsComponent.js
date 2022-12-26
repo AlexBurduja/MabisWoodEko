@@ -29,7 +29,10 @@ function ParticlesBackground() {
           particles: {
             color: { value: "#fff" },
             number: {
-
+              density: {
+                enable: true,
+                area: 1080
+              },
               value: 400
             },
             opacity: {

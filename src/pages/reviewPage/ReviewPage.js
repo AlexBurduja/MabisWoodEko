@@ -1,4 +1,5 @@
 import React from 'react';
+import { Footer } from '../homePage/Footer';
 import { Header } from '../homePage/Header';
 import { PreFooter } from '../homePage/PreFooter';
 import { ReviewPageComponent } from './ReviewPageComponent';
@@ -12,6 +13,7 @@ export function ReviewPage() {
       <ReviewPageComponent />
       <Reviewpagesomething />
       <PreFooter />
+      <Footer />
     </>
   );
 }

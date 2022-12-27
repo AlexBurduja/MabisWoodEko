@@ -1,3 +1,4 @@
+import { Footer } from '../homePage/Footer';
 import { Header } from '../homePage/Header';
 import { PreFooter } from '../homePage/PreFooter';
 import { ShoppingCartPage } from './ShoppingCartPage';
@@ -9,6 +10,7 @@ export function CartPage() {
       <Header />
       <ShoppingCartPage />
       <PreFooter />
+      <Footer />
     </>
   );
 }

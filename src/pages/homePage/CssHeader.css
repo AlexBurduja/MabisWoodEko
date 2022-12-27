@@ -12,8 +12,9 @@
 }
 
 .logo{
-    width: 400px;
-    margin-left: 10px;
+    width: 60%;
+    max-width: 250px;
+    margin-left: -20px;
 }
 
 .desktopAnchors{

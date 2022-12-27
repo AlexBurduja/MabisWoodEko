@@ -8,49 +8,7 @@ export function ReviewPageComponent(props) {
 
     const { reviewTitle, reviewText, rating, firstName, lastName, id  } = props
 
-    const [reviews, setReviews] = useState([])
-
     const { auth } = useContext(AuthContext)
-
-
-        const [text, setText] = useState("");
-        const [title, setTitle] = useState("")
-        
-function textChange(event){
-    setText(event.target.value)
-}
-
-function ratingChange(event){
-    setSelected(event.target.value)
-}
-
-function titleChange(event){
-    setTitle(event.target.value)
-}
-
-function postHandler(event){
-    event.preventDefault()
-    
-    const body = {
-        reviewTitle: title,
-        reviewText: text,
-        reviewRating: selected,
-        userFirstName: auth.user.firstName,
-        userLastName: auth.user.lastName,
-        user: auth.user.id
-    }
-
-    fetch(`http://localhost:3001/reviews`, {
-        method: "POST",
-        headers: {
-            "Content-Type" : "application/json",
-            Authorization : `Bearer ${auth.accessToken}`
-        },
-        body: JSON.stringify(body)
-    })
-    window.location.reload();
-}
-
 
 
 function deleteHandler() {
@@ -58,6 +16,7 @@ function deleteHandler() {
             
                  method: "DELETE"
              })
+        window.location.reload();
 }
 
 

@@ -1,8 +1,9 @@
-import { RiShoppingCartLine } from 'react-icons/ri'
-import { NavLink } from 'react-router-dom';
+import { RiShoppingCartLine } from 'react-icons/ri';
 import { useState, useEffect, useContext } from 'react';
 import "./ShoppingCart.css"
 import { AuthContext } from '../../App';
+import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 export function ShoppingCart() {
@@ -40,13 +41,11 @@ const { auth } = useContext(AuthContext)
     }
 
   return (
-   <NavLink to='/cart' id='cartNavlink'>
-
+  <NavLink to='/cart' id='cartNavlink' >
     <section className='cartSectionn'>
       <RiShoppingCartLine />
           <ProductCount />
     </section>
-
   </NavLink>
   );
 }

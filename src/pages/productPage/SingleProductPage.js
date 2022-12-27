@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../App";
 import "./SingleProductPage.css"
 import { motion } from "framer-motion";
+import { HashLink } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
 
 export function SingleProductPage() {
 
@@ -45,13 +46,13 @@ export function SingleProductPage() {
             <p>Works best with a thermal plant.</p>
             <h1>{productDetails.title}</h1>
             <p>{productDetails.price} {productDetails.currency}</p>
-            <NavLink to="/">
-              <motion.button 
+              <HashLink to="/#product">
+              <motion.button
             whileHover={{scale: 1.1}}
             whileTap={{scale: 0.9}}>
                 Back to all products
             </motion.button>
-            </NavLink>
+              </HashLink>
         </div>
       
       </div>

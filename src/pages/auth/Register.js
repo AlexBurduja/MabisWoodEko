@@ -198,8 +198,16 @@ function Register(){
 
 
   return (
-<div className='registerWrapper'>
+<section className='registerWrapper'>
 <ParticlesBackground />
+
+<div className='registerLeftSide'>
+  <div>
+      
+  </div>      
+</div>
+
+<div className='registerRightSide'>
   <form className='registerForm' onSubmit={onSubmits}>
     <h1>Register</h1>
 
@@ -235,13 +243,13 @@ function Register(){
                 type="submit"
                 className="submitButtonRegister"
                 whileHover={{scale: 1.1}}
-                whileTap={{scale:0.9}}
-                >
+                whileTap={{scale:0.9}} >
                     Register
           </motion.button>
 
           <p>Already have an account? <Link to="/login">Login</Link></p>
-    </form>
-</div>
+    </form>  
+  </div>
+</section>
   );
 }

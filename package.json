@@ -25,6 +25,7 @@
     "react-lorem-ipsum": "^1.4.10",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.4.3",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "react-social-icons": "^5.15.0",

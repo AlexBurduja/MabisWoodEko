@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useContext } from 'react';
-import { BiLogOut } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg'
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../App';
@@ -8,7 +7,6 @@ import logo from '../../publicResources/logoMabis.svg';
 import './CssHeader.css'
 import "../cartPage/ShoppingCart"
 import { ShoppingCart } from '../cartPage/ShoppingCart';
-import Particle from '../../particlesJS/particleJsComponent';
 
 export function Header() {
 

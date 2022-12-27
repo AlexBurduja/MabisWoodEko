@@ -1,8 +1,9 @@
 .registerWrapper{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 15px;
     height: 100vh;
     background: linear-gradient(-135deg, #000C40, rgb(43,43,230));
 }
@@ -30,4 +31,12 @@
     font-weight: bold;
     font-size: 20px;
     font-family: inherit;
+}
+
+.registerLeftSide{
+    z-index: 1;
+}
+
+.registerRightSide{
+    z-index: 1;
 }

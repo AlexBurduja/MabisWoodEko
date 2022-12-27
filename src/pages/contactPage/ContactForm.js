@@ -6,6 +6,7 @@ import { BsFacebook } from "react-icons/bs"
 import { BsInstagram } from "react-icons/bs"
 import { FaTiktok } from "react-icons/fa"
 import emailjs from 'emailjs-com'
+import { Link } from "react-router-dom"
 
 export function ContactForm() {
   
@@ -73,7 +74,7 @@ export function ContactForm() {
           <input name="message" type="text" required="required" autoComplete="off"></input>
           <span>Message</span>
         </div>
-
+        
           <button type="submit"> Send Message </button>
 
         </form>

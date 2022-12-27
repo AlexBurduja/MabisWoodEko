@@ -8,9 +8,8 @@ import { RiShoppingCartLine } from 'react-icons/ri';
 
 export function ShoppingCartPage() {
   
-
-  const [products, setProducts] = useState([])
-  const { auth } = useContext(AuthContext)
+  const [ products, setProducts ] = useState([])
+  const { auth } = useContext( AuthContext )
 
 
       useEffect(() => {
@@ -72,7 +71,7 @@ export function ShoppingCartPage() {
       <h3>Please check that you have the right quantity of every single item to avoid confusions at checkout, Thanks!</h3>
       {products.map((item) => {
         return (
-          <section className='cartProductShowFlex'>
+          <section key={item} className='cartProductShowFlex'>
               <div>
                 <img src={item.productImage} width="150vw" alt="product image"></img>
               </div>
@@ -182,7 +181,7 @@ export function ShoppingCartPage() {
           <section className='doamneAjuta'>
           {products.map((item) => {
             return (
-              <section className='productCheckoutPage'>
+              <section key={item} className='productCheckoutPage'>
                   <div className='imageQuantity'>
                     <img src={item.productImage} alt="product image" width="100px"></img>
                     <p>{item.quantity}</p>
@@ -201,7 +200,7 @@ export function ShoppingCartPage() {
                 </div>
 
                 <div className='deliveryOptions'>
-                  <label for="delivery">Delivery </label>
+                  <label htmlFor="delivery">Delivery </label>
                   <select id='delivery'>
                     <option value="standard">Standard Delivery</option>
                     <option value="premium">Premium Delivery</option>
@@ -225,6 +224,6 @@ export function ShoppingCartPage() {
       }
 
   return (
-    <ShoppingCartPage />
+      <ShoppingCartPage />
   )
 }

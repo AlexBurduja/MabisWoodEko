@@ -1,4 +1,4 @@
-section .cartSectionn{
+section .cartSection{
     display: flex;
     gap: 10px;
     align-items: center;
@@ -10,4 +10,23 @@ section .cartSectionn{
     font-size: 1vw;
     text-decoration: none;
 }
+.wrapper{
+    height: 100%;
+}
 
+.scrollButton{
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    background-color: rgb(43,43,230);
+    border-radius: 50%;
+}
+
+.scrollButtonMobile{
+    display: none;
+}

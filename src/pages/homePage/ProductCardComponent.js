@@ -3,6 +3,7 @@ import "./ProductCardComponent.css"
 import 'animate.css';
 import { AuthContext } from "../../App";
 import { AiFillEdit } from "react-icons/ai";
+import { motion, AnimatePresence } from "framer-motion";
 /// Modal
 
 export function ProductCardComponent(props) {
@@ -46,6 +47,9 @@ export function ProductCardComponent(props) {
   const [newKg, setKg] = useState('')
   const [newImage, setImage] = useState('')
   const [newDescription, setDescription] = useState('')
+
+  const [succes, setSucces] = useState('')
+  const [ deleteSucces, setDeleteSucces ] = useState('')
   ///// End of Modal
 
   const { auth } = useContext( AuthContext )
@@ -87,6 +91,14 @@ if(auth.user.admin){
       },
       body: JSON.stringify(body)
     } )
+    .then(response => {
+      if(response.status === 200){
+        setSucces("Succes!")
+        setTimeout(() => {
+          setSucces("")
+        }, 1500 )
+      }
+    })
   }
 }
   
@@ -96,6 +108,14 @@ if(auth.user.admin){
         method: "DELETE",
         headers: {
           Authorization : `Bearer ${auth.accessToken}`
+        }
+      })
+      .then(response => {
+        if(response.status === 200){
+          setDeleteSucces('Product Deleted!')
+          setTimeout(() => {
+            setDeleteSucces('')
+          }, 1500)
         }
       })
     }
@@ -259,6 +279,32 @@ if(auth.user.admin){
                 <h1>Edit product</h1>
                   <p className="modal-content_p">Here you can change anything that you want regarding your product..</p>
                   
+                  <AnimatePresence>
+                  {succes && (
+                    <motion.h3
+                    initial={{opacity:0}}
+                    animate={{opacity:1}}
+                    exit={{opacity:0}}
+                    transition={{ease:"easeIn", duration:1.5}}
+                    className="editModalSucces"
+                    >
+                      {succes}
+                    </motion.h3>
+                  )}
+
+                  {deleteSucces && (
+                    <motion.h3
+                    initial={{opacity:0}}
+                    animate={{opacity:1}}
+                    exit={{opacity:0}}
+                    transition={{ease:"easeIn", duration:1.5}}
+                    className="editModalSucces"
+                    >
+                      {deleteSucces}
+                    </motion.h3>
+                  )}
+                  </AnimatePresence>
+
                   <div className="modal-content-inputs">
                     
                     <div className="modal-content-inputs_div">

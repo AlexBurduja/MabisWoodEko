@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import "./CreateProduct.css"
 import 'animate.css';
 import { AuthContext } from "../../App";
+import { motion, AnimatePresence } from "framer-motion";
 
 
 export function CreateProduct(){
@@ -16,6 +17,8 @@ export function CreateProduct(){
   const [currency, setCurrency] = useState('');
   const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
+
+  const [ succes, setSucces ] = useState('')
 
   const {auth} = useContext(AuthContext)
 
@@ -79,7 +82,17 @@ export function CreateProduct(){
         },
         body: JSON.stringify(body)
       })
-      window.onclick.reload();
+      .then(response => {
+        if(response.status === 201){
+
+          setSucces("Succes!")          
+          setInterval(() => {
+            setSucces("")
+            window.location.reload()
+        
+          }, 2000)
+        }
+      })
     }
   }
 
@@ -111,6 +124,19 @@ export function CreateProduct(){
             <div className="modal-content ">
               <h1 >Create product.</h1>
               <p className="modal-content_p">All fields need to be completed.</p>
+
+              <AnimatePresence>
+                  {succes && (
+                    <motion.h3
+                    initial={{opacity:0}}
+                    animate={{opacity:1}}
+                    exit={{opacity:0}}
+                    transition={{ease:"easeInOut", duration:1}}
+                    >
+                      {succes}
+                    </motion.h3>
+                  )}
+                  </AnimatePresence>
 
                 <div className="modal-content-inputs">
 

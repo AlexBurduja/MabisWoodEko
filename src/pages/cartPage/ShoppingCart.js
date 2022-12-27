@@ -42,7 +42,7 @@ const { auth } = useContext(AuthContext)
 
   return (
   <NavLink to='/cart' id='cartNavlink' >
-    <section className='cartSectionn'>
+    <section className='cartSection'>
       <RiShoppingCartLine />
           <ProductCount />
     </section>

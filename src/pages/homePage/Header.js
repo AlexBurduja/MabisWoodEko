@@ -17,7 +17,7 @@ export function Header() {
   const activeClassHamburger = ({isActiveHamburger}) => isActiveHamburger ? "activeClassHamburger" : "link";
 
   return (
-    <section className='flex'>
+    <section id="home" className='flex'>
       <div className='logo'>
         <img src={logo} alt="logo"/>
       </div>
@@ -59,7 +59,7 @@ export function Header() {
       <nav className="nav">
         <ul className="list">
           <li className="item"> <NavLink className={activeClassHamburger} to='/'>Home</NavLink> </li>
-          <li className="item"> <NavLink className={activeClassHamburger} to='/cart'>About</NavLink> </li>
+          <li className="item"> <NavLink className={activeClassHamburger} to='/about'>About</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>Contact</NavLink> </li>
           <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{auth.user.username}'s Profile</NavLink> </li>

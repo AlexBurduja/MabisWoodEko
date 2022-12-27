@@ -6,7 +6,7 @@ import { BsFacebook } from "react-icons/bs"
 import { BsInstagram } from "react-icons/bs"
 import { FaTiktok } from "react-icons/fa"
 import emailjs from 'emailjs-com'
-import { Link } from "react-router-dom"
+import { HashLink } from "react-router-hash-link"
 
 export function ContactForm() {
   
@@ -22,7 +22,7 @@ export function ContactForm() {
   }
   
   return (
-    <section className="contactFormWrapper">
+    <section id="contact" className="contactFormWrapper">
       <div className="leftSide">
         <div className="leftSide_header">
           <h1>Get in touch</h1>

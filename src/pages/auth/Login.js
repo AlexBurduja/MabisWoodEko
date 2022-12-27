@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import './loginCss.css'
 import logo from "../../publicResources/logoMabis.svg"
 import { AiOutlineEye } from "react-icons/ai"
@@ -65,7 +65,7 @@ export function Login(){
             
             setTimeout(() =>{
               setErrorMsg('')
-            }, 3000)
+            }, 2000)
 
             throw new Error('invalid credentials');
 
@@ -147,7 +147,20 @@ export function Login(){
       <>
       <ParticlesBackground />
       <section className="loginWrapper">
-      <h1 className="errorMsgAccNotFound">{errorMsg}</h1>
+        <AnimatePresence>
+          {errorMsg && (
+            <motion.h1
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity:0}}
+            transition={{ease: "easeInOut", duration:2}}
+            className="errorMsgAccNotFound"
+            >
+              {errorMsg}
+            </motion.h1>
+          )}
+        </AnimatePresence>
+      {/* <h1 className="errorMsgAccNotFound">{errorMsg}</h1> */}
         <div className="wrapperOfWrapper">
 
         <div className="leftRegion">

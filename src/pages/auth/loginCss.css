@@ -129,6 +129,7 @@
 
 .errorMsgAccNotFound{
     color: red;
+    z-index: 1;
 }   
 
 .submitButtonLogin{
@@ -156,6 +157,10 @@ div #tsparticles {
 @media (max-width:1000px) {
     .leftRegion{
         display:none;
+    }
+
+    .errorMsgAccNotFound{
+        text-align: center;
     }
 }
 

@@ -4,6 +4,7 @@ import logo from "../../publicResources/logoMabis.svg"
 import { NavLink } from 'react-router-dom';
 import { BsFillTelephoneFill, BsFillPinMapFill } from 'react-icons/bs';
 import { FiMail } from 'react-icons/fi'
+import { HashLink } from 'react-router-hash-link';
 
 export function Footer() {
   return (
@@ -15,21 +16,21 @@ export function Footer() {
         </div>
 
         <div className='footerSection_flex_column_2 footerSection_common'>
-          <NavLink to="/">Home</NavLink>
+          <HashLink to="/#home">Home</HashLink>
           <p>Home</p>
           <p>Home</p>
           <p>Home</p>
         </div>
 
         <div className='footerSection_flex_column_3 footerSection_common'>
-        <NavLink to="/reviews">Reviews</NavLink>
+        <HashLink to="/reviews#">Reviews</HashLink>
           <p>Reviews</p>
           <p>Reviews</p>
           <p>Reviews</p>
         </div>
 
         <div className='footerSection_flex_column_4 footerSection_common'>
-          <NavLink to="/contact">Contact</NavLink>
+          <HashLink to="/contact#">Contact</HashLink>
           <p>Contact</p>
           <p>Contact</p>
           <p>Contact</p>

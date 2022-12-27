@@ -4,7 +4,7 @@ import { AuthContext } from "../../App";
 import { Header } from "../homePage/Header";
 import { PreFooter } from "../homePage/PreFooter";
 import "./ProfilePage.css"
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 
 export function ProfilePage() {
@@ -23,6 +23,9 @@ export function ProfilePage() {
     const [ usernameError, setUsernameError ] = useState('')
     const [ firstNameError, setFirstNameError ] = useState('')
     const [ lastNameError, setLastNameError ] = useState('')
+
+    const [succes, setSucces] = useState('')
+    const [fail , setFail] = useState('')
 
     function changeUsername(event) {
         setUsername(event.target.value)
@@ -84,6 +87,15 @@ export function ProfilePage() {
       },
       body: JSON.stringify(body)
     } )
+    .then((response) => {
+      if(response.status === 200){
+        setModalSubmitButton(false)
+        setSucces("Succes!")
+        setTimeout(() => {
+          setSucces("")
+        }, 1500);
+      }
+    })
 }
 
 
@@ -224,6 +236,33 @@ if(modalSubmitButton) {
         <>
         <Header />
             <h1 className="profilePageh1">{auth.user.username}'s Profile Page</h1>
+          <AnimatePresence>
+        {succes && (
+            <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity:1}}
+            exit={{opacity:0}}
+            transition={{ease:"easeOut", duration: 0.5}}
+            className="succesMessage"
+            >
+              {succes}
+            </motion.div>
+        )}
+
+        {fail && (
+            <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity:1}}
+            exit={{opacity:0}}
+            transition={{ease:"easeOut", duration: 0.5}}
+            className="succesMessage"
+            >
+              {fail}
+            </motion.div>
+        )}
+
+
+          </AnimatePresence>
             <section className="profilePageSection">
             
             <div className="profilePageSection_divL">
@@ -303,16 +342,18 @@ if(modalSubmitButton) {
                   exit={{ opacity: 0 }}
                   className="modal">
                   <div onClick={toggleModalDeleteButton} className="overlay"></div>
-                    <div className="modal-content modal3">
-                    <div>
+                    <div className="modal-content modal4">
+                    <div className="modal4_content_header">
                         <h1>Do you REALLY want to delete your account?</h1>
                         <h3>We will miss you if you do that!</h3>
                     </div>
-
+                  
+                  <div className="modal3ButtonsWrapper">
                     <div className="modal3Buttons"> 
                         <button onClick={deleteAccount}>Delete</button>
                         <button onClick={toggleModalDeleteButton}>Cancel</button>
                     </div>
+                  </div>
                     </div>
                 </motion.div>
                 )}

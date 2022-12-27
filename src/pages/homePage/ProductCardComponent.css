@@ -120,6 +120,13 @@ button.edit-btn{
     margin-bottom: 2rem;
 }
 
+.editModalSucces{
+    text-align: center;
+    margin-top: 10px;
+    color: rgb(14, 235, 14);
+}
+
+
 @media (max-width: 800px){
     .cardDiv .viewMoreButton{
         opacity: 1;

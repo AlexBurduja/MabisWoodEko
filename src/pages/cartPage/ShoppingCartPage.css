@@ -432,10 +432,14 @@ table:hover{
     font-size: 40px;
 }
 
+
 /* under 900px */
 
 @media  (max-width: 850px) {
-    
+    .scrollButtonMobile{
+        display: inline;
+    }
+
     table, tr,th,td{
         display: block;
         text-align: center;

@@ -13,7 +13,7 @@
     background-color: rgb(79, 79, 252);
 }
 
-@media (max-width: 850px){
+@media (max-width: 850px) {
     .progressMainWrapper{
         display: none;
     }

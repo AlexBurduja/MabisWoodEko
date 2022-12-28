@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from "framer-motion"
 import React, { useContext } from "react"
 import { useEffect, useState } from "react"
 import { AuthContext } from "../../App"
@@ -7,6 +8,8 @@ import { ReviewPageComponent } from "./ReviewPageComponent"
 export function Reviewpagesomething(){
 
     const [review, setReview] = useState([])
+
+    const [ succes, setSucces ] = useState('')
 
     const now = new Date();
     let minutes = now.getMinutes()
@@ -58,7 +61,17 @@ fetch(`http://localhost:3001/reviews`, {
     },
     body: JSON.stringify(body)
 })
-window.location.reload();
+.then(response => {
+    if(response.status === 201){
+        setSucces('Review Posted!')
+       
+        setTimeout(() => {
+            setSucces('');
+            window.location.reload();
+        }, 1500)
+    
+    }
+})
 }
 
 
@@ -69,6 +82,20 @@ window.location.reload();
             <h1>Review Page</h1>
             <h4>Here you can see how everyone reviewed our services!</h4>
             <h4>Be sure to leave one yourself by completing the form below!</h4>
+
+            <AnimatePresence>
+                {succes && (
+                <motion.h5
+                initial={{opacity: 0}}
+                animate={{opacity:1}}
+                exit={{opcaity: 0}}
+                transition={{ease: "easeIn", duration:1}}
+                className="reviewSuccesMessage"
+                >
+                    {succes}
+                </motion.h5>
+                )}
+            </AnimatePresence>
         </div>
                 <section>
 

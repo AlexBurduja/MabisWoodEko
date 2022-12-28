@@ -63,7 +63,7 @@ export function Header() {
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>Contact</NavLink> </li>
           <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{auth.user.username}'s Profile</NavLink> </li>
-          <li className="item mobileCart"> <NavLink className={activeClassHamburger} to='/cart'> <ShoppingCart /> </NavLink> </li>
+          <li className="item mobileCart">  <ShoppingCart />  </li>
           <button className='logoutButtonHamburger' onClick={logOut}>Log Out</button>
         </ul>
       </nav>

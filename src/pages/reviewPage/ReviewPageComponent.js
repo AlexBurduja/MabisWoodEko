@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import React from "react"
 import { RiStarFill, RiStarLine } from "react-icons/ri";
 import { AuthContext } from "../../App";
@@ -173,7 +173,7 @@ function Hello(){
                             <div className="reviewRatingSection_time">
                                 <p> Submitted at: {time}</p>
                             </div>
-                            
+
                             {auth.user.admin &&
                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                             }
@@ -181,9 +181,6 @@ function Hello(){
                         )
                     }
 };
-
-const options = ["1","2","3","4","5"]
-const [selected, setSelected] = useState(options[0])
 
     return(
         <>

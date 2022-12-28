@@ -19,6 +19,9 @@
     width: 35%;
 }
 
+.leftSide{
+
+}
 
 .leftSide_footer {
     display: flex;
@@ -147,9 +150,11 @@
         align-items: center;
         text-align: center;
         gap: 50px;
-        font-size: 2.5vw;
+        font-size: 3.5vw;
     }
-    
+        
+
+
     .leftSide_footer_icons{
         gap: 1em;
     }

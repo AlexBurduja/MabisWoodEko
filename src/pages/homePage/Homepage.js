@@ -6,6 +6,7 @@ import { ProductListComponent } from './ProductListComponent';
 import { PreFooter } from './PreFooter';
 import { ShoppingCart } from "../cartPage/ShoppingCart";
 import { Footer } from './Footer';
+import { BackToTop } from '../cartPage/BackToTop';
 
 export function Homepage() {
 
@@ -18,6 +19,7 @@ export function Homepage() {
       <ImageCards />
       <CreateProduct />
       <ProductListComponent />
+      <BackToTop />
       <PreFooter />
       <Footer />
     </>

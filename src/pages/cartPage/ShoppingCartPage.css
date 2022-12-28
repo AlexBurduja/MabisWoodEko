@@ -432,11 +432,66 @@ table:hover{
     font-size: 40px;
 }
 
+#progress {
+    height: 70px;
+    width: 70px;
+    background-color: rgba(48, 48, 230, 0.8);
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px;
+    right: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0 0 10px black;
+    display: grid;
+    place-items: center;
+    z-index: 1;
+}
 
+#progress-value {
+    display: block;
+    height: calc(100% - 10px);
+    width: calc(100% - 10px);
+    background-color: white;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    z-index: 1;
+}
+.arrowDiv{
+    width: 70px;
+    height: 70px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+}
+
+/* .arrowDiv_Icon{
+    position: fixed;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 50px;
+} */
 /* under 900px */
+
+.scrollProgress {
+    display: none;
+}
 
 @media  (max-width: 850px) {
     .scrollButtonMobile{
+        display: inline;
+    }
+
+    .scrollProgress{
         display: inline;
     }
 

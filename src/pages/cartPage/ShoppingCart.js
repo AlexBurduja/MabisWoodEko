@@ -3,7 +3,6 @@ import { useState, useEffect, useContext } from 'react';
 import "./ShoppingCart.css"
 import { AuthContext } from '../../App';
 import { NavLink } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 
 export function ShoppingCart() {

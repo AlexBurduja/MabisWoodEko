@@ -22,7 +22,7 @@ export function BackToTop(){
 
     const scrollPercentage = () => {
         
-        const scrollProgress = document.getElementById("progress")
+        let scrollProgress = document.getElementById("progress")
         
         const progressValue = document.getElementById("progress-value")
         
@@ -32,7 +32,9 @@ export function BackToTop(){
 
         const scrollValue = Math.round( pos * 100 / calcHeight)
 
-        scrollProgress.style.background = `conic-gradient(#008fff ${scrollValue}%, #c0c0ff ${scrollValue}% `
+        document.addEventListener("DOMContentLoaded", function(){
+            scrollProgress.style.background = `conic-gradient(#008fff ${scrollValue}%, #c0c0ff ${scrollValue}% `
+        });
 
     }
 

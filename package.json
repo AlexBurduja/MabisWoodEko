@@ -24,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-lorem-ipsum": "^1.4.10",
+    "react-progressbar-on-scroll": "^2.0.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.4.3",
     "react-router-hash-link": "^2.4.3",

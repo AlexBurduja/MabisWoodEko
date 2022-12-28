@@ -3,10 +3,11 @@ import React from "react"
 import { RiStarFill, RiStarLine } from "react-icons/ri";
 import { AuthContext } from "../../App";
 import "./ReviewPageComponent.css"
+import { AiOutlineClose } from "react-icons/ai";
 
 export function ReviewPageComponent(props) {
 
-    const { reviewTitle, reviewText, rating, firstName, lastName, time,id  } = props
+    const { reviewTitle, reviewText, rating, firstName, lastName, time, id  } = props
 
     const { auth } = useContext(AuthContext)
 
@@ -38,12 +39,15 @@ function Hello(){
                                 {reviewText}    
                             </div>
 
-                            <div className="stars">
+                            <div className="reviewRatingSection_stars">
                             <RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine /><RiStarLine />
                             </div>
-                            <p>{time}</p>
+                            
+                            <div className="reviewRatingSection_time">
+                                <p> Submitted at: {time}</p>
+                            </div>
                             {auth.user.admin &&
-                                <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
+                                <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                             }
                             </section>
                         )
@@ -66,11 +70,16 @@ function Hello(){
                                 {reviewText}    
                             </div>
 
-                        <div className="stars">
+                        <div className="reviewRatingSection_stars">
                             <RiStarFill /><RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine />
                         </div>
+
+                        <div className="reviewRatingSection_time">
+                                <p> Submitted at: {time}</p>
+                        </div>
+
                         {auth.user.admin &&
-                                <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
+                                <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                         }
                         </section>
                         )
@@ -93,11 +102,16 @@ function Hello(){
                                 {reviewText}    
                             </div>
                                 
-                            <div className="stars">
+                            <div className="reviewRatingSection_stars">
                                 <RiStarFill /><RiStarFill /><RiStarFill /><RiStarLine /><RiStarLine />
                             </div>
+
+                            <div className="reviewRatingSection_time">
+                                <p> Submitted at: {time}</p>
+                            </div>
+
                             {auth.user.admin &&
-                                <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
+                                <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                             }
                             </section>
                         )
@@ -120,11 +134,16 @@ function Hello(){
                                 {reviewText}    
                             </div>
 
-                            <div className="stars">
+                            <div className="reviewRatingSection_stars">
                                 <RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill /><RiStarLine />
                             </div>
+
+                            <div className="reviewRatingSection_time">
+                                <p> Submitted at: {time}</p>
+                            </div>
+
                             {auth.user.admin &&
-                                <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
+                                <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                             }
                             </section>
                         )
@@ -147,11 +166,16 @@ function Hello(){
                                 {reviewText}    
                             </div>
 
-                            <div className="stars">
+                            <div className="reviewRatingSection_stars">
                                 <RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill />
                             </div>
+
+                            <div className="reviewRatingSection_time">
+                                <p> Submitted at: {time}</p>
+                            </div>
+                            
                             {auth.user.admin &&
-                                <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
+                                <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                             }
                             </section>
                         )

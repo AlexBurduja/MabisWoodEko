@@ -138,98 +138,54 @@
   ],
   "reviews": [
     {
-      "reviewTitle": "Very good!",
-      "reviewText": "I liked it very much",
-      "reviewRating": "5",
+      "reviewTitle": "1 star",
+      "reviewText": "1 star rating goes here!",
+      "reviewRating": "1",
       "userFirstName": "Burduja",
       "userLastName": "Alexandru",
+      "time": "28.12.2022 23:07",
       "user": 1,
       "id": 1
     },
     {
-      "reviewTitle": "3 star rating title goes here",
-      "reviewText": "3 star rating text goes here",
+      "reviewTitle": "2 star",
+      "reviewText": "2 star rating goes here",
+      "reviewRating": "2",
+      "userFirstName": "Burduja",
+      "userLastName": "Alexandru",
+      "time": "28.12.2022 23:27",
+      "user": 1,
+      "id": 2
+    },
+    {
+      "reviewTitle": "3 star",
+      "reviewText": "3 star rating goes here",
       "reviewRating": "3",
-      "userFirstName": "Carla",
-      "userLastName": "Grigorescu",
-      "user": 2,
+      "userFirstName": "Burduja",
+      "userLastName": "Alexandru",
+      "time": "28.12.2022 23:29",
+      "user": 1,
       "id": 3
     },
     {
-      "reviewTitle": "2 star rating title goes here",
-      "reviewText": "2 star rating text goes here",
-      "reviewRating": "2",
-      "userFirstName": "Carla",
-      "userLastName": "Grigorescu",
-      "user": 2,
+      "reviewTitle": "4 star",
+      "reviewText": "4 star rating goes here",
+      "reviewRating": "4",
+      "userFirstName": "Burduja",
+      "userLastName": "Alexandru",
+      "time": "28.12.2022 23:29",
+      "user": 1,
       "id": 4
     },
     {
-      "reviewTitle": "1 star rating title goes here",
-      "reviewText": "1 star rating text goes here",
-      "reviewRating": "1",
-      "userFirstName": "Carla",
-      "userLastName": "Grigorescu",
-      "user": 2,
+      "reviewTitle": "5 star",
+      "reviewText": "5 star rating goes here",
+      "reviewRating": "5",
+      "userFirstName": "Burduja",
+      "userLastName": "Alexandru",
+      "time": "28.12.2022 23:30",
+      "user": 1,
       "id": 5
-    },
-    {
-      "reviewTitle": "4 star rating title goes here",
-      "reviewText": "4 star rating text goes here",
-      "reviewRating": "4",
-      "userFirstName": "Carla",
-      "userLastName": "Grigorescu",
-      "user": 2,
-      "id": 6
-    },
-    {
-      "reviewTitle": "Mi-a placut",
-      "reviewText": "Foarte frumos",
-      "reviewRating": "5",
-      "userFirstName": "Burduja",
-      "userLastName": "Dumitru",
-      "user": 3,
-      "id": 7
-    },
-    {
-      "reviewTitle": "dsd",
-      "reviewText": "dsda",
-      "reviewRating": "5",
-      "userFirstName": "Burduja",
-      "userLastName": "Alexandru",
-      "time": "2022-12-28T17:28:37.565Z",
-      "user": 1,
-      "id": 8
-    },
-    {
-      "reviewTitle": "",
-      "reviewText": "",
-      "reviewRating": "1",
-      "userFirstName": "Burduja",
-      "userLastName": "Alexandru",
-      "time": "2022-12-28T17:29:19.440Z",
-      "user": 1,
-      "id": 9
-    },
-    {
-      "reviewTitle": "",
-      "reviewText": "",
-      "reviewRating": "1",
-      "userFirstName": "Burduja",
-      "userLastName": "Alexandru",
-      "time": "2022-12-28T17:31:56.322Z",
-      "user": 1,
-      "id": 10
-    },
-    {
-      "reviewTitle": "",
-      "reviewText": "",
-      "reviewRating": "1",
-      "userFirstName": "Burduja",
-      "userLastName": "Alexandru",
-      "time": "2022-12-28T17:35:33.311Z",
-      "user": 1,
-      "id": 11
     }
   ]
 }

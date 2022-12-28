@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import 'react-circular-progressbar/dist/styles.css'
 import { BsArrowUp } from "react-icons/bs";
+import "./BackToTop.css"
 
 
 export function BackToTop(){
@@ -58,8 +59,9 @@ export function BackToTop(){
                  <motion.div
                  className="arrowDiv"
                  initial = {{opacity: 0}}
-                 animate= {{opacity: 1}}
-                 exit = {{opacity: 0}}
+                 animate= {{opacity:1, rotate:360}}
+                 exit = {{opacity: 0, rotate:180}}
+                 transition= {{duration:1}}
                  >
                 <BsArrowUp className="arrowDiv_Icon" onClick={scrollUp}  />
                 </motion.div>

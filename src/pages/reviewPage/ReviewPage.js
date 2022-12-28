@@ -1,7 +1,8 @@
 import React from 'react';
-import { Footer } from '../homePage/Footer';
-import { Header } from '../homePage/Header';
-import { PreFooter } from '../homePage/PreFooter';
+import { BackToTop } from '../reusableComponents/BackToTop';
+import { Footer } from '../reusableComponents/Footer';
+import { Header } from '../reusableComponents/Header';
+import { PreFooter } from '../reusableComponents/PreFooter';
 import { ReviewPageComponent } from './ReviewPageComponent';
 import { Reviewpagesomething } from './Reviewpagesomething';
 
@@ -12,6 +13,7 @@ export function ReviewPage() {
       <Header />
       <ReviewPageComponent />
       <Reviewpagesomething />
+      <BackToTop />
       <PreFooter />
       <Footer />
     </>

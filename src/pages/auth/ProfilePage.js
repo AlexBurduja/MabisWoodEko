@@ -1,8 +1,8 @@
 import { useContext,  useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
-import { Header } from "../homePage/Header";
-import { PreFooter } from "../homePage/PreFooter";
+import { Header } from "../reusableComponents/Header";
+import { PreFooter } from "../reusableComponents/PreFooter";
 import "./ProfilePage.css"
 import { AnimatePresence, motion } from "framer-motion";
 

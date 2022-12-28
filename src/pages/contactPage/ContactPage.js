@@ -1,6 +1,6 @@
-import { Footer } from '../homePage/Footer';
-import { Header } from '../homePage/Header';
-import { PreFooter } from '../homePage/PreFooter';
+import { Footer } from '../reusableComponents/Footer';
+import { Header } from '../reusableComponents/Header';
+import { PreFooter } from '../reusableComponents/PreFooter';
 import { ContactForm } from './ContactForm';
 
 

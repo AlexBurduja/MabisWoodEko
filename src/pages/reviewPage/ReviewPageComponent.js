@@ -6,7 +6,7 @@ import "./ReviewPageComponent.css"
 
 export function ReviewPageComponent(props) {
 
-    const { reviewTitle, reviewText, rating, firstName, lastName, id  } = props
+    const { reviewTitle, reviewText, rating, firstName, lastName, time,id  } = props
 
     const { auth } = useContext(AuthContext)
 
@@ -41,6 +41,7 @@ function Hello(){
                             <div className="stars">
                             <RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine /><RiStarLine />
                             </div>
+                            <p>{time}</p>
                             {auth.user.admin &&
                                 <button className="reviewDeleteButton" onClick={deleteHandler}>Delete</button>
                             }

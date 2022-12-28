@@ -1,12 +1,12 @@
 import { CreateProduct } from './CreateProduct';
-import { Header } from './Header.js';
+import { Header } from '../reusableComponents/Header';
 import { Image } from './Image';
 import { ImageCards } from './ImageCards';
 import { ProductListComponent } from './ProductListComponent';
-import { PreFooter } from './PreFooter';
+import { PreFooter } from '../reusableComponents/PreFooter';
 import { ShoppingCart } from "../cartPage/ShoppingCart";
-import { Footer } from './Footer';
-import { BackToTop } from '../cartPage/BackToTop';
+import { Footer } from '../reusableComponents/Footer';
+import { BackToTop } from '../reusableComponents/BackToTop';
 
 export function Homepage() {
 

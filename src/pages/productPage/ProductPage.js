@@ -1,6 +1,6 @@
-import { Footer } from '../homePage/Footer.js';
-import { Header } from '../homePage/Header.js';
-import { PreFooter } from '../homePage/PreFooter';
+import { Footer } from '../reusableComponents/Footer';
+import { Header } from '../reusableComponents/Header.js';
+import { PreFooter } from '../reusableComponents/PreFooter';
 import { SingleProductPage } from './SingleProductPage';
 
 

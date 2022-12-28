@@ -8,6 +8,12 @@ export function Reviewpagesomething(){
 
     const [review, setReview] = useState([])
 
+    const now = new Date();
+    const time = now.getTime();
+    const day = now.getDay();
+
+    console.log(`${now.getDate()}.${now.getUTCMonth() + 1}.${now.getFullYear()}`)
+
     useEffect(()=>{
         fetch('http://localhost:3001/reviews')
         .then(response => response.json())
@@ -41,6 +47,7 @@ const body = {
     reviewRating: selected,
     userFirstName: auth.user.firstName,
     userLastName: auth.user.lastName,
+    time : `Date.setDate() + Date.setTime` ,
     user: auth.user.id
 }
 
@@ -99,6 +106,7 @@ window.location.reload();
                 rating = {reviews.reviewRating}
                 firstName={reviews?.userFirstName}
                 lastName={reviews.userLastName}
+                time={reviews.time}
                 id={reviews.id}
                 key={reviews.id}>
                 </ReviewPageComponent>

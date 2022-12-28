@@ -1,7 +1,7 @@
-import { Footer } from '../homePage/Footer';
-import { Header } from '../homePage/Header';
-import { PreFooter } from '../homePage/PreFooter';
-import { BackToTop } from './BackToTop';
+import { Footer } from '../reusableComponents/Footer';
+import { Header } from '../reusableComponents/Header';
+import { PreFooter } from '../reusableComponents/PreFooter';
+import { BackToTop } from '../reusableComponents/BackToTop';
 import { ShoppingCartPage } from './ShoppingCartPage';
 
 

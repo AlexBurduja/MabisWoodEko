@@ -160,7 +160,6 @@ export function Login(){
             </motion.h1>
           )}
         </AnimatePresence>
-      {/* <h1 className="errorMsgAccNotFound">{errorMsg}</h1> */}
         <div className="wrapperOfWrapper">
 
         <div className="leftRegion">

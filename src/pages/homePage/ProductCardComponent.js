@@ -96,6 +96,7 @@ if(auth.user.admin){
         setSucces("Succes!")
         setTimeout(() => {
           setSucces("")
+          window.location.reload()
         }, 1500 )
       }
     })
@@ -115,6 +116,7 @@ if(auth.user.admin){
           setDeleteSucces('Product Deleted!')
           setTimeout(() => {
             setDeleteSucces('')
+            window.location.reload()
           }, 1500)
         }
       })
@@ -291,7 +293,9 @@ if(auth.user.admin){
                       {succes}
                     </motion.h3>
                   )}
+                  </AnimatePresence>
 
+                  <AnimatePresence>
                   {deleteSucces && (
                     <motion.h3
                     initial={{opacity:0}}

@@ -85,12 +85,12 @@ export function CreateProduct(){
       .then(response => {
         if(response.status === 201){
 
-          setSucces("Succes!")          
+          setSucces("Product Created!")          
           setInterval(() => {
             setSucces("")
             window.location.reload()
         
-          }, 2000)
+          }, 1500)
         }
       })
     }
@@ -131,7 +131,8 @@ export function CreateProduct(){
                     initial={{opacity:0}}
                     animate={{opacity:1}}
                     exit={{opacity:0}}
-                    transition={{ease:"easeInOut", duration:1}}
+                    transition={{ease: "easeInOut", duration:1.5}}
+                    className="editModalSucces"
                     >
                       {succes}
                     </motion.h3>

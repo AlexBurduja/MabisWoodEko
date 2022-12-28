@@ -126,6 +126,11 @@ button.edit-btn{
     color: rgb(14, 235, 14);
 }
 
+.editModalDeleteSucces{
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
 
 @media (max-width: 800px){
     .cardDiv .viewMoreButton{

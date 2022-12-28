@@ -93,7 +93,7 @@ if(auth.user.admin){
     } )
     .then(response => {
       if(response.status === 200){
-        setSucces("Succes!")
+        setSucces("Product Edited!")
         setTimeout(() => {
           setSucces("")
           window.location.reload()
@@ -302,7 +302,7 @@ if(auth.user.admin){
                     animate={{opacity:1}}
                     exit={{opacity:0}}
                     transition={{ease:"easeIn", duration:1.5}}
-                    className="editModalSucces"
+                    className="editModalDeleteSucces"
                     >
                       {deleteSucces}
                     </motion.h3>

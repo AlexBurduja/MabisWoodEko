@@ -198,8 +198,9 @@ function Register(){
 
 
   return (
-<section className='registerWrapper'>
+    <>
 <ParticlesBackground />
+<section className='registerWrapper'>
 
 <div className='registerLeftSide'>
   <div>
@@ -208,8 +209,8 @@ function Register(){
 </div>
 
 <div className='registerRightSide'>
-  <form className='registerForm' onSubmit={onSubmits}>
     <h1>Register</h1>
+  <form className='registerForm' onSubmit={onSubmits}>
 
       <div className="inputBoxes">
         <input id="firstName" type="text" onChange={firstNameChangeHandler} required></input>
@@ -247,9 +248,11 @@ function Register(){
                     Register
           </motion.button>
 
+    </form>
+
           <p>Already have an account? <Link to="/login">Login</Link></p>
-    </form>  
   </div>
 </section>
+</>
   );
 }

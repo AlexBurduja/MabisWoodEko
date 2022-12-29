@@ -172,11 +172,24 @@
   display: none;
 }
 
+.mobileCart{
+  display: flex;
+  justify-content: center;
+}
+
 .mobileCart p,
 .mobileCart svg{
   color: black;
   font-size: 5vh;
-  text-align: center;
+}
+
+.shoppingCartHamburger{
+  display: flex;
+  justify-content: center;
+}
+
+.shoppingCartHamburger:hover{
+  border-bottom: 5px solid rgba(48, 48, 230,1)
 }
 
 .loginListP{
@@ -243,6 +256,7 @@
 
     .desktopCart{
       display: block;
+     
     }
 
     .logo {

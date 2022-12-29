@@ -117,15 +117,6 @@
       "id": 1
     },
     {
-      "email": "carla.grigorescu@yahoo.com",
-      "password": "$2a$10$PwB2gvKQuAB6255bUP8D2OwaDqjt/HQNn.Ul4sIvlTfFB.V6uK4de",
-      "firstName": "Grigorescu",
-      "lastName": "Carla",
-      "username": "CarlaUnicorn",
-      "confirmPassword": "Carla789@",
-      "id": 2
-    },
-    {
       "email": "burduja_dan@yahoo.com",
       "password": "$2a$10$BE6ZfuCQFFezocxmM80J3uHKu2CaOwoQCQ/pF0DS2k96Qhr5uRa.e",
       "firstName": "Burduja",

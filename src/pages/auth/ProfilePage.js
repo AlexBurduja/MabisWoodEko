@@ -24,8 +24,8 @@ export function ProfilePage() {
     const [ firstNameError, setFirstNameError ] = useState('')
     const [ lastNameError, setLastNameError ] = useState('')
 
-    const [succes, setSucces] = useState('')
-    const [fail , setFail] = useState('')
+    const [succes, setSucces] = useState('');
+    const [deleteMessage , setDeleteMessage] = useState('')
 
     function changeUsername(event) {
         setUsername(event.target.value)
@@ -204,8 +204,16 @@ function deleteAccount(event) {
     fetch(`http://localhost:3001/users/${auth.user.id}`, {
         method: "DELETE"
     })
+    .then(response => {
+      if(response.status === 200){
+        setDeleteMessage('Account deleted...back to register!')
 
-    navigate('/login')
+        setTimeout(() => {
+          setDeleteMessage('')
+          navigate('/register')
+        }, 1500)
+      }
+    })
 }
 
 const [modalDeleteButton, setModalDeleteButton] = useState(false);
@@ -248,21 +256,8 @@ if(modalSubmitButton) {
               {succes}
             </motion.div>
         )}
-
-        {fail && (
-            <motion.div
-            initial={{opacity: 0}}
-            animate={{opacity:1}}
-            exit={{opacity:0}}
-            transition={{ease:"easeOut", duration: 0.5}}
-            className="succesMessage"
-            >
-              {fail}
-            </motion.div>
-        )}
-
-
           </AnimatePresence>
+            
             <section className="profilePageSection">
             
             <div className="profilePageSection_divL">
@@ -347,6 +342,22 @@ if(modalSubmitButton) {
                         <h1>Do you REALLY want to delete your account?</h1>
                         <h3>We will miss you if you do that!</h3>
                     </div>
+
+                    <div>
+                      <AnimatePresence>
+                        {deleteMessage && (
+                          <motion.h1
+                          initial={{opacity:0}}
+                          animate={{opacity:1}}
+                          exit={{opacity:0}}
+                          transition={{ease : "easeIn", duration:1}}
+                          >
+                            {deleteMessage}
+                          </motion.h1>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
                   
                   <div className="modal3ButtonsWrapper">
                     <div className="modal3Buttons"> 

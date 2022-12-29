@@ -7,9 +7,13 @@ import { BsInstagram } from "react-icons/bs"
 import { FaTiktok } from "react-icons/fa"
 import emailjs from 'emailjs-com'
 import { HashLink } from "react-router-hash-link"
+import { useContext } from "react"
+import { AuthContext } from "../../App"
 
 export function ContactForm() {
   
+  const { auth } = useContext( AuthContext )
+
   function sendEmail(e) {
     e.preventDefault();
 
@@ -61,12 +65,12 @@ export function ContactForm() {
         </div>
           
         <div className='rightSide_inputs__input' >
-          <input name="name" type="text" required="required" ></input>
+          <input name="name" type="text" required="required" defaultValue={`${auth.user.firstName} ${auth.user.lastName}`}></input>
           <span>Full Name</span>
         </div>
 
         <div className='rightSide_inputs__input' >
-          <input name="email" type="text" required="required" ></input>
+          <input name="email" type="text" required="required" defaultValue={auth.user.email}></input>
           <span>Email</span>
         </div>
 

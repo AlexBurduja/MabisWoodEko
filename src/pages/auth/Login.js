@@ -182,9 +182,10 @@ export function Login(){
           
         </div>
 
-            <form onSubmit={onSubmit} className="loginForm" noValidate>
-
+          <div className="LoginRightSide">
           <h1>Log in</h1>
+
+            <form onSubmit={onSubmit} className="loginForm" noValidate>
 
                 <div className="inputBoxes">
                     <input id="email" type="text" onChange={emailChangeHandler} required></input>
@@ -199,9 +200,8 @@ export function Login(){
                     <p className="eyeIcon" onClick={togglePassword}><AiOutlineEye/></p>
                 </div>
                 
-                <div>
+                  <div>
                 </div>
-
                 <motion.button 
                 type="submit"
                 className="submitButtonLogin"
@@ -209,12 +209,14 @@ export function Login(){
                 whileTap={{scale:0.9}}
                 >
                     Login
-                  </motion.button>
+                </motion.button>
+
+              </form>
 
             <div>
                 Don't have an account? <Link to="/register">Register</Link>
             </div>
-            </form>
+            </div>
         </div>
       </section>
     </>

@@ -32,8 +32,8 @@ export function Header() {
         </div>
     </div>
 
-    <div className='desktopCart'>
-      <ShoppingCart></ShoppingCart>
+    <div className='desktopCart'> 
+      <ShoppingCart/>
     </div>
 
       <div className='headerLogin'>
@@ -63,7 +63,7 @@ export function Header() {
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>Contact</NavLink> </li>
           <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{auth.user.username}'s Profile</NavLink> </li>
-          <li className="item mobileCart">  <ShoppingCart />  </li>
+          <li className="item mobileCart"> <ShoppingCart/> </li>
           <button className='logoutButtonHamburger' onClick={logOut}>Log Out</button>
         </ul>
       </nav>

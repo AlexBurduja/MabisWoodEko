@@ -1,25 +1,36 @@
 .registerWrapper{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
     height: 100vh;
+    width: 100%;
     background: linear-gradient(-135deg, #000C40, rgb(43,43,230));
+}
+
+
+.registerRightSide{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0px 0px 10px black;
+    background-color: #fff;
+    border-radius: 20px;
+    gap: 20px;
+    padding: 30px;
+    z-index: 1;
 }
 
 .registerForm{
     display: flex;
-    width: 90%;
-    max-width: 450px;
-    border-radius: 20px;
-    flex-direction: column;
+    width: 100%;
     align-items: center;
+    flex-direction: column;
     gap: 20px;
-    box-shadow: 0px 0px 10px black;
-    padding: 30px;
-    background-color: #fff;
-    z-index: 1;
 }
 
 .submitButtonRegister{
@@ -31,12 +42,4 @@
     font-weight: bold;
     font-size: 20px;
     font-family: inherit;
-}
-
-.registerLeftSide{
-    z-index: 1;
-}
-
-.registerRightSide{
-    z-index: 1;
 }

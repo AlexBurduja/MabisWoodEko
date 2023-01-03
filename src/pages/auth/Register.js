@@ -149,67 +149,13 @@ function validatePassword(password) {
   return false;
 }
 
-function Register(){
-  <div className='registerWrapper'>
-  <form className='registerForm' onSubmit={onSubmits}>
-    <h1>Register</h1>
-
-      <div className="inputBoxes">
-        <input id="firstName" type="text" onChange={firstNameChangeHandler} required></input>
-        <span htmlFor='firstName'>First name</span>
-      </div>
-
-      <div className="inputBoxes">
-        <input id="lastName" type="text" onChange={lastNameChangeHandler} required></input>
-        <span htmlFor='lastName'>Last name</span>
-      </div>
-
-      <div className="inputBoxes">
-        <input id="username" type="text" onChange={usernameChangeHandler} required></input>
-        <span htmlFor='username'>Username</span>
-      </div>
-
-      <div className='inputBoxes'>
-          <input id="email" type="text" onChange={emailChangeHandler} required></input>
-          <span>Email</span>
-          <p className="error">{emailError}</p>
-      </div>
-
-      <div className="inputBoxes">
-          <input id="password" type={passwordShow ? "text" : "password"} onChange={passwordChangeHandler} required></input>
-          <span>Password</span>
-          <p className="error">{passwordError}</p>
-          <p className="eyeIcon" onClick={togglePassword}><AiOutlineEye/></p>
-        </div>
-
-        <motion.button 
-                type="submit"
-                className="submitButtonRegister"
-                whileHover={{scale: 1.2}}
-                whileTap={{scale:0.9}}
-                >
-                    Register
-          </motion.button>
-
-          <p>Already have an account? <Link to="/login">Login</Link></p>
-    </form>
-</div>
-}
-
-
   return (
-    <>
-<ParticlesBackground />
 <section className='registerWrapper'>
-
-<div className='registerLeftSide'>
-  <div>
-      
-  </div>      
-</div>
+<ParticlesBackground />
 
 <div className='registerRightSide'>
     <h1>Register</h1>
+
   <form className='registerForm' onSubmit={onSubmits}>
 
       <div className="inputBoxes">
@@ -252,7 +198,6 @@ function Register(){
 
           <p>Already have an account? <Link to="/login">Login</Link></p>
   </div>
-</section>
-</>
+  </section>
   );
 }

@@ -123,7 +123,15 @@
       "lastName": "Dumitru",
       "username": "Mabis",
       "confirmPassword": "Dan888!",
-      "admin": true,
+      "id": 2
+    },
+    {
+      "email": "carla.grigorescu@yahoo.com",
+      "password": "$2a$10$KRblXae98bqfEwqlTVeZ2.HRUmH0OSuhW0PTseaOlsG9w9l3AFh2G",
+      "firstName": "Carla",
+      "lastName": "Grigorescu",
+      "username": "CarlaUnicorn",
+      "confirmPassword": "Carla789@",
       "id": 3
     }
   ],

@@ -10,8 +10,6 @@ export function ProductCardComponent(props) {
 
   const { title ,kg, currency,  price, image, description, id } = props
 
-
-
     const productDetailUrl = 'http://localhost:3001';
     const endpoint = "/product"
 
@@ -264,9 +262,8 @@ if(auth.user.admin){
         <p className="priceCurrencyP">{price} {currency}</p>
 
         <button  className="cardDivButton" onClick={createCart}>Add to cart</button>
-
     
-      <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
+        <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
 
       {
         auth.user.admin &&

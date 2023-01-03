@@ -15,6 +15,7 @@ import { CanNavigate } from './pages/auth/CanNavigate';
 import { Register } from './pages/auth/Register';
 import { ProfilePage } from './pages/auth/ProfilePage.js';
 import { ReviewPage } from './pages/reviewPage/ReviewPage';
+import { AdminPanelList } from './pages/adminPanel/AdminPanelList';
 
 export const AuthContext = React.createContext();
 
@@ -59,6 +60,12 @@ function App() {
               <ProfilePage /> 
             </CanNavigate>
               } ></Route>
+
+              <Route path = '/users' element={
+                <CanNavigate>
+                  <AdminPanelList />
+                </CanNavigate>
+              }></Route>
 
             <Route path = '/login' element={ <Login /> }></Route>
             <Route path = '/register' element= { <Register/> }></Route>

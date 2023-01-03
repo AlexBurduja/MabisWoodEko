@@ -199,9 +199,7 @@ export function Login(){
                     <p className="error">{passwordError}</p>
                     <p className="eyeIcon" onClick={togglePassword}><AiOutlineEye/></p>
                 </div>
-                
-                  <div>
-                </div>
+
                 <motion.button 
                 type="submit"
                 className="submitButtonLogin"
@@ -210,11 +208,11 @@ export function Login(){
                 >
                     Login
                 </motion.button>
-
               </form>
 
             <div>
-                Don't have an account? <Link to="/register">Register</Link>
+                
+                <p> Don't have an account? <Link to="/register">Register</Link> </p>
             </div>
             </div>
         </div>

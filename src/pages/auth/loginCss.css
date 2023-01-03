@@ -81,7 +81,7 @@
     gap: 20px;
 }
 
-.loginForm button {
+.submitButtonLogin {
     width: 100%;
     max-width: 350px;
 }

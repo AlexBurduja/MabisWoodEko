@@ -1,0 +1,62 @@
+.adminPanel{
+    display: flex;
+    flex-direction: column;
+}
+
+.userRow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+.userRowRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.userRowRow svg{
+    width: 35px;
+    height: 30px;
+}
+
+.userRowRow button {
+    border-radius: 50%;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.userPageHeader{
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userPasswordDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.userPasswordEyeIcon{
+    position: absolute;
+    right: 90px;
+    bottom: -3px;
+}
+
+.userModalContent{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}

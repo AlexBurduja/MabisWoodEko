@@ -154,6 +154,7 @@ function validatePassword(password) {
 <ParticlesBackground />
 
 <div className='registerRightSide'>
+    
     <h1>Register</h1>
 
   <form className='registerForm' onSubmit={onSubmits}>
@@ -191,12 +192,13 @@ function validatePassword(password) {
                 className="submitButtonRegister"
                 whileHover={{scale: 1.1}}
                 whileTap={{scale:0.9}} >
-                    Register
+                    Register  
           </motion.button>
 
     </form>
 
-          <p>Already have an account? <Link to="/login">Login</Link></p>
+      
+          <p className='alreadyLoginP' >Already have an account? <Link to="/login">Login</Link></p>
   </div>
   </section>
   );

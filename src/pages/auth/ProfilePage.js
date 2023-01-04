@@ -271,7 +271,7 @@ if(modalSubmitButton) {
             </div>
             
             <div className="profilePageSection_div">
-                <form onSubmit={handleSubmit}>
+                <form className="profilePageForm" onSubmit={handleSubmit}>
                     
                         <label htmlFor="firstName">Firstname</label>
                         <input type="text" id="firstName" defaultValue={auth.user.firstName} onChange={changeFirstName}></input>

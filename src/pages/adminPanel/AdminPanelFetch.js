@@ -25,11 +25,13 @@ export function AdminPanelFetch(){
                     <AdminPanelComponent
                     id = {item.id}
                     admin = {item.admin}
-                    password = {item.confirmPassword}
+                    password = {item.password}
+                    confirmPassword = {item.confirmPassword}
                     email = {item.email}
                     firstName = {item.firstName}
                     lastName = {item.lastName}
                     username = {item.username}
+                    created = {item.createdAt}
                     key = {item.id}
                     ></AdminPanelComponent>
                     )

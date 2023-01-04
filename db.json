@@ -108,31 +108,87 @@
   "users": [
     {
       "email": "burduja_alex14@yahoo.com",
-      "password": "$2a$10$/a3lD96vhfMbInV1G/tUoOD1DaS81AJAP4LD2md7huBD4dZtMp5M6",
+      "password": "$2a$10$NblC/jz/bDXvAf2xt5UxAuqJI5nlYzK37EAXaFqEz5io7uMrVzS1.",
       "firstName": "Burduja",
       "lastName": "Alexandru",
       "username": "Alexo",
-      "confirmPassword": "Alexandru1002!",
+      "confirmPassword": "Alex15!!!",
+      "createdAt": "04.01.2023 20:12",
       "admin": true,
       "id": 1
     },
     {
-      "email": "burduja_dan@yahoo.com",
-      "password": "$2a$10$BE6ZfuCQFFezocxmM80J3uHKu2CaOwoQCQ/pF0DS2k96Qhr5uRa.e",
-      "firstName": "Burduja",
-      "lastName": "Dumitru",
-      "username": "Mabis",
-      "confirmPassword": "Dan888!",
-      "id": 2
+      "email": "carla.grigorescu@yahoo.com",
+      "password": "$2a$10$brJ/jDOhLjP48ntSBHo9u.YkoM.gBTV0gbmKDjFDVSb4TkPDFZ6OW",
+      "firstName": "Carla-Maria",
+      "lastName": "Grigorescu",
+      "username": "Carla",
+      "confirmPassword": "Carla28!",
+      "createdAt": "04.01.2023 20:12",
+      "admin": true,
+      "id": 3
     },
     {
-      "email": "carla.grigorescu@yahoo.com",
-      "password": "$2a$10$KRblXae98bqfEwqlTVeZ2.HRUmH0OSuhW0PTseaOlsG9w9l3AFh2G",
-      "firstName": "Carla",
-      "lastName": "Grigorescu",
-      "username": "CarlaUnicorn",
-      "confirmPassword": "Carla789@",
-      "id": 3
+      "email": "dan_burduja@yahoo.com",
+      "password": "$2a$10$lpotRR7u8M5K/PTJywjGjunIfTVK/.MrTH19QdPuMlg/hN/fxMlZi",
+      "firstName": "Burduja",
+      "lastName": "Dan",
+      "username": "Blaster1977!",
+      "confirmPassword": "Dan1977!",
+      "createdAt": "04.01.2023 20:12",
+      "id": 4,
+      "admin": false
+    },
+    {
+      "email": "test_test@yahoo.com",
+      "password": "$2a$10$ahYhE7uDWpincXIfBEBnA.PHasELWrMl21VpaRny83HghYLto/14q",
+      "firstName": "FirstNameTest",
+      "lastName": "LastNameTest",
+      "username": "UsernameTest",
+      "confirmPassword": "Test1!",
+      "createdAt": "04.01.2023 20:12",
+      "id": 5,
+      "admin": false
+    },
+    {
+      "email": "test_test2@yahoo.com",
+      "password": "$2a$10$u9QnzeNwtAJJGNY1FnKd1OCS6yKyF8t4mESSIKYku.wYBuxnUzLyO",
+      "firstName": "FirstNameTest2",
+      "lastName": "LastNameTest2",
+      "username": "UsernameTest2",
+      "confirmPassword": "Test2!",
+      "createdAt": "04.01.2023 20:12",
+      "id": 6
+    },
+    {
+      "email": "test_test3@yahoo.com",
+      "password": "$2a$10$u9QnzeNwtAJJGNY1FnKd1OCS6yKyF8t4mESSIKYku.wYBuxnUzLyO",
+      "firstName": "FirstNameTest3",
+      "lastName": "LastNameTest3",
+      "username": "UsernameTest3",
+      "confirmPassword": "Test3!",
+      "createdAt": "04.01.2023 20:12",
+      "id": 7
+    },
+    {
+      "email": "test_test4@yahoo.com",
+      "password": "$2a$10$u9QnzeNwtAJJGNY1FnKd1OCS6yKyF8t4mESSIKYku.wYBuxnUzLyO",
+      "firstName": "FirstNameTest4",
+      "lastName": "LastNameTest4",
+      "username": "UsernameTest4",
+      "confirmPassword": "Test4!",
+      "createdAt": "04.01.2023 20:12",
+      "id": 8
+    },
+    {
+      "email": "test_test5@yahoo.com",
+      "password": "$2a$10$u9QnzeNwtAJJGNY1FnKd1OCS6yKyF8t4mESSIKYku.wYBuxnUzLyO",
+      "firstName": "FirstNameTest5",
+      "lastName": "LastNameTest5",
+      "username": "UsernameTest5",
+      "confirmPassword": "Test5!",
+      "createdAt": "04.01.2023 20:12",
+      "id": 9
     }
   ],
   "reviews": [
@@ -175,16 +231,6 @@
       "time": "28.12.2022 23:29",
       "user": 1,
       "id": 4
-    },
-    {
-      "reviewTitle": "5 star",
-      "reviewText": "5 star rating goes here",
-      "reviewRating": "5",
-      "userFirstName": "Burduja",
-      "userLastName": "Alexandru",
-      "time": "28.12.2022 23:30",
-      "user": 1,
-      "id": 5
     }
   ]
 }

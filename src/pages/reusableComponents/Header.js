@@ -29,6 +29,7 @@ export function Header() {
         <NavLink className={activeClass} to='/e'>About</NavLink>
         <NavLink className={activeClass} to='/reviews'>Reviews</NavLink>
         <NavLink className={activeClass} to='/contact'>Contact</NavLink>
+        <NavLink className={activeClass} to='/users'>Panel</NavLink>
         </div>
     </div>
 

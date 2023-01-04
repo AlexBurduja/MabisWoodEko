@@ -29,6 +29,19 @@ export function Register() {
 
   const navigate = useNavigate();
 
+  const now = new Date();
+  let minutes = now.getMinutes()
+
+  minutes = minutes.toString().padStart(2, '0')
+
+  let date = now.getDate()
+  
+  date = date.toString().padStart(2, '0')
+
+  let month = now.getMonth() + 1
+
+  month = month.toString().padStart(2, '0')
+
   function onSubmits(event) {
     event.preventDefault();
     setEmailError('');
@@ -48,7 +61,8 @@ export function Register() {
       username : username,
       email : email,
       password : password,
-      confirmPassword : password
+      confirmPassword : password ,
+      createdAt: `${date}.${month}.${now.getFullYear()} ${now.getHours()}:${minutes}`
     };
 
     fetch("http://localhost:3001/register", {
@@ -63,6 +77,7 @@ export function Register() {
     
       navigate("/login")
   }
+
 
   function passwordChangeHandler(event){
     setPassword(event.target.value)

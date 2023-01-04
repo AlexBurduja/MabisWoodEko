@@ -125,7 +125,7 @@
       "username": "Carla",
       "confirmPassword": "Carla28!!",
       "createdAt": "04.01.2023 20:12",
-      "admin": false,
+      "admin" : true,
       "id": 3
     },
     {
@@ -231,6 +231,16 @@
       "time": "28.12.2022 23:29",
       "user": 1,
       "id": 4
+    },
+    {
+      "reviewTitle": "5 star",
+      "reviewText": "5 star rating goes here",
+      "reviewRating": "5",
+      "userFirstName": "Carla-Maria",
+      "userLastName": "Grigorescu",
+      "time": "4.1.2023 21:12",
+      "user": 3,
+      "id": 5
     }
   ]
 }

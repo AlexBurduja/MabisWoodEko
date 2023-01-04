@@ -119,13 +119,13 @@
     },
     {
       "email": "carla.grigorescu@yahoo.com",
-      "password": "$2a$10$brJ/jDOhLjP48ntSBHo9u.YkoM.gBTV0gbmKDjFDVSb4TkPDFZ6OW",
+      "password": "$2a$10$hZRiWlGDQlEXTvQqHE01FugVar9FZf/H8m33q3Tirio/T2vgXF/jW",
       "firstName": "Carla-Maria",
       "lastName": "Grigorescu",
       "username": "Carla",
-      "confirmPassword": "Carla28!",
+      "confirmPassword": "Carla28!!",
       "createdAt": "04.01.2023 20:12",
-      "admin": true,
+      "admin": false,
       "id": 3
     },
     {

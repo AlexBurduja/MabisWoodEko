@@ -108,11 +108,11 @@
   "users": [
     {
       "email": "burduja_alex14@yahoo.com",
-      "password": "$2a$10$NblC/jz/bDXvAf2xt5UxAuqJI5nlYzK37EAXaFqEz5io7uMrVzS1.",
+      "password": "$2a$10$RdTjiB8cEldri1zlG2FXl.SyciyPLyoZCsx0lYdmgLW0DMy3..UBq",
       "firstName": "Burduja",
       "lastName": "Alexandru",
       "username": "Alexo",
-      "confirmPassword": "Alex15!!!",
+      "confirmPassword": "Alex15!",
       "createdAt": "04.01.2023 20:12",
       "admin": true,
       "id": 1
@@ -125,7 +125,7 @@
       "username": "Carla",
       "confirmPassword": "Carla28!!",
       "createdAt": "04.01.2023 20:12",
-      "admin" : true,
+      "admin": true,
       "id": 3
     },
     {

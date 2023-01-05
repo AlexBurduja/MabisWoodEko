@@ -9,20 +9,19 @@
     z-index: 10000;
 }
 
-.userRow {
-    width: 70%;
-    margin-left: 15%;
-
+.userRow{
+    position: relative;
+    gap: 10px;
 }
 
 .userRowRow{
     display: flex;
+    gap: 15px;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    font-size: 2vw;
-    width: 100%;
 }
+
+
 
 .userRowRow svg{
     width: 35px;
@@ -172,5 +171,8 @@
 @media (max-width: 820px) {
     .userRowRow {
         font-size: 5vw;
+        justify-content: flex-start;
+        width: 90%;
+        margin-left: 5%;
     }   
 }

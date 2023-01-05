@@ -1,0 +1,87 @@
+Date : 2023-01-05 17:20:22
+Directory : c:\Users\admin\Desktop\pelets\src
+Total : 50 files,  1147 codes, -6 comments, 195 blanks, all 1336 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         31 |        595 |         -1 |        109 |        703 |
+| CSS        |         17 |        442 |         -5 |         78 |        515 |
+| XML        |          2 |        110 |          0 |          8 |        118 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                             | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                |         50 |      1,147 |         -6 |        195 |      1,336 |
+| pages                                                                            |         44 |      1,035 |         -4 |        189 |      1,220 |
+| pages\adminPanel                                                                 |          4 |        498 |          0 |         97 |        595 |
+| pages\auth                                                                       |          6 |        102 |         -1 |         17 |        118 |
+| pages\cartPage                                                                   |          6 |          0 |          7 |         -5 |          2 |
+| pages\contactPage                                                                |          3 |         10 |          0 |          5 |         15 |
+| pages\homePage                                                                   |          9 |       -269 |        -17 |        -68 |       -354 |
+| pages\productPage                                                                |          2 |          5 |          0 |          0 |          5 |
+| pages\reusableComponents                                                         |         10 |        646 |          7 |        136 |        789 |
+| pages\reviewPage                                                                 |          4 |         43 |          0 |          7 |         50 |
+| particlesJS                                                                      |          1 |          4 |          0 |         -1 |          3 |
+| publicResources                                                                  |          2 |        110 |          0 |          8 |        118 |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                         | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\admin\Desktop\pelets\src\App.js                                         | JavaScript |          5 |          0 |          2 |          7 |
+| c:\Users\admin\Desktop\pelets\src\Particle.js                                    | JavaScript |         -9 |          0 |         -3 |        -12 |
+| c:\Users\admin\Desktop\pelets\src\index.js                                       | JavaScript |          2 |         -2 |          0 |          0 |
+| c:\Users\admin\Desktop\pelets\src\pages\adminPanel\AdminPanelComponent.css       | CSS        |        151 |          0 |         27 |        178 |
+| c:\Users\admin\Desktop\pelets\src\pages\adminPanel\AdminPanelComponent.js        | JavaScript |        291 |          0 |         61 |        352 |
+| c:\Users\admin\Desktop\pelets\src\pages\adminPanel\AdminPanelFetch.js            | JavaScript |         37 |          0 |          5 |         42 |
+| c:\Users\admin\Desktop\pelets\src\pages\adminPanel\AdminPanelList.js             | JavaScript |         19 |          0 |          4 |         23 |
+| c:\Users\admin\Desktop\pelets\src\pages\auth\Login.js                            | JavaScript |         12 |          0 |          0 |         12 |
+| c:\Users\admin\Desktop\pelets\src\pages\auth\ProfilePage.css                     | CSS        |         36 |         -1 |          6 |         41 |
+| c:\Users\admin\Desktop\pelets\src\pages\auth\ProfilePage.js                      | JavaScript |         49 |          0 |          3 |         52 |
+| c:\Users\admin\Desktop\pelets\src\pages\auth\Register.css                        | CSS        |         21 |          0 |          4 |         25 |
+| c:\Users\admin\Desktop\pelets\src\pages\auth\Register.js                         | JavaScript |        -29 |          0 |          3 |        -26 |
+| c:\Users\admin\Desktop\pelets\src\pages\auth\loginCss.css                        | CSS        |         13 |          0 |          1 |         14 |
+| c:\Users\admin\Desktop\pelets\src\pages\cartPage\CartPage.js                     | JavaScript |          6 |          0 |          0 |          6 |
+| c:\Users\admin\Desktop\pelets\src\pages\cartPage\ShoppingCart.css                | CSS        |         18 |          0 |          1 |         19 |
+| c:\Users\admin\Desktop\pelets\src\pages\cartPage\ShoppingCart.js                 | JavaScript |          1 |          0 |         -2 |         -1 |
+| c:\Users\admin\Desktop\pelets\src\pages\cartPage\ShoppingCartPage.css            | CSS        |          0 |          7 |          2 |          9 |
+| c:\Users\admin\Desktop\pelets\src\pages\cartPage\ShoppingCartPage.js             | JavaScript |          0 |          0 |         -1 |         -1 |
+| c:\Users\admin\Desktop\pelets\src\pages\cartPage\ShoppingCartProps.js            | JavaScript |        -25 |          0 |         -5 |        -30 |
+| c:\Users\admin\Desktop\pelets\src\pages\contactPage\ContactForm.css              | CSS        |          2 |          0 |          3 |          5 |
+| c:\Users\admin\Desktop\pelets\src\pages\contactPage\ContactForm.js               | JavaScript |          4 |          0 |          2 |          6 |
+| c:\Users\admin\Desktop\pelets\src\pages\contactPage\ContactPage.js               | JavaScript |          4 |          0 |          0 |          4 |
+| c:\Users\admin\Desktop\pelets\src\pages\homePage\CreateProduct.js                | JavaScript |         23 |          0 |          4 |         27 |
+| c:\Users\admin\Desktop\pelets\src\pages\homePage\CssHeader.css                   | CSS        |       -234 |         -4 |        -41 |       -279 |
+| c:\Users\admin\Desktop\pelets\src\pages\homePage\Header.js                       | JavaScript |        -60 |         -1 |        -16 |        -77 |
+| c:\Users\admin\Desktop\pelets\src\pages\homePage\Homepage.js                     | JavaScript |          6 |          0 |          0 |          6 |
+| c:\Users\admin\Desktop\pelets\src\pages\homePage\PreFooter.css                   | CSS        |        -51 |          0 |         -9 |        -60 |
+| c:\Users\admin\Desktop\pelets\src\pages\homePage\PreFooter.js                    | JavaScript |        -30 |          0 |         -8 |        -38 |
+| c:\Users\admin\Desktop\pelets\src\pages\homePage\ProductCardComponent.css        | CSS        |         22 |        -12 |          3 |         13 |
+| c:\Users\admin\Desktop\pelets\src\pages\homePage\ProductCardComponent.js         | JavaScript |         48 |          0 |         -1 |         47 |
+| c:\Users\admin\Desktop\pelets\src\pages\homePage\ProductCardComponentModal.css   | CSS        |          7 |          0 |          0 |          7 |
+| c:\Users\admin\Desktop\pelets\src\pages\productPage\ProductPage.js               | JavaScript |          4 |          0 |          0 |          4 |
+| c:\Users\admin\Desktop\pelets\src\pages\productPage\SingleProductPage.js         | JavaScript |          1 |          0 |          0 |          1 |
+| c:\Users\admin\Desktop\pelets\src\pages\reusableComponents\BackToTop.css         | CSS        |         46 |          1 |          8 |         55 |
+| c:\Users\admin\Desktop\pelets\src\pages\reusableComponents\BackToTop.js          | JavaScript |         54 |          1 |         18 |         73 |
+| c:\Users\admin\Desktop\pelets\src\pages\reusableComponents\CssHeader.css         | CSS        |        245 |          4 |         45 |        294 |
+| c:\Users\admin\Desktop\pelets\src\pages\reusableComponents\Footer.css            | CSS        |         67 |          0 |         14 |         81 |
+| c:\Users\admin\Desktop\pelets\src\pages\reusableComponents\Footer.js             | JavaScript |         45 |          0 |          8 |         53 |
+| c:\Users\admin\Desktop\pelets\src\pages\reusableComponents\Header.js             | JavaScript |         64 |          1 |         16 |         81 |
+| c:\Users\admin\Desktop\pelets\src\pages\reusableComponents\PreFooter.css         | CSS        |         55 |          0 |          9 |         64 |
+| c:\Users\admin\Desktop\pelets\src\pages\reusableComponents\PreFooter.js          | JavaScript |         30 |          0 |          8 |         38 |
+| c:\Users\admin\Desktop\pelets\src\pages\reusableComponents\TopScrollProgress.js  | JavaScript |         22 |          0 |          8 |         30 |
+| c:\Users\admin\Desktop\pelets\src\pages\reusableComponents\topScrollProgress.css | CSS        |         18 |          0 |          2 |         20 |
+| c:\Users\admin\Desktop\pelets\src\pages\reviewPage\ReviewPage.js                 | JavaScript |          6 |          0 |          0 |          6 |
+| c:\Users\admin\Desktop\pelets\src\pages\reviewPage\ReviewPageComponent.css       | CSS        |         26 |          0 |          3 |         29 |
+| c:\Users\admin\Desktop\pelets\src\pages\reviewPage\ReviewPageComponent.js        | JavaScript |        -17 |          0 |         -2 |        -19 |
+| c:\Users\admin\Desktop\pelets\src\pages\reviewPage\Reviewpagesomething.js        | JavaScript |         28 |          0 |          6 |         34 |
+| c:\Users\admin\Desktop\pelets\src\particlesJS\particleJsComponent.js             | JavaScript |          4 |          0 |         -1 |          3 |
+| c:\Users\admin\Desktop\pelets\src\publicResources\logoMabis.svg                  | XML        |        109 |          0 |          8 |        117 |
+| c:\Users\admin\Desktop\pelets\src\publicResources\logoMabisOg.svg                | XML        |          1 |          0 |          0 |          1 |
+| Total                                                                            |            |      1,147 |         -6 |        195 |      1,336 |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

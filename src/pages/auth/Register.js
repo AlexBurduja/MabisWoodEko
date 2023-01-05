@@ -62,7 +62,8 @@ export function Register() {
       email : email,
       password : password,
       confirmPassword : password ,
-      createdAt: `${date}.${month}.${now.getFullYear()} ${now.getHours()}:${minutes}`
+      createdAt: `${date}.${month}.${now.getFullYear()} ${now.getHours()}:${minutes}`,
+      admin : false
     };
 
     fetch("http://localhost:3001/register", {

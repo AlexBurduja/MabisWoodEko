@@ -65,6 +65,9 @@ export function Header() {
           <li className="item"> <NavLink className={activeClassHamburger} to='/about'>About</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>Contact</NavLink> </li>
+          {auth.user.admin === true && (
+            <li className='item'><NavLink className={activeClassHamburger} to='/users'>Panel</NavLink> </li>
+          )}
           <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{auth.user.username}'s Profile</NavLink> </li>
           <li className="item mobileCart"> <ShoppingCart/> </li>
           <button className='logoutButtonHamburger' onClick={logOut}>Log Out</button>

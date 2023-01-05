@@ -136,17 +136,37 @@ form label{
     font-size: 40px;
 }
 
+.deleteMessage{
+    color: red;
+    position: fixed;
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 40px;
+}
+
 @media (max-width:1000px){
     .profilePageSection{
         flex-direction: column;
     }
 
     .profilePageSection_divL{
-        width: 80%;
+        width: 70%;
+        min-width: 300px;
     }
 
     .profilePageSection_divL p{
         font-size: 3.5vw;
+    }
+
+    .succesMessage{
+        background-color: rgb(199, 199, 199);
+        z-index: 10;
+    }
+
+    .deleteMessage{
+        background-color: rgba(199, 199, 199, 1);
+        z-index: 10;
     }
 }
 

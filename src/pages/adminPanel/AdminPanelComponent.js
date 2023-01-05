@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AdminPanelComponent.css"
 import { GrContactInfo } from "react-icons/gr"
-import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineCloseCircle, AiOutlineEye } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function AdminPanelComponent(props) {
@@ -199,7 +199,7 @@ export function AdminPanelComponent(props) {
              className="modal">
                 <div onClick={toggleModal} className="overlay"></div>
                     <div className="modal-content ">
-                        <button onClick={toggleModal} className="modal-content-x">X</button>
+                        <AiOutlineCloseCircle onClick={toggleModal} className="modal-content-x"/>
                         <div className="userModalHeader">
                             <h1>{username}'s Account Info</h1>
                         </div>

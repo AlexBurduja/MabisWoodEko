@@ -93,6 +93,7 @@ export function ProfilePage() {
         setSucces("Succes!")
         setTimeout(() => {
           setSucces("")
+          navigate('/login')
         }, 1500);
       }
     })
@@ -207,7 +208,7 @@ function deleteAccount(event) {
     .then(response => {
       if(response.status === 200){
         setDeleteMessage('Account deleted...back to register!')
-
+        setModalDeleteButton(false)
         setTimeout(() => {
           setDeleteMessage('')
           navigate('/register')
@@ -254,6 +255,20 @@ if(modalSubmitButton) {
             className="succesMessage"
             >
               {succes}
+            </motion.div>
+        )}
+          </AnimatePresence>
+          
+          <AnimatePresence>
+        {deleteMessage && (
+            <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity:1}}
+            exit={{opacity:0}}
+            transition={{ease:"easeOut", duration: 0.5}}
+            className="deleteMessage"
+            >
+              {deleteMessage}
             </motion.div>
         )}
           </AnimatePresence>
@@ -341,21 +356,6 @@ if(modalSubmitButton) {
                     <div className="modal4_content_header">
                         <h1>Do you REALLY want to delete your account?</h1>
                         <h3>We will miss you if you do that!</h3>
-                    </div>
-
-                    <div>
-                      <AnimatePresence>
-                        {deleteMessage && (
-                          <motion.h1
-                          initial={{opacity:0}}
-                          animate={{opacity:1}}
-                          exit={{opacity:0}}
-                          transition={{ease : "easeIn", duration:1}}
-                          >
-                            {deleteMessage}
-                          </motion.h1>
-                        )}
-                      </AnimatePresence>
                     </div>
 
                   

@@ -125,19 +125,8 @@
       "username": "Carla",
       "confirmPassword": "Carla28!!",
       "createdAt": "04.01.2023 20:12",
-      "admin": true,
+      "admin": false,
       "id": 3
-    },
-    {
-      "email": "dan_burduja@yahoo.com",
-      "password": "$2a$10$lpotRR7u8M5K/PTJywjGjunIfTVK/.MrTH19QdPuMlg/hN/fxMlZi",
-      "firstName": "Burduja",
-      "lastName": "Dan",
-      "username": "Blaster1977!",
-      "confirmPassword": "Dan1977!",
-      "createdAt": "04.01.2023 20:12",
-      "id": 4,
-      "admin": false
     },
     {
       "email": "test_test@yahoo.com",
@@ -147,8 +136,8 @@
       "username": "UsernameTest",
       "confirmPassword": "Test1!",
       "createdAt": "04.01.2023 20:12",
-      "id": 5,
-      "admin": false
+      "admin": false,
+      "id": 5
     },
     {
       "email": "test_test2@yahoo.com",
@@ -158,6 +147,7 @@
       "username": "UsernameTest2",
       "confirmPassword": "Test2!",
       "createdAt": "04.01.2023 20:12",
+      "admin": false,
       "id": 6
     },
     {
@@ -168,6 +158,7 @@
       "username": "UsernameTest3",
       "confirmPassword": "Test3!",
       "createdAt": "04.01.2023 20:12",
+      "admin": false,
       "id": 7
     },
     {
@@ -178,6 +169,7 @@
       "username": "UsernameTest4",
       "confirmPassword": "Test4!",
       "createdAt": "04.01.2023 20:12",
+      "admin": false,
       "id": 8
     },
     {
@@ -188,7 +180,19 @@
       "username": "UsernameTest5",
       "confirmPassword": "Test5!",
       "createdAt": "04.01.2023 20:12",
+      "admin": false,
       "id": 9
+    },
+    {
+      "email": "dan_burduja@yahoo.com",
+      "password": "$2a$10$1hFqGcCAXo6B1pg3hL3PEuT1/ADB3HQDhpvPaGxzrJ7xjrrffCVje",
+      "firstName": "Dan",
+      "lastName": "Burduja",
+      "username": "Blaster",
+      "confirmPassword": "Blaster1977!",
+      "createdAt": "05.01.2023 14:59",
+      "admin": false,
+      "id": 10
     }
   ],
   "reviews": [

@@ -10,13 +10,13 @@ export function ShoppingCart() {
 
 const [products, setProducts] = useState([]);
 
-const { auth } = useContext(AuthContext)
+// const { auth } = useContext(AuthContext)
 
   ///Fetch Get RestApi
   useEffect(() => {
-    fetch(`http://localhost:3001/cart?user=${auth.user.id}` ,{
+    fetch(`http://localhost:3001/cart?user=` ,{
       headers : {
-        Authorization : `Bearer ${auth.accessToken}`
+        Authorization : ``
       }
     })
       .then((response) => response.json())
@@ -25,7 +25,7 @@ const { auth } = useContext(AuthContext)
 
         setProducts(cart.products)
       });
-    }, [auth.user.id, auth.accessToken])
+    }, [])
     
     const totalQ = products.reduce((acc,curr) => {
       return acc + curr.quantity

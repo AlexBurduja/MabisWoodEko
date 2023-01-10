@@ -11,7 +11,7 @@ export function ProductListComponent() {
   const endpoint = "/product";
   const [products, setProducts] = useState([]);
 
-  const { auth } = useContext(AuthContext)
+  // const { auth } = useContext(AuthContext)
 
   ///Fetch Get RestApi
   // useEffect(() => {

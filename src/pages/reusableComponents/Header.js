@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { CgProfile } from 'react-icons/cg'
 import { NavLink } from 'react-router-dom';
-import { AuthContext } from '../../App';
+// import { AuthContext } from '../../App';
 import logo from '../../publicResources/logoMabis.svg';
 import './CssHeader.css'
 import "../cartPage/ShoppingCart"
@@ -10,7 +10,7 @@ import { ShoppingCart } from '../cartPage/ShoppingCart';
 
 export function Header() {
 
-  const { auth, logOut } = useContext(AuthContext)
+  // const { auth, logOut } = useContext(AuthContext)
 
   const activeClass = ({isActive}) => isActive ? "activeClassNav" : {};
 
@@ -29,9 +29,9 @@ export function Header() {
         <NavLink className={activeClass} to='/e'>About</NavLink>
         <NavLink className={activeClass} to='/reviews'>Reviews</NavLink>
         <NavLink className={activeClass} to='/contact'>Contact</NavLink>
-        {auth.user.admin === true && (
+        
           <NavLink className={activeClass} to='/users'>Panel</NavLink>
-        )}
+        
         </div>
     </div>
 
@@ -45,9 +45,9 @@ export function Header() {
         </div>
 
         <div className='headerLoginText'>
-          <p>Hi, {auth?.user?.username}</p> 
+          <p>Hi, </p> 
           
-          <button className='logoutButtonHeader' onClick={logOut}>Log Out </button>
+          <button className='logoutButtonHeader' >Log Out </button>
         </div>
       </div>
 
@@ -65,12 +65,12 @@ export function Header() {
           <li className="item"> <NavLink className={activeClassHamburger} to='/about'>About</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>Contact</NavLink> </li>
-          {auth.user.admin === true && (
+          
             <li className='item'><NavLink className={activeClassHamburger} to='/users'>Panel</NavLink> </li>
-          )}
-          <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{auth.user.username}'s Profile</NavLink> </li>
+          
+          <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>'s Profile</NavLink> </li>
           <li className="item mobileCart"> <ShoppingCart/> </li>
-          <button className='logoutButtonHamburger' onClick={logOut}>Log Out</button>
+          <button className='logoutButtonHamburger' >Log Out</button>
         </ul>
       </nav>
 </div>  

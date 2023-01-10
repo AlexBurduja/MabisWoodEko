@@ -20,12 +20,10 @@ export function CreateProduct(){
 
   const [ succes, setSucces ] = useState('')
 
-  const {auth} = useContext(AuthContext)
 
   useEffect(() => {
     fetch(productDetailUrl + endpoint, {
       headers: {
-        Authorization : `Bearer ${auth.accessToken}`
       }
     })
     .then((response) => response.json())
@@ -73,12 +71,10 @@ export function CreateProduct(){
       description : description
     }
 
-    if(auth.user.admin){
       fetch(productDetailUrl + endpoint, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
-          Authorization : `Bearer ${auth.accessToken}`
         },
         body: JSON.stringify(body)
       })
@@ -94,7 +90,6 @@ export function CreateProduct(){
         }
       })
     }
-  }
 
   
   const [modal2, setModal2] = useState(false);
@@ -112,11 +107,9 @@ export function CreateProduct(){
   return (
     
     <>
-    {auth.user.admin &&
       <div className="createProductButtonWrapper">
         <button className="createProductButton" onClick={toggleModal2}>Create Product</button>
       </div>
-    }
 
       {modal2 && (
         <div className="modal">

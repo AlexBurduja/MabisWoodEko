@@ -59,35 +59,13 @@ export function RegisterFirebase() {
     }
   }
 
-  // getDoc(ref)
-  // .then((doc) => {
-  //   console.log(doc.admin)
-  // })
-
-  // async function getDocument(){
-  //   try {
-
-  //     const ref = doc(db, 'users', user.uid)
-  //     let document = await getDoc(ref)
-      
-  //     if(document.data().admin === true) {
-  //       console.log(true)
-  //       return true
-  //     } else {
-  //       console.log(false)
-  //       return false
-  //     }
-
-  //   } catch (err) {
-  //     console.log(err.message)
-  //   }
-  // }
 
   const getDocument = async () => {
 
     const ref = doc(db, 'users', user.uid)
     let document = await getDoc(ref)
     
+    console.log(document.data().admin)
     return document.data().admin
   }
 
@@ -99,6 +77,9 @@ export function RegisterFirebase() {
 
   return (
     <>
+      {getDocument() === true && (
+        <p>Admin</p>
+      )} 
       <h1>Register</h1>
       <input placeholder='email' onChange={saveEmail}></input>
       <input placeholder='password' onChange={savePassword}></input>
@@ -106,9 +87,6 @@ export function RegisterFirebase() {
 
       <button onClick={register}>Create</button>
       
-      {getDocument() === true && (
-        <p>Admin</p>
-      )} 
     </>
   );
 }

@@ -24,12 +24,9 @@ function App() {
 
   return (
     <BrowserRouter>
-    {/* <AuthContextProvider> */}
         <Routes>
           <Route path="/" element={ 
-            // <CanNavigate> 
               <Homepage />
-            // </CanNavigate> 
         }></Route>
 
             <Route path='/cart' element={ 
@@ -61,7 +58,6 @@ function App() {
             {/* <Route path = '/login' element={ <Login /> }></Route> */}
             {/* <Route path = '/register' element= { <Register/> }></Route> */}
         </Routes>
-    {/* </AuthContextProvider> */}
       </BrowserRouter>
   )
 }

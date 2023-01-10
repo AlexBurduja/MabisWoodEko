@@ -4,6 +4,7 @@ import 'animate.css';
 import { AuthContext } from "../../App";
 import { AiFillEdit } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
+import { auth } from "../../firebase-config";
 /// Modal
 
 export function ProductCardComponent(props) {
@@ -50,12 +51,11 @@ export function ProductCardComponent(props) {
   const [ deleteSucces, setDeleteSucces ] = useState('')
   ///// End of Modal
 
-  const { auth } = useContext( AuthContext )
+  // const { auth } = useContext( AuthContext )
 
   useEffect(() => {
     fetch(productDetailUrl + endpoint + "/" + id, {
       headers: {
-        Authorization : `Bearer ${auth.accessToken}`
       }
     })
     .then((response) => response.json())
@@ -80,12 +80,10 @@ export function ProductCardComponent(props) {
       description: newDescription,
       image : newImage
     };
-if(auth.user.admin){
     fetch(productDetailUrl + endpoint + "/" + id ,{
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json',
-        Authorization : `Bearer ${auth.accessToken}`
       },
       body: JSON.stringify(body)
     } )
@@ -98,15 +96,12 @@ if(auth.user.admin){
         }, 1500 )
       }
     })
-  }
 }
   
   function deleteItem() {
-    if(auth.user.admin) {
       fetch (productDetailUrl + endpoint + "/" + id , {
         method: "DELETE",
         headers: {
-          Authorization : `Bearer ${auth.accessToken}`
         }
       })
       .then(response => {
@@ -118,7 +113,7 @@ if(auth.user.admin){
           }, 1500)
         }
       })
-    }
+    
   }
 
     function titleChange(event){
@@ -205,7 +200,6 @@ if(auth.user.admin){
         body: JSON.stringify({ products }),
         headers: {
           'Content-Type': 'application/json',
-          Authorization : `Bearer ${auth.accessToken}`
         }
       });
     }
@@ -226,11 +220,10 @@ if(auth.user.admin){
           quantity: 1
         }
       ],
-    user : auth.user.id}),
+    user : "userid"}),
 
         headers: {
           'Content-Type': 'application/json',
-          Authorization : `Bearer ${auth.accessToken}`
         }
       });
     }
@@ -265,10 +258,8 @@ if(auth.user.admin){
     
         <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
 
-      {
-        auth.user.admin &&
         <button onClick={toggleModal} className="edit-btn">< AiFillEdit /></button>
-      }
+      
     </div>
 
         {modal && (

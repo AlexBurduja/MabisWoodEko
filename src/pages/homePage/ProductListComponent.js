@@ -1,5 +1,7 @@
+import { collection, getDocs } from 'firebase/firestore';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../App';
+import { db } from '../../firebase-config';
 import { ProductCardComponent } from "./ProductCardComponent";
 import "./ProductCardComponentModal.css"
 
@@ -12,37 +14,28 @@ export function ProductListComponent() {
   const { auth } = useContext(AuthContext)
 
   ///Fetch Get RestApi
-  useEffect(() => {
-    fetch(url + endpoint, {
-      headers: {
-        Authorization : `Bearer ${auth.accessToken}`
-      }
-    })
-      .then((response) => response.json())
-      .then((productsFromServer) => setProducts(productsFromServer));
-  }, []);
+  // useEffect(() => {
+  //   fetch(url + endpoint, {
+  //     headers: {
+  //       Authorization : `Bearer ${auth.accessToken}`
+  //     }
+  //   })
+  //     .then((response) => response.json())
+  //     .then((productsFromServer) => setProducts(productsFromServer));
+  // }, []);
 
   
-  // Fetch Get FirebaseApi
-  // useEffect(() => {
-    //   fetch('https://pelets-project-default-rtdb.europe-west1.firebasedatabase.app/product.json')
-    //     .then((response) => response.json())
-    //     .then((productsFromServer) => setProducts(productsFromServer))
-    // }, []);
-    
-    /// Get
-    // const [products, setProducts] = useState([])
-    // const productCollection = collection(db, "products")
+  const ref = collection(db , 'products')
 
-    // useEffect(() => {
-    //   const getProducts = async () => {
-    //     const data = await getDocs(productCollection);
-    //     setProducts(data.docs.map((doc) =>({...doc.data(), id: doc.id})))
-    //   };
-    //   getProducts();
-    // }, [productCollection])
+useEffect(() => {
+  const getProducts = async () => {
+    const data = await getDocs(ref)
 
-  ///Get ends
+    setProducts(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+  }
+
+  getProducts();
+})
   
   
   return (

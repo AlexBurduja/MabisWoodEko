@@ -24,56 +24,44 @@ function App() {
 
   return (
     <BrowserRouter>
-    <AuthContextProvider>
+    {/* <AuthContextProvider> */}
         <Routes>
           <Route path="/" element={ 
-            <CanNavigate> 
+            // <CanNavigate> 
               <Homepage />
-            </CanNavigate> 
+            // </CanNavigate> 
         }></Route>
 
             <Route path='/cart' element={ 
-            <CanNavigate>
               <CartPage />
-            </CanNavigate>
             }></Route>
 
             <Route path='/products/:id' element={ 
-            <CanNavigate>
               <ProductPage /> 
-            </CanNavigate>
             }></Route>
 
             <Route path='/contact' element={ 
-            <CanNavigate>
               <ContactPage />
-            </CanNavigate>
             }></Route>
 
             <Route path='/reviews' element={ 
-            <CanNavigate>
               <ReviewPage />
-            </CanNavigate>
             }></Route>
 
             <Route path = '/profile' element={ 
-            <CanNavigate> 
               <ProfilePage /> 
-            </CanNavigate>
               } ></Route>
 
               <Route path = '/users' element={
-                <CanNavigate>
                   <AdminPanelList />
-                </CanNavigate>
               }></Route>
 
             <Route path = '/loginfirebase' element={ <Login /> }></Route>
             <Route path = '/registerfirebase' element= { <RegisterFirebase/> }></Route>
-            <Route path = '/login' element={ <Login /> }></Route>
-            <Route path = '/register' element= { <Register/> }></Route>
+            {/* <Route path = '/login' element={ <Login /> }></Route> */}
+            {/* <Route path = '/register' element= { <Register/> }></Route> */}
         </Routes>
-    </AuthContextProvider>
+    {/* </AuthContextProvider> */}
       </BrowserRouter>
   )
 }

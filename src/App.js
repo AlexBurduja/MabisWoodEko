@@ -16,6 +16,7 @@ import { Register } from './pages/auth/Register';
 import { ProfilePage } from './pages/auth/ProfilePage.js';
 import { ReviewPage } from './pages/reviewPage/ReviewPage';
 import { AdminPanelList } from './pages/adminPanel/AdminPanelList';
+import { RegisterFirebase } from './RegisterFirebase';
 
 export const AuthContext = React.createContext();
 
@@ -67,6 +68,8 @@ function App() {
                 </CanNavigate>
               }></Route>
 
+            <Route path = '/loginfirebase' element={ <Login /> }></Route>
+            <Route path = '/registerfirebase' element= { <RegisterFirebase/> }></Route>
             <Route path = '/login' element={ <Login /> }></Route>
             <Route path = '/register' element= { <Register/> }></Route>
         </Routes>
@@ -76,4 +79,5 @@ function App() {
 }
 
 export default App;
+
 

@@ -1,17 +1,27 @@
+
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "@firebase/firestore"
+import { getAnalytics } from "firebase/analytics";
+import { doc, getFirestore, setDoc } from "firebase/firestore"
+import { getAuth } from 'firebase/auth'
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDrG_dP9VS7vkBr22Q8l82eILTSjG0QJt0",
-  authDomain: "pelets-project.firebaseapp.com",
-  projectId: "pelets-project",
-  storageBucket: "pelets-project.appspot.com",
-  messagingSenderId: "650608095749",
-  appId: "1:650608095749:web:7d0ff21a6cb279ebb4626c"
+  apiKey: "AIzaSyD7kIw_bWAATFikBPWn-6a7QVvkUFsIEvs",
+  authDomain: "pelets-af6eb.firebaseapp.com",
+  projectId: "pelets-af6eb",
+  storageBucket: "pelets-af6eb.appspot.com",
+  messagingSenderId: "26453888497",
+  appId: "1:26453888497:web:e51f0ff4fd31286f81c850",
+  measurementId: "G-8GML1KJM4Q"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-export const db = getFirestore(app);
+const analytics = getAnalytics(app);
+export const db = getFirestore(app)
+export const auth = getAuth(app)
 

@@ -212,8 +212,6 @@ function validatePassword(password) {
           </motion.button>
 
     </form>
-
-      
           <p className='alreadyLoginP' >Already have an account? <Link to="/login">Login</Link></p>
   </div>
   </section>

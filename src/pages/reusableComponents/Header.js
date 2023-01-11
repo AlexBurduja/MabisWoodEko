@@ -7,14 +7,42 @@ import logo from '../../publicResources/logoMabis.svg';
 import './CssHeader.css'
 import "../cartPage/ShoppingCart"
 import { ShoppingCart } from '../cartPage/ShoppingCart';
+import { useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db } from '../../firebase-config';
+import { doc, getDoc } from 'firebase/firestore';
 
 export function Header() {
 
-  // const { auth, logOut } = useContext(AuthContext)
+  const [user , setUser] = useState({})
+  const [conditional , setConditional ] = useState(false)
+  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user)
+    }
+  })
+
+  const getDocument = async () => {
+
+    const ref = doc(db, 'users', user.uid)
+    let document = await getDoc(ref)
+
+    return document.data().admin
+  }
+
+  getDocument()
+  .then(data => {
+    setConditional(data)
+  })
+
 
   const activeClass = ({isActive}) => isActive ? "activeClassNav" : {};
 
   const activeClassHamburger = ({isActiveHamburger}) => isActiveHamburger ? "activeClassHamburger" : "link";
+
+
+  console.log(auth.currentUser)
 
   return (
     <section id="home" className='flex'>
@@ -29,8 +57,9 @@ export function Header() {
         <NavLink className={activeClass} to='/e'>About</NavLink>
         <NavLink className={activeClass} to='/reviews'>Reviews</NavLink>
         <NavLink className={activeClass} to='/contact'>Contact</NavLink>
-        
+        {conditional === true && (
           <NavLink className={activeClass} to='/users'>Panel</NavLink>
+        )}
         
         </div>
     </div>
@@ -65,8 +94,9 @@ export function Header() {
           <li className="item"> <NavLink className={activeClassHamburger} to='/about'>About</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>Contact</NavLink> </li>
-          
+          {conditional && (
             <li className='item'><NavLink className={activeClassHamburger} to='/users'>Panel</NavLink> </li>
+          )}
           
           <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>'s Profile</NavLink> </li>
           <li className="item mobileCart"> <ShoppingCart/> </li>

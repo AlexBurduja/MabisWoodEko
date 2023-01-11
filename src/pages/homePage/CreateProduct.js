@@ -1,17 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import "./CreateProduct.css"
 import 'animate.css';
-import { AuthContext } from "../../App";
 import { motion, AnimatePresence } from "framer-motion";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase-config";
+import { doc, setDoc } from "firebase/firestore";
+import { db, storage } from "../../firebase-config";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 
 export function CreateProduct(){
 
-
-  const productDetailUrl = 'http://localhost:3001';
-  const endpoint = "/product";
 
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
@@ -79,6 +76,34 @@ export function CreateProduct(){
   //     })
   //   }
 
+  const [ firebaseImg, setFirebaseImg ] = useState(null)
+  const [ url , setUrl] = useState(null)
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]){
+      setFirebaseImg(e.target.files[0])
+    }
+  }
+
+  const handleSubmit = () => {
+    const imageRef = ref(storage, firebaseImg.name);
+    uploadBytes(imageRef, firebaseImg)
+        .then(() => {
+      getDownloadURL(imageRef)
+        .then((url) => {
+          setUrl(url)
+          console.log(url)
+      })
+        .catch((error) => {
+          console.log(error.message, "Error uploading")
+      })
+      setFirebaseImg(null)
+    })
+      .catch((error) => {
+        console.log(error.message)
+    })
+  };
+
 
   function submit(event) {
     event.preventDefault()
@@ -89,7 +114,7 @@ export function CreateProduct(){
       kg:kg,
       price:price,
       currency:currency,
-      image: image,
+      image: url,
       description : description
       })
     } catch (error) {
@@ -119,7 +144,7 @@ export function CreateProduct(){
       {modal2 && (
         <div className="modal">
           <div onClick={toggleModal2} className="overlay"></div>
-            <div className="modal-content ">
+            <div className="modal-content modal2">
               <h1 >Create product.</h1>
               <p className="modal-content_p">All fields need to be completed.</p>
 
@@ -168,6 +193,12 @@ export function CreateProduct(){
                       <label htmlFor="image">Image :</label>
                       <input type="url" onChange={imageChange} id="image" required></input>
                     </div>
+
+                    <div className="modal-content-inputs_div">
+                      <input type="file" onChange={handleImageChange}></input>
+                      <button onClick={handleSubmit}>Upload Image</button>
+                    </div>
+
 
                 </div>
 

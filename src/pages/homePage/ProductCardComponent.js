@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import "./ProductCardComponent.css"
 import 'animate.css';
-import { AuthContext } from "../../App";
 import { AiFillEdit } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth, db } from "../../firebase-config";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { storage } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { onAuthStateChanged } from "firebase/auth";
 
 /// Modal
 
@@ -15,9 +15,29 @@ export function ProductCardComponent(props) {
 
   const { title ,kg, currency,  price, image, description, id } = props
 
-    const productDetailUrl = 'http://localhost:3001';
-    const endpoint = "/product"
+  const [user , setUser] = useState({})
+  const [conditional , setConditional ] = useState(false)
+  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user)
+    }
+  })
 
+  const getDocument = async () => {
+
+    const ref = doc(db, 'users', user.uid)
+    let document = await getDoc(ref)
+
+    return document.data().admin
+  }
+
+  getDocument()
+  .then(data => {
+    setConditional(data)
+  })
+
+  
 
   const [modal, setModal] = useState(false);
 
@@ -48,8 +68,6 @@ export function ProductCardComponent(props) {
   const [newKg, setKg] = useState(kg)
   const [newImage, setImage] = useState(image)
 
-  const [ imageUpload, setImageUpload ] = useState(null)
-
   const [newDescription, setDescription] = useState(description)
 
   const [succes, setSucces] = useState('')
@@ -75,8 +93,9 @@ export function ProductCardComponent(props) {
   // }, [id])
 
   const [ firebaseImg, setFirebaseImg] = useState(null)
-  const [url, setUrl] = useState(null)
+  const [url, setUrl] = useState(image)
 
+  
 
   const handleImageChange = (e) => {
     if (e.target.files[0]){
@@ -85,7 +104,7 @@ export function ProductCardComponent(props) {
   }
 
   const handleSubmit = () => {
-    const imageRef = ref(storage, "image");
+    const imageRef = ref(storage, firebaseImg.name);
     uploadBytes(imageRef, firebaseImg)
         .then(() => {
       getDownloadURL(imageRef)
@@ -104,21 +123,24 @@ export function ProductCardComponent(props) {
   };
   
   const update = async () => {
-      const userDoc = doc(db, 'products', id)
-      const newFields = {
-        title : newTitle,
-        kg : newKg,
-        price : newPrice,
-        currency : newCurrency,
-        description: newDescription,
-        image : newImage
-      }
-      await updateDoc(userDoc, newFields)
+    const userDoc = doc(db, 'products', id)
+    
+    const newFields = {
+      title : newTitle,
+      kg : newKg,
+      price : newPrice,
+      currency : newCurrency,
+      description: newDescription,
+      image : url
+    }
+
+    await updateDoc(userDoc, newFields)
+      
     }
     
   
   function deleteItem() {
-      fetch (productDetailUrl + endpoint + "/" + id , {
+      fetch ("/" + id , {
         method: "DELETE",
         headers: {
         }
@@ -156,7 +178,7 @@ export function ProductCardComponent(props) {
   }
 
   function imageChange(event){
-    setImage(event.target.value)
+    setImage(url)
   }
   /// CART
 
@@ -265,11 +287,13 @@ export function ProductCardComponent(props) {
   //   editProduct(id, title, image, kg, price, currency)
   // }
 
+  console.log(conditional)
+
   return (
         <>
     <div id="product" className="cardDiv" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
         <h2>{title}</h2>
-        <img src={firebaseImg} alt="productImage" />
+        <img src={image} alt="productImage" />
         <p className="kgP">{kg} Kg</p>
         <p className="priceCurrencyP">{price} {currency}</p>
 
@@ -277,7 +301,9 @@ export function ProductCardComponent(props) {
     
         <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
 
+      { conditional === true && (
         <button onClick={toggleModal} className="edit-btn">< AiFillEdit /></button>
+      )}
       
     </div>
 
@@ -348,10 +374,10 @@ export function ProductCardComponent(props) {
                     <input id="image" defaultValue={image} onChange={imageChange} ></input>
                     </div>
 
-                    <div className="modal-content-inputs_div">
+                    <div>
                       <label>Image :</label>
                       <input type="file" onChange={handleImageChange}></input>
-                      <button type="submit" onClick={handleSubmit}>Upload</button>
+                      <button onClick={handleSubmit}>Upload Image</button>
                     </div>
 
                     {/* <img alt="ProductImage"

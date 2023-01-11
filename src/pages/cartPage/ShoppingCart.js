@@ -13,19 +13,19 @@ const [products, setProducts] = useState([]);
 // const { auth } = useContext(AuthContext)
 
   ///Fetch Get RestApi
-  useEffect(() => {
-    fetch(`http://localhost:3001/cart?user=` ,{
-      headers : {
-        Authorization : ``
-      }
-    })
-      .then((response) => response.json())
-      .then((cartList) => {
-        const [ cart ] = cartList
+  // useEffect(() => {
+  //   fetch(`http://localhost:3001/cart?user=` ,{
+  //     headers : {
+  //       Authorization : ``
+  //     }
+  //   })
+  //     .then((response) => response.json())
+  //     .then((cartList) => {
+  //       const [ cart ] = cartList
 
-        setProducts(cart.products)
-      });
-    }, [])
+  //       setProducts(cart.products)
+  //     });
+  //   }, [])
     
     const totalQ = products.reduce((acc,curr) => {
       return acc + curr.quantity

@@ -3,6 +3,8 @@ import "./CreateProduct.css"
 import 'animate.css';
 import { AuthContext } from "../../App";
 import { motion, AnimatePresence } from "framer-motion";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase-config";
 
 
 export function CreateProduct(){
@@ -20,20 +22,6 @@ export function CreateProduct(){
 
   const [ succes, setSucces ] = useState('')
 
-
-  useEffect(() => {
-    fetch(productDetailUrl + endpoint, {
-      headers: {
-      }
-    })
-    .then((response) => response.json())
-    .then((product) => {
-      setTitle(product.title);
-      setPrice(product.price);
-      setKg(product.kg)
-      setCurrency(product.currency)
-    }) 
-  }, [])
 
   function titleChange(event){
     setTitle(event.target.value);
@@ -59,38 +47,55 @@ export function CreateProduct(){
     setDescription(event.target.value)
   }
 
-  function submit(event) {
-    event.preventDefault();
+  // function submit(event) {
+  //   event.preventDefault();
 
-    const body = {
+  //   const body = {
+  //     title:title,
+  //     kg:kg,
+  //     price:price,
+  //     currency:currency,
+  //     image: image,
+  //     description : description
+  //   }
+
+  //     fetch(productDetailUrl + endpoint, {
+  //       method: "POST",
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(body)
+  //     })
+  //     .then(response => {
+  //       if(response.status === 201){
+
+  //         setSucces("Product Created!")          
+  //         setInterval(() => {
+  //           setSucces("")
+  //           window.location.reload()
+        
+  //         }, 1500)
+  //       }
+  //     })
+  //   }
+
+
+  function submit(event) {
+    event.preventDefault()
+
+    try {
+      setDoc(doc(db, 'products', title), {
       title:title,
       kg:kg,
       price:price,
       currency:currency,
       image: image,
       description : description
-    }
-
-      fetch(productDetailUrl + endpoint, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body)
       })
-      .then(response => {
-        if(response.status === 201){
-
-          setSucces("Product Created!")          
-          setInterval(() => {
-            setSucces("")
-            window.location.reload()
-        
-          }, 1500)
-        }
-      })
+    } catch (error) {
+      console.log(error.message)
     }
-
+  } 
   
   const [modal2, setModal2] = useState(false);
 
@@ -151,7 +156,7 @@ export function CreateProduct(){
 
                     <div className="modal-content-inputs_div">
                       <label htmlFor="currency">Currency :</label>
-                      <input id="currency" onChange={currencyChange} required></input>
+                      <input id="currency" onChange={currencyChange}  required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">

@@ -4,7 +4,11 @@ import 'animate.css';
 import { AuthContext } from "../../App";
 import { AiFillEdit } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
-import { auth } from "../../firebase-config";
+import { auth, db } from "../../firebase-config";
+import { doc, updateDoc } from "firebase/firestore";
+import { storage } from "../../firebase-config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 /// Modal
 
 export function ProductCardComponent(props) {
@@ -40,12 +44,15 @@ export function ProductCardComponent(props) {
   }
   
   
-  const [newTitle, setTitle] = useState('')
-  const [newCurrency, setCurrency] = useState('')
-  const [newPrice, setPrice] = useState('')
-  const [newKg, setKg] = useState('')
-  const [newImage, setImage] = useState('')
-  const [newDescription, setDescription] = useState('')
+  const [newTitle, setTitle] = useState(title)
+  const [newCurrency, setCurrency] = useState(currency)
+  const [newPrice, setPrice] = useState(price)
+  const [newKg, setKg] = useState(kg)
+  const [newImage, setImage] = useState(image)
+
+  const [ imageUpload, setImageUpload ] = useState(null)
+
+  const [newDescription, setDescription] = useState(description)
 
   const [succes, setSucces] = useState('')
   const [ deleteSucces, setDeleteSucces ] = useState('')
@@ -53,50 +60,38 @@ export function ProductCardComponent(props) {
 
   // const { auth } = useContext( AuthContext )
 
-  useEffect(() => {
-    fetch(productDetailUrl + endpoint + "/" + id, {
-      headers: {
-      }
-    })
-    .then((response) => response.json())
-    .then((product) => {
-      setTitle(product.title);
-      setPrice(product.price);
-      setKg(product.kg)
-      setCurrency(product.currency)
-      setImage(product.image)
-      setDescription(product.description)
-    }) 
-  }, [id])
+  // useEffect(() => {
+  //   fetch(productDetailUrl + endpoint + "/" + id, {
+  //     headers: {
+  //     }
+  //   })
+  //   .then((response) => response.json())
+  //   .then((product) => {
+  //     setTitle(product.title);
+  //     setPrice(product.price);
+  //     setKg(product.kg)
+  //     setCurrency(product.currency)
+  //     setImage(product.image)
+  //     setDescription(product.description)
+  //   }) 
+  // }, [id])
 
-  function submit(event) {
-    event.preventDefault();
+
   
-    const body = {
-      title : newTitle,
-      kg : newKg,
-      price : newPrice,
-      currency : newCurrency,
-      description: newDescription,
-      image : newImage
-    };
-    fetch(productDetailUrl + endpoint + "/" + id ,{
-      method: "PATCH",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body)
-    } )
-    .then(response => {
-      if(response.status === 200){
-        setSucces("Product Edited!")
-        setTimeout(() => {
-          setSucces("")
-          window.location.reload()
-        }, 1500 )
+  const update = async () => {
+      const userDoc = doc(db, 'products', id)
+      const newFields = {
+        title : newTitle,
+        kg : newKg,
+        price : newPrice,
+        currency : newCurrency,
+        description: newDescription,
+        image : newImage
       }
-    })
-}
+      await updateDoc(userDoc, newFields)
+
+    }
+    
   
   function deleteItem() {
       fetch (productDetailUrl + endpoint + "/" + id , {
@@ -124,10 +119,6 @@ export function ProductCardComponent(props) {
     setCurrency(event.target.value)
   }
 
-  function imageChange(event){
-    setImage(event.target.value)
-  }
-
   function priceChange(event){
     setPrice(event.target.value)
   }
@@ -138,6 +129,10 @@ export function ProductCardComponent(props) {
 
   function descriptionChange(event){
     setDescription(event.target.value)
+  }
+
+  function imageChange(event){
+    setImage(event.target.value)
   }
   /// CART
 
@@ -328,11 +323,19 @@ export function ProductCardComponent(props) {
                     <label for="image">Image :</label>
                     <input id="image" defaultValue={image} onChange={imageChange} ></input>
                     </div>
+
+                    <div className="modal-content-inputs_div">
+                      <label>Image :</label>
+                      <input type="file" defaultValue={imageUpload} onChange={imageChange}></input>
+                    </div>
+
+                    {/* <img alt="ProductImage"
+                    src={url}></img> */}
                   </div>
 
                   <div className="modal-content-buttons">
                   <button  className="modal-content-button_delete" onClick={deleteItem}>Delete Item</button>
-                  <button className="modal-content-button_save" onClick={submit} >Save Changes</button>
+                  <button className="modal-content-button_save" onClick={update} >Save Changes</button>
                   </div>
                   
                   <button className="close-modal" onClick={toggleModal}>

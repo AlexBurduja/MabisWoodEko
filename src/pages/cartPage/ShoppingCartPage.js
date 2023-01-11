@@ -12,18 +12,18 @@ export function ShoppingCartPage() {
   const { auth } = useContext( AuthContext )
 
 
-      useEffect(() => {
-        fetch(`http://localhost:3001/cart?user=${auth.user.id}`, {
-          headers : {
-            Authorization : `Bearer ${auth.accessToken}`
-          }
-        })
-        .then((response) => response.json())
-        .then((cartList) => {
-          const [ cart ] = cartList
+        // useEffect(() => {
+        //   fetch(`http://localhost:3001/cart?user=${auth.user.id}`, {
+        //     headers : {
+        //       Authorization : `Bearer ${auth.accessToken}`
+        //     }
+        //   })
+        //   .then((response) => response.json())
+        //   .then((cartList) => {
+        //     const [ cart ] = cartList
 
-          setProducts(cart.products)
-      })}, [] );
+        //     setProducts(cart.products)
+        // })}, [] );
 
       function ProductCount () {
         if (totalQuantity === 1){
@@ -41,14 +41,14 @@ export function ShoppingCartPage() {
         return acc+ cur.quantity
       }, 0)
 
-      function removeHandler(){
-        fetch(`http://localhost:3001/cart/${auth.user.id}`, {
-          method: "DELETE",
-          headers : {
-            Authorization : `Bearer ${auth.accessToken}`
-          }
-        })
-      }
+      // function removeHandler(){
+      //   fetch(`http://localhost:3001/cart/${auth.user.id}`, {
+      //     method: "DELETE",
+      //     headers : {
+      //       Authorization : `Bearer ${auth.accessToken}`
+      //     }
+      //   })
+      // }
 
       function ShoppingCartPage() {
         if(totalQuantity === 0) {
@@ -102,7 +102,7 @@ export function ShoppingCartPage() {
       )
     })}
       <div className='productCartFooter'>
-      <button className="emptyCartButton" onClick={removeHandler}>Empty Cart</button>
+      <button className="emptyCartButton" >Empty Cart</button>
         <ProductCount />
         <p>Total: {totalPrice} RON</p>
       </div>

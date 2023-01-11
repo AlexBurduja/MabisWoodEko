@@ -31,8 +31,6 @@ export function ProductCardComponent(props) {
     setIsHovering(false);
   }
 
-
-
   const toggleModal = () => {
     setModal(!modal)
   };
@@ -76,7 +74,34 @@ export function ProductCardComponent(props) {
   //   }) 
   // }, [id])
 
+  const [ firebaseImg, setFirebaseImg] = useState(null)
+  const [url, setUrl] = useState(null)
 
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]){
+      setFirebaseImg(e.target.files[0])
+    }
+  }
+
+  const handleSubmit = () => {
+    const imageRef = ref(storage, "image");
+    uploadBytes(imageRef, firebaseImg)
+        .then(() => {
+      getDownloadURL(imageRef)
+        .then((url) => {
+          setUrl(url)
+          console.log(url)
+      })
+        .catch((error) => {
+          console.log(error.message, "Error uploading")
+      })
+      setFirebaseImg(null)
+    })
+      .catch((error) => {
+        console.log(error.message)
+    })
+  };
   
   const update = async () => {
       const userDoc = doc(db, 'products', id)
@@ -89,7 +114,6 @@ export function ProductCardComponent(props) {
         image : newImage
       }
       await updateDoc(userDoc, newFields)
-
     }
     
   
@@ -245,7 +269,7 @@ export function ProductCardComponent(props) {
         <>
     <div id="product" className="cardDiv" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
         <h2>{title}</h2>
-        <img src={image} alt="productImage" />
+        <img src={firebaseImg} alt="productImage" />
         <p className="kgP">{kg} Kg</p>
         <p className="priceCurrencyP">{price} {currency}</p>
 
@@ -326,7 +350,8 @@ export function ProductCardComponent(props) {
 
                     <div className="modal-content-inputs_div">
                       <label>Image :</label>
-                      <input type="file" defaultValue={imageUpload} onChange={imageChange}></input>
+                      <input type="file" onChange={handleImageChange}></input>
+                      <button type="submit" onClick={handleSubmit}>Upload</button>
                     </div>
 
                     {/* <img alt="ProductImage"

@@ -11,38 +11,65 @@ import { useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../../firebase-config';
 import { doc, getDoc } from 'firebase/firestore';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../FirebaseAuthContext';
 
 export function Header() {
 
-  const [user , setUser] = useState({})
+  // const [user , setUser] = useState({})
   const [conditional , setConditional ] = useState(false)
+  const [ data , setData ] = useState({})
   
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user)
-    }
-  })
+  const { user } = useContext(AuthContext)
 
-  const getDocument = async () => {
+  const getName = async () => {
 
-    const ref = doc(db, 'users', user.uid)
-    let document = await getDoc(ref)
-
-    return document.data().admin
   }
 
-  getDocument()
-  .then(data => {
-    setConditional(data)
-  })
+    // const getAdmin = async () => {
+    //   if(user?.uid){
+
+    //     const ref = doc(db, 'users', user.uid)
+        
+    //     let document = await getDoc(ref)
+        
+    //     return document.data()
+    //   }
+    // }
+
+    // getAdmin()
+    // .then(data => {
+    //   console.log(data)
+    // })
+
+    useEffect(() => {
+      if(user?.uid){
+
+        const ref = doc(db, 'users', user.uid)
+        
+    const getDocument = async () => {
+      
+      let document = await getDoc(ref)
+      
+      return document.data()
+    }
+    
+    getDocument()
+    .then(data => {
+      setConditional(data)
+    })
+  }
+    })
+
+    
+
 
 
   const activeClass = ({isActive}) => isActive ? "activeClassNav" : {};
 
   const activeClassHamburger = ({isActiveHamburger}) => isActiveHamburger ? "activeClassHamburger" : "link";
 
-
-  console.log(auth.currentUser)
 
   return (
     <section id="home" className='flex'>
@@ -57,7 +84,7 @@ export function Header() {
         <NavLink className={activeClass} to='/e'>About</NavLink>
         <NavLink className={activeClass} to='/reviews'>Reviews</NavLink>
         <NavLink className={activeClass} to='/contact'>Contact</NavLink>
-        {conditional === true && (
+        {conditional.admin === true && (
           <NavLink className={activeClass} to='/users'>Panel</NavLink>
         )}
         
@@ -74,7 +101,7 @@ export function Header() {
         </div>
 
         <div className='headerLoginText'>
-          <p>Hi, </p> 
+          <p>Hi, {conditional.displayName}</p> 
           
           <button className='logoutButtonHeader' >Log Out </button>
         </div>
@@ -94,7 +121,7 @@ export function Header() {
           <li className="item"> <NavLink className={activeClassHamburger} to='/about'>About</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>Contact</NavLink> </li>
-          {conditional && (
+          {conditional.admin === true && (
             <li className='item'><NavLink className={activeClassHamburger} to='/users'>Panel</NavLink> </li>
           )}
           

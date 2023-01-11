@@ -2,9 +2,14 @@ import { useState } from "react";
 import "./CreateProduct.css"
 import 'animate.css';
 import { motion, AnimatePresence } from "framer-motion";
-import { doc, setDoc } from "firebase/firestore";
-import { db, storage } from "../../firebase-config";
+import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { auth, db, storage } from "../../firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
+import { async } from "@firebase/util";
+import { useContext } from "react";
+import { AuthContext } from "../../FirebaseAuthContext";
 
 
 export function CreateProduct(){
@@ -18,6 +23,34 @@ export function CreateProduct(){
   const [description, setDescription] = useState('');
 
   const [ succes, setSucces ] = useState('')
+
+  // const [user , setUser] = useState({})
+  const [conditional , setConditional ] = useState(false)
+
+  const { user } = useContext(AuthContext)
+
+  // console.log(user.uid)
+  
+  
+  useEffect(() => {
+    if(user?.uid){
+
+      const ref = doc(db, 'users', user.uid)
+      
+  const getDocument = async () => {
+    
+    let document = await getDoc(ref)
+    
+    return document.data().admin
+  }
+  
+  getDocument()
+  .then(data => {
+    setConditional(data)
+  })
+}
+}, [])
+
 
 
   function titleChange(event){
@@ -137,9 +170,11 @@ export function CreateProduct(){
   return (
     
     <>
+    {conditional === true && (
       <div className="createProductButtonWrapper">
         <button className="createProductButton" onClick={toggleModal2}>Create Product</button>
       </div>
+    )}
 
       {modal2 && (
         <div className="modal">
@@ -203,8 +238,11 @@ export function CreateProduct(){
                 </div>
 
                 <div className="modal-content-button_create">
-              <button type="submit" onClick={submit} className="modal-content-button_save">Create Product</button>
-                </div>
+              
+                <button type="submit" onClick={submit} className="modal-content-button_save">Create Product</button>
+              
+              
+              </div>
               <button className="close-modal" onClick={toggleModal2}>
                 X
               </button>

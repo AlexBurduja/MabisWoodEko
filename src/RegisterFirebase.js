@@ -1,7 +1,8 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from './firebase-config';
-import React, {  useState } from 'react';
+import React, {  useContext, useState } from 'react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { AuthContext } from './FirebaseAuthContext';
 
 
 
@@ -10,13 +11,17 @@ export function RegisterFirebase() {
   const [registerPassword , setRegisterPassword] = useState('')
   const [name , setName] = useState('')
 
-  const [user , setUser] = useState({})
+  // const [user , setUser] = useState({})
+
+  const { user } = useContext(AuthContext)
+
+  console.log(user.uid)
   
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user)
-    }
-  })
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     setUser(user)
+  //   }
+  // })
 
   function saveEmail (event) {
     setRegisterEmail(event.target.value)
@@ -44,9 +49,6 @@ export function RegisterFirebase() {
           age : 10,
           admin: false 
         })
-
-      console.log(user)
-      // await createUserDocument(user, name)
     } catch (error) {
       console.log(error.message)
     }
@@ -54,19 +56,19 @@ export function RegisterFirebase() {
 
 ///
 
-  const getDocument = async () => {
+  // const getDocument = async () => {
 
-    const ref = doc(db, 'users', user.uid)
-    let document = await getDoc(ref)
+  //   const ref = doc(db, 'users', user.uid)
+  //   let document = await getDoc(ref)
 
-    return document.data().admin
-  }
+  //   return document.data().admin
+  // }
 
-  const [conditional , setConditional] = useState(false)
+  // const [conditional , setConditional] = useState(false)
   
-    getDocument()
-      .then(data => {
-        setConditional(data) })
+  //   getDocument()
+  //     .then(data => {
+  //       setConditional(data) })
 
 ///
 

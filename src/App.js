@@ -9,7 +9,6 @@ import { CartPage } from './pages/cartPage/CartPage'
 import { ProductPage } from './pages/productPage/ProductPage'
 import { ContactPage } from './pages/contactPage/ContactPage'
 import { Login } from './pages/auth/Login';
-import { AuthContextProvider } from './pages/auth/auth-context';
 import React from 'react';
 import { CanNavigate } from './pages/auth/CanNavigate';
 import { Register } from './pages/auth/Register';
@@ -17,12 +16,14 @@ import { ProfilePage } from './pages/auth/ProfilePage.js';
 import { ReviewPage } from './pages/reviewPage/ReviewPage';
 import { AdminPanelList } from './pages/adminPanel/AdminPanelList';
 import { RegisterFirebase } from './RegisterFirebase';
+import { AuthProvider } from './FirebaseAuthContext';
 
 export const AuthContext = React.createContext();
 
 function App() {
 
   return (
+        <AuthProvider>
     <BrowserRouter>
         <Routes>
           <Route path="/" element={ 
@@ -59,6 +60,7 @@ function App() {
             {/* <Route path = '/register' element= { <Register/> }></Route> */}
         </Routes>
       </BrowserRouter>
+      </AuthProvider>
   )
 }
 

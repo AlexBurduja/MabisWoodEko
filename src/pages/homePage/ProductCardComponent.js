@@ -26,10 +26,12 @@ export function ProductCardComponent(props) {
 
   const getDocument = async () => {
 
-    const ref = doc(db, 'users', user.uid)
-    let document = await getDoc(ref)
+if(user?.uid){
+  const ref = doc(db, 'users', user.uid)
+  let document = await getDoc(ref)
+  return document.data().admin
+}
 
-    return document.data().admin
   }
 
   getDocument()
@@ -37,7 +39,7 @@ export function ProductCardComponent(props) {
     setConditional(data)
   })
 
-  
+
 
   const [modal, setModal] = useState(false);
 
@@ -286,8 +288,6 @@ export function ProductCardComponent(props) {
   // function editProductButton() {
   //   editProduct(id, title, image, kg, price, currency)
   // }
-
-  console.log(conditional)
 
   return (
         <>

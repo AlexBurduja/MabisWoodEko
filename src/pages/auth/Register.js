@@ -5,6 +5,10 @@ import "./Register.css"
 import { motion } from 'framer-motion';
 import { AiOutlineEye } from 'react-icons/ai';
 import ParticlesBackground from '../../particlesJS/particleJsComponent';
+import { FirebaseAuthContext } from '../../FirebaseAuthContext';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../../firebase-config';
+import { doc, setDoc } from 'firebase/firestore';
 
 
 
@@ -15,11 +19,18 @@ export function Register() {
   const [firstName, setFirstName ] = useState('')
   const [lastName, setLastName ] = useState('')
 
+  const [registerEmail , setRegisterEmail] = useState('')
+  const [registerPassword , setRegisterPassword] = useState('')
+  const [ sex, setSex] = useState('')
+  const [ phoneNumber, setPhoneNumber] = useState('')
+  const [ address, setAddress] = useState('')
+  const [name , setName] = useState('')
+
   
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
-  const { auth, setAuth } = useContext(LoginContext);
+  const { user } = useContext(FirebaseAuthContext)
 
   const [passwordShow, setPasswordShow] = useState(false)
   
@@ -42,62 +53,54 @@ export function Register() {
 
   month = month.toString().padStart(2, '0')
 
-  function onSubmits(event) {
-    event.preventDefault();
-    setEmailError('');
-    setPasswordError('');
 
-    const emailValid = validateEmail(email)
+  const register = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth, 
+        registerEmail , 
+        registerPassword
+        );
 
-    const passwordValid = validatePassword(password);
-
-    if (!emailValid || !passwordValid){
-        return;
+        await setDoc(doc(db, "users", user._tokenResponse.localId), {
+          firstName : firstName,
+          lastName : lastName,
+          phoneNumber : phoneNumber,
+          address : address,
+          sex : sex,
+          admin: false, 
+        })
+    } catch (error) {
+      console.log(error.message)
     }
-    
-    const body = {
-      firstName: firstName,
-      lastName: lastName,
-      username : username,
-      email : email,
-      password : password,
-      confirmPassword : password ,
-      createdAt: `${date}.${month}.${now.getFullYear()} ${now.getHours()}:${minutes}`,
-      admin : false
-    };
-
-    fetch("http://localhost:3001/register", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    })
-      .then((response) => response.json())
-
-    
-      navigate("/login")
   }
 
-
-  function passwordChangeHandler(event){
-    setPassword(event.target.value)
-  }
-
-  function emailChangeHandler(event){
-    setEmail(event.target.value)
-  }
-
-  function usernameChangeHandler(event){
-    setUsername(event.target.value)
-  }
-
-  function firstNameChangeHandler(event){
+  function saveFirstName(event){
     setFirstName(event.target.value)
   }
 
-  function lastNameChangeHandler(event){
+  function saveLastName(event){
     setLastName(event.target.value)
+  }
+
+  function saveSex(event){
+    setSex(event.target.value)
+  }
+
+  function savePhone(event){
+    setPhoneNumber(event.target.value)
+  }
+
+  function saveAddress(event){
+    setAddress(event.target.value)
+  }
+
+  function saveEmail (event) {
+    setRegisterEmail(event.target.value)
+  }
+
+  function savePassword (event) {
+    setRegisterPassword(event.target.value)
   }
 
   function validateEmail(email){
@@ -173,35 +176,53 @@ function validatePassword(password) {
     
     <h1>Register</h1>
 
-  <form className='registerForm' onSubmit={onSubmits}>
+  <form className='registerForm' onSubmit={register}>
 
       <div className="inputBoxes">
-        <input id="firstName" type="text" onChange={firstNameChangeHandler} required></input>
+        <input id="firstName" type="text" onChange={saveFirstName} required></input>
         <span htmlFor='firstName'>First name</span>
       </div>
 
       <div className="inputBoxes">
-        <input id="lastName" type="text" onChange={lastNameChangeHandler} required></input>
+        <input id="lastName" type="text" onChange={saveLastName} required></input>
         <span htmlFor='lastName'>Last name</span>
       </div>
 
       <div className="inputBoxes">
-        <input id="username" type="text" onChange={usernameChangeHandler} required></input>
-        <span htmlFor='username'>Username</span>
+        <input id="username" type="text" onChange={savePhone} required></input>
+        <span htmlFor='username'>Phone No.</span>
+      </div>
+
+      <div className="inputBoxes">
+        <input id="username" type="text" onChange={saveAddress} required></input>
+        <span htmlFor='username'>Address</span>
       </div>
 
       <div className='inputBoxes'>
-          <input id="email" type="text" onChange={emailChangeHandler} required></input>
+          <input id="email" type="text" onChange={saveEmail} required></input>
           <span>Email</span>
           <p className="error">{emailError}</p>
       </div>
 
       <div className="inputBoxes">
-          <input id="password" type={passwordShow ? "text" : "password"} onChange={passwordChangeHandler} required></input>
+          <input id="password" type={passwordShow ? "text" : "password"} onChange={savePassword} required></input>
           <span>Password</span>
           <p className="error">{passwordError}</p>
           <p className="eyeIcon" onClick={togglePassword}><AiOutlineEye/></p>
+      </div>
+
+      <section className='sexRadioButton'>
+        <div>
+
+        <input type="radio" id='sex' name='sex' value="M"></input>
+          <label for="sex">M</label>
         </div>
+
+        <div>
+        <input type="radio" id='sex' name='sex' value="F"></input>
+          <label for="sex">F</label>
+        </div>
+      </section>
 
         <motion.button 
                 type="submit"

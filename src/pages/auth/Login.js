@@ -16,7 +16,6 @@ export function Login(){
 
     const [errorMsg, setErrorMsg] = useState('')
 
-    const { auth, setAuth } = useContext(LoginContext)
 
     const [passwordShow, setPasswordShow] = useState(false)
     const togglePassword = () => {
@@ -33,48 +32,48 @@ export function Login(){
         setEmail(event.target.value)
     }
 
-    function onSubmit(event){
-        event.preventDefault();
-        setEmailError('');
-        setPasswordError('');
+  //   function onSubmit(event){
+  //       event.preventDefault();
+  //       setEmailError('');
+  //       setPasswordError('');
 
-        const emailValid = validateEmail(email)
+  //       const emailValid = validateEmail(email)
 
-        const passwordValid = validatePassword(password);
+  //       const passwordValid = validatePassword(password);
 
-        if (!emailValid || !passwordValid){
-            return;
-        }
+  //       if (!emailValid || !passwordValid){
+  //           return;
+  //       }
          
-        const body = {
-            email,
-            password
-        };
+  //       const body = {
+  //           email,
+  //           password
+  //       };
 
 
-        fetch(`http://localhost:3001/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            body : JSON.stringify(body)
-        })
-        .then(response => {
-          if (response.status === 400){
-            setErrorMsg('Email or Password is incorrect!')
+  //       fetch(`http://localhost:3001/login`, {
+  //           method: 'POST',
+  //           headers: {
+  //               'Content-Type' : 'application/json'
+  //           },
+  //           body : JSON.stringify(body)
+  //       })
+  //       .then(response => {
+  //         if (response.status === 400){
+  //           setErrorMsg('Email or Password is incorrect!')
             
-            setTimeout(() =>{
-              setErrorMsg('')
-            }, 2000)
+  //           setTimeout(() =>{
+  //             setErrorMsg('')
+  //           }, 2000)
 
-            throw new Error('invalid credentials');
+  //           throw new Error('invalid credentials');
 
-          } return response
-        })
-        .then(response => response.json())
-        .then(response => setAuth(response))
-        .then( () => navigate("/"))
-  };
+  //         } return response
+  //       })
+  //       .then(response => response.json())
+  //       .then(response => setAuth(response))
+  //       .then( () => navigate("/"))
+  // };
     
 
     function validateEmail(email){
@@ -185,7 +184,7 @@ export function Login(){
           <div className="LoginRightSide">
           <h1>Log in</h1>
 
-            <form onSubmit={onSubmit} className="loginForm" noValidate>
+            <form  className="loginForm" noValidate>
 
                 <div className="inputBoxes">
                     <input id="email" type="text" onChange={emailChangeHandler} required></input>

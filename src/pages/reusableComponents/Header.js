@@ -83,7 +83,7 @@ useEffect(() => {
       )
     } else {
       return (
-        <button>Log in</button>
+        <button><NavLink to="/login">Log in</NavLink></button>
       )
     }
   }

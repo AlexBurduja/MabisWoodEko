@@ -9,6 +9,7 @@ import { CartPage } from './pages/cartPage/CartPage'
 import { ProductPage } from './pages/productPage/ProductPage'
 import { ContactPage } from './pages/contactPage/ContactPage'
 import { Login } from './pages/auth/Login';
+import { Register } from './pages/auth/Register';
 import React from "react"
 import { ProfilePage } from './pages/auth/ProfilePage.js';
 import { ReviewPage } from './pages/reviewPage/ReviewPage';
@@ -58,10 +59,10 @@ function App() {
                   <AdminPanelList />
               }></Route>
 
-            <Route path = '/loginfirebase' element={ <Login /> }></Route>
-            <Route path = '/registerfirebase' element= { <RegisterFirebase/> }></Route>
-            {/* <Route path = '/login' element={ <Login /> }></Route> */}
-            {/* <Route path = '/register' element= { <Register/> }></Route> */}
+            {/* <Route path = '/loginfirebase' element={ <Login /> }></Route> */}
+            {/* <Route path = '/registerfirebase' element= { <RegisterFirebase/> }></Route> */}
+            <Route path = '/login' element={ <Login /> }></Route>
+            <Route path = '/register' element= { <Register/> }></Route>
         </Routes>
       </BrowserRouter>
       </AuthProvider>

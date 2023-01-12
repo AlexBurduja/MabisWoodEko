@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/aut
 import { auth, db } from './firebase-config';
 import React, {  useContext, useState } from 'react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { AuthContext } from './FirebaseAuthContext';
+import { FirebaseAuthContext } from './FirebaseAuthContext';
 
 
 
@@ -13,9 +13,7 @@ export function RegisterFirebase() {
 
   // const [user , setUser] = useState({})
 
-  const { user } = useContext(AuthContext)
-
-  console.log(user.uid)
+  const { user } = useContext(FirebaseAuthContext)
   
   // onAuthStateChanged(auth, (user) => {
   //   if (user) {

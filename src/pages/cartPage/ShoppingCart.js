@@ -1,7 +1,7 @@
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { useState, useEffect, useContext } from 'react';
 import "./ShoppingCart.css"
-import { AuthContext } from '../../App';
+import { LoginContext } from '../../App';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'react';
 

@@ -9,16 +9,17 @@ import { CartPage } from './pages/cartPage/CartPage'
 import { ProductPage } from './pages/productPage/ProductPage'
 import { ContactPage } from './pages/contactPage/ContactPage'
 import { Login } from './pages/auth/Login';
-import React from 'react';
-import { CanNavigate } from './pages/auth/CanNavigate';
-import { Register } from './pages/auth/Register';
+import React from "react"
 import { ProfilePage } from './pages/auth/ProfilePage.js';
 import { ReviewPage } from './pages/reviewPage/ReviewPage';
 import { AdminPanelList } from './pages/adminPanel/AdminPanelList';
 import { RegisterFirebase } from './RegisterFirebase';
 import { AuthProvider } from './FirebaseAuthContext';
+import { AdminContext } from './AdminContext';
 
-export const AuthContext = React.createContext();
+export const LoginContext = React.createContext();
+
+
 
 function App() {
 
@@ -26,9 +27,12 @@ function App() {
         <AuthProvider>
     <BrowserRouter>
         <Routes>
-          <Route path="/" element={ 
-              <Homepage />
-        }></Route>
+
+      <Route path='/' element = {
+        <Homepage />
+      }>
+      </Route>
+          
 
             <Route path='/cart' element={ 
               <CartPage />

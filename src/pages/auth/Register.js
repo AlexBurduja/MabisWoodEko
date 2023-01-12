@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../App';
+import { LoginContext } from '../../App';
 import "./Register.css"
 import { motion } from 'framer-motion';
 import { AiOutlineEye } from 'react-icons/ai';
@@ -19,7 +19,7 @@ export function Register() {
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(LoginContext);
 
   const [passwordShow, setPasswordShow] = useState(false)
   

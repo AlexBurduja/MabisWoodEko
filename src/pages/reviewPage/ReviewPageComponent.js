@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import React from "react"
 import { RiStarFill, RiStarLine } from "react-icons/ri";
-import { AuthContext } from "../../App";
+import { LoginContext } from "../../App";
 import "./ReviewPageComponent.css"
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -9,7 +9,7 @@ export function ReviewPageComponent(props) {
 
     const { reviewTitle, reviewText, rating, firstName, lastName, time, id  } = props
 
-    const { auth } = useContext(AuthContext)
+    const { auth } = useContext(LoginContext)
 
 
 function deleteHandler() {

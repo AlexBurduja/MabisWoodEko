@@ -8,20 +8,27 @@ import './CssHeader.css'
 import "../cartPage/ShoppingCart"
 import { ShoppingCart } from '../cartPage/ShoppingCart';
 import { useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth, db } from '../../firebase-config';
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect } from 'react';
 import { useContext } from 'react';
-import { AuthContext } from '../../FirebaseAuthContext';
+import { FirebaseAuthContext } from '../../FirebaseAuthContext';
 
 export function Header() {
 
   // const [user , setUser] = useState({})
-  const [conditional , setConditional ] = useState(false)
+  const [conditional , setConditional ] = useState([])
   const [ data , setData ] = useState({})
   
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(FirebaseAuthContext)
+
+  console.log(user)
+
+  const logOut = async () => {
+    await signOut(auth)
+  }
+
 
   const getName = async () => {
 
@@ -43,27 +50,43 @@ export function Header() {
     //   console.log(data)
     // })
 
-    useEffect(() => {
-      if(user?.uid){
+ 
 
-        const ref = doc(db, 'users', user.uid)
-        
+useEffect(() => {
+
+  if (user?.uid){
+  
     const getDocument = async () => {
+      const ref = doc(db, 'users', user.uid)
       
       let document = await getDoc(ref)
       
       return document.data()
+      
     }
-    
     getDocument()
-    .then(data => {
-      setConditional(data)
-    })
+    .then(data => setConditional(data))
+  
   }
-    })
+}, [user?.uid])
 
-    
+            
+          
 
+  function LogInOurOut() {
+    if (user?.uid){
+      return (
+        <div className='headerLoginText'>
+        <p>Hi, {conditional.displayName}</p> 
+        <button className='logoutButtonHeader' onClick={logOut} >Log Out </button>
+      </div>
+      )
+    } else {
+      return (
+        <button>Log in</button>
+      )
+    }
+  }
 
 
   const activeClass = ({isActive}) => isActive ? "activeClassNav" : {};
@@ -84,9 +107,7 @@ export function Header() {
         <NavLink className={activeClass} to='/e'>About</NavLink>
         <NavLink className={activeClass} to='/reviews'>Reviews</NavLink>
         <NavLink className={activeClass} to='/contact'>Contact</NavLink>
-        {conditional.admin === true && (
-          <NavLink className={activeClass} to='/users'>Panel</NavLink>
-        )}
+        <NavLink className={activeClass} to='/users'>Panel</NavLink>
         
         </div>
     </div>
@@ -100,11 +121,8 @@ export function Header() {
         <NavLink to="/profile"> <CgProfile /> </NavLink>
         </div>
 
-        <div className='headerLoginText'>
-          <p>Hi, {conditional.displayName}</p> 
+      <LogInOurOut />
           
-          <button className='logoutButtonHeader' >Log Out </button>
-        </div>
       </div>
 
     <div className='hamburger'>
@@ -121,6 +139,7 @@ export function Header() {
           <li className="item"> <NavLink className={activeClassHamburger} to='/about'>About</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>Contact</NavLink> </li>
+          
           {conditional.admin === true && (
             <li className='item'><NavLink className={activeClassHamburger} to='/users'>Panel</NavLink> </li>
           )}

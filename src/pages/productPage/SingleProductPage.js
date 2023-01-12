@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { AuthContext } from "../../App";
+import { LoginContext } from "../../App";
 import "./SingleProductPage.css"
 import { motion } from "framer-motion";
 import { HashLink } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
@@ -12,7 +12,7 @@ export function SingleProductPage() {
   let { id } = useParams();
   const [productDetails, setproductDetails] = useState({})
 
-  const { auth } = useContext(AuthContext)
+  const { auth } = useContext(LoginContext)
   
   useEffect(() => {
     fetch(`${url}/${id}`, {

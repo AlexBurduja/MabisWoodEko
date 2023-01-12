@@ -8,11 +8,11 @@ import { FaTiktok } from "react-icons/fa"
 import emailjs from 'emailjs-com'
 import { HashLink } from "react-router-hash-link"
 import { useContext } from "react"
-import { AuthContext } from "../../App"
+import { LoginContext } from "../../App"
 
 export function ContactForm() {
   
-  const { auth } = useContext( AuthContext )
+  const { auth } = useContext( LoginContext )
 
   function sendEmail(e) {
     e.preventDefault();

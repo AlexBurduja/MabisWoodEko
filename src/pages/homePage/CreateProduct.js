@@ -9,7 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { async } from "@firebase/util";
 import { useContext } from "react";
-import { AuthContext } from "../../FirebaseAuthContext";
+import { FirebaseAuthContext } from "../../FirebaseAuthContext";
 
 
 export function CreateProduct(){
@@ -27,7 +27,7 @@ export function CreateProduct(){
   // const [user , setUser] = useState({})
   const [conditional , setConditional ] = useState(false)
 
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(FirebaseAuthContext)
 
   // console.log(user.uid)
   

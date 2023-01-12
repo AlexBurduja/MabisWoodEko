@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useContext } from "react"
 import { useEffect, useState } from "react"
-import { AuthContext } from "../../App"
+import { LoginContext } from "../../App"
 import { ReviewPageComponent } from "./ReviewPageComponent"
 
 
@@ -22,7 +22,7 @@ export function Reviewpagesomething(){
         .then ((reviews) => setReview(reviews))
     }, [])
 
-    const { auth } = useContext(AuthContext)
+    const { auth } = useContext(LoginContext)
     const [text, setText] = useState("");
     const [title, setTitle] = useState("");
     const options = ["1","2","3","4","5"];

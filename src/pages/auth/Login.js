@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../App";
+import { LoginContext } from "../../App";
 import { AnimatePresence, motion } from "framer-motion";
 import './loginCss.css'
 import logo from "../../publicResources/logoMabis.svg"
@@ -16,7 +16,7 @@ export function Login(){
 
     const [errorMsg, setErrorMsg] = useState('')
 
-    const { auth, setAuth } = useContext(AuthContext)
+    const { auth, setAuth } = useContext(LoginContext)
 
     const [passwordShow, setPasswordShow] = useState(false)
     const togglePassword = () => {

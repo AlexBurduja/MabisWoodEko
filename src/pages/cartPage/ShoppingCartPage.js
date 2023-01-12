@@ -3,13 +3,13 @@ import { useContext, useEffect, useState } from 'react';
 import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
-import { AuthContext } from '../../App';
+import { LoginContext } from '../../App';
 import { RiShoppingCartLine } from 'react-icons/ri';
 
 export function ShoppingCartPage() {
   
   const [ products, setProducts ] = useState([])
-  const { auth } = useContext( AuthContext )
+  const { auth } = useContext( LoginContext )
 
 
         // useEffect(() => {

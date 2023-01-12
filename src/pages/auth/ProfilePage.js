@@ -1,6 +1,6 @@
 import { useContext,  useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../App";
+import { LoginContext } from "../../App";
 import { Header } from "../reusableComponents/Header";
 import { PreFooter } from "../reusableComponents/PreFooter";
 import "./ProfilePage.css"
@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 
 export function ProfilePage() {
-    const { auth } = useContext(AuthContext)
+    const { auth } = useContext(LoginContext)
     const navigate = useNavigate();
 
     const [ username, setUsername ] = useState(auth.user.username)

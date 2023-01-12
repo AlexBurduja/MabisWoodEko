@@ -1,6 +1,6 @@
 import { collection, getDocs } from 'firebase/firestore';
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../App';
+import { LoginContext } from '../../App';
 import { db } from '../../firebase-config';
 import { ProductCardComponent } from "./ProductCardComponent";
 import "./ProductCardComponentModal.css"

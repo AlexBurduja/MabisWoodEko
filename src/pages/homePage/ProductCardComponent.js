@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./ProductCardComponent.css"
 import 'animate.css';
 import { AiFillEdit } from "react-icons/ai";
@@ -8,6 +8,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { storage } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
+import { FirebaseAuthContext } from "../../FirebaseAuthContext";
 
 /// Modal
 
@@ -15,29 +16,36 @@ export function ProductCardComponent(props) {
 
   const { title ,kg, currency,  price, image, description, id } = props
 
-  const [user , setUser] = useState({})
+  // const [user , setUser] = useState({})
   const [conditional , setConditional ] = useState(false)
   
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user)
+
+  const { user } = useContext(FirebaseAuthContext)
+  
+  useEffect(() => {
+
+    if (user?.uid){
+    
+      const getDocument = async () => {
+        const ref = doc(db, 'users', user.uid)
+        
+        let document = await getDoc(ref)
+        
+        return document.data()
+        
+      }
+      getDocument()
+      .then(data => setConditional(data))
+    
     }
-  })
+  }, [user?.uid])
 
-  const getDocument = async () => {
-
-if(user?.uid){
-  const ref = doc(db, 'users', user.uid)
-  let document = await getDoc(ref)
-  return document.data().admin
-}
-
+  const handleImageChange = (e) => {
+    if (e.target.files[0]){
+      setFirebaseImg(e.target.files[0])
+    }
   }
 
-  getDocument()
-  .then(data => {
-    setConditional(data)
-  })
 
 
 
@@ -96,14 +104,6 @@ if(user?.uid){
 
   const [ firebaseImg, setFirebaseImg] = useState(null)
   const [url, setUrl] = useState(image)
-
-  
-
-  const handleImageChange = (e) => {
-    if (e.target.files[0]){
-      setFirebaseImg(e.target.files[0])
-    }
-  }
 
   const handleSubmit = () => {
     const imageRef = ref(storage, firebaseImg.name);
@@ -302,9 +302,7 @@ if(user?.uid){
     
         <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
 
-      { conditional === true && (
         <button onClick={toggleModalEdit} className="edit-btn">< AiFillEdit /></button>
-      )}
       
     </div>
 

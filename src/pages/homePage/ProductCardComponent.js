@@ -4,11 +4,12 @@ import 'animate.css';
 import { AiFillEdit } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth, db } from "../../firebase-config";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { storage } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import { FirebaseAuthContext } from "../../FirebaseAuthContext";
+import { async } from "@firebase/util";
 
 /// Modal
 
@@ -45,9 +46,6 @@ export function ProductCardComponent(props) {
       setFirebaseImg(e.target.files[0])
     }
   }
-
-
-
 
   const [modalEdit, setModalEdit] = useState(false);
 
@@ -288,6 +286,24 @@ export function ProductCardComponent(props) {
   // function editProductButton() {
   //   editProduct(id, title, image, kg, price, currency)
   // }
+  const addToCart = async () => {
+    const cartDoc = collection(db, `cart/${user.uid}`, `${title}`)
+
+    const newFields = {
+      title : title,
+      quantity: 1,
+      price : price,
+      currency: currency,
+      kg: kg,
+      image : url
+    }
+
+    try {
+      addDoc(cartDoc, newFields)
+    } catch(e) {
+      console.log(e.message)
+    }
+  }
 
 
   return (
@@ -298,7 +314,7 @@ export function ProductCardComponent(props) {
         <p className="kgP">{kg} Kg</p>
         <p className="priceCurrencyP">{price} {currency}</p>
 
-        <button  className="cardDivButton" >Add to cart</button>
+        <button  className="cardDivButton" onClick={addToCart}>Add to cart</button>
     
         <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
 

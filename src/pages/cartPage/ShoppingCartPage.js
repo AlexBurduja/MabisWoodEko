@@ -3,27 +3,33 @@ import { useContext, useEffect, useState } from 'react';
 import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
-import { LoginContext } from '../../App';
-import { RiShoppingCartLine } from 'react-icons/ri';
+import { FirebaseAuthContext } from '../../FirebaseAuthContext';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase-config';
 
-export function ShoppingCartPage() {
+export function ShoppingCartPage(props) {
   
+  const { kg, image, quantity, currency, price, title, key, id} = props
   const [ products, setProducts ] = useState([])
-  const { auth } = useContext( LoginContext )
 
+  const { user } = useContext( FirebaseAuthContext )
 
-        // useEffect(() => {
-        //   fetch(`http://localhost:3001/cart?user=${auth.user.id}`, {
-        //     headers : {
-        //       Authorization : `Bearer ${auth.accessToken}`
-        //     }
-        //   })
-        //   .then((response) => response.json())
-        //   .then((cartList) => {
-        //     const [ cart ] = cartList
+  const [ cart, setCart ] = useState([])
 
-        //     setProducts(cart.products)
-        // })}, [] );
+  useEffect(() => {
+
+          const getCart = async () =>{
+
+              const cartDoc = `users/${user.uid}/cart`
+              const ref = collection(db, cartDoc)
+          
+          let data = await getDocs(ref)
+          
+          setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+        };   
+      
+      getCart()
+    }, [])
 
       function ProductCount () {
         if (totalQuantity === 1){
@@ -41,22 +47,10 @@ export function ShoppingCartPage() {
         return acc+ cur.quantity
       }, 0)
 
-      // function removeHandler(){
-      //   fetch(`http://localhost:3001/cart/${auth.user.id}`, {
-      //     method: "DELETE",
-      //     headers : {
-      //       Authorization : `Bearer ${auth.accessToken}`
-      //     }
-      //   })
-      // }
-
       function ShoppingCartPage() {
-        if(totalQuantity === 0) {
-          return (
-            <div className='emptyCartText'>
-            <h1>Your Cart is Empty </h1>
-            <p> <RiShoppingCartLine /> </p>
-            </div>
+        if(quantity === 0){
+          return(
+            <p>Empty</p>
           )
         } else {
           return (
@@ -69,22 +63,22 @@ export function ShoppingCartPage() {
       <section className='cartPageLeftSection'>
       <h1>1. REVIEW YOUR ORDER </h1>
       <h3>Please check that you have the right quantity of every single item to avoid confusions at checkout, Thanks!</h3>
-      {products.map((item) => {
-        return (
-          <section key={item} className='cartProductShowFlex'>
+      {cart.map((item) => {
+        return(
+        <section key={item} className='cartProductShowFlex'>
               <div>
-                <img src={item.productImage} width="150vw" alt="product image"></img>
+                <img src={item.image} width="150vw" alt="product image"></img>
               </div>
 
             <div className='row'>
               <div className='column'>
-                <p className='columnProductTitle'>{item.productTitle}</p>
-                <p>{item.productKg} Kg</p>
+                <p className='columnProductTitle'>{item.title}</p>
+                <p>{item.kg} Kg</p>
               </div>
 
               <div className='column'>
                 <p>Each</p>
-                {item.productPrice} {item.productCurrency}
+                {item.price} {item.currency}
               </div>
 
               <div className='column'>
@@ -94,13 +88,14 @@ export function ShoppingCartPage() {
 
               <div className='column'>
                 <p>Total</p>
-                {item.quantity * item.productPrice} {item.productCurrency}
+                {item.quantity * item.price} {item.currency}
               </div>
 
             </div>
           </section>
-      )
-    })}
+        )
+          })}
+
       <div className='productCartFooter'>
       <button className="emptyCartButton" >Empty Cart</button>
         <ProductCount />
@@ -117,18 +112,18 @@ export function ShoppingCartPage() {
 
       <div className="deliveryAddress_inputs">
         <div className='deliveryAddress_inputs__input' >
-          <input type="text" required="required" defaultValue={auth.user.email} ></input>
+          <input type="text" required="required"  ></input>
           <span>Email Address</span>
         </div>
 
         <div className='deliveryAddress_inputs__input input2' >
           <div>
-            <input type="text" required="required" defaultValue={auth.user.firstName}></input>
+            <input type="text" required="required" ></input>
             <span>First name</span>
           </div>
 
           <div className='lastNameInput'>
-            <input type="text" required="required" defaultValue={auth.user.lastName}></input>
+            <input type="text" required="required" ></input>
             <span>Last name</span>
           </div>
         </div>
@@ -179,16 +174,16 @@ export function ShoppingCartPage() {
           </div>
 
           <section className='doamneAjuta'>
-          {products.map((item) => {
+          {cart.map((item) => {
             return (
-              <section key={item} className='productCheckoutPage'>
+              <section className='productCheckoutPage'>
                   <div className='imageQuantity'>
-                    <img src={item.productImage} alt="product image" width="100px"></img>
+                    <img src={item.image} alt="product image" width="100px"></img>
                     <p>{item.quantity}</p>
                   </div>
                 
-                  <p className='productCheckoutPage_Title'>{item.productTitle}</p>
-                  <p>{item.quantity * item.productPrice} {item.productCurrency}</p>
+                  <p className='productCheckoutPage_Title'>{item.title}</p>
+                  <p>{item.quantity * item.price} {item.currency}</p>
                 </section>
                 )
               })}

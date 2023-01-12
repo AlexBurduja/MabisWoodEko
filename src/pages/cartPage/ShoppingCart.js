@@ -4,41 +4,64 @@ import "./ShoppingCart.css"
 import { LoginContext } from '../../App';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'react';
+import { FirebaseAuthContext } from '../../FirebaseAuthContext';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase-config';
 
 
 export function ShoppingCart() {
 
 const [products, setProducts] = useState([]);
 
-// const { auth } = useContext(AuthContext)
+const { user } = useContext( FirebaseAuthContext )
 
-  ///Fetch Get RestApi
-  // useEffect(() => {
-  //   fetch(`http://localhost:3001/cart?user=` ,{
-  //     headers : {
-  //       Authorization : ``
-  //     }
-  //   })
-  //     .then((response) => response.json())
-  //     .then((cartList) => {
-  //       const [ cart ] = cartList
+const [ cart, setCart ] = useState([])
+const [isLoading, setIsLoading] = useState(false)
 
-  //       setProducts(cart.products)
-  //     });
-  //   }, [])
+// useEffect(() => {
+//     if(user?.uid){
+
+      
+//       getCart()
+//       console.log(getCart)
+//     }
+//   }, [])
+
+
+
+useEffect(() => {
+  const getCart = async () =>{
+    setIsLoading(false)
     
-    const totalQ = products.reduce((acc,curr) => {
-      return acc + curr.quantity
-    }, 0)
+    const cartDoc = `users/${user.uid}/cart`
+      const ref = collection(db, cartDoc)
+  
+      let data = await getDocs(ref)
+      setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+  
+      setIsLoading(true)
+    };
+       
+    getCart()
+}, [])
 
 
-    function ProductCount () {
-      if (totalQ === 1){
-        return <p>{totalQ} product</p>
-      } else {
-        return <p>{totalQ} products</p>
-      }
-    }
+
+
+let sum = 0
+const totalquantity = cart.forEach(value => sum+= value.quantity)
+
+
+// console.log(quantity)
+function ProductCount () {
+  if (sum === 1){
+    return <p>{sum} product</p>
+  } else {
+    return <p>{sum} products</p>
+  }
+}
+
+
 
   return (
   <NavLink to='/cart' id='cartNavlink' >

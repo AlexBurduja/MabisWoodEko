@@ -4,7 +4,7 @@ import 'animate.css';
 import { AiFillEdit } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth, db } from "../../firebase-config";
-import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { storage } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
@@ -35,6 +35,7 @@ export function ProductCardComponent(props) {
         return document.data()
         
       }
+      
       getDocument()
       .then(data => setConditional(data))
     
@@ -286,24 +287,44 @@ export function ProductCardComponent(props) {
   // function editProductButton() {
   //   editProduct(id, title, image, kg, price, currency)
   // }
+  
+  const [ counter, setCounter] = useState(1)
+  
   const addToCart = async () => {
-    const cartDoc = collection(db, `cart/${user.uid}`, `${title}`)
+    const cartDoc = `users/${user.uid}/cart`
 
     const newFields = {
       title : title,
-      quantity: 1,
+      quantity: counter,
       price : price,
       currency: currency,
       kg: kg,
       image : url
     }
 
+    const quantity = {
+      quantity : counter
+    }
+    
+    const docRef = doc(db, cartDoc, title+kg);
+    const docSnap = await getDoc(docRef)
+
+    if(docSnap.exists()){
+      setCounter(counter + 1)
+      setDoc(doc(db,cartDoc,title+kg), quantity)
+    } else {
+      console.log(`Now having ${counter} ${title} in cart`)
+    }
+
     try {
-      addDoc(cartDoc, newFields)
+      setDoc(doc(db, cartDoc, title+kg), newFields)
     } catch(e) {
       console.log(e.message)
     }
+    
   }
+
+  
 
 
   return (

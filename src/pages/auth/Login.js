@@ -6,10 +6,13 @@ import './loginCss.css'
 import logo from "../../publicResources/logoMabis.svg"
 import { AiOutlineEye } from "react-icons/ai"
 import ParticlesBackground from "../../particlesJS/particleJsComponent";
+import { NavLink } from "react-router-dom";
+import { signInWithCredential, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase-config";
 
 export function Login(){
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [loginEmail, setLoginEmail] = useState('')
+    const [loginPassword, setLoginPassword] = useState('')
 
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
@@ -25,55 +28,26 @@ export function Login(){
     const navigate = useNavigate();
 
     function passwordChangeHandler(event){
-        setPassword(event.target.value)
+        setLoginPassword(event.target.value)
     }
 
     function emailChangeHandler(event){
-        setEmail(event.target.value)
+        setLoginEmail(event.target.value)
     }
 
-  //   function onSubmit(event){
-  //       event.preventDefault();
-  //       setEmailError('');
-  //       setPasswordError('');
+    const login = async () => {
+      try{
+        const user = await signInWithEmailAndPassword(
+          auth,
+          loginEmail,
+          loginPassword
+        )
 
-  //       const emailValid = validateEmail(email)
-
-  //       const passwordValid = validatePassword(password);
-
-  //       if (!emailValid || !passwordValid){
-  //           return;
-  //       }
-         
-  //       const body = {
-  //           email,
-  //           password
-  //       };
-
-
-  //       fetch(`http://localhost:3001/login`, {
-  //           method: 'POST',
-  //           headers: {
-  //               'Content-Type' : 'application/json'
-  //           },
-  //           body : JSON.stringify(body)
-  //       })
-  //       .then(response => {
-  //         if (response.status === 400){
-  //           setErrorMsg('Email or Password is incorrect!')
-            
-  //           setTimeout(() =>{
-  //             setErrorMsg('')
-  //           }, 2000)
-
-  //           throw new Error('invalid credentials');
-
-  //         } return response
-  //       })
-  //       .then(response => response.json())
-  //       .then(response => setAuth(response))
-  //       .then( () => navigate("/"))
-  // };
+        navigate("/")
+      }catch(err){
+        console.log(err.message)
+      }
+    }
     
 
     function validateEmail(email){
@@ -184,7 +158,7 @@ export function Login(){
           <div className="LoginRightSide">
           <h1>Log in</h1>
 
-            <form  className="loginForm" noValidate>
+            <section  className="loginForm">
 
                 <div className="inputBoxes">
                     <input id="email" type="text" onChange={emailChangeHandler} required></input>
@@ -200,18 +174,19 @@ export function Login(){
                 </div>
 
                 <motion.button 
-                type="submit"
+                onClick={login}
                 className="submitButtonLogin"
                 whileHover={{scale: 0.99}}
                 whileTap={{scale:0.9}}
                 >
-                    Login
+
+                  Login
                 </motion.button>
-              </form>
+              </section>
 
             <div>
                 
-                <p> Don't have an account? <Link to="/register">Register</Link> </p>
+                <p> Don't have an account? <NavLink to="/register">Register</NavLink> </p>
             </div>
             </div>
         </div>

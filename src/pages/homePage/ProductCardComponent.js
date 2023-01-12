@@ -41,7 +41,7 @@ if(user?.uid){
 
 
 
-  const [modal, setModal] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
 
   const [isHovering, setIsHovering] = useState(false)
 
@@ -53,11 +53,11 @@ if(user?.uid){
     setIsHovering(false);
   }
 
-  const toggleModal = () => {
-    setModal(!modal)
+  const toggleModalEdit = () => {
+    setModalEdit(!modalEdit)
   };
 
-  if(modal) {
+  if(modalEdit) {
     document.body.classList.add('active-modal')
   } else {
     document.body.classList.remove('active-modal')
@@ -289,6 +289,7 @@ if(user?.uid){
   //   editProduct(id, title, image, kg, price, currency)
   // }
 
+
   return (
         <>
     <div id="product" className="cardDiv" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
@@ -297,19 +298,19 @@ if(user?.uid){
         <p className="kgP">{kg} Kg</p>
         <p className="priceCurrencyP">{price} {currency}</p>
 
-        <button  className="cardDivButton" onClick={createCart}>Add to cart</button>
+        <button  className="cardDivButton" >Add to cart</button>
     
         <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
 
       { conditional === true && (
-        <button onClick={toggleModal} className="edit-btn">< AiFillEdit /></button>
+        <button onClick={toggleModalEdit} className="edit-btn">< AiFillEdit /></button>
       )}
       
     </div>
 
-        {modal && (
+        {modalEdit && (
           <div className="modal">
-            <div onClick={toggleModal} className="overlay"></div>
+            <div onClick={toggleModalEdit} className="overlay"></div>
               <div className="modal-content ">
                 <h1>Edit product</h1>
                   <p className="modal-content_p">Here you can change anything that you want regarding your product..</p>
@@ -389,7 +390,7 @@ if(user?.uid){
                   <button className="modal-content-button_save" onClick={update} >Save Changes</button>
                   </div>
                   
-                  <button className="close-modal" onClick={toggleModal}>
+                  <button className="close-modal" onClick={toggleModalEdit}>
                     X
                   </button>
             </div>

@@ -49,7 +49,7 @@ export function CreateProduct(){
     setConditional(data)
   })
 }
-}, [])
+}, [user?.uid])
 
 
 

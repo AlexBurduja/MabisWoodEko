@@ -212,11 +212,19 @@
   font-weight: bold;
 }
 
+.loginButtonHeader{
+  display: none;
+}
+
 /* Greater than 760px (desktop & rest) */
 @media only screen and (min-width: 850px){
     
     .hamburger{
         display: none;
+    }
+
+    .loginButtonHeader{
+      display: block;
     }
 
     .headerLogin{

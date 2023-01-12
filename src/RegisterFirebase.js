@@ -43,8 +43,10 @@ export function RegisterFirebase() {
         );
 
         await setDoc(doc(db, "users", user._tokenResponse.localId), {
-          displayName : name,
-          age : 10,
+          firstName : firstName,
+          lastName : lastName,
+          phoneNumber : phone,
+          address : address,
           admin: false 
         })
     } catch (error) {
@@ -70,12 +72,40 @@ export function RegisterFirebase() {
 
 ///
 
+const [firstName, setFirstName] = useState("")
+const [lastName, setLastName] = useState("")
+const [phone, setPhone] = useState("")
+const [address, setAddress] = useState("")
+
+function saveFirstName(event){
+  setFirstName(event.target.value)
+}
+
+function saveLastName(event){
+  setLastName(event.target.value)
+}
+
+function savePhone(event){
+  setPhone(event.target.value)
+}
+
+function saveAddress(event){
+  setAddress(event.target.value)
+}
+
   return (
     <>
       <h1>Register</h1>
+      <div className="inputBoxes">
+        <input id="firstName" type="text" onChange={saveFirstName} required></input>
+        <span htmlFor='firstName'>First name</span>
+      </div>
+      <input placeholder='firstName' onChange={saveLastName}></input>
       <input placeholder='email' onChange={saveEmail}></input>
       <input placeholder='password' onChange={savePassword}></input>
       <input placeholder='name' onChange={saveName}></input>
+      <input placeholder='address' onChange={saveAddress}></input>
+      <input placeholder='phone' onChange={savePhone}></input>
 
       <button onClick={register}>Create</button>
     </>

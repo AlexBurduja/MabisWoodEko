@@ -35,7 +35,7 @@ useEffect(() => {
   }
 
   getProducts();
-}, [collection])
+}, [])
   
   
   return (

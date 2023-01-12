@@ -23,33 +23,12 @@ export function Header() {
   
   const { user } = useContext(FirebaseAuthContext)
 
-  console.log(user)
 
   const logOut = async () => {
     await signOut(auth)
+
+    window.location.reload()
   }
-
-
-  const getName = async () => {
-
-  }
-
-    // const getAdmin = async () => {
-    //   if(user?.uid){
-
-    //     const ref = doc(db, 'users', user.uid)
-        
-    //     let document = await getDoc(ref)
-        
-    //     return document.data()
-    //   }
-    // }
-
-    // getAdmin()
-    // .then(data => {
-    //   console.log(data)
-    // })
-
  
 
 useEffect(() => {
@@ -73,20 +52,39 @@ useEffect(() => {
             
           
 
-  function LogInOurOut() {
+  function LogInOrOut() {
     if (user?.uid){
       return (
+        <div className='headerLogin'>     
+      <div className='headerLoginIcons'>
+        <NavLink to="/profile"> <CgProfile /> </NavLink>
+        </div>
+
         <div className='headerLoginText'>
-        <p>Hi, {conditional.displayName}</p> 
+        <p>Hi, {conditional.firstName}</p> 
         <button className='logoutButtonHeader' onClick={logOut} >Log Out </button>
       </div>
+
+        </div>
       )
     } else {
       return (
-        <button><NavLink to="/login">Log in</NavLink></button>
+        <button className='loginButtonHeader'><NavLink to="/login">Log in</NavLink></button>
       )
     }
   }
+
+  function LogInOrOutMobile(){
+    if(user?.uid){
+      return(
+        <button className='logoutButtonHamburger' onClick={logOut}>Log Out</button>
+      ) 
+    } else {
+      return(
+        <button className='logoutButtonHamburger'><NavLink to="/login"> Log in </NavLink></button>
+      )
+      }
+    }
 
 
   const activeClass = ({isActive}) => isActive ? "activeClassNav" : {};
@@ -107,7 +105,9 @@ useEffect(() => {
         <NavLink className={activeClass} to='/e'>About</NavLink>
         <NavLink className={activeClass} to='/reviews'>Reviews</NavLink>
         <NavLink className={activeClass} to='/contact'>Contact</NavLink>
-        <NavLink className={activeClass} to='/users'>Panel</NavLink>
+        {conditional.admin === true && (
+          <NavLink className={activeClass} to='/users'>Panel</NavLink>
+        )}
         
         </div>
     </div>
@@ -116,14 +116,8 @@ useEffect(() => {
       <ShoppingCart/>
     </div>
 
-      <div className='headerLogin'>
-        <div className='headerLoginIcons'>
-        <NavLink to="/profile"> <CgProfile /> </NavLink>
-        </div>
-
-      <LogInOurOut />
+      <LogInOrOut />
           
-      </div>
 
     <div className='hamburger'>
         <input type="checkbox" id="navi-toggle" className="checkbox" />
@@ -144,9 +138,11 @@ useEffect(() => {
             <li className='item'><NavLink className={activeClassHamburger} to='/users'>Panel</NavLink> </li>
           )}
           
-          <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>'s Profile</NavLink> </li>
+          {user?.uid && (
+            <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{conditional.firstName}'s Profile</NavLink> </li>
+          )}
           <li className="item mobileCart"> <ShoppingCart/> </li>
-          <button className='logoutButtonHamburger' >Log Out</button>
+          <LogInOrOutMobile/>
         </ul>
       </nav>
 </div>  

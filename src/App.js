@@ -16,7 +16,7 @@ import { ReviewPage } from './pages/reviewPage/ReviewPage';
 import { AdminPanelList } from './pages/adminPanel/AdminPanelList';
 import { RegisterFirebase } from './RegisterFirebase';
 import { AuthProvider } from './FirebaseAuthContext';
-import { AdminContext } from './AdminContext';
+import { CanNavigate } from './CanNavigate';
 
 export const LoginContext = React.createContext();
 
@@ -56,11 +56,13 @@ function App() {
               } ></Route>
 
               <Route path = '/users' element={
+                <CanNavigate>
                   <AdminPanelList />
+                </CanNavigate>
               }></Route>
 
             {/* <Route path = '/loginfirebase' element={ <Login /> }></Route> */}
-            {/* <Route path = '/registerfirebase' element= { <RegisterFirebase/> }></Route> */}
+            <Route path = '/registerfirebase' element= { <RegisterFirebase/> }></Route> 
             <Route path = '/login' element={ <Login /> }></Route>
             <Route path = '/register' element= { <Register/> }></Route>
         </Routes>

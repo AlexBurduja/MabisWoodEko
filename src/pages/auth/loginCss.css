@@ -130,11 +130,24 @@
 }
 
 .error{
-    width: 350px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 100%;
+    word-break: normal;
     text-align: center;
     color: red;
-    transition: width 200ms ease-in;
 }
+
+
+/* .errorContainer{
+    color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
 
 .errorMsgAccNotFound{
     color: red;
@@ -173,3 +186,9 @@ div #tsparticles {
     }
 }
 
+@media (min-width:850){
+
+    .error{
+        font-size: 80%;
+    }
+}

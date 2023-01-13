@@ -51,8 +51,7 @@ useEffect(() => {
                 price={product.price}
                 image={product.image}
                 description = {product.description}
-                id={product.id}
-                key={product.id}>
+                id={product.id}>
                 </ProductCardComponent>
             )
           })}

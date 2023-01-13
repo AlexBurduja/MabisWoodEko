@@ -5,7 +5,8 @@ import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase-config';
+import { auth, db } from '../../firebase-config';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export function ShoppingCartPage(props) {
   
@@ -16,10 +17,13 @@ export function ShoppingCartPage(props) {
 
   const [ cart, setCart ] = useState([])
 
+  const [ isLoading, setIsLoading ] = useState(true)
+
+  
   useEffect(() => {
-
-          const getCart = async () =>{
-
+    
+    const getCart = async () =>{
+      
               const cartDoc = `users/${user.uid}/cart`
               const ref = collection(db, cartDoc)
           
@@ -29,7 +33,7 @@ export function ShoppingCartPage(props) {
         };   
       
       getCart()
-    }, [])
+    }, [user.uid])  
 
       function ProductCount () {
         if (totalQuantity === 1){
@@ -65,7 +69,7 @@ export function ShoppingCartPage(props) {
       <h3>Please check that you have the right quantity of every single item to avoid confusions at checkout, Thanks!</h3>
       {cart.map((item) => {
         return(
-        <section key={item} className='cartProductShowFlex'>
+        <section key={item.id} className='cartProductShowFlex'>
               <div>
                 <img src={item.image} width="150vw" alt="product image"></img>
               </div>
@@ -176,7 +180,7 @@ export function ShoppingCartPage(props) {
           <section className='doamneAjuta'>
           {cart.map((item) => {
             return (
-              <section className='productCheckoutPage'>
+              <section key={item.id} className='productCheckoutPage'>
                   <div className='imageQuantity'>
                     <img src={item.image} alt="product image" width="100px"></img>
                     <p>{item.quantity}</p>

@@ -7,49 +7,53 @@ import { Button } from 'react';
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+import { useCallback } from 'react';
+import { ref } from 'firebase/storage';
 
 
 export function ShoppingCart() {
 
 const [products, setProducts] = useState([]);
 
+
 const { user } = useContext( FirebaseAuthContext )
+
 
 const [ cart, setCart ] = useState([])
 const [isLoading, setIsLoading] = useState(false)
 
-// useEffect(() => {
-//     if(user?.uid){
-
-      
-//       getCart()
-//       console.log(getCart)
-//     }
-//   }, [])
-
 
 
 useEffect(() => {
+  setIsLoading(false)
   const getCart = async () =>{
-    setIsLoading(false)
-    
+  
     const cartDoc = `users/${user.uid}/cart`
-      const ref = collection(db, cartDoc)
+    const ref = collection(db, cartDoc)
+    
   
       let data = await getDocs(ref)
-      setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
   
-      setIsLoading(true)
+      setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
     };
-       
+
     getCart()
-}, [])
+}, [user.uid])
 
 
 
+  if(isLoading === false ){
+    console.log("Is loading = false")
+  } 
+
+  if(isLoading === true){
+    <ShoppingCart />
+  }
 
 let sum = 0
 const totalquantity = cart.forEach(value => sum+= value.quantity)
+
+
 
 
 // console.log(quantity)

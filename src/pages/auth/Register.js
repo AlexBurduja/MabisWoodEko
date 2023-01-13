@@ -160,9 +160,10 @@ function validatePassword(registerPassword) {
 
     setInterval(() => {
 
-      setPasswordError("")
-  
+      setPasswordError("")      
     }, 2000)
+
+    navigate("/login")
 
     return false;
   }

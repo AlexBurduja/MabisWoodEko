@@ -10,6 +10,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import { FirebaseAuthContext } from "../../FirebaseAuthContext";
 import { async } from "@firebase/util";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /// Modal
 
@@ -301,19 +303,17 @@ export function ProductCardComponent(props) {
       kg: kg,
       image : url
     }
-
-    const quantity = {
-      quantity : counter
-    }
     
     const docRef = doc(db, cartDoc, title+kg);
     const docSnap = await getDoc(docRef)
+    const notify = () => toast(`${title} added in cart.`)
 
     if(docSnap.exists()){
       setCounter(counter + 1)
-      setDoc(doc(db,cartDoc,title+kg), quantity)
+      setDoc(doc(db,cartDoc,title+kg), newFields)
+      notify()
     } else {
-      console.log(`Now having ${counter} ${title} in cart`)
+      console.log(`Now having ${title} in cart`)
     }
 
     try {
@@ -323,6 +323,7 @@ export function ProductCardComponent(props) {
     }
     
   }
+
 
   
 
@@ -336,6 +337,7 @@ export function ProductCardComponent(props) {
         <p className="priceCurrencyP">{price} {currency}</p>
 
         <button  className="cardDivButton" onClick={addToCart}>Add to cart</button>
+        <ToastContainer />
     
         <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
 

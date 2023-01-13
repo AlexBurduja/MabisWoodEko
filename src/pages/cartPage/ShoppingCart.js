@@ -25,7 +25,6 @@ const [isLoading, setIsLoading] = useState(false)
 
 
 useEffect(() => {
-  setIsLoading(false)
   const getCart = async () =>{
   
     const cartDoc = `users/${user.uid}/cart`
@@ -38,17 +37,7 @@ useEffect(() => {
     };
 
     getCart()
-}, [user.uid])
-
-
-
-  if(isLoading === false ){
-    console.log("Is loading = false")
-  } 
-
-  if(isLoading === true){
-    <ShoppingCart />
-  }
+}, [user])
 
 let sum = 0
 const totalquantity = cart.forEach(value => sum+= value.quantity)

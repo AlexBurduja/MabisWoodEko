@@ -17,6 +17,7 @@ import { AdminPanelList } from './pages/adminPanel/AdminPanelList';
 import { RegisterFirebase } from './RegisterFirebase';
 import { AuthProvider } from './FirebaseAuthContext';
 import { CanNavigate } from './CanNavigate';
+import { NotificationContainer } from 'react-notifications';
 
 export const LoginContext = React.createContext();
 
@@ -67,6 +68,7 @@ function App() {
             <Route path = '/register' element= { <Register/> }></Route>
         </Routes>
       </BrowserRouter>
+      <NotificationContainer />
       </AuthProvider>
   )
 }

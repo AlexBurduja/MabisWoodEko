@@ -54,11 +54,11 @@
 }
 
 .nav {
+  position: absolute;
   overflow-y: hidden;
   height: 100vh;
-  position: fixed;
   top: 0;
-  right: -60vw;
+  right: -60px;
   z-index: 1500;
   opacity: 0;
   width: 0;
@@ -113,7 +113,7 @@
 
 .checkbox:checked ~ .nav {
   opacity: 1;
-  width: 100%;
+  width: 100%;  
   right: 0;
 }
 

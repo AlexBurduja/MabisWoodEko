@@ -124,10 +124,6 @@ export function Register() {
         })
 
         setSucces("Account created! Now taking you to login!")
-
-        setInterval(() => {
-          navigate("/login")
-        }, 2000)
     } catch (error) {
       console.log(error.message)
     }
@@ -163,10 +159,10 @@ function validatePassword(registerPassword) {
     setPasswordError('Password must contain at least 6 characters');
 
     setInterval(() => {
-    
+
       setPasswordError("")
-    
-  }, 2000)
+  
+    }, 2000)
 
     return false;
   }

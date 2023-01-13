@@ -161,7 +161,7 @@ export function Login(){
             <section  className="loginForm">
 
                 <div className="inputBoxes">
-                    <input id="email" type="text" onChange={emailChangeHandler} required></input>
+                    <input id="email" type="text" onChange={emailChangeHandler} autoComplete required></input>
                     <span>Email</span>
                     <p className="error">{emailError}</p>
                 </div>

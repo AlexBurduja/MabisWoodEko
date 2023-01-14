@@ -22,21 +22,40 @@ const { user } = useContext( FirebaseAuthContext )
 const [ cart, setCart ] = useState([])
 const [isLoading, setIsLoading] = useState(false)
 
-
+const noUser = user?.uid
 
 useEffect(() => {
-  const getCart = async () =>{
-  
-    const cartDoc = `users/${user.uid}/cart`
-    const ref = collection(db, cartDoc)
-    
-  
+  if(user?.uid){
+
+    const getCart = async () =>{
+      
+      const cartDoc = `users/${user.uid}/cart`
+      const ref = collection(db, cartDoc)
+      
+      
       let data = await getDocs(ref)
-  
+      
+      setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+    };
+    
+    getCart()
+  }
+
+  if(!user?.uid){
+    const clientId = sessionStorage.getItem("clientId")
+
+    const getCart = async () => {
+      const cartDoc = `guestCarts/${clientId}/cart`
+      const ref = collection(db, cartDoc)
+
+      let data = await getDocs(ref)
+
       setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
     };
 
     getCart()
+  }
+
 }, [user])
 
 let sum = 0

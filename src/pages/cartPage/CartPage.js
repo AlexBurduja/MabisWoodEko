@@ -4,6 +4,9 @@ import { PreFooter } from '../reusableComponents/PreFooter';
 import { BackToTop } from '../reusableComponents/BackToTop';
 import { ShoppingCartPage } from './ShoppingCartPage';
 import TopScrollProgress from '../reusableComponents/TopScrollProgress';
+import { ProductListComponent } from '../homePage/ProductListComponent';
+import { ShoppingCart } from './ShoppingCart';
+import { ShopCartGet } from './ShopCartGet';
 
 
 export function CartPage() {
@@ -11,7 +14,7 @@ export function CartPage() {
     <>
       <TopScrollProgress />
       <Header />
-      <ShoppingCartPage />
+        <ShoppingCartPage />
       <BackToTop />
       <PreFooter />
       <Footer />

@@ -4,36 +4,97 @@ import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
 
 export function ShoppingCartPage(props) {
   
-  const { kg, image, quantity, currency, price, title, key, id} = props
+  const { title, quantity } = props
   const [ products, setProducts ] = useState([])
-
+  const [kg ,setKg] = useState({})
+  
   const { user } = useContext( FirebaseAuthContext )
-
+  
   const [ cart, setCart ] = useState([])
-
-  const [ isLoading, setIsLoading ] = useState(true)
-
+  
+  const [titles, setTitles] = useState([])
+  const ref = collection(db , 'products')
+  
+  const [Q , setQ] = useState({})
+  console.log(title)
   
   useEffect(() => {
+    function getTitles(){
+  
+      const getProducts = async () => {
+        let data = await getDocs(ref)
+        
+        setTitles(data.docs.map((doc) => (doc.data())))
+        setKg(data.docs.map((doc) => (doc.data().kg)))
+      }
+      
+      getProducts()
+    }
+  
+    getTitles()
+  }, [])
+
+  const clientId = sessionStorage.getItem("clientId")
+  const finalTitles = titles.map((titles) =>  titles.title )
+
+  
+  function quantityDown() {
+    const cartDoc = `guestCarts/${clientId}/cart/Peleti25`
+
+    const newFields = {
+      quantity : +1
+    }
+
+    updateDoc(doc(db, cartDoc), newFields)
+  }
+  
+  useEffect(() => {
+    const doamneAjuta = async () => {
+      
+       const ref = collection(db, `guestCarts/${clientId}/cart`)
+       let data = await getDocs(ref)
+  
+       setQ(data.docs.map((doc) => (doc.data().quantity)))
+    }
+    doamneAjuta();
     
+    const titlees = cart.map((item) => item.title)
+    console.log(titlees)
     const getCart = async () =>{
-      
-              const cartDoc = `users/${user.uid}/cart`
-              const ref = collection(db, cartDoc)
-          
-          let data = await getDocs(ref)
-          
-          setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
-        };   
-      
+      if(user?.uid){
+
+        
+        const cartDoc = `users/${user.uid}/cart`
+        const ref = collection(db, cartDoc)
+        
+        let data = await getDocs(ref)
+        
+        setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+      };    
       getCart()
-    }, [user.uid])  
+    }
+
+      if(!user?.uid){
+        const clientId = sessionStorage.getItem("clientId")
+    
+        const getCart = async () => {
+          const cartDoc = `guestCarts/${clientId}/cart`
+          const ref = collection(db, cartDoc)
+    
+          let data = await getDocs(ref)
+    
+          setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+        };
+    
+        getCart()
+      }
+    }, [user.uid]) 
 
       function ProductCount () {
         if (totalQuantity === 1){
@@ -87,7 +148,7 @@ export function ShoppingCartPage(props) {
 
               <div className='column'>
                 <p>Quantity</p>
-                {item.quantity}
+                <button onClick={quantityDown}>-</button>{item.quantity}<button>+</button>
               </div>
 
               <div className='column'>

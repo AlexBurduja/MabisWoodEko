@@ -2,6 +2,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { useContext, useEffect, useState } from 'react';
 import { LoginContext } from '../../App';
 import { db } from '../../firebase-config';
+import { ShoppingCartPage } from '../cartPage/ShoppingCartPage';
 import { ProductCardComponent } from "./ProductCardComponent";
 import "./ProductCardComponentModal.css"
 
@@ -43,7 +44,8 @@ useEffect(() => {
       <header>Products</header>
       <div className='gridUl'>
         {products.map((product) => {
-            return (
+          return (
+            <>
                 <ProductCardComponent
                 title={product.title}
                 kg={product.kg}
@@ -53,9 +55,11 @@ useEffect(() => {
                 description = {product.description}
                 id={product.id}>
                 </ProductCardComponent>
+              </>
             )
           })}
       </div>
     </section>
-  );
+
+    )
 }

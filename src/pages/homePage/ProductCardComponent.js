@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import "./ProductCardComponent.css"
 import 'animate.css';
 import { AiFillEdit } from "react-icons/ai";
@@ -37,12 +37,29 @@ export function ProductCardComponent(props) {
         return document.data()
         
       }
+
       
       getDocument()
       .then(data => setConditional(data))
-    
     }
-  }, [user?.uid])
+  }, [])
+
+  const useClientId = () => {
+    const [clientId, setClientId] = useState(sessionStorage.getItem("clientId"));
+  
+    const generateId = () => Math.random().toString(36).substring(2, 18);
+  
+    useEffect(() => {
+      if (!clientId) {
+        const newClientId = generateId();
+        sessionStorage.setItem("clientId", newClientId);
+        setClientId(newClientId);
+      }
+    }, []);
+  }
+  
+  useClientId();
+
 
   const handleImageChange = (e) => {
     if (e.target.files[0]){
@@ -291,6 +308,7 @@ export function ProductCardComponent(props) {
   // }
   
   const [ counter, setCounter] = useState(1)
+  const [ called, setCalled ] = useState(false)
   
   // console.log(user?.uid) 
 
@@ -313,35 +331,66 @@ export function ProductCardComponent(props) {
     const docRef = doc(db, cartDoc, title+kg);
     const docSnap = await getDoc(docRef)
     const notify = () => toast(`${title} added in cart.`)
+    const notifyAdd = () => toast(`Now having ${counter} ${title} in your cart!`)
     
     if(docSnap.exists()){
+      notifyAdd();
       setCounter(counter + 1)
       setDoc(doc(db,cartDoc,title+kg), newFields)
-      notify()
     } else {
-      console.log(`Now having ${title} in cart`)
+      addInCart();
+      notify()
     }
 
-    try {
-      setDoc(doc(db, cartDoc, title+kg), newFields)
-    } catch(e) {
-      console.log(e.message)
+    function addInCart(){
+      try {
+        setDoc(doc(db, cartDoc, title+kg), newFields)
+      } catch(e) {
+        console.log(e.message)
+      }
     }
   }
 
   if(!user?.uid){
-
-      function generateId() {
-        const generateId = () => Math.random().toString(36).substring(2,18) 
-        
-        sessionStorage.setItem("cliendId", generateId())
-      }
-
-      generateId()
-
-  }
+    const clientId = sessionStorage.getItem("clientId")
     
+    const cartDoc = `guestCarts/${clientId}/cart`
+
+    const newFields = {
+      title : title,
+      quantity: counter,
+      price : price,
+      currency: currency,
+      kg: kg,
+      image : url
+    }
+
+    const docRef = doc(db,cartDoc,title+kg);
+    const docSnap = await getDoc(docRef)
+    const notify = () => toast(`${title} added in cart.`)
+    const notifyAdd = () => toast(`One more ${title} in your cart!`)
+
+    if(docSnap.exists()){
+      setCounter(counter + 1)
+      setDoc(doc(db,cartDoc,title+kg), newFields)
+      notifyAdd()
+    } else {
+      addInCart();
+      notify();
+      console.log(`Now having ${title} in your cart.`)
+    }
+
+      function addInCart(){
+      try {
+        setDoc(doc(db, cartDoc, title+kg), newFields)
+      } catch(e) {
+        console.log(e.message)
+      }
+    }
+
   }
+  
+}
   
 
   

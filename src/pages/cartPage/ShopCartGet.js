@@ -7,32 +7,30 @@ import { ShoppingCartPage } from "./ShoppingCartPage";
 export function ShopCartGet(){
 
     const { user } = useContext(FirebaseAuthContext)
-
-    const [ cart, setCart ] = useState([])
+    const [titles, setTitles] = useState([])
+    const ref = collection(db , 'products')
 
     useEffect(() => {
-        if(user?.uid){
-
-            const getCart = async () =>{
-
-                const cartDoc = `users/${user.uid}/cart`
-                const ref = collection(db, cartDoc)
-            
+        function getTitles(){
+      
+          const getProducts = async () => {
             let data = await getDocs(ref)
             
-            
-            setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
-        };   
-        
-        getCart()
-    }
-    }, [])
+            setTitles(data.docs.map((doc) => (doc.data())))
+            // setKg(data.docs.map((doc) => (doc.data().kg)))
+          }
+          
+          getProducts()
+        }
+      
+        getTitles()
+      }, [])
 
 
 
     return (
     <>
-        {cart.map((item) => (
+        {titles.map((item) => (
         <ShoppingCartPage
         currency = {item.currency}
         image = {item.image}

@@ -292,8 +292,14 @@ export function ProductCardComponent(props) {
   
   const [ counter, setCounter] = useState(1)
   
-  const addToCart = async () => {
+  // console.log(user?.uid) 
+
+    
+    const addToCart = async () => {
+      
+    if(user?.uid) {
     const cartDoc = `users/${user.uid}/cart`
+    
 
     const newFields = {
       title : title,
@@ -307,7 +313,7 @@ export function ProductCardComponent(props) {
     const docRef = doc(db, cartDoc, title+kg);
     const docSnap = await getDoc(docRef)
     const notify = () => toast(`${title} added in cart.`)
-
+    
     if(docSnap.exists()){
       setCounter(counter + 1)
       setDoc(doc(db,cartDoc,title+kg), newFields)
@@ -321,9 +327,22 @@ export function ProductCardComponent(props) {
     } catch(e) {
       console.log(e.message)
     }
-    
   }
 
+  if(!user?.uid){
+
+      function generateId() {
+        const generateId = () => Math.random().toString(36).substring(2,18) 
+        
+        sessionStorage.setItem("cliendId", generateId())
+      }
+
+      generateId()
+
+  }
+    
+  }
+  
 
   
 

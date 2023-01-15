@@ -23,7 +23,6 @@ export function ShoppingCartPage(props) {
   const ref = collection(db , 'products')
   
   const [Q , setQ] = useState({})
-  console.log(title)
   
   useEffect(() => {
     function getTitles(){
@@ -43,6 +42,24 @@ export function ShoppingCartPage(props) {
 
   const clientId = sessionStorage.getItem("clientId")
   const finalTitles = titles.map((titles) =>  titles.title )
+
+  const [ Taitalss, setTaitals ] = useState({})
+
+  // const Tatal = cart.forEach(function (cartTitle) { return cart.title })
+
+
+  
+  
+  function quantityUp(item){
+      const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
+      
+      const newFields = {
+        quantity : item.quantity + 1,
+      }
+
+      updateDoc(userDoc , newFields)
+  }
+
 
   
   function quantityDown(){
@@ -65,8 +82,7 @@ export function ShoppingCartPage(props) {
     }
     doamneAjuta();
     
-    const titlees = cart.map((item) => item.title)
-    console.log(titlees)
+
     const getCart = async () =>{
       if(user?.uid){
 
@@ -149,7 +165,8 @@ export function ShoppingCartPage(props) {
 
               <div className='column'>
                 <p>Quantity</p>
-                <button onClick={quantityDown}>-</button>{item.quantity}<button>+</button>
+                <button onClick={quantityDown}>-</button>{item.quantity}
+                <button onClick={() => quantityUp(item)}>+</button>
               </div>
 
               <div className='column'>

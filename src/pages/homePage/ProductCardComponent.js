@@ -350,6 +350,7 @@ export function ProductCardComponent(props) {
         console.log(e.message)
       }
     }
+    
   }
 
   if(!user?.uid){

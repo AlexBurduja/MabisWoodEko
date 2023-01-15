@@ -14,7 +14,7 @@ import React from "react"
 import { ProfilePage } from './pages/auth/ProfilePage.js';
 import { ReviewPage } from './pages/reviewPage/ReviewPage';
 import { AdminPanelList } from './pages/adminPanel/AdminPanelList';
-import { RegisterFirebase } from './RegisterFirebase';
+import { Form } from './pages/auth/Register/Form';
 import { AuthProvider } from './FirebaseAuthContext';
 import { CanNavigate } from './CanNavigate';
 import { NotificationContainer } from 'react-notifications';
@@ -63,7 +63,7 @@ function App() {
               }></Route>
 
             {/* <Route path = '/loginfirebase' element={ <Login /> }></Route> */}
-            <Route path = '/registerfirebase' element= { <RegisterFirebase/> }></Route> 
+            <Route path = '/registerfirebase' element= { <Form/> }></Route> 
             <Route path = '/login' element={ <Login /> }></Route>
             <Route path = '/register' element= { <Register/> }></Route>
         </Routes>

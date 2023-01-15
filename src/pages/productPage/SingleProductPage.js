@@ -4,25 +4,27 @@ import { LoginContext } from "../../App";
 import "./SingleProductPage.css"
 import { motion } from "framer-motion";
 import { HashLink } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase-config";
 
 export function SingleProductPage() {
-
-  const url = "http://localhost:3001/product"
 
   let { id } = useParams();
   const [productDetails, setproductDetails] = useState({})
 
-  const { auth } = useContext(LoginContext)
+useEffect(() => {
+
+  const ref = collection(db, `/products/${id}`, id)
   
-  useEffect(() => {
-    fetch(`${url}/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${auth.accessToken}`
-      }
-    })
-    .then((response) => response.json())
-    .then((product) => setproductDetails(product))
+    const getProduct = async () => {
+      const data = await getDocs(ref)
+      
+      setproductDetails(data.docs.map((doc) => doc.data()))
+    }
+    
+    getProduct();
   }, [])
+    
 
   
   return (

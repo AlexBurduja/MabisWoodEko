@@ -433,13 +433,12 @@ table:hover{
     padding-bottom: 10%;
 }
 
-.emptyCartTextWrapper button {
+
+
+.cartBackToProduct {
+    text-decoration: none;
     border: 2px solid black;
     padding: 20px;
-    font-family: inherit;
-    font-size: 20px;
-    cursor: pointer;
-    font-weight: bold;
 }
 
 .emptyCartTextWrapper button:hover {

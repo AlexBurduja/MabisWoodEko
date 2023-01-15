@@ -395,8 +395,6 @@ export function ProductCardComponent(props) {
 }
   
 
-  
-
 
   return (
         <>
@@ -409,7 +407,7 @@ export function ProductCardComponent(props) {
         <button  className="cardDivButton" onClick={addToCart}>Add to cart</button>
         <ToastContainer />
     
-        <a href={`/products/${id}`} className="viewMoreButton"> View more </a>
+        <a href={`products/${id}`} className="viewMoreButton"> View more </a>
 
         <button onClick={toggleModalEdit} className="edit-btn">< AiFillEdit /></button>
       

@@ -7,6 +7,7 @@ import SignUpInfo from './SignUpInfo';
 import PersonalInfo from './PersonalInfo';
 import OtherInfo from './OtherInfo';
 import "./RegisterMulti.css"
+import ParticlesBackground from '../../../particlesJS/particleJsComponent';
 
 
 
@@ -125,8 +126,8 @@ const registerO = async (event) => {
   return (
     <>
       {/* <h1>Register</h1> */}
-
       <div className='form'>
+      <ParticlesBackground />
         <div className='progressbar'>
           <div className='progressbarTransaction' style={{ width: page === 0 ? "33.3%" : page === 1 ? "66.6%" : "100%", transition: "width ease-in 1s"}}></div>
         </div>

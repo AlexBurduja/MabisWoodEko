@@ -63,9 +63,9 @@ function App() {
               }></Route>
 
             {/* <Route path = '/loginfirebase' element={ <Login /> }></Route> */}
-            <Route path = '/registerfirebase' element= { <Form/> }></Route> 
+            {/* <Route path = '/registerfirebase' element= { <Form/> }></Route>  */}
             <Route path = '/login' element={ <Login /> }></Route>
-            <Route path = '/register' element= { <Register/> }></Route>
+            <Route path = '/register' element= { <Form/> }></Route>
         </Routes>
       </BrowserRouter>
       <NotificationContainer />

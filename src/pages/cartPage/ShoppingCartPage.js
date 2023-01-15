@@ -4,10 +4,12 @@ import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
-import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 import { FieldValue } from 'firebase/firestore';
 import { auth, db } from '../../firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
+import { RiShoppingCartLine } from 'react-icons/ri';
+import { HashLink } from 'react-router-hash-link';
 
 export function ShoppingCartPage(props) {
   
@@ -51,25 +53,74 @@ export function ShoppingCartPage(props) {
   
   
   function quantityUp(item){
+    if(user?.uid){
+
       const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
       
       const newFields = {
         quantity : item.quantity + 1,
       }
-
+      
       updateDoc(userDoc , newFields)
+    }
+
+    if(!user?.uid){
+      const clientId = sessionStorage.getItem("clientId")
+      const userDoc= doc(db, `guestCarts/${clientId}/cart/${item.title+item.kg}`)
+
+      const newFields = {
+        quantity : item.quantity + 1
+      }
+
+      updateDoc(userDoc, newFields)
+    }
+
+    setInterval(() => {
+      window.location.reload()
+    }, 500)
+
   }
 
 
   
-  function quantityDown(){
-    const cartDoc = `guestCarts/${clientId}/cart`
+  function quantityDown(item){
+    if(user?.uid){
 
-    const newFields = {
-      quantity : FieldValue.increment(1)
+      const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
+      
+      const newFields = {
+        quantity : item.quantity - 1,
+      }
+      
+      updateDoc(userDoc , newFields)
+
+      if(item.quantity === 1){
+  
+        deleteDoc(userDoc)
+        console.log(`Item is deleted!` )
+      }
     }
 
-    updateDoc((db, cartDoc, "Peleti25"), newFields)
+    if(!user?.uid){
+      const clientId = sessionStorage.getItem("clientId")
+      const userDoc= doc(db, `guestCarts/${clientId}/cart/${item.title+item.kg}`)
+
+      const newFields = {
+        quantity : item.quantity - 1
+      }
+
+      updateDoc(userDoc, newFields)
+
+      if(item.quantity === 1){
+  
+        deleteDoc(userDoc)
+        console.log(`Item is deleted!` )
+      }
+    }
+
+    setInterval(() => {
+      window.location.reload()
+    }, 500)
   }
   
   useEffect(() => {
@@ -113,7 +164,7 @@ export function ShoppingCartPage(props) {
       }
     }, [user]) 
 
-      function ProductCount () {
+      function ProductCount (item) {
         if (totalQuantity === 1){
           return <p>{totalQuantity} product</p>
         } else {
@@ -121,18 +172,34 @@ export function ShoppingCartPage(props) {
         }
       }
 
-      const totalPrice = products.reduce((acc,cur) => {
-        return acc + cur.quantity * cur.productPrice
+      const totalPrice = cart.reduce((acc,cur) => {
+        return acc + cur.quantity * cur.price
       }, 0)
 
-      const totalQuantity = products.reduce((acc,cur) => {
+      const totalQuantity = cart.reduce((acc,cur) => {
         return acc+ cur.quantity
       }, 0)
 
       function ShoppingCartPage() {
-        if(quantity === 0){
+        if(totalQuantity === 0){
           return(
-            <p>Empty</p>
+            <div className='emptyCartTextWrapper'>
+            <div className='emptyCartText'>
+              <div>
+            <h1>Your Cart is Empty </h1>
+              </div>
+
+              <div>
+            <p> <RiShoppingCartLine /> </p>
+              </div>
+
+            </div>
+
+            <div>
+              <button><HashLink to="/#products" replace="true">Back to products</HashLink></button>
+            </div>
+
+            </div>
           )
         } else {
           return (
@@ -165,7 +232,8 @@ export function ShoppingCartPage(props) {
 
               <div className='column'>
                 <p>Quantity</p>
-                <button onClick={quantityDown}>-</button>{item.quantity}
+                <button onClick={() => quantityDown(item)}>-</button>
+                {item.quantity}
                 <button onClick={() => quantityUp(item)}>+</button>
               </div>
 

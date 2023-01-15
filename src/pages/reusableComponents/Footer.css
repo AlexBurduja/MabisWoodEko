@@ -3,11 +3,14 @@
     background: linear-gradient(to left, #041e91, rgb(43,43,230));
     font-weight: bold;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 
 .footerSection_flex_row{
     display: flex;
+    flex-direction: row;
     text-align: center;
     justify-content: space-around;
 }

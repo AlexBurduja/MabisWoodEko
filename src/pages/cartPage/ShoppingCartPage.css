@@ -416,15 +416,35 @@ table:hover{
 }
 
 .emptyCartText{
-    text-align: center;
-    margin-top: 20px;
     display: flex;
-    gap: 20px;
-    font-size: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10%;
+}
+
+.emptyCartTextWrapper{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    gap: 250px;
+    padding-bottom: 10%;
+}
+
+.emptyCartTextWrapper button {
+    border: 2px solid black;
+    padding: 20px;
+    font-family: inherit;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.emptyCartTextWrapper button:hover {
+    color: white;
+    background-color: rgba(48, 48, 230, 1);
 }
 
 .emptyCartText p{
@@ -433,15 +453,7 @@ table:hover{
 }
 
 
-/* .arrowDiv_Icon{
-    position: fixed;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%,-50%);
-    font-size: 50px;
-} */
 /* under 900px */
-
 
 @media  (max-width: 850px) {
 

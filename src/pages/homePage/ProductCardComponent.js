@@ -4,7 +4,7 @@ import 'animate.css';
 import { AiFillEdit } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth, db } from "../../firebase-config";
-import { addDoc, collection, doc, FieldValue, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { storage } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
@@ -42,9 +42,8 @@ export function ProductCardComponent(props) {
       getDocument()
       .then(data => setConditional(data))
     }
-
   }, [])
-  
+
   const useClientId = () => {
     const [clientId, setClientId] = useState(sessionStorage.getItem("clientId"));
   
@@ -57,12 +56,9 @@ export function ProductCardComponent(props) {
         setClientId(newClientId);
       }
     }, []);
-    if(!user?.uid){
-      useClientId()
-    }
   }
-
   
+  useClientId();
 
 
   const handleImageChange = (e) => {
@@ -316,6 +312,7 @@ export function ProductCardComponent(props) {
   
   // console.log(user?.uid) 
 
+
     
     const addToCart = async () => {
       
@@ -331,10 +328,6 @@ export function ProductCardComponent(props) {
       kg: kg,
       image : url
     }
-
-    const quantity = {
-      quantity : FieldValue.increment(1)
-    }
     
     const docRef = doc(db, cartDoc, title+kg);
     const docSnap = await getDoc(docRef)
@@ -344,7 +337,7 @@ export function ProductCardComponent(props) {
     if(docSnap.exists()){
       notifyAdd();
       setCounter(counter + 1)
-      setDoc(doc(db,cartDoc,title+kg), quantity)
+      setDoc(doc(db,cartDoc,title+kg), newFields)
     } else {
       addInCart();
       notify()

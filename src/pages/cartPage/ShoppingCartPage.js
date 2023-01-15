@@ -5,6 +5,7 @@ import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
 import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
+import { FieldValue } from 'firebase/firestore';
 import { auth, db } from '../../firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
 
@@ -44,14 +45,14 @@ export function ShoppingCartPage(props) {
   const finalTitles = titles.map((titles) =>  titles.title )
 
   
-  function quantityDown() {
-    const cartDoc = `guestCarts/${clientId}/cart/Peleti25`
+  function quantityDown(){
+    const cartDoc = `guestCarts/${clientId}/cart`
 
     const newFields = {
-      quantity : +1
+      quantity : FieldValue.increment(1)
     }
 
-    updateDoc(doc(db, cartDoc), newFields)
+    updateDoc((db, cartDoc, "Peleti25"), newFields)
   }
   
   useEffect(() => {

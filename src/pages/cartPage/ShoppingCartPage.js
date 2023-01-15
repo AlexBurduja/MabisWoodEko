@@ -196,7 +196,7 @@ export function ShoppingCartPage(props) {
             </div>
 
             <div>
-              <button><HashLink to="/#products" replace="true">Back to products</HashLink></button>
+              <button><HashLink to="/#product" replace="true">Back to products</HashLink></button>
             </div>
 
             </div>

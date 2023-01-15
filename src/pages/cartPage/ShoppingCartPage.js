@@ -78,8 +78,8 @@ export function ShoppingCartPage(props) {
         
         setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
       };    
-      getCart()
     }
+    getCart()
 
       if(!user?.uid){
         const clientId = sessionStorage.getItem("clientId")
@@ -95,7 +95,7 @@ export function ShoppingCartPage(props) {
     
         getCart()
       }
-    }, [user.uid]) 
+    }, [user]) 
 
       function ProductCount () {
         if (totalQuantity === 1){

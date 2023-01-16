@@ -221,23 +221,36 @@ export function ShoppingCartPage(props) {
         return stripePromise
       }
 
-      const item= {
-        price : toString(totalPrice),
-        quantity : totalQuantity,
+      // const item= {
+      //   price : totalPrice.toString(),
+      //   quantity : 2,
+      // }
+
+      const formatCartItems = (cart) => {
+        return cart.map((item) => {
+          return {
+            price: `${item.price}`,
+            quantity: item.quantity
+          }
+        });
       }
 
+      // console.log(toString(totalPrice))
+
+      // console.log(item)
+
       const checkoutOptions = {
-        lineItems: [item],
+        lineItems: formatCartItems(cart),
         mode: "payment",
-        successUrl: "",
-        cancelUrl: ""
+        successUrl: `${window.location.origin}/succes`,
+        cancelUrl: `${window.location.origin}/cancel`
       }
 
       const redirectToCheckout = async () => {
         console.log("redirectToCheckout")
 
         const stripe = await getStripe()
-        const {error} = await stripe.redirectToCheckout(checkoutOptions)
+        const { error } = await stripe.redirectToCheckout(checkoutOptions)
         console.log("Stripe checkout error", error)
       } 
 

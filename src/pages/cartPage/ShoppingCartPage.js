@@ -10,6 +10,7 @@ import { auth, db } from '../../firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
+import { loadStripe } from '@stripe/stripe-js';
 
 export function ShoppingCartPage(props) {
   
@@ -179,6 +180,66 @@ export function ShoppingCartPage(props) {
       const totalQuantity = cart.reduce((acc,cur) => {
         return acc+ cur.quantity
       }, 0)
+
+      function Checkout({ amount }) {
+        const stripeKey = process.env.pk_test_51MQo3GLhCgTZCrVVShrOGDphb9M7MGq9YTOCW90JE5cVtrYsExpY49wClOSYqEn4Ezv9tGcuKIFtbBpSCIF1iDPT00wEyjkOIV
+
+        const handleToken= (token) => {
+          const headers = { 'Content-Type' : 'application/json' }
+          const body = JSON.stringify({token : token.id, amount: amount})
+          const options = {method : 'POST', headers, body}
+
+
+        }
+      }
+
+      const handleFirebase = async (token) => {
+        db.collection('payments').add({
+          product: cart.title,
+          token: token.id,
+          amount: cart.price * 100, // in cents
+          date: new Date()
+        });
+      }
+      
+      // const handleCheckout = async (event) => {
+      //     event.preventDefault();
+      //     const { token, error } = await props.stripe.createToken();
+      //     if (error) {
+      //       console.log(error);
+      //     } else {
+      //       handleFirebase(token);
+      //     }
+      // };
+
+      let stripePromise;
+
+      const getStripe = () => {
+        if(!stripePromise){
+          stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
+        }
+        return stripePromise
+      }
+
+      const item= {
+        price : totalPrice,
+        quantity : totalQuantity,
+      }
+
+      const checkoutOptions = {
+        lineItems: [item],
+        mode: "payment",
+        successUrl: "",
+        cancelUrl: ""
+      }
+
+      const redirectToCheckout = async () => {
+        console.log("redirectToCheckout")
+
+        const stripe = await getStripe()
+        const {error} = await stripe.redirectToCheckout(checkoutOptions)
+        console.log("Stripe checkout error", error)
+      } 
 
       function ShoppingCartPage() {
         if(totalQuantity === 0){
@@ -351,12 +412,12 @@ export function ShoppingCartPage(props) {
                     <option value="standard">Standard Delivery</option>
                     <option value="premium">Premium Delivery</option>
                   </select>
-                  <button>CHECKOUT</button>
                   <div className='deliveryFooter'>
                     <p>WE ACCEPT:</p>
                     <div className='react-icons'>
                     <FaCcApplePay /> <FaCcPaypal /> <FaCcVisa /> <FaCcAmazonPay /> <FaCcAmex />
                     </div>
+                  <button onClick={redirectToCheckout}>Checkout</button>
                   </div>
                 </div>
               </div>

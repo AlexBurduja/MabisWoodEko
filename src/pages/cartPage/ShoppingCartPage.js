@@ -216,13 +216,13 @@ export function ShoppingCartPage(props) {
 
       const getStripe = () => {
         if(!stripePromise){
-          stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
+          stripePromise = loadStripe("pk_test_51MQo3GLhCgTZCrVVShrOGDphb9M7MGq9YTOCW90JE5cVtrYsExpY49wClOSYqEn4Ezv9tGcuKIFtbBpSCIF1iDPT00wEyjkOIV")
         }
         return stripePromise
       }
 
       const item= {
-        price : totalPrice,
+        price : toString(totalPrice),
         quantity : totalQuantity,
       }
 

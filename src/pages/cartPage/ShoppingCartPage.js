@@ -221,26 +221,26 @@ export function ShoppingCartPage(props) {
         return stripePromise
       }
 
-      // const item= {
-      //   price : totalPrice.toString(),
-      //   quantity : 2,
-      // }
-
-      const formatCartItems = (cart) => {
-        return cart.map((item) => {
-          return {
-            price: `${item.price}`,
-            quantity: item.quantity
-          }
-        });
+      const item= {
+        price : totalPrice.toString(),
+        quantity : 2,
       }
+
+      // const formatCartItems = (cart) => {
+      //   return cart.map((item) => {
+      //     return {
+      //       price: item.price,
+      //       quantity: item.quantity
+      //     }
+      //   });
+      // }
 
       // console.log(toString(totalPrice))
 
       // console.log(item)
 
       const checkoutOptions = {
-        lineItems: formatCartItems(cart),
+        lineItems: item(cart),
         mode: "payment",
         successUrl: `${window.location.origin}/succes`,
         cancelUrl: `${window.location.origin}/cancel`
@@ -252,7 +252,7 @@ export function ShoppingCartPage(props) {
         const stripe = await getStripe()
         const { error } = await stripe.redirectToCheckout(checkoutOptions)
         console.log("Stripe checkout error", error)
-      } 
+      }
 
       function ShoppingCartPage() {
         if(totalQuantity === 0){
@@ -430,7 +430,7 @@ export function ShoppingCartPage(props) {
                     <div className='react-icons'>
                     <FaCcApplePay /> <FaCcPaypal /> <FaCcVisa /> <FaCcAmazonPay /> <FaCcAmex />
                     </div>
-                  <button onClick={redirectToCheckout}>Checkout</button>
+                  <button onClick={handleCheckout}>Checkout</button>
                   </div>
                 </div>
               </div>

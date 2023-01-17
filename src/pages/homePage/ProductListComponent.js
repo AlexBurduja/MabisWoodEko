@@ -37,7 +37,7 @@ useEffect(() => {
 
   getProducts();
 }, [])
-  
+
   
   return (
     <section className='listComponent'>
@@ -53,6 +53,7 @@ useEffect(() => {
                 price={product.price}
                 image={product.image}
                 description = {product.description}
+                stripeId = {product.stripeId}
                 id={product.id}>
                 </ProductCardComponent>
               </>

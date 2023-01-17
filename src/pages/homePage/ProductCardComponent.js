@@ -17,7 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export function ProductCardComponent(props) {
 
-  const { title ,kg, currency,  price, image, description, id } = props
+  const { title ,kg, currency,  price, image, description, id, stripeId } = props
 
   // const [user , setUser] = useState({})
   const [conditional , setConditional ] = useState(false)
@@ -326,6 +326,7 @@ export function ProductCardComponent(props) {
       price : price,
       currency: currency,
       kg: kg,
+      stripeId : stripeId,
       image : url
     }
     

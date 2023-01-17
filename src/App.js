@@ -1,16 +1,13 @@
 import './App.css';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import React from "react"
+import { BrowserRouter } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { Homepage } from './pages/homePage/Homepage'
 import { CartPage } from './pages/cartPage/CartPage'
 import { ProductPage } from './pages/productPage/ProductPage'
 import { ContactPage } from './pages/contactPage/ContactPage'
 import { Login } from './pages/auth/Login';
-import { Register } from './pages/auth/Register';
-import React from "react"
 import { ProfilePage } from './pages/auth/ProfilePage.js';
 import { ReviewPage } from './pages/reviewPage/ReviewPage';
 import { AdminPanelList } from './pages/adminPanel/AdminPanelList';

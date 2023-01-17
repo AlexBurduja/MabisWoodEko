@@ -4,54 +4,46 @@ import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
-import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
-import { FieldValue } from 'firebase/firestore';
-import { auth, db } from '../../firebase-config';
-import { onAuthStateChanged } from 'firebase/auth';
+import { collection, deleteDoc, doc,getDocs, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase-config';
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
 import { loadStripe } from '@stripe/stripe-js';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import emailjs from "emailjs-com"
 
-export function ShoppingCartPage(props) {
-  
-  const { title, quantity } = props
-  const [ products, setProducts ] = useState([])
-  const [kg ,setKg] = useState({})
-  
+export function ShoppingCartPage() {
   const { user } = useContext( FirebaseAuthContext )
   
   const [ cart, setCart ] = useState([])
-  
-  const [titles, setTitles] = useState([])
-  const ref = collection(db , 'products')
-  
-  const [Q , setQ] = useState({})
-  
-  useEffect(() => {
-    function getTitles(){
-  
-      const getProducts = async () => {
-        let data = await getDocs(ref)
-        
-        setTitles(data.docs.map((doc) => (doc.data())))
-        setKg(data.docs.map((doc) => (doc.data().kg)))
-      }
-      
-      getProducts()
+  const [ country, setCountry ] = useState("")
+  const [ pickUp, setPickUp] = useState(false)
+  const [deliverySelected, setDeliverySelected] = useState("card")
+  const [ region, setRegion ] = useState("Select region")
+  const [ disabled, setDisable ] = useState("disable")
+
+  const handleDeliveryChange = (e) =>{
+    setDeliverySelected(e.target.value)
+    
+    if(e.target.value === "pickUp"){
+      setPickUp(true)
+    }else {
+      setPickUp(false);
     }
-  
-    getTitles()
-  }, [])
+  }
 
-  const clientId = sessionStorage.getItem("clientId")
-  const finalTitles = titles.map((titles) =>  titles.title )
+  const handleRegionChange = (e) => {
+    setRegion(e)
 
-  const [ Taitalss, setTaitals ] = useState({})
+    if(region.length === (!"Select Region") || "-"){
+      setDisable("")
+    } else {
+      setDisable("disable")
+    }
+  }
 
-  // const Tatal = cart.forEach(function (cartTitle) { return cart.title })
+  console.log(region)
 
-
-  
   
   function quantityUp(item){
     if(user?.uid){
@@ -125,15 +117,6 @@ export function ShoppingCartPage(props) {
   }
   
   useEffect(() => {
-    const doamneAjuta = async () => {
-      
-       const ref = collection(db, `guestCarts/${clientId}/cart`)
-       let data = await getDocs(ref)
-  
-       setQ(data.docs.map((doc) => (doc.data().quantity)))
-    }
-    doamneAjuta();
-    
 
     const getCart = async () =>{
       if(user?.uid){
@@ -181,37 +164,6 @@ export function ShoppingCartPage(props) {
         return acc+ cur.quantity
       }, 0)
 
-      function Checkout({ amount }) {
-        const stripeKey = process.env.pk_test_51MQo3GLhCgTZCrVVShrOGDphb9M7MGq9YTOCW90JE5cVtrYsExpY49wClOSYqEn4Ezv9tGcuKIFtbBpSCIF1iDPT00wEyjkOIV
-
-        const handleToken= (token) => {
-          const headers = { 'Content-Type' : 'application/json' }
-          const body = JSON.stringify({token : token.id, amount: amount})
-          const options = {method : 'POST', headers, body}
-
-
-        }
-      }
-
-      const handleFirebase = async (token) => {
-        db.collection('payments').add({
-          product: cart.title,
-          token: token.id,
-          amount: cart.price * 100, // in cents
-          date: new Date()
-        });
-      }
-      
-      // const handleCheckout = async (event) => {
-      //     event.preventDefault();
-      //     const { token, error } = await props.stripe.createToken();
-      //     if (error) {
-      //       console.log(error);
-      //     } else {
-      //       handleFirebase(token);
-      //     }
-      // };
-
       let stripePromise;
 
       const getStripe = () => {
@@ -221,29 +173,23 @@ export function ShoppingCartPage(props) {
         return stripePromise
       }
 
-      const item= {
-        price : totalPrice.toString(),
-        quantity : 2,
+      const stripeIds = cart.map(item => item.stripeId)
+      const itemQuantity = cart.map(item => item.quantity)
+
+      const items = []
+      for(let i= 0; i < cart.length; i++){
+        items.push({
+          price : stripeIds[i],
+          quantity : itemQuantity[i]
+        })
       }
 
-      // const formatCartItems = (cart) => {
-      //   return cart.map((item) => {
-      //     return {
-      //       price: item.price,
-      //       quantity: item.quantity
-      //     }
-      //   });
-      // }
-
-      // console.log(toString(totalPrice))
-
-      // console.log(item)
 
       const checkoutOptions = {
-        lineItems: item(cart),
+        lineItems: items,
         mode: "payment",
         successUrl: `${window.location.origin}/succes`,
-        cancelUrl: `${window.location.origin}/cancel`
+        cancelUrl: `${window.location.origin}/cancel`,
       }
 
       const redirectToCheckout = async () => {
@@ -420,17 +366,61 @@ export function ShoppingCartPage(props) {
                 </div>
 
                 <div className='deliveryOptions'>
-                  <label htmlFor="delivery">Delivery </label>
-                  <select id='delivery'>
-                    <option value="standard">Standard Delivery</option>
-                    <option value="premium">Premium Delivery</option>
+                  <CountryDropdown value={country}
+
+                  onChange={(e) => setCountry(e)}
+
+                  />
+                  <RegionDropdown country={country}
+                  value = {region}
+                  onChange={handleRegionChange}/>
+                  <label htmlFor="delivery">Pay Method: </label>
+                  
+                  {country === "Romania" && (
+                  <select disabled={disabled} id='delivery' onChange={handleDeliveryChange} value={deliverySelected}>
+                    <option value="card">Credit Card</option>
+                    <option value="ramburs">Ramburs (cash on delivery)</option>
+                    <option value="pickUp">Pick up from one of our stores.</option>
                   </select>
+                  )}
+
+                  {!(country === "Romania") && (
+                    <select disabled={disabled} id='delivery'>
+                    <option value="card">Credit Card</option>
+                  </select>
+                  )}
+
+                  {pickUp && (
+                    <select id='blabla'>
+                    <option value="bucuresti">Bucuresti</option>
+                    <option value="arges">Arges</option>
+                  </select>
+                  )}
+
                   <div className='deliveryFooter'>
                     <p>WE ACCEPT:</p>
                     <div className='react-icons'>
                     <FaCcApplePay /> <FaCcPaypal /> <FaCcVisa /> <FaCcAmazonPay /> <FaCcAmex />
                     </div>
-                  <button onClick={handleCheckout}>Checkout</button>
+                  <button onClick={() => {
+                    if(deliverySelected === "card"){
+                      // redirectToCheckout()
+                      console.log("Stripe")
+                    } else if(deliverySelected === "ramburs" || "pickUp") {
+                      console.log('mail')
+                    //   emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
+                    //         subject: `Order from ${user.email}` `${stripeIdss()}`,
+                    //         message : `Order contains :`
+                    //         }
+                    //   }, 'crU6K8bQnftB81z-j')                    
+                    // }
+
+                    emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
+                      subject: `Order from ${user.email}`,
+                      message : `O comanda a fost lansata! Aceasta contine : ${stripeIdss()} 
+                      Pretul total fiind de ${totalPrice} lei` 
+                    }, 'crU6K8bQnftB81z-j' )
+                  }}}>Checkout</button>
                   </div>
                 </div>
               </div>
@@ -443,6 +433,19 @@ export function ShoppingCartPage(props) {
         }
       }
 
+
+
+      function stripeIdss(){
+        return cart.map(cart => `${cart.title} ${cart.kg}Kg (Cantitate : ${cart.quantity})
+        `)
+        // let itemes = []
+        // for(const items of stripeIds){
+        //   items.push(itemes)
+        // }
+        // return itemes
+      }
+
+      console.log(stripeIdss())
   return (
       <ShoppingCartPage />
   )

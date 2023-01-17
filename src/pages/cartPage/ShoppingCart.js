@@ -61,10 +61,10 @@ useEffect(() => {
 let sum = 0
 const totalquantity = cart.forEach(value => sum+= value.quantity)
 
+console.log(sum)
 
 
 
-// console.log(quantity)
 function ProductCount () {
   if (sum === 1){
     return <p>{sum} product</p>

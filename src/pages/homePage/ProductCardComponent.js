@@ -365,6 +365,7 @@ export function ProductCardComponent(props) {
       price : price,
       currency: currency,
       kg: kg,
+      stripeId : stripeId,
       image : url
     }
 

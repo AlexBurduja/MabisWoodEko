@@ -9,10 +9,11 @@ import emailjs from 'emailjs-com'
 import { HashLink } from "react-router-hash-link"
 import { useContext } from "react"
 import { LoginContext } from "../../App"
+import { FirebaseAuthContext } from "../../FirebaseAuthContext"
 
 export function ContactForm() {
   
-  const { auth } = useContext( LoginContext )
+  const {  user } = useContext( FirebaseAuthContext )
 
   function sendEmail(e) {
     e.preventDefault();
@@ -65,12 +66,12 @@ export function ContactForm() {
         </div>
           
         <div className='rightSide_inputs__input' >
-          <input name="name" type="text" required="required" defaultValue={`${auth.user.firstName} ${auth.user.lastName}`}></input>
+          <input name="name" type="text" required="required" defaultValue={`${user} ${user}`}></input>
           <span>Full Name</span>
         </div>
 
         <div className='rightSide_inputs__input' >
-          <input name="email" type="text" required="required" defaultValue={auth.user.email}></input>
+          <input name="email" type="text" required="required" defaultValue={user.email}></input>
           <span>Email</span>
         </div>
 

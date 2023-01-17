@@ -21,6 +21,10 @@ export function ShoppingCartPage() {
   const [deliverySelected, setDeliverySelected] = useState("card")
   const [ region, setRegion ] = useState("Select region")
   const [ disabled, setDisable ] = useState("disable")
+  
+  const [email ,setEmail] = useState('')
+
+
 
   const handleDeliveryChange = (e) =>{
     setDeliverySelected(e.target.value)
@@ -184,7 +188,6 @@ export function ShoppingCartPage() {
         })
       }
 
-
       const checkoutOptions = {
         lineItems: items,
         mode: "payment",
@@ -283,7 +286,7 @@ export function ShoppingCartPage() {
 
       <div className="deliveryAddress_inputs">
         <div className='deliveryAddress_inputs__input' >
-          <input type="text" required="required"  ></input>
+          <input type="text" required="required" defaultValue={user?.uid ? user.email : ''}></input>
           <span>Email Address</span>
         </div>
 
@@ -439,7 +442,6 @@ export function ShoppingCartPage() {
         // return itemes
       }
 
-      console.log(stripeIdss())
   return (
       <ShoppingCartPage />
   )

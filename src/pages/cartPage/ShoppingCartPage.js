@@ -255,6 +255,7 @@ export function ShoppingCartPage() {
 
       function stripeIdss(){
         return cart.map(cart => `${cart.title} ${cart.kg}Kg (Cantitate : ${cart.quantity})
+
         `)
         // let itemes = []
         // for(const items of stripeIds){
@@ -456,8 +457,11 @@ export function ShoppingCartPage() {
 
               emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
                 subject: `Order from ${user.email}`,
-                message : `O comanda a fost lansata! Aceasta contine : ${stripeIdss()} 
-                Pretul total fiind de ${totalPrice} lei` 
+                name : "Hello",
+                message : `O comanda a fost lansata! 
+                Aceasta contine : 
+                ${stripeIdss()} `,
+                totalPrice : `Pretul total este de ${totalPrice}`,
               }, 'crU6K8bQnftB81z-j' )
             }}}>Checkout</button>
             </div>

@@ -1,14 +1,12 @@
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./Register.css"
 import { AnimatePresence, motion } from 'framer-motion';
 import { AiOutlineEye } from 'react-icons/ai';
 import ParticlesBackground from '../../particlesJS/particleJsComponent';
-import { FirebaseAuthContext } from '../../FirebaseAuthContext';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../firebase-config';
 import { doc, setDoc } from 'firebase/firestore';
-import PhoneInput from 'react-phone-number-input';
 import { NavLink } from 'react-router-dom';
 
 
@@ -31,9 +29,7 @@ export function Register() {
   const [phoneNumberError, setPhoneNumberError] = useState('')
   const [ succes, setSucces] = useState("")
 
-  const [value, setValue] = useState()
 
-  const { user } = useContext(FirebaseAuthContext)
 
   const [passwordShow, setPasswordShow] = useState(false)
   
@@ -42,19 +38,6 @@ export function Register() {
   }
 
   const navigate = useNavigate();
-
-  const now = new Date();
-  let minutes = now.getMinutes()
-
-  minutes = minutes.toString().padStart(2, '0')
-
-  let date = now.getDate()
-  
-  date = date.toString().padStart(2, '0')
-
-  let month = now.getMonth() + 1
-
-  month = month.toString().padStart(2, '0')
 
 
   
@@ -228,7 +211,7 @@ function validatePassword(registerPassword) {
 }
 
 function validateFirstName(firstLastName){
-  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
+  const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
   
   if(firstLastName.match(/\d/)){
     setFirstNameError("First name can't contain numbers!")
@@ -270,7 +253,7 @@ function validateFirstName(firstLastName){
   }
 
 function validateLastName(firstLastName){
-  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
+  const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
   
   if(firstLastName.match(/\d/)){
     setLastNameError("Last name can't contain numbers!")

@@ -404,16 +404,10 @@ export function ShoppingCartPage() {
                     </div>
                   <button onClick={() => {
                     if(deliverySelected === "card"){
-                      // redirectToCheckout()
+                      redirectToCheckout()
                       console.log("Stripe")
                     } else if(deliverySelected === "ramburs" || "pickUp") {
                       console.log('mail')
-                    //   emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
-                    //         subject: `Order from ${user.email}` `${stripeIdss()}`,
-                    //         message : `Order contains :`
-                    //         }
-                    //   }, 'crU6K8bQnftB81z-j')                    
-                    // }
 
                     emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
                       subject: `Order from ${user.email}`,

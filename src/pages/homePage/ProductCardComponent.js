@@ -4,7 +4,7 @@ import 'animate.css';
 import { AiFillEdit } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth, db } from "../../firebase-config";
-import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import { storage } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
@@ -308,11 +308,6 @@ export function ProductCardComponent(props) {
   // }
   
   const [ counter, setCounter] = useState(1)
-  const [ called, setCalled ] = useState(false)
-  
-  // console.log(user?.uid) 
-
-
     
     const addToCart = async () => {
       
@@ -332,25 +327,24 @@ export function ProductCardComponent(props) {
     
     const docRef = doc(db, cartDoc, title+kg);
     const docSnap = await getDoc(docRef)
-    const notify = () => toast(`${title} added in cart.`)
+    const notify = () => toast(`Click one more time to add ${title} in your cart!`)
     const notifyAdd = () => toast(`Now having ${counter} ${title} in your cart!`)
     
     if(docSnap.exists()){
+      setDoc(doc(db,cartDoc,title+kg), newFields)
       notifyAdd();
       setCounter(counter + 1)
-      setDoc(doc(db,cartDoc,title+kg), newFields)
+      console.log(counter)
     } else {
-      addInCart();
-      notify()
-    }
-
-    function addInCart(){
       try {
         setDoc(doc(db, cartDoc, title+kg), newFields)
       } catch(e) {
         console.log(e.message)
       }
+      notify()
     }
+
+  
     
   }
 

@@ -27,7 +27,15 @@ export function ShoppingCartPage() {
 
 
   const [email ,setEmail] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [street, setStreet] = useState('')
+  const [streetNo, setStreetNo] = useState('')
+  const [block, setBlock] = useState('')
+  const [apartamentNo, setApartamentNo] = useState('')
 
+  console.log(email)
 
 
   const handleDeliveryChange = (e) =>{
@@ -254,14 +262,8 @@ export function ShoppingCartPage() {
 
 
       function stripeIdss(){
-        return cart.map(cart => `${cart.title} ${cart.kg}Kg (Cantitate : ${cart.quantity})
-
+        return cart.map(cart => `${cart.title} ${cart.kg}Kg (Cantitate : ${cart.quantity}) => ${cart.kg * cart.quantity} de ${cart.title})
         `)
-        // let itemes = []
-        // for(const items of stripeIds){
-        //   items.push(itemes)
-        // }
-        // return itemes
       }
 
   return (
@@ -329,18 +331,18 @@ export function ShoppingCartPage() {
 
 <div className="deliveryAddress_inputs">
   <div className='deliveryAddress_inputs__input' >
-    <input type="text" required="required" defaultValue={user?.uid ? user.email : ''}></input>
+    <input type="text" required="required" defaultValue={user?.uid ? user.email : email} onChange={(event) => setEmail(event.target.value)} ></input>
     <span>Email Address</span>
   </div>
 
   <div className='deliveryAddress_inputs__input input2' >
     <div>
-      <input type="text" defaultValue={user?.uid ? conditional.firstName : ''} required="required" ></input>
+      <input type="text" defaultValue={user?.uid ? conditional.firstName : firstName} onChange={(event) => setFirstName(event.target.value)} required="required" ></input>
       <span>First name</span>
     </div>
 
     <div className='lastNameInput'>
-      <input type="text" defaultValue={user?.uid ? conditional.lastName : ''} required="required" ></input>
+      <input type="text" defaultValue={user?.uid ? conditional.lastName : lastName} onChange={(event) => setLastName(event.target.value)} required="required" ></input>
       <span>Last name</span>
     </div>
   </div>
@@ -351,34 +353,35 @@ export function ShoppingCartPage() {
   </div>
 
   <div className='deliveryAddress_inputs__input' >
-    <input type="text" defaultValue={user?.uid ? conditional.phoneNumber : ''} required="required"></input>
+    <input type="text" defaultValue={user?.uid ? conditional.phoneNumber : phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)} required="required"></input>
     <span>Telephone</span>
   </div>
   
   <div className='deliveryAddress_inputs__input' >
-    <input type="text" defaultValue={user?.uid ? conditional.address : ''} required="required"></input>
-    <span>Delivery Address</span>
+    <input type="text" defaultValue={user?.uid ? conditional.address : street} onChange={(event) => setStreet(event.target.value)} required="required"></input>
+    <span>Street</span>
   </div>
 
 
   <div className='deliveryAddress_inputs__input towninput' >
 
     <div className='lastNameInput'>
-      <input type="text" required="required"></input>
-      <span>Town</span>
+      <input type="text" defaultValue={user?.uid ? conditional.streetNo : streetNo} onChange={(event) => setStreetNo(event.target.value)} required="required"></input>
+      <span>Street No.</span>
     </div>
 
     <div className='lastNameInput'>
-      <input type="text" required="required"></input>
-      <span>Country</span>
-    </div>
-
-    <div className='lastNameInput'>
-      <input type="text" required="required"></input>
-      <span>Zip Code</span>
+      <input type="text" defaultValue={user?.uid ? conditional.block : block} onChange={(event) => setBlock(event.target.value)} required="required"></input>
+      <span>Block</span>
     </div>
 
   </div>
+  
+  <div className='deliveryAddress_inputs__input'>
+      <input type="text" defaultValue ={user?.uid ? conditional.apartamentNo : apartamentNo} onChange={(event) => setApartamentNo(event.target.value)} required="required"></input>
+      <span>Apartament No.</span>
+  </div>
+
   
 </div>
 
@@ -456,12 +459,12 @@ export function ShoppingCartPage() {
                 console.log('mail')
 
               emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
-                subject: `Order from ${user.email}`,
-                name : "Hello",
-                message : `O comanda a fost lansata! 
-                Aceasta contine : 
+                subject: `Comanda de la ${email}`,
+                name : `${firstName} ${lastName}`,
+                message : `
+                Comanda contine :
                 ${stripeIdss()} `,
-                totalPrice : `Pretul total este de ${totalPrice}`,
+                totalPrice : `Pretul total este de ${totalPrice} lei.`,
               }, 'crU6K8bQnftB81z-j' )
             }}}>Checkout</button>
             </div>

@@ -46,36 +46,28 @@ export function ShoppingCartPage() {
   const [notifyLastNameNumbers, setNotifyLastNameNumbers] = useState(false);
   const [notifyLastNameSpecialChar, setNotifyLastNameChar] = useState(false);
   const [notifyLastNameUppercase, setNotifyLastNameUppercase] = useState(false)
-  const [notifyLastNameEmpty, setNotifyLastNameEmpty] = useState(false)
 
   const [notifyFirstNameNumbers, setNotifyFirstNameNumbers] = useState(false)
   const [notifyFirstNameSpecialChar, setNotifyFirstNameSpecialChar] = useState(false)
   const [notifyFirstNameUppercase, setNotifyFirstNameUppercase] = useState(false)
-  const [notifyFirstNameEmpty, setNotifyFirstNameEmpty] = useState(false)
 
   const [notifyPhoneDigits , setNotifyPhoneDigits] = useState(false)
   const [notifyLetterPhone, setNotifyLetterPhone] = useState(false)
   const [notifySpecialCharPhone, setNotifySpecialCharPhone] = useState(false)
-  const [notifyPhoneNumberEmpty, setNotifyPhoneNumberEmpty] = useState(false)
 
   const [emailValidState, setEmailValidState] = useState(false)
 
   const [ notifyStreetNumbers , setNotifyStreetNumbers] = useState(false)
   const [ notifyStreetSpecialChar, setNotifyStreetSpecialChar] = useState(false)
-  const [ notifyStreetEmpty, setNotifyStreetEmpty] = useState(false)
 
   const [notifyLetterBlock , setNotifyLetterBlock] = useState(false)
   const [notifySpecialCharBlock, setNotifySpecialBlock] = useState(false)
-  const [notifyBlockEmpty, setNotifyBlockEmpty] = useState(false)
 
   const [notifyLetterApartament, setNotifyLetterApartament] = useState(false)
   const [notifySpecialCharApartament, setNotifySpecialApartament] = useState(false)
-  const [notifyApartamentNoEmpty, setNotifyApartamentNoEmpty] = useState(false)
 
   const [notifySpecialCharStreetNo, setNotifySpecialStreetNo] = useState(false)
   const [notifyLetterStreetNo, setNotifyLetterStreetNo] = useState(false)
-  const [notifyStreetNoEmpty, setNotifyStreetNoEmpty] = useState(false)
-
 
   const handleDeliveryChange = (e) =>{
     setDeliverySelected(e.target.value)
@@ -96,7 +88,6 @@ export function ShoppingCartPage() {
       setDisable("disable")
     }
   }
-
   
   function quantityUp(item){
     if(user?.uid){
@@ -126,8 +117,6 @@ export function ShoppingCartPage() {
     }, 500)
 
   }
-
-
   
   function quantityDown(item){
     if(user?.uid){
@@ -255,81 +244,13 @@ export function ShoppingCartPage() {
             })
           }
         }
-      
-        function HandleBlurFirstName(firstName) {
-          if(firstName === ""){
-            setNotifyFirstNameEmpty(true)
-            toast.error("First name can't be empty!", {
-              autoClose: 6000
-            })
-            return false;
-          }
-          else {
-            setNotifyFirstNameEmpty(false);
-            return true
-          }
-        }
-
-        function handleBlurLastName(){
-          if(notifyLastNameEmpty){
-            toast.error("Last name can't be empty!", {
-              autoClose: 6000
-            })
-          }
-        }
-
-        function handleBlurPhoneNumber(){
-          if(!notifyPhoneNumberEmpty){
-
-            toast.error("Phone Number name can't be empty!", {
-              autoClose: 6000
-            })
-          }
-        }
-
-        function handleBlurStreet(){
-          if(!notifyStreetEmpty){
-
-            toast.error("Street name can't be empty!", {
-              autoClose: 6000
-            })
-          }
-        }
-
-        function handleBlurStreetNo(){
-          if(!notifyStreetNoEmpty){
-            toast.error("Street number can't be empty!", {
-              autoClose: 6000
-            })
-          }
-        }
-
-        function handleBlurBlock(){
-          if(!notifyBlockEmpty){
-            toast.error("Last name can't be empty!", {
-              autoClose: 6000
-            })
-          }
-        }
-
-        function handleBlurApartmentNo(){
-          if(!notifyApartamentNoEmpty){
-            toast.error("Last name can't be empty!", {
-              autoClose: 6000
-            })
-          }
-        }
 
         function validateFirstName(firstName){
         const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
 
-        if (firstName === "") {
-          setNotifyFirstNameEmpty(true);
-          toast.error("First name can't be empty!", {
-              autoClose: 6000
-          });
-          return false;
-      }
+          if(firstName.length === 0){
+            return false
+          }
 
         if(firstName.match(/\d/)){
           if(!notifyFirstNameNumbers){
@@ -365,13 +286,15 @@ export function ShoppingCartPage() {
       
           return false
         }
-      
-      
           return true;
         }
       
         function validateLastName(lastName){
         const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+
+        if(lastName.length === 0 ){
+          return false
+        }
 
         if(lastName.match(/\d/)){
           
@@ -415,6 +338,10 @@ export function ShoppingCartPage() {
         function validatePhoneNumber(phoneNumber){
           const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
 
+          if(phoneNumber.length === 0){
+            return false
+          }
+
           if(phoneNumber.length > 10){
             if(!notifyPhoneDigits){
               toast.error("Phone number can't exceed 10 digits!", {
@@ -455,6 +382,10 @@ export function ShoppingCartPage() {
 
           const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
 
+          if(street.length === 0){
+            return false
+          }
+
           if(street.match(/\d/)){
             if(!notifyStreetNumbers){
               toast.error("Street can't contain numbers! Input Street No.below.", {
@@ -480,6 +411,10 @@ export function ShoppingCartPage() {
 
         function validateStreetNo(streetNo){
           const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+
+          if(streetNo.length === 0){
+            return false
+          }
 
           if(/[a-zA-Z]/.test(streetNo)){
             if(!notifyLetterStreetNo){
@@ -508,6 +443,10 @@ export function ShoppingCartPage() {
         function validateBlock(block){
           const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
 
+          if(block.length === 0){
+            return false
+          }
+
           if(/[a-zA-Z]/.test(block)){
             if(!notifyLetterBlock){
               toast.error("Phone number can't contain letters!", {
@@ -534,6 +473,10 @@ export function ShoppingCartPage() {
         function validateApartamentNo(apartamentNo){
           const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
 
+          if(apartamentNo.length === 0){
+            return false
+          }
+
           if(/[a-zA-Z]/.test(apartamentNo)){
             if(!notifyLetterApartament){
               toast.error("Phone number can't contain letters!", {
@@ -556,6 +499,55 @@ export function ShoppingCartPage() {
         }
         return true
         }
+
+
+        const checkout = () => {
+
+          if(!emailValid || !firstNameValid || !lastNameValid || !phoneValid || !streetValid || !streetNoValid || !blockValid || !apartamentNoValid ){
+            toast.error("One or more fields are empty!", {
+              autoClose: 6000
+            })
+            return
+          }
+          
+          if(deliverySelected === "card"){
+            redirectToCheckout()
+            console.log("Stripe")
+          } else if(deliverySelected === "ramburs") {
+            console.log("mailRamburs")
+          } else {
+            console.log("mailPickUp")
+          }
+
+        }
+          
+        //     if(deliverySelected === "card"){
+        //       redirectToCheckout()
+        //       console.log("Stripe")
+        //     } else if(deliverySelected === "ramburs" || "pickUp") {
+        //       console.log('mail')
+
+        //     emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
+        //       subject: `Comanda de la ${email}`,
+        //       name : `${firstName} ${lastName}`,
+        //       message : `
+        //       Comanda contine :
+        //       ${stripeIdss()} `,
+        //       totalPrice : `Pretul total este de ${totalPrice} lei.`,
+        //     }, 'crU6K8bQnftB81z-j' )
+        //   }}}
+        // } else {
+
+        function totalQ () {
+          let total = 0
+          cart.forEach(item => {
+            total += item.quantity
+          });
+          return total
+        }
+
+        console.log(totalQ())
+
 
         const handleEmailChange = e => {
           setEmailValidState(!validateEmail(e.target.value))
@@ -690,7 +682,7 @@ export function ShoppingCartPage() {
     <h1>1. REVIEW YOUR ORDER </h1>
     <h3>Please check that you have the right quantity of every single item to avoid confusions at checkout, Thanks!</h3>
     {loading && (
-      <LoadingSpinner />
+      <LoadingSpinner />  
     )}
 
     {cart.map((item) => {
@@ -739,7 +731,7 @@ export function ShoppingCartPage() {
     <div className='deliveryAddress_header'>
       <h1>2. DELIVERY ADDRESS</h1>
       <h3>Please check that all the informations are valid and correct, Thanks!</h3>
-      <h5>All fields required.</h5>
+      <h5>All fields need to be completed!</h5>
     </div>
 
     <ToastContainer />
@@ -752,12 +744,12 @@ export function ShoppingCartPage() {
 
       <div className='deliveryAddress_inputs__input input2' >
         <div>
-          <input type="text" defaultValue={user?.uid ? conditional.firstName : firstName} onChange={handleFirstNameChange} onBlur={HandleBlurFirstName} required="required" ></input>
+          <input type="text" defaultValue={user?.uid ? conditional.firstName : firstName} onChange={handleFirstNameChange} required="required" ></input>
           <span>First name</span>
         </div>
 
         <div className='lastNameInput'>
-          <input type="text" defaultValue={user?.uid ? conditional.lastName : lastName} onChange={handleLastNameChange} required="required" ></input>
+          <input type="text" defaultValue={user?.uid ? conditional.lastName : lastName} onChange={(e) => handleLastNameChange(e)} required="required" ></input>
           <span>Last name</span>
         </div>
       </div>
@@ -881,22 +873,7 @@ export function ShoppingCartPage() {
                   <div className='react-icons'>
                   <FaCcApplePay /> <FaCcPaypal /> <FaCcVisa /> <FaCcAmazonPay /> <FaCcAmex />
                   </div>
-                <button onClick={() => {
-                  if(deliverySelected === "card"){
-                    redirectToCheckout()
-                    console.log("Stripe")
-                  } else if(deliverySelected === "ramburs" || "pickUp") {
-                    console.log('mail')
-
-                  emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
-                    subject: `Comanda de la ${email}`,
-                    name : `${firstName} ${lastName}`,
-                    message : `
-                    Comanda contine :
-                    ${stripeIdss()} `,
-                    totalPrice : `Pretul total este de ${totalPrice} lei.`,
-                  }, 'crU6K8bQnftB81z-j' )
-                }}}>Checkout</button>
+                <button onClick={checkout}>Checkout</button>
                 </div>
               </div>
             </div>

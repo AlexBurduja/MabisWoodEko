@@ -36,35 +36,45 @@ export function ShoppingCartPage() {
   const [streetNo, setStreetNo] = useState('')
   const [block, setBlock] = useState('')
   const [apartamentNo, setApartamentNo] = useState('')
-  const [company, setCompany] = useState(false)
+  const [isCompanyChecked, setIsCompanyChecked] = useState(false)
+  const [companyName, setCompanyName] = useState('')
+  const [companyCui, setCompanyCui] = useState('')
+
 
   //UseState for checks
 
   const [notifyLastNameNumbers, setNotifyLastNameNumbers] = useState(false);
   const [notifyLastNameSpecialChar, setNotifyLastNameChar] = useState(false);
   const [notifyLastNameUppercase, setNotifyLastNameUppercase] = useState(false)
+  const [notifyLastNameEmpty, setNotifyLastNameEmpty] = useState(false)
 
   const [notifyFirstNameNumbers, setNotifyFirstNameNumbers] = useState(false)
   const [notifyFirstNameSpecialChar, setNotifyFirstNameSpecialChar] = useState(false)
   const [notifyFirstNameUppercase, setNotifyFirstNameUppercase] = useState(false)
+  const [notifyFirstNameEmpty, setNotifyFirstNameEmpty] = useState(false)
 
   const [notifyPhoneDigits , setNotifyPhoneDigits] = useState(false)
   const [notifyLetterPhone, setNotifyLetterPhone] = useState(false)
   const [notifySpecialCharPhone, setNotifySpecialCharPhone] = useState(false)
+  const [notifyPhoneNumberEmpty, setNotifyPhoneNumberEmpty] = useState(false)
 
   const [emailValidState, setEmailValidState] = useState(false)
 
   const [ notifyStreetNumbers , setNotifyStreetNumbers] = useState(false)
   const [ notifyStreetSpecialChar, setNotifyStreetSpecialChar] = useState(false)
+  const [ notifyStreetEmpty, setNotifyStreetEmpty] = useState(false)
 
   const [notifyLetterBlock , setNotifyLetterBlock] = useState(false)
   const [notifySpecialCharBlock, setNotifySpecialBlock] = useState(false)
+  const [notifyBlockEmpty, setNotifyBlockEmpty] = useState(false)
 
   const [notifyLetterApartament, setNotifyLetterApartament] = useState(false)
   const [notifySpecialCharApartament, setNotifySpecialApartament] = useState(false)
+  const [notifyApartamentNoEmpty, setNotifyApartamentNoEmpty] = useState(false)
 
   const [notifySpecialCharStreetNo, setNotifySpecialStreetNo] = useState(false)
   const [notifyLetterStreetNo, setNotifyLetterStreetNo] = useState(false)
+  const [notifyStreetNoEmpty, setNotifyStreetNoEmpty] = useState(false)
 
 
   const handleDeliveryChange = (e) =>{
@@ -229,7 +239,7 @@ export function ShoppingCartPage() {
         const streetValid = validateStreet(street)
         const streetNoValid = validateStreetNo(streetNo)
         const blockValid = validateBlock(block)
-        const apartamentNoValid = validateApartamentNo(apartamentNo) 
+        const apartamentNoValid = validateApartamentNo(apartamentNo)
   
       
         function validateEmail(registerEmail) {
@@ -238,7 +248,7 @@ export function ShoppingCartPage() {
           return emailRegex.test(registerEmail);
         }
       
-        function handleBlur() {
+        function handleBlurEmail() {
           if (emailValidState) {
             toast.error("Email is not valid!" , {
               autoClose: 6000
@@ -246,10 +256,81 @@ export function ShoppingCartPage() {
           }
         }
       
+        function HandleBlurFirstName(firstName) {
+          if(firstName === ""){
+            setNotifyFirstNameEmpty(true)
+            toast.error("First name can't be empty!", {
+              autoClose: 6000
+            })
+            return false;
+          }
+          else {
+            setNotifyFirstNameEmpty(false);
+            return true
+          }
+        }
+
+        function handleBlurLastName(){
+          if(notifyLastNameEmpty){
+            toast.error("Last name can't be empty!", {
+              autoClose: 6000
+            })
+          }
+        }
+
+        function handleBlurPhoneNumber(){
+          if(!notifyPhoneNumberEmpty){
+
+            toast.error("Phone Number name can't be empty!", {
+              autoClose: 6000
+            })
+          }
+        }
+
+        function handleBlurStreet(){
+          if(!notifyStreetEmpty){
+
+            toast.error("Street name can't be empty!", {
+              autoClose: 6000
+            })
+          }
+        }
+
+        function handleBlurStreetNo(){
+          if(!notifyStreetNoEmpty){
+            toast.error("Street number can't be empty!", {
+              autoClose: 6000
+            })
+          }
+        }
+
+        function handleBlurBlock(){
+          if(!notifyBlockEmpty){
+            toast.error("Last name can't be empty!", {
+              autoClose: 6000
+            })
+          }
+        }
+
+        function handleBlurApartmentNo(){
+          if(!notifyApartamentNoEmpty){
+            toast.error("Last name can't be empty!", {
+              autoClose: 6000
+            })
+          }
+        }
 
         function validateFirstName(firstName){
         const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
-        
+
+        if (firstName === "") {
+          setNotifyFirstNameEmpty(true);
+          toast.error("First name can't be empty!", {
+              autoClose: 6000
+          });
+          return false;
+      }
+
         if(firstName.match(/\d/)){
           if(!notifyFirstNameNumbers){
             toast.error("First name can't contain numbers!", {
@@ -260,6 +341,7 @@ export function ShoppingCartPage() {
       
           return false
         } 
+
          if(specialChars.test(firstName)){
         //   setFirstNameError("First name can't contain special characters!")
           if(!notifyFirstNameSpecialChar){
@@ -290,7 +372,7 @@ export function ShoppingCartPage() {
       
         function validateLastName(lastName){
         const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
-        
+
         if(lastName.match(/\d/)){
           
           if(!notifyLastNameNumbers){
@@ -372,7 +454,6 @@ export function ShoppingCartPage() {
         function validateStreet(street){
 
           const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
-
 
           if(street.match(/\d/)){
             if(!notifyStreetNumbers){
@@ -523,6 +604,14 @@ export function ShoppingCartPage() {
           validateApartamentNo(input)
         }
 
+        const handleCompanyNameChange = (e) => {
+
+        }
+
+        const handleCompanyCuiChange = (e) => {
+
+        }
+
         
       let stripePromise;
 
@@ -657,13 +746,13 @@ export function ShoppingCartPage() {
 
     <div className="deliveryAddress_inputs">
       <div className='deliveryAddress_inputs__input' >
-        <input type="text" required="required" defaultValue={user?.uid ? user.email : email} onChange={handleEmailChange} onBlur={handleBlur}></input>
+        <input type="text" required="required" defaultValue={user?.uid ? user.email : email} onChange={handleEmailChange} onBlur={handleBlurEmail}></input>
         <span>Email Address</span>
       </div>
 
       <div className='deliveryAddress_inputs__input input2' >
         <div>
-          <input type="text" defaultValue={user?.uid ? conditional.firstName : firstName} onChange={handleFirstNameChange} required="required" ></input>
+          <input type="text" defaultValue={user?.uid ? conditional.firstName : firstName} onChange={handleFirstNameChange} onBlur={HandleBlurFirstName} required="required" ></input>
           <span>First name</span>
         </div>
 
@@ -674,7 +763,7 @@ export function ShoppingCartPage() {
       </div>
 
       <div className='deliveryAddress_inputs__input' >
-        <input type="text" defaultValue={user?.uid ? conditional.phoneNumber : phoneNumber} onChange={handlePhoneNumberChange} required="required"></input>
+        <input type="number" defaultValue={user?.uid ? conditional.phoneNumber : phoneNumber} onChange={handlePhoneNumberChange} required="required"></input>
         <span>Telephone</span>
       </div>
       
@@ -704,13 +793,26 @@ export function ShoppingCartPage() {
       </div>
 
         <div className='companyCheckbox'>
-          <input type="checkbox" id='html' name='company' ></input>
-          <label for="html" >Company</label>
-          
-          <input type="checkbox" id='html' name='company' ></input>
-          <label for="html" >Not Company</label>
+          <input type="checkbox" id='Company' name='company' checked={isCompanyChecked} onChange={() => setIsCompanyChecked(!isCompanyChecked)}></input>
+          <label for="Company" >Company</label>
         </div>
-      
+
+      {isCompanyChecked && (
+
+        <div className='deliveryAddress_inputs__input towninput' >
+
+        <div className='lastNameInput'>
+          <input type="text" defaultValue={companyName} onChange={handleCompanyNameChange} required="required"></input>
+          <span>Name</span>
+        </div>
+
+        <div className='lastNameInput'>
+          <input type="text" defaultValue={companyCui} onChange={handleCompanyCuiChange} required="required"></input>
+          <span>ID / CUI</span>
+        </div>
+
+        </div>
+          )}
     </div>
 
     </div>

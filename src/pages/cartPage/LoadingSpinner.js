@@ -1,4 +1,5 @@
 import React from "react";
+import "./ShoppingCart.css"
 
 export default function LoadingSpinner() {
   return (

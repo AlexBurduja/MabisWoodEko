@@ -17,6 +17,9 @@ export const AuthProvider = ({children}) => {
         return () => {
             unsubscribe();
         }
+
+
+        
     }, [])
 
     return (

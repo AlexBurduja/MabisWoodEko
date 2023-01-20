@@ -29,8 +29,8 @@ export function ShoppingCartPage() {
 
 /// Input useStates
 
-  const [email ,setEmail] = useState('')
-  const [firstName, setFirstName] = useState('')
+  const [email ,setEmail] = useState(user?.uid ? user.email : "")
+  const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [street, setStreet] = useState('')
@@ -159,7 +159,7 @@ export function ShoppingCartPage() {
     }, 500)
   }
 
-  
+  console.log(conditional)
   
   useEffect(() => {
     
@@ -186,31 +186,34 @@ export function ShoppingCartPage() {
         
         let document = await getDoc(ref)
         
-        return document.data()
+        setConditional(document.data())
         
       }
       getDocument()
-      .then(data => setConditional(data))
+      .then(() => setFirstName(conditional.firstName))
     }
 
-      if(!user?.uid){
-        const clientId = sessionStorage.getItem("clientId")
     
-        const getCart = async () => {
-          const cartDoc = `guestCarts/${clientId}/cart`
+    
+    if(!user?.uid){
+      const clientId = sessionStorage.getItem("clientId")
+      
+      const getCart = async () => {
+        const cartDoc = `guestCarts/${clientId}/cart`
           const ref = collection(db, cartDoc)
     
           let data = await getDocs(ref)
     
           setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
         };
-    
+        
         getCart()
       }
     }, [user])
-
-      function ProductCount () {
-        if (totalQuantity === 1){
+  
+    
+    function ProductCount () {
+      if (totalQuantity === 1){
           return <p>{totalQuantity} product</p>
         } else {
           return <p>{totalQuantity} products</p>
@@ -239,7 +242,6 @@ export function ShoppingCartPage() {
 
           return emailRegex.test(registerEmail);
         }
-      
         function handleBlurEmail() {
           if (emailValidState) {
             toast.error("Email is not valid!" , {
@@ -558,16 +560,12 @@ export function ShoppingCartPage() {
           return total
         }
 
-        console.log(firstName)
 
 
         const handleEmailChange = e => {
           setEmailValidState(!validateEmail(e.target.value))
           setEmail(e.target.value)
 
-          if(user?.uid){
-            setEmail(user.email)
-          }
         }
 
         const handleLastNameChange = (e) => {
@@ -785,29 +783,29 @@ export function ShoppingCartPage() {
 
    <div className="deliveryAddress_inputs">
      <div className='deliveryAddress_inputs__input' >
-       <input type="text" required="required" defaultValue={user?.uid ? user.email : email} onChange={handleEmailChange} onBlur={handleBlurEmail}></input>
+       <input type="text" required="required" defaultValue={email} onChange={handleEmailChange} onBlur={handleBlurEmail}></input>
        <span>Email Address</span>
      </div>
 
      <div className='deliveryAddress_inputs__input input2' >
        <div>
-         <input type="text" defaultValue={user?.uid ? conditional.firstName : firstName} onChange={handleFirstNameChange} required="required" ></input>
+         <input type="text" defaultValue={firstName} onChange={handleFirstNameChange} required="required" ></input>
          <span>First name</span>
        </div>
 
        <div className='lastNameInput'>
-         <input type="text" defaultValue={user?.uid ? conditional.lastName : lastName} onChange={(e) => handleLastNameChange(e)} required="required" ></input>
+         <input type="text" defaultValue={lastName} onChange={(e) => handleLastNameChange(e)} required="required" ></input>
          <span>Last name</span>
        </div>
      </div>
 
      <div className='deliveryAddress_inputs__input' >
-       <input type="number" defaultValue={user?.uid ? conditional.phoneNumber : phoneNumber} onChange={handlePhoneNumberChange} required="required"></input>
+       <input type="number" defaultValue={phoneNumber} onChange={handlePhoneNumberChange} required="required"></input>
        <span>Telephone</span>
      </div>
      
      <div className='deliveryAddress_inputs__input' >
-       <input type="text" defaultValue={user?.uid ? conditional.address : street} onChange={handleStreetChange} required="required"></input>
+       <input type="text" defaultValue={street} onChange={handleStreetChange} required="required"></input>
        <span>Street</span>
      </div>
 
@@ -815,19 +813,19 @@ export function ShoppingCartPage() {
      <div className='deliveryAddress_inputs__input towninput' >
 
        <div className='lastNameInput'>
-         <input type="text" defaultValue={user?.uid ? conditional.streetNo : streetNo} onChange={handleStreetNoChange} required="required"></input>
+         <input type="text" defaultValue={streetNo} onChange={handleStreetNoChange} required="required"></input>
          <span>Street No.</span>
        </div>
 
        <div className='lastNameInput'>
-         <input type="text" defaultValue={user?.uid ? conditional.block : block} onChange={handleBlockChange} required="required"></input>
+         <input type="text" defaultValue={block} onChange={handleBlockChange} required="required"></input>
          <span>Block</span>
        </div>
 
      </div>
      
      <div className='deliveryAddress_inputs__input'>
-         <input type="text" defaultValue ={user?.uid ? conditional.apartamentNo : apartamentNo} onChange={handleApartamentNo} required="required"></input>
+         <input type="text" defaultValue ={apartamentNo} onChange={handleApartamentNo} required="required"></input>
          <span>Apartament No.</span>
      </div>
 

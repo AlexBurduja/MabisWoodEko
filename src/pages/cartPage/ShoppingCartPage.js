@@ -29,7 +29,7 @@ export function ShoppingCartPage() {
 /// Input useStates
 
   const [email ,setEmail] = useState("")
-  const [firstName, setFirstName] = useState("")
+  const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [street, setStreet] = useState('')
@@ -68,6 +68,8 @@ export function ShoppingCartPage() {
 
   const [notifySpecialCharStreetNo, setNotifySpecialStreetNo] = useState(false)
   const [notifyLetterStreetNo, setNotifyLetterStreetNo] = useState(false)
+
+  const [fiirstName , setFiirstName] = useState(conditional.firstName)
 
   const handleDeliveryChange = (e) =>{
     setDeliverySelected(e.target.value)
@@ -188,8 +190,7 @@ export function ShoppingCartPage() {
       getDocument()
       .then(data => setConditional(data))
     }
-
-
+    
     
     
     if(!user?.uid){
@@ -571,7 +572,6 @@ export function ShoppingCartPage() {
           // validateLastName(input)
         }
 
-        console.log(conditional.firstName)
         const handleFirstNameChange = (e) => {
           if(user?.uid){
             setFirstName(conditional.firstName)
@@ -692,6 +692,12 @@ export function ShoppingCartPage() {
         `)
       }
 
+      useEffect(() => {
+        setFiirstName(conditional.firstName)
+      }, [conditional])
+
+      console.log(fiirstName)
+
   return (
     <>
     {loading === false && 
@@ -784,7 +790,7 @@ export function ShoppingCartPage() {
 
      <div className='deliveryAddress_inputs__input input2' >
        <div>
-         <input type="text" defaultValue={firstName} onChange={handleFirstNameChange} required="required" ></input>
+         <input type="text" defaultValue={user?.uid ? fiirstName : firstName} onChange={handleFirstNameChange} required="required" ></input>
          <span>First name</span>
        </div>
 

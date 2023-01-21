@@ -13,7 +13,6 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import emailjs from "emailjs-com"
 import LoadingSpinner from './LoadingSpinner';
 import { toast, ToastContainer } from 'react-toastify';
-import { ClipLoader } from 'react-spinners';
 
 export function ShoppingCartPage() {
   const { user } = useContext( FirebaseAuthContext )
@@ -29,7 +28,7 @@ export function ShoppingCartPage() {
 
 /// Input useStates
 
-  const [email ,setEmail] = useState(user?.uid ? user.email : "")
+  const [email ,setEmail] = useState("")
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -158,8 +157,6 @@ export function ShoppingCartPage() {
       window.location.reload()
     }, 500)
   }
-
-  console.log(conditional)
   
   useEffect(() => {
     
@@ -185,13 +182,13 @@ export function ShoppingCartPage() {
         const ref = doc(db, 'users', user.uid)
         
         let document = await getDoc(ref)
-        
-        setConditional(document.data())
-        
+    
+        return document.data()
       }
       getDocument()
-      .then(() => setFirstName(conditional.firstName))
+      .then(data => setConditional(data))
     }
+
 
     
     
@@ -227,6 +224,11 @@ export function ShoppingCartPage() {
         return acc + cur.quantity * cur.price
       }, 0)
 
+      
+      /// !firstNameValid || !lastNameValid || !phoneValid || !streetValid
+      
+      
+      const checkout = () => {
         const emailValid = validateEmail(email)
         const firstNameValid = validateFirstName(firstName)
         const lastNameValid = validateLastName(lastName)
@@ -235,279 +237,274 @@ export function ShoppingCartPage() {
         const streetNoValid = validateStreetNo(streetNo)
         const blockValid = validateBlock(block)
         const apartamentNoValid = validateApartamentNo(apartamentNo)
-  
-      
+          
         function validateEmail(registerEmail) {
-          const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-          return emailRegex.test(registerEmail);
-        }
-        function handleBlurEmail() {
-          if (emailValidState) {
-            toast.error("Email is not valid!" , {
-              autoClose: 6000
-            })
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+            return emailRegex.test(registerEmail);
           }
-        }
-
-        function validateFirstName(firstName){
-        const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
-
+          function handleBlurEmail() {
+            if (emailValidState) {
+              toast.error("Email is not valid!" , {
+                autoClose: 6000
+              })
+            }
+          }
+          
+          function validateFirstName(firstName){
+          const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+    
           if(firstName.length === 0){
+              return false
+            }
+    
+          if(firstName.match(/\d/)){
+            if(!notifyFirstNameNumbers){
+              toast.error("First name can't contain numbers!", {
+                autoClose: 6000
+              })
+              setNotifyFirstNameNumbers(true);
+            }
+        
             return false
-          }
-
-        if(firstName.match(/\d/)){
-          if(!notifyFirstNameNumbers){
-            toast.error("First name can't contain numbers!", {
-              autoClose: 6000
-            })
-            setNotifyFirstNameNumbers(true);
-          }
-      
-          return false
-        } 
-
-         if(specialChars.test(firstName)){
-        //   setFirstNameError("First name can't contain special characters!")
+          } 
+          
+           if(specialChars.test(firstName)){
+          //   setFirstNameError("First name can't contain special characters!")
           if(!notifyFirstNameSpecialChar){
             toast.error("First name can't contain special characters!", {
               autoClose: 6000
-            })
-            setNotifyFirstNameSpecialChar(true)
-          }
-      
-          return false
-        }
-      
-        if(/[a-z]/.test(firstName.charAt(0))){
-        //   setFirstNameError("First letter of your last name needs to be uppercase!")
-          if(!notifyFirstNameUppercase){
-            toast.error("First name's first character needs to be uppercase!", {
-              autoClose: 6000
-            })
-            setNotifyFirstNameUppercase(true)
-          }
-      
-          return false
-        }
-          return true;
-        }
-      
-        function validateLastName(lastName){
-        const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
-
-        if(lastName.length === 0 ){
-          return false
-        }
-
-        if(lastName.match(/\d/)){
-          
-          if(!notifyLastNameNumbers){
-            toast.error("Last name can't contain numbers!", {
-              autoClose:6000
-            })
-            setNotifyLastNameNumbers(true)
-          }
-          
-          return false
-        } 
+              })
+              setNotifyFirstNameSpecialChar(true)
+            }
         
-        if(specialChars.test(lastName)){
-          
-          if(!notifyLastNameSpecialChar){
-            toast.error("Last name can't contain special characters!", {
-              autoClose: 6000
-            })
-            setNotifyLastNameChar(true)
+            return false
           }
-      
-          return false
-        }
-      
-        if(/[a-z]/.test(lastName.charAt(0))){
-          if(!notifyLastNameUppercase){
-            toast.error("Last name's first character needs to be uppercase!", {
-              autoClose: 6000
-            })
-            setNotifyLastNameUppercase(true)
+        
+          if(/[a-z]/.test(firstName.charAt(0))){
+          //   setFirstNameError("First letter of your last name needs to be uppercase!")
+            if(!notifyFirstNameUppercase){
+              toast.error("First name's first character needs to be uppercase!", {
+                autoClose: 6000
+              })
+              setNotifyFirstNameUppercase(true)
+            }
+        
+            return false
           }
-
-          return false
-        }
-      
-      
-          return true;
-        }
-      
-        function validatePhoneNumber(phoneNumber){
+            return true;
+          }
+        
+          function validateLastName(lastName){
           const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
-
-          if(phoneNumber.length === 0){
+    
+          if(lastName.length === 0 ){
             return false
           }
-
-          if(phoneNumber.length > 10){
-            if(!notifyPhoneDigits){
-              toast.error("Phone number can't exceed 10 digits!", {
-                autoClose: 6000
-              })
-              setNotifyPhoneDigits(true)
-            }
-      
-            return false
-          }
-
-          if(/[a-zA-Z]/.test(phoneNumber)){
-            if(!notifyLetterPhone){
-              toast.error("Phone number can't contain letters!", {
-                autoClose: 6000
-              })
-              setNotifyLetterPhone(true)
-            }
-            return false
-          }
-
-          if(specialChars.test(phoneNumber)){
-          
-            if(!notifySpecialCharPhone){
-              toast.error("Phone number can't contain special characters! No prefix needed!", {
+    
+          if(lastName.match(/\d/)){
+            
+            if(!notifyLastNameNumbers){
+              toast.error("Last name can't contain numbers!", {
                 autoClose:6000
               })
-              setNotifySpecialCharPhone(true)
+              setNotifyLastNameNumbers(true)
             }
             
             return false
           } 
-      
-          return true;
-        }
-
-        function validateStreet(street){
-
-          const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
-
-          if(street.length === 0){
-            return false
-          }
-
-          if(street.match(/\d/)){
-            if(!notifyStreetNumbers){
-              toast.error("Street can't contain numbers! Input Street No.below.", {
+          
+          if(specialChars.test(lastName)){
+            
+            if(!notifyLastNameSpecialChar){
+              toast.error("Last name can't contain special characters!", {
                 autoClose: 6000
               })
-              setNotifyStreetNumbers(true)
+              setNotifyLastNameChar(true)
             }
+        
             return false
           }
-
-          if(specialChars.test(street)){
-            if(!notifyStreetSpecialChar){
-              toast.error("Street can't contain special characters!", {
-                autoClose:6000
+        
+          if(/[a-z]/.test(lastName.charAt(0))){
+            if(!notifyLastNameUppercase){
+              toast.error("Last name's first character needs to be uppercase!", {
+                autoClose: 6000
               })
-              setNotifyStreetSpecialChar(true)
+              setNotifyLastNameUppercase(true)
             }
+    
             return false
           }
-
+        
+        
+            return true;
+          }
+        
+          function validatePhoneNumber(phoneNumber){
+            const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+    
+            if(phoneNumber.length === 0){
+              return false
+            }
+    
+            if(phoneNumber.length > 10){
+              if(!notifyPhoneDigits){
+                toast.error("Phone number can't exceed 10 digits!", {
+                  autoClose: 6000
+                })
+                setNotifyPhoneDigits(true)
+              }
+        
+              return false
+            }
+    
+            if(/[a-zA-Z]/.test(phoneNumber)){
+              if(!notifyLetterPhone){
+                toast.error("Phone number can't contain letters!", {
+                  autoClose: 6000
+                })
+                setNotifyLetterPhone(true)
+              }
+              return false
+            }
+    
+            if(specialChars.test(phoneNumber)){
+            
+              if(!notifySpecialCharPhone){
+                toast.error("Phone number can't contain special characters! No prefix needed!", {
+                  autoClose:6000
+                })
+                setNotifySpecialCharPhone(true)
+              }
+              
+              return false
+            } 
+        
+            return true;
+          }
+    
+          function validateStreet(street){
+    
+            const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+    
+            if(street.length === 0){
+              return false
+            }
+    
+            if(street.match(/\d/)){
+              if(!notifyStreetNumbers){
+                toast.error("Street can't contain numbers! Input Street No.below.", {
+                  autoClose: 6000
+                })
+                setNotifyStreetNumbers(true)
+              }
+              return false
+            }
+    
+            if(specialChars.test(street)){
+              if(!notifyStreetSpecialChar){
+                toast.error("Street can't contain special characters!", {
+                  autoClose:6000
+                })
+                setNotifyStreetSpecialChar(true)
+              }
+              return false
+            }
+    
+            return true
+          }
+    
+          function validateStreetNo(streetNo){
+            const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+    
+            if(streetNo.length === 0){
+              return false
+            }
+    
+            if(/[a-zA-Z]/.test(streetNo)){
+              if(!notifyLetterStreetNo){
+                toast.error("Street No. can't contain letters!", {
+                  autoClose: 6000
+                })
+                setNotifyLetterStreetNo(true)
+              }
+              return false
+            }
+    
+            if(specialChars.test(streetNo)){
+            
+              if(!notifySpecialCharStreetNo){
+                toast.error("Street No. can't contain special characters! No prefix needed!", {
+                  autoClose:6000
+                })
+                setNotifySpecialStreetNo(true)
+              }
+              return false
+          }
+    
+           return true
+          }
+    
+          function validateBlock(block){
+            const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+    
+            if(block.length === 0){
+              return false
+            }
+    
+            if(/[a-zA-Z]/.test(block)){
+              if(!notifyLetterBlock){
+                toast.error("Phone number can't contain letters!", {
+                  autoClose: 6000
+                })
+                setNotifyLetterBlock(true)
+              }
+              return false
+            }
+    
+            if(specialChars.test(block)){
+            
+              if(!notifySpecialCharBlock){
+                toast.error("Phone number can't contain special characters! No prefix needed!", {
+                  autoClose:6000
+                })
+                setNotifySpecialBlock(true)
+              }
+              return false
+          }
           return true
-        }
-
-        function validateStreetNo(streetNo){
-          const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
-
-          if(streetNo.length === 0){
-            return false
           }
-
-          if(/[a-zA-Z]/.test(streetNo)){
-            if(!notifyLetterStreetNo){
-              toast.error("Street No. can't contain letters!", {
-                autoClose: 6000
-              })
-              setNotifyLetterStreetNo(true)
+    
+          function validateApartamentNo(apartamentNo){
+            const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+    
+            if(apartamentNo.length === 0){
+              return false
             }
-            return false
+    
+            if(/[a-zA-Z]/.test(apartamentNo)){
+              if(!notifyLetterApartament){
+                toast.error("Phone number can't contain letters!", {
+                  autoClose: 6000
+                })
+                setNotifyLetterApartament(true)
+              }
+              return false
+            }
+    
+            if(specialChars.test(apartamentNo)){
+            
+              if(!notifySpecialCharApartament){
+                toast.error("Phone number can't contain special characters! No prefix needed!", {
+                  autoClose:6000
+                })
+                setNotifySpecialApartament(true)
+              }
+              return false
           }
-
-          if(specialChars.test(streetNo)){
-          
-            if(!notifySpecialCharStreetNo){
-              toast.error("Street No. can't contain special characters! No prefix needed!", {
-                autoClose:6000
-              })
-              setNotifySpecialStreetNo(true)
-            }
-            return false
-        }
-
-         return true
-        }
-
-        function validateBlock(block){
-          const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
-
-          if(block.length === 0){
-            return false
+          return true
           }
-
-          if(/[a-zA-Z]/.test(block)){
-            if(!notifyLetterBlock){
-              toast.error("Phone number can't contain letters!", {
-                autoClose: 6000
-              })
-              setNotifyLetterBlock(true)
-            }
-            return false
-          }
-
-          if(specialChars.test(block)){
-          
-            if(!notifySpecialCharBlock){
-              toast.error("Phone number can't contain special characters! No prefix needed!", {
-                autoClose:6000
-              })
-              setNotifySpecialBlock(true)
-            }
-            return false
-        }
-        return true
-        }
-
-        function validateApartamentNo(apartamentNo){
-          const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
-
-          if(apartamentNo.length === 0){
-            return false
-          }
-
-          if(/[a-zA-Z]/.test(apartamentNo)){
-            if(!notifyLetterApartament){
-              toast.error("Phone number can't contain letters!", {
-                autoClose: 6000
-              })
-              setNotifyLetterApartament(true)
-            }
-            return false
-          }
-
-          if(specialChars.test(apartamentNo)){
-          
-            if(!notifySpecialCharApartament){
-              toast.error("Phone number can't contain special characters! No prefix needed!", {
-                autoClose:6000
-              })
-              setNotifySpecialApartament(true)
-            }
-            return false
-        }
-        return true
-        }
-
-        /// !firstNameValid || !lastNameValid || !phoneValid || !streetValid
-
-        const checkout = () => {
 
           if(!emailValid || !firstNameValid || !lastNameValid || !phoneValid || !streetValid || !streetNoValid || !blockValid || !apartamentNoValid ){
             toast.error("One or more fields are empty!", {
@@ -563,7 +560,7 @@ export function ShoppingCartPage() {
 
 
         const handleEmailChange = e => {
-          setEmailValidState(!validateEmail(e.target.value))
+          // setEmailValidState(!validateEmail(e.target.value))
           setEmail(e.target.value)
 
         }
@@ -571,27 +568,25 @@ export function ShoppingCartPage() {
         const handleLastNameChange = (e) => {
           const input = e.target.value
           setLastName(input)
-          validateLastName(input)
-
-          if(user?.uid){
-            setLastName(conditional.lastName)
-          }
+          // validateLastName(input)
         }
 
+        console.log(conditional.firstName)
         const handleFirstNameChange = (e) => {
-          const input = e.target.value
-          setFirstName(input)
-          validateFirstName(input)
-
           if(user?.uid){
             setFirstName(conditional.firstName)
           }
+
+          const input = e.target.value
+          setFirstName(input)
+          // validateFirstName(input)
+
         }
 
         const handlePhoneNumberChange = (e) => {
           const input = e.target.value
           setPhoneNumber(input)
-          validatePhoneNumber(input)
+          // validatePhoneNumber(input)
           if(user?.uid){
             setPhoneNumber(conditional.phoneNumber)
           }
@@ -600,7 +595,7 @@ export function ShoppingCartPage() {
         const handleStreetChange = (e) => {
           const input = e.target.value
           setStreet(input)
-          validateStreet(input)
+          // validateStreet(input)
           if(user?.uid){
             setStreet(conditional.address)
           }
@@ -609,19 +604,19 @@ export function ShoppingCartPage() {
         const handleStreetNoChange = (e) => {
           const input = e.target.value
           setStreetNo(input)
-          validateStreetNo(input)
+          // validateStreetNo(input)
         }
 
         const handleBlockChange = (e) => {
           const input = e.target.value
           setBlock(input)
-          validateBlock(input)
+          // validateBlock(input)
         }
 
         const handleApartamentNo = (e) => {
           const input = e.target.value
           setApartamentNo(input)
-          validateApartamentNo(input)
+          // validateApartamentNo(input)
         }
 
         const handleCompanyNameChange = (e) => {
@@ -783,7 +778,7 @@ export function ShoppingCartPage() {
 
    <div className="deliveryAddress_inputs">
      <div className='deliveryAddress_inputs__input' >
-       <input type="text" required="required" defaultValue={email} onChange={handleEmailChange} onBlur={handleBlurEmail}></input>
+       <input type="text" required="required" defaultValue={email} onChange={handleEmailChange} ></input>
        <span>Email Address</span>
      </div>
 

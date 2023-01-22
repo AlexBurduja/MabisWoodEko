@@ -405,7 +405,9 @@ export function ProductCardComponent(props) {
     
         <a href={`products/${id}`} className="viewMoreButton"> View more </a>
 
-        <button onClick={toggleModalEdit} className="edit-btn">< AiFillEdit /></button>
+        {conditional.admin && (
+          <button onClick={toggleModalEdit} className="edit-btn">< AiFillEdit /></button>
+        )}
       
     </div>
 

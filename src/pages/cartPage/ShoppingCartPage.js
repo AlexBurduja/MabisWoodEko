@@ -515,7 +515,7 @@ export function ShoppingCartPage() {
           }
           
           if(deliverySelected === "card"){
-            // redirectToCheckout()
+            redirectToCheckout()
             console.log("Stripe")
           } else if(deliverySelected === "ramburs" || "pickUp") {
             console.log("mailRamburs")
@@ -693,10 +693,16 @@ export function ShoppingCartPage() {
       }
 
       useEffect(() => {
-        setFiirstName(conditional.firstName)
-      }, [conditional])
+        if(user?.uid){
+          setEmail(user.email)
+          setFirstName(conditional.firstName)
+          setLastName(conditional.lastName)
+          setPhoneNumber(conditional.phoneNumber)
+          setStreet(conditional.address)
+        }
+      }, [conditional, user])
 
-      console.log(fiirstName)
+      console.log(firstName)
 
   return (
     <>
@@ -790,7 +796,7 @@ export function ShoppingCartPage() {
 
      <div className='deliveryAddress_inputs__input input2' >
        <div>
-         <input type="text" defaultValue={user?.uid ? fiirstName : firstName} onChange={handleFirstNameChange} required="required" ></input>
+         <input type="text" defaultValue={firstName} onChange={handleFirstNameChange} required="required" ></input>
          <span>First name</span>
        </div>
 

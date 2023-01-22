@@ -389,8 +389,6 @@ export function ProductCardComponent(props) {
   }
   
 }
-  
-
 
   return (
         <>

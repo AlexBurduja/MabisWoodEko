@@ -9,7 +9,7 @@ export function ReviewPageComponent(props) {
 
     const { reviewTitle, reviewText, rating, firstName, lastName, time, id  } = props
 
-    const { auth } = useContext(LoginContext)
+    // const { auth } = useContext(LoginContext)
 
 
 function deleteHandler() {
@@ -46,9 +46,9 @@ function Hello(){
                             <div className="reviewRatingSection_time">
                                 <p> Submitted at: {time}</p>
                             </div>
-                            {auth.user.admin &&
+                            
                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
-                            }
+                            
                             </section>
                         )
                     }
@@ -78,9 +78,8 @@ function Hello(){
                                 <p> Submitted at: {time}</p>
                         </div>
 
-                        {auth.user.admin &&
                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
-                        }
+                        
                         </section>
                         )
                     }
@@ -110,9 +109,8 @@ function Hello(){
                                 <p> Submitted at: {time}</p>
                             </div>
 
-                            {auth.user.admin &&
                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
-                            }
+                            
                             </section>
                         )
                     }
@@ -142,9 +140,8 @@ function Hello(){
                                 <p> Submitted at: {time}</p>
                             </div>
 
-                            {auth.user.admin &&
                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
-                            }
+                            
                             </section>
                         )
                     }
@@ -174,9 +171,8 @@ function Hello(){
                                 <p> Submitted at: {time}</p>
                             </div>
 
-                            {auth.user.admin &&
                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
-                            }
+                            
                             </section>
                         )
                     }

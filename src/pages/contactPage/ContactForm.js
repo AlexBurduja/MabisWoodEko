@@ -66,12 +66,12 @@ export function ContactForm() {
         </div>
           
         <div className='rightSide_inputs__input' >
-          <input name="name" type="text" required="required" defaultValue={`${user} ${user}`}></input>
+          <input name="name" type="text" required="required" ></input>
           <span>Full Name</span>
         </div>
 
         <div className='rightSide_inputs__input' >
-          <input name="email" type="text" required="required" defaultValue={user.email}></input>
+          <input name="email" type="text" required="required" ></input>
           <span>Email</span>
         </div>
 

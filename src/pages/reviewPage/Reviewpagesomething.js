@@ -22,7 +22,7 @@ export function Reviewpagesomething(){
         .then ((reviews) => setReview(reviews))
     }, [])
 
-    const { auth } = useContext(LoginContext)
+    // const { auth } = useContext(LoginContext)
     const [text, setText] = useState("");
     const [title, setTitle] = useState("");
     const options = ["1","2","3","4","5"];
@@ -47,17 +47,17 @@ const body = {
     reviewTitle: title,
     reviewText: text,
     reviewRating: selected,
-    userFirstName: auth.user.firstName,
-    userLastName: auth.user.lastName,
+    // userFirstName: auth.user.firstName,
+    // userLastName: auth.user.lastName,
     time : `${now.getDate()}.${now.getUTCMonth() + 1}.${now.getFullYear()} ${now.getHours()}:${minutes}` ,
-    user: auth.user.id
+    // user: auth.user.id
 }
 
 fetch(`http://localhost:3001/reviews`, {
     method: "POST",
     headers: {
         "Content-Type" : "application/json",
-        Authorization : `Bearer ${auth.accessToken}`
+        // Authorization : `Bearer ${auth.accessToken}`
     },
     body: JSON.stringify(body)
 })

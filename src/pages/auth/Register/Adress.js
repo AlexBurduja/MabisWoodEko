@@ -33,14 +33,15 @@ function Adress({formData, setFormData}) {
         </div>
 
         <div className='inputBoxes'>
+            <input type="text" required value={formData.block} onChange={saveBlock}/>
+            <span>Block No.</span>
+        </div>
+
+        <div className='inputBoxes'>
             <input type="text" required value={formData.apartNo} onChange={saveApartamentNo}/>
             <span>Apartament No.</span>
         </div>
     
-        <div className='inputBoxes'>
-            <input type="text" required value={formData.block} onChange={saveBlock}/>
-            <span>Block</span>
-        </div>
     </div>
   )
 }

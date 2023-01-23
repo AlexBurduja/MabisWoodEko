@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiOutlineEye } from 'react-icons/ai'
 
 function SignUpInfo({ formData, setFormData }) {
@@ -14,6 +14,16 @@ function SignUpInfo({ formData, setFormData }) {
         setFormData({...formData, confirmPassword: event.target.value})
     }
   
+    const [passwordShow, setPasswordShow] = useState(false)
+    const [confirmPasswordShow, setConfirmPasswordShow] = useState(false)
+  
+    const togglePassword = () => {
+      setPasswordShow(!passwordShow)    
+    }
+  
+    const confirmTogglePassword = () => {
+      setConfirmPasswordShow(!confirmPasswordShow)    
+    }
 
     return (
     <div className='wrapperCenter'>
@@ -24,15 +34,15 @@ function SignUpInfo({ formData, setFormData }) {
                 </div>
 
                 <div className="inputBoxes">
-                    <input id="password" type="password" required value={formData.password} onChange={savePassword}/>
+                    <input id="password" type={passwordShow ? "text" : "password"} required value={formData.password} onChange={savePassword}/>
                     <span>Password</span>
-                    <p className="eyeIcon"><AiOutlineEye/></p>
+                    <p className="eyeIcon" onClick={togglePassword}><AiOutlineEye/></p>
                 </div>
 
                 <div className="inputBoxes confirmPassword">
-                    <input id="confirmPassword" type="password" required value={formData.confirmPassword} onChange={saveConfirmPassword} />
+                    <input id="confirmPassword" type={confirmPasswordShow ? "text" : "password"} required value={formData.confirmPassword} onChange={saveConfirmPassword} />
                     <span>Confirm Pass</span>
-                    <p className="eyeIcon"><AiOutlineEye/></p>
+                    <p className="eyeIcon" onClick={confirmTogglePassword}><AiOutlineEye/></p>
                 </div>
 
     </div>

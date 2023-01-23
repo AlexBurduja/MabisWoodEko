@@ -12,6 +12,8 @@ function PersonalInfo({formData, setFormData}) {
   function savePhone(event){
     setFormData({...formData, phoneNumber : event.target.value})
   }
+
+  
   
     return (
     <div className='wrapperCenter'>

@@ -174,8 +174,8 @@ export function ShoppingCartPage() {
         
         setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
         
+        setLoading(false)
       };    
-      setLoading(false)
     }
     getCart()
     
@@ -725,7 +725,7 @@ export function ShoppingCartPage() {
      </div>
 
      </div> 
-     : 
+     : loading ? <LoadingSpinner /> : 
      <>
      <div className='pageHeader'>
    <h1>Your cart</h1>

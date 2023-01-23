@@ -18,26 +18,22 @@ function SignUpInfo({ formData, setFormData }) {
     return (
     <div className='wrapperCenter'>
                 <div className="inputBoxes">
-                    <input id="email" type="text" autoComplete required value={formData.email} 
+                    <input id="email" type="text" required value={formData.email} 
                     onChange={saveEmail}/>
                     <span>Email</span>
-                    {/* <p className="error">{emailError}</p> */}
                 </div>
 
                 <div className="inputBoxes">
                     <input id="password" type="password" required value={formData.password} onChange={savePassword}/>
                     <span>Password</span>
-                    {/* <p className="error">{passwordError}</p> */}
                     <p className="eyeIcon"><AiOutlineEye/></p>
                 </div>
 
-                <div className="inputBoxes">
+                <div className="inputBoxes confirmPassword">
                     <input id="confirmPassword" type="password" required value={formData.confirmPassword} onChange={saveConfirmPassword} />
-                    <span>Confirm Password</span>
-                    {/* <p className="error">{passwordError}</p> */}
+                    <span>Confirm Pass</span>
                     <p className="eyeIcon"><AiOutlineEye/></p>
                 </div>
-
 
     </div>
   )

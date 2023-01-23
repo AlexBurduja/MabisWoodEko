@@ -8,6 +8,10 @@ function PersonalInfo({formData, setFormData}) {
   function saveLastName(event){
     setFormData({...formData, lastName:event.target.value})
   }
+
+  function savePhone(event){
+    setFormData({...formData, phoneNumber : event.target.value})
+  }
   
     return (
     <div className='wrapperCenter'>
@@ -20,6 +24,11 @@ function PersonalInfo({formData, setFormData}) {
             <input type="text" required value={formData.lastName} onChange={saveLastName}/>
             <span>Last Name</span>
         </div>
+
+        <div className='inputBoxes'>
+            <input type="text" required value={formData.phoneNumber} onChange={savePhone}/>
+            <span>Phone Number</span>
+        </div>  
 
     </div>
   )

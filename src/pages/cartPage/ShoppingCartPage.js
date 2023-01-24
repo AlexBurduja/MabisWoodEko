@@ -13,6 +13,7 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import emailjs from "emailjs-com"
 import LoadingSpinner from './LoadingSpinner';
 import { toast, ToastContainer } from 'react-toastify';
+import { isEmpty } from '@firebase/util';
 
 export function ShoppingCartPage() {
   const { user } = useContext( FirebaseAuthContext )
@@ -507,7 +508,7 @@ export function ShoppingCartPage() {
           return true
           }
 
-          if(!emailValid || !firstNameValid || !lastNameValid || !phoneValid || !streetValid || !streetNoValid || !blockValid || !apartamentNoValid ){
+          if(!emailValid || !firstNameValid || !lastNameValid || !phoneValid || !streetValid || !streetNoValid || !blockValid || !apartamentNoValid || isEmpty(country) || region === "Select region"){
             toast.error("One or more fields are empty!", {
               autoClose: 6000
             })
@@ -531,6 +532,12 @@ export function ShoppingCartPage() {
   
           } 
 
+        }
+
+        if (region === "Select region"){
+          console.log('empty')
+        } else {
+          console.log('selected')
         }
           
         //     if(deliverySelected === "card"){
@@ -692,17 +699,24 @@ export function ShoppingCartPage() {
         `)
       }
 
+      function removeItemFromCart(item){
+        const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
+      
+        deleteDoc(userDoc)
+      }
+
       useEffect(() => {
         if(user?.uid){
           setEmail(user.email)
           setFirstName(conditional.firstName)
           setLastName(conditional.lastName)
           setPhoneNumber(conditional.phoneNumber)
-          setStreet(conditional.address)
+          setStreet(conditional.street)
+          setStreetNo(conditional.streetNo)
+          setBlock(conditional.block)
+          setApartamentNo(conditional.apartNo)
         }
       }, [conditional, user])
-
-      console.log(firstName)
 
   return (
     <>
@@ -766,6 +780,8 @@ export function ShoppingCartPage() {
              <p>Total</p>
              {item.quantity * item.price} {item.currency}
            </div>
+
+           <button onClick={() => removeItemFromCart(item)}>Remove</button>
 
          </div>
        </section>
@@ -838,7 +854,7 @@ export function ShoppingCartPage() {
 
        <div className='companyCheckbox'>
          <input type="checkbox" id='Company' name='company' checked={isCompanyChecked} onChange={() => setIsCompanyChecked(!isCompanyChecked)}></input>
-         <label for="Company" >Company</label>
+         <label htmlFor="Company" >Company</label>
        </div>
 
      {isCompanyChecked && (
@@ -890,9 +906,7 @@ export function ShoppingCartPage() {
 
              <div className='deliveryOptions'>
                <CountryDropdown value={country}
-
-onChange={(e) => setCountry(e)}
-               
+              onChange={(e) => setCountry(e)}
 />
                <RegionDropdown country={country}
                value = {region}

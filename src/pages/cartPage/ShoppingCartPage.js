@@ -716,11 +716,13 @@ export function ShoppingCartPage() {
       }
 
 
-      const deleteCart = async () => {
-        db.collection
-
-        await deleteDoc(userDoc)
-      }
+        const deleteCart = async () => {
+        const cartDoc = `users/${user.uid}/cart`
+        
+        await deleteDoc(db, cartDoc)
+        
+        }
+      
 
       function emptyCart(){
         if(user?.uid){

@@ -4,7 +4,7 @@ import 'animate.css';
 import { AiFillEdit } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth, db } from "../../firebase-config";
-import { addDoc, collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import { storage } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
@@ -158,24 +158,7 @@ export function ProductCardComponent(props) {
       
     }
     
-  
-  function deleteItem() {
-      fetch ("/" + id , {
-        method: "DELETE",
-        headers: {
-        }
-      })
-      .then(response => {
-        if(response.status === 200){
-          setDeleteSucces('Product Deleted!')
-          setTimeout(() => {
-            setDeleteSucces('')
-            window.location.reload()
-          }, 1500)
-        }
-      })
-    
-  }
+
 
     function titleChange(event){
     setTitle(event.target.value)
@@ -202,41 +185,7 @@ export function ProductCardComponent(props) {
   }
   /// CART
 
-  const cartUrl = 'http://localhost:3001/cart'
-
-   function createCart() {
-
-    fetch(`${cartUrl}?user=${auth.user.id}`, {
-      headers: {
-        Authorization : `Bearer ${auth.accessToken}`
-      }
-    })
-    .then(response => response.json())
-    .then(cartList => {
-      const [cart] = cartList;
-
-      if (cart) {
-        const productInCart = cart.products.find((product) => product.productId === id)
-
-        if (productInCart) {
-          productInCart.quantity = productInCart.quantity + 1; 
-        } else {
-          cart.products.push({ 
-            productId: id, 
-            productTitle: title, 
-            productImage: image, 
-            productPrice: price, 
-            productCurrency: currency,
-            productKg : kg,
-            quantity: 1 })
-          }
-          updateCart(cart.id, cart.products);
-
-      } else {
-        createAndAddToCart();
-      }
-    })
-
+ 
 
     // fetch(`${cartUrl}/?productId=${id}`)
     // .then(response => response.json())
@@ -253,43 +202,6 @@ export function ProductCardComponent(props) {
 
     //   }
     // })
-
-
-    function updateCart(cartId, products) {
-      fetch(`${cartUrl}/${cartId}`, {
-        method: "PATCH",
-        body: JSON.stringify({ products }),
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-    }
-
-    function createAndAddToCart() {
-      fetch(`${cartUrl}`, {
-        method: "POST",
-
-        body: JSON.stringify({ products: 
-      [
-        {
-          productId: id, 
-          productTitle: title, 
-          productImage: image, 
-          productPrice: price,
-          productCurrency: currency,
-          productKg : kg,
-          quantity: 1
-        }
-      ],
-    user : "userid"}),
-
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
-    }
-  };
-
   //Firebase api edit
   // const editProduct = async (id) => {
   //   const userDoc = doc(db, "products", id)
@@ -389,6 +301,12 @@ export function ProductCardComponent(props) {
   }
   
 }
+
+  function deleteItem(){
+    const userDoc = doc(db, `products/${title}`)
+
+    deleteDoc(userDoc)
+  }
 
   return (
         <>

@@ -700,9 +700,36 @@ export function ShoppingCartPage() {
       }
 
       function removeItemFromCart(item){
-        const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
-      
-        deleteDoc(userDoc)
+        if(user?.uid){
+          const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
+          
+          deleteDoc(userDoc)
+        }
+        
+        if(!user?.uid){
+          const clientId = sessionStorage.getItem("clientId")
+          
+          const userDoc= doc(db, `guestCarts/${clientId}/cart/${item.title+item.kg}`)
+          
+          deleteDoc(userDoc)
+        }
+      }
+
+      function emptyCart(){
+        if(user?.uid){
+            const userDoc = doc(db, `users/${user.uid}/cart`)
+            
+           deleteDoc(userDoc)
+           .then(() => console.log("Deleted"))
+          }
+
+        if(!user?.uid){
+          const clientId = sessionStorage.getItem("clientId")
+
+          const userDoc = doc(db, `guestCarts/${clientId}/cart`)
+        
+          deleteDoc(userDoc)
+        }
       }
 
       useEffect(() => {
@@ -771,9 +798,13 @@ export function ShoppingCartPage() {
 
            <div className='column'>
              <p>Quantity</p>
-             <button onClick={() => quantityDown(item)}>-</button>
-             {item.quantity}
-             <button onClick={() => quantityUp(item)}>+</button>
+
+             <div className='quantityColumn'>
+              <button onClick={() => quantityDown(item)}>-</button>
+              {item.quantity}
+              <button onClick={() => quantityUp(item)}>+</button>
+             </div>
+           
            </div>
 
            <div className='column'>
@@ -781,7 +812,10 @@ export function ShoppingCartPage() {
              {item.quantity * item.price} {item.currency}
            </div>
 
-           <button onClick={() => removeItemFromCart(item)}>Remove</button>
+
+            <div className='column removeBtn'>
+           <button  onClick={() => removeItemFromCart(item)}>Remove</button>
+            </div>
 
          </div>
        </section>
@@ -789,7 +823,7 @@ export function ShoppingCartPage() {
        })}
 
    <div className='productCartFooter'>
-   <button className="emptyCartButton" >Empty Cart</button>
+   <button className="emptyCartButton" onClick={emptyCart}>Empty Cart</button>
      <ProductCount />
      <p>Total: {totalPrice} RON</p>
    </div>

@@ -340,7 +340,8 @@ table:hover{
 
 .emptyCartButton{
     border: none;
-    background : linear-gradient(-135deg, white, rgba(48,48,230));
+    background : linear-gradient(-130deg, rgba(48,48,230,1), rgb(15, 0, 70) );
+    color: white;
     width: 100px;
     border-radius: 5px;
     cursor: pointer;
@@ -348,6 +349,7 @@ table:hover{
     font-family: inherit;
     font-size: 15px;
 }
+
 /* under 1400px */
 
 @media (max-width: 1400px)  {
@@ -451,10 +453,67 @@ table:hover{
     font-size: 40px;
 }
 
+.removeBtn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.removeBtn button{
+    height: 4vh;
+    width:  7vh;
+
+    border: transparent;
+    background: linear-gradient(-130deg, rgba(48,48,230,1), rgb(15, 0, 70) );
+    border-radius: 10px;
+
+    color: white;
+    cursor: pointer;
+
+    font: inherit;
+    font-size: 14px;
+}
+
+.removeBtn button:hover{    
+    background: linear-gradient(-130deg, red, black);
+
+}
+
+.quantityColumn{
+    display: flex;
+    gap: 10px;
+}
+
+.quantityColumn button{
+    width: 2vw;
+    height: 3vh;
+}
+
 
 /* under 900px */
 
 @media  (max-width: 850px) {
+    .removeBtn{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    .removeBtn button{
+        height: 5vh;
+        width:  10vh;
+    }
+
+    .quantityColumn{
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+    }
+    
+    .quantityColumn button{
+        width: 5vw;
+        height: 3vh;
+    }
 
     table, tr,th,td{
         display: block;

@@ -4,7 +4,7 @@ import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
-import { collection, deleteDoc, doc,getDoc,getDocs, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc,Firestore,getDoc,getDocs, query, updateDoc, WriteBatch, writeBatch } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
@@ -161,6 +161,20 @@ export function ShoppingCartPage() {
     }, 500)
   }
   
+  function quantityChange(item){
+    const userDoc = doc(db, `users/${user.uid}/cart/${item.title+item.kg}`)
+
+    const newFields = {
+      quantity : item.quantity
+    }
+
+    const handleInputChange = (e) => {
+      newFields.quantity = e.target.value
+    }
+
+    updateDoc(userDoc, newFields)
+  }
+
   useEffect(() => {
     
     const getCart = async () =>{
@@ -195,6 +209,7 @@ export function ShoppingCartPage() {
     
     
     if(!user?.uid){
+      setLoading(true)
       const clientId = sessionStorage.getItem("clientId")
       
       const getCart = async () => {
@@ -204,12 +219,39 @@ export function ShoppingCartPage() {
           let data = await getDocs(ref)
     
           setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+        setLoading(false);
         };
+
         
         getCart()
       }
+
+      const handleStorageEvent = (event) => {
+        const clientId = sessionStorage.getItem("clientId")
+        console.log(event)
+        if (event.key === clientId && event.newValue === null) {
+          // myKey was deleted from sessionStorage
+          deleteGuestClientId();
+          console.log("Key deleted")
+        }
+      };
+
+      window.addEventListener('storage', handleStorageEvent);
+      return () => {
+        window.removeEventListener('storage', handleStorageEvent);
+      }
+
     }, [user])
+
   
+
+    function deleteGuestClientId(){
+      const clientId = sessionStorage.getItem("clientId")
+
+      const userDoc = doc(db, `guestCarts/${clientId}`)
+
+      deleteDoc(userDoc)
+    }
     
     function ProductCount () {
       if (totalQuantity === 1){
@@ -717,10 +759,39 @@ export function ShoppingCartPage() {
 
 
         const deleteCart = async () => {
-        const cartDoc = `users/${user.uid}/cart`
-        
-        await deleteDoc(db, cartDoc)
-        
+          if(user?.uid){
+
+            const userDoc = collection(db, `users/${user.uid}/cart`)
+            
+            const q =await getDocs(userDoc)
+            
+            const batch = writeBatch(db)
+            q.forEach(doc => {
+              batch.delete(doc.ref)
+            })
+            
+            batch.commit()
+          }
+
+          if(!user?.uid){
+            const clientId = sessionStorage.getItem("clientId")
+
+            const userDoc = collection(db, `guestCarts/${clientId}/cart`)
+            
+            const q =await getDocs(userDoc)
+            
+            const batch = writeBatch(db)
+            q.forEach(doc => {
+              batch.delete(doc.ref)
+            })
+            
+            batch.commit()
+          }
+          
+            setInterval(() => {
+            window.location.reload()
+          }, 2000)
+          
         }
       
 
@@ -809,7 +880,7 @@ export function ShoppingCartPage() {
 
              <div className='quantityColumn'>
               <button onClick={() => quantityDown(item)}>-</button>
-              {item.quantity}
+              <input type="number" defaultValue={item.quantity} onChange={quantityChange}/>
               <button onClick={() => quantityUp(item)}>+</button>
              </div>
            

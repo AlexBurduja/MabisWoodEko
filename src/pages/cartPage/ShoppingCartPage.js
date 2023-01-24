@@ -715,12 +715,18 @@ export function ShoppingCartPage() {
         }
       }
 
+
+      const deleteCart = async () => {
+        db.collection
+
+        await deleteDoc(userDoc)
+      }
+
       function emptyCart(){
         if(user?.uid){
-            const userDoc = doc(db, `users/${user.uid}/cart`)
+            const userDoc = doc(db, `/users/sz7Sdw0wiEhmuVgoJHIOt3pTnZw1/cart`)
             
            deleteDoc(userDoc)
-           .then(() => console.log("Deleted"))
           }
 
         if(!user?.uid){
@@ -823,7 +829,7 @@ export function ShoppingCartPage() {
        })}
 
    <div className='productCartFooter'>
-   <button className="emptyCartButton" onClick={emptyCart}>Empty Cart</button>
+   <button className="emptyCartButton" onClick={deleteCart}>Empty Cart</button>
      <ProductCount />
      <p>Total: {totalPrice} RON</p>
    </div>

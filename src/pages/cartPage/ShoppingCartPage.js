@@ -225,33 +225,50 @@ export function ShoppingCartPage() {
         
         getCart()
       }
+      
+      
+      // const clientId = sessionStorage.getItem("clientId")
 
-      const handleStorageEvent = (event) => {
-        const clientId = sessionStorage.getItem("clientId")
-        console.log(event)
-        if (event.key === clientId && event.newValue === null) {
-          // myKey was deleted from sessionStorage
-          deleteGuestClientId();
-          console.log("Key deleted")
-        }
-      };
-
-      window.addEventListener('storage', handleStorageEvent);
-      return () => {
-        window.removeEventListener('storage', handleStorageEvent);
-      }
-
+      // const handleStorageEvent = (event) => {
+      //   console.log(event)
+      //   if (event.key === clientId && event.newValue === null) {
+      //     // myKey was deleted from sessionStorage
+      //     deleteGuestClientId();
+      //   }
+      // };
+      
+      // window.addEventListener('storage', handleStorageEvent);
+      // return () => {
+      //   window.removeEventListener('storage', handleStorageEvent);
+      // }
+      
     }, [user])
-
-  
-
-    function deleteGuestClientId(){
+    
+    
+    
+    
+    const deleteGuestClientId = async () => {
       const clientId = sessionStorage.getItem("clientId")
 
-      const userDoc = doc(db, `guestCarts/${clientId}`)
-
-      deleteDoc(userDoc)
+      
+      const userDoc = collection(db, `guestCarts/${clientId}/cart`)
+      
+      const q =await getDocs(userDoc)
+            
+      const batch = writeBatch(db)
+      q.forEach(doc => {
+        batch.delete(doc.ref)
+      })
+      
+      batch.commit()
     }
+    
+    window.addEventListener('storage', function (event) { 
+          if(event.key === 'clientId' && event.newValue === null){
+            deleteGuestClientId();
+          }
+  });
+    
     
     function ProductCount () {
       if (totalQuantity === 1){

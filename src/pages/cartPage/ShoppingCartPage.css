@@ -38,13 +38,13 @@ table:hover{
     display:flex;
     flex-direction: row;
     width: 90%;
-    margin-left: 10%;
+    margin-left: 5%;
     gap: 20px;
 }
 
 .cartPageLeftSection{
     display: flex;
-    flex: 50%;
+    flex: 50% 1;
     align-items: center;
     flex-direction: column;
 }
@@ -257,6 +257,10 @@ table:hover{
     font-weight: normal;
 }
 
+.checkoutTab {
+    overflow: hidden;
+}
+
 .checkoutTab_header{
     border-bottom: 2px solid grey;
     padding-bottom: 20px;
@@ -413,6 +417,17 @@ table:hover{
         flex-direction: row;
         width: 90%;
         gap: 20px;
+    }
+
+    .removeBtn{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    .removeBtn button{
+        height: 5vh;
+        width:  10vh;
     }
     
 }

@@ -45,8 +45,8 @@ useEffect(() => {
     }
     getDocument()
     .then(data => setConditional(data))
-  
   }
+  
 }, [user?.uid])
 
             

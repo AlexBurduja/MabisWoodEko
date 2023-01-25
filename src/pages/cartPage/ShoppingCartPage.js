@@ -263,7 +263,7 @@ export function ShoppingCartPage() {
       batch.commit()
     }
     
-    window.addEventListener('storage', function (event) { 
+    window.addEventListener('unload', function (event) { 
           if(event.key === 'clientId' && event.newValue === null){
             deleteGuestClientId();
           }

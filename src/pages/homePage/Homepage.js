@@ -1,7 +1,6 @@
 import { CreateProduct } from './CreateProduct';
 import { Header } from '../reusableComponents/Header';
 import { Image } from './Image';
-import { ImageCards } from './ImageCards';
 import { ProductListComponent } from './ProductListComponent';
 import { PreFooter } from '../reusableComponents/PreFooter';
 import { ShoppingCart } from "../cartPage/ShoppingCart";
@@ -18,7 +17,6 @@ export function Homepage() {
         <ShoppingCart />
       </Header>
       <Image />
-      <ImageCards />
       <CreateProduct />
       <ProductListComponent />
       <BackToTop />

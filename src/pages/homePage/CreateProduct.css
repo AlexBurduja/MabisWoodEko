@@ -7,7 +7,7 @@
     font-size: 15px;
     padding: 5px 5px;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 10px;
     cursor: pointer;
 }
 
@@ -26,6 +26,7 @@
     font-size: 25px;
     cursor: pointer;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 .createProductButton:hover{

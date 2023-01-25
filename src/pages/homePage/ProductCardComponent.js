@@ -48,14 +48,22 @@ export function ProductCardComponent(props) {
     const [clientId, setClientId] = useState(sessionStorage.getItem("clientId"));
   
     const generateId = () => Math.random().toString(36).substring(2, 18);
-  
+
+    
     useEffect(() => {
       if (!clientId) {
         const newClientId = generateId();
         sessionStorage.setItem("clientId", newClientId);
         setClientId(newClientId);
+        
+        const newDocRef = doc(db, "guestCarts" , clientId);
+        const newFields = {
+          cart: []
+        }
+        setDoc(newDocRef, newFields);
+
       }
-    }, []);
+    }, [clientId]);
   }
   
   useClientId();
@@ -255,7 +263,6 @@ export function ProductCardComponent(props) {
       }
       notify()
     }
-
   
     
   }
@@ -321,9 +328,9 @@ export function ProductCardComponent(props) {
     
         <a href={`products/${id}`} className="viewMoreButton"> View more </a>
 
-        {conditional.admin && (
+        {/* {conditional.admin && ( */}
           <button onClick={toggleModalEdit} className="edit-btn">< AiFillEdit /></button>
-        )}
+        {/* )} */}
       
     </div>
 

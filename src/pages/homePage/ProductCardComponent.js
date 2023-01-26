@@ -328,9 +328,9 @@ export function ProductCardComponent(props) {
     
         <a href={`products/${id}`} className="viewMoreButton"> View more </a>
 
-        {/* {conditional.admin && ( */}
+        {conditional.admin && (
           <button onClick={toggleModalEdit} className="edit-btn">< AiFillEdit /></button>
-        {/* )} */}
+        )}
       
     </div>
 
@@ -406,9 +406,6 @@ export function ProductCardComponent(props) {
                       <input type="file" onChange={handleImageChange}></input>
                       <button onClick={handleSubmit}>Upload Image</button>
                     </div>
-
-                    {/* <img alt="ProductImage"
-                    src={url}></img> */}
                   </div>
 
                   <div className="modal-content-buttons">

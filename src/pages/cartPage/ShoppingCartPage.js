@@ -161,19 +161,6 @@ export function ShoppingCartPage() {
     }, 500)
   }
   
-  function quantityChange(item){
-    const userDoc = doc(db, `users/${user.uid}/cart/${item.title+item.kg}`)
-
-    const newFields = {
-      quantity : item.quantity
-    }
-
-    const handleInputChange = (e) => {
-      newFields.quantity = e.target.value
-    }
-
-    updateDoc(userDoc, newFields)
-  }
 
   useEffect(() => {
     
@@ -264,9 +251,11 @@ export function ShoppingCartPage() {
     }
     
     window.addEventListener('unload', function (event) { 
-          if(event.key === 'clientId' && event.newValue === null){
+          
+        if(event.key === 'clientId' && event.newValue === null){
             deleteGuestClientId();
           }
+
   });
     
     
@@ -841,6 +830,49 @@ export function ShoppingCartPage() {
         }
       }, [conditional, user])
 
+      function onChangeQ(e){
+        return Number(e.target.value)
+      }
+
+
+      function quantityChange(e, item){
+        const userDoc = doc(db, `users/${user.uid}/cart/${item.title + item.kg}`)
+    
+        const newFields = {
+          quantity : onChangeQ(e)
+        }
+    
+        updateDoc(userDoc, newFields)
+
+        if(onChangeQ(e) === 0 ){
+          if(user?.uid){
+            const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
+            
+            deleteDoc(userDoc)
+          }
+          
+          if(!user?.uid){
+            const clientId = sessionStorage.getItem("clientId")
+            
+            const userDoc= doc(db, `guestCarts/${clientId}/cart/${item.title+item.kg}`)
+            
+            deleteDoc(userDoc)
+          }
+
+          setInterval(() => {
+            window.location.reload();
+          }, 2000)
+
+        } else if(onChangeQ(e) > 0){
+          toast.warn("Cart is being updated!")
+
+          setInterval(() => {
+            window.location.reload();
+          }, 2000)
+        }
+        
+      }
+
   return (
     <>
     {loading === false && 
@@ -868,6 +900,7 @@ export function ShoppingCartPage() {
    <h1>Your cart</h1>
    <AiOutlineShopping />
    </div>
+   <ToastContainer />
    <section className='wrapper'>
    <section className='cartPageLeftSection'>
    <h1>1. REVIEW YOUR ORDER </h1>
@@ -897,7 +930,9 @@ export function ShoppingCartPage() {
 
              <div className='quantityColumn'>
               <button onClick={() => quantityDown(item)}>-</button>
-              <input type="number" defaultValue={item.quantity} onChange={quantityChange}/>
+              
+              <input type="number" defaultValue={item.quantity} onChange={(e) => quantityChange(e, item)}/>
+              
               <button onClick={() => quantityUp(item)}>+</button>
              </div>
            

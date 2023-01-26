@@ -354,6 +354,11 @@ table:hover{
     font-size: 15px;
 }
 
+.quantityColumn input{
+    width: 40px;
+    text-align: center;
+}
+
 /* under 1400px */
 
 @media (max-width: 1400px)  {

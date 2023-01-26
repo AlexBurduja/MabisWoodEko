@@ -55,18 +55,11 @@ export function ProductCardComponent(props) {
         const newClientId = generateId();
         sessionStorage.setItem("clientId", newClientId);
         setClientId(newClientId);
-        
-        const newDocRef = doc(db, "guestCarts" , clientId);
-        const newFields = {
-          cart: []
-        }
-        setDoc(newDocRef, newFields);
-
       }
-    }, [clientId]);
+    }, []);
   }
-  
   useClientId();
+  
 
 
   const handleImageChange = (e) => {
@@ -284,6 +277,7 @@ export function ProductCardComponent(props) {
 
     const docRef = doc(db,cartDoc,title+kg);
     const docSnap = await getDoc(docRef)
+    
     const notify = () => toast(`${title} added in cart.`)
     const notifyAdd = () => toast(`One more ${title} in your cart!`)
 

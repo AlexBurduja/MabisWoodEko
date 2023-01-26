@@ -4,7 +4,7 @@ import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
-import { collection, deleteDoc, doc,Firestore,getDoc,getDocs, query, updateDoc, WriteBatch, writeBatch } from 'firebase/firestore';
+import { collection, deleteDoc, doc,Firestore,getDoc,getDocs, query, setDoc, updateDoc, WriteBatch, writeBatch } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
@@ -275,8 +275,10 @@ export function ShoppingCartPage() {
       }, 0)
 
       
-      /// !firstNameValid || !lastNameValid || !phoneValid || !streetValid
-      
+      function stripeIdss(){
+        return cart.map(cart => `${cart.title} ${cart.kg}Kg (Cantitate : ${cart.quantity}) => ${cart.kg * cart.quantity} de ${cart.title})
+        `)
+      }
       
       const checkout = () => {
         const emailValid = validateEmail(email)
@@ -292,13 +294,6 @@ export function ShoppingCartPage() {
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     
             return emailRegex.test(registerEmail);
-          }
-          function handleBlurEmail() {
-            if (emailValidState) {
-              toast.error("Email is not valid!" , {
-                autoClose: 6000
-              })
-            }
           }
           
           function validateFirstName(firstName){
@@ -564,19 +559,19 @@ export function ShoppingCartPage() {
           }
           
           if(deliverySelected === "card"){
+            
             redirectToCheckout()
-            console.log("Stripe")
           } else if(deliverySelected === "ramburs" || "pickUp") {
             console.log("mailRamburs")
 
-            // emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
-            //   subject: `Comanda de la ${email}, metoda de livrare este : ${deliverySelected === "ramburs" ? "Ramburs" : "Ridicare din magazin."}`,
-            //   name : `${firstName} ${lastName}`,
-            //   message : `
-            //   Comanda contine :
-            //   ${stripeIdss()} `,
-            //   totalPrice : `Pretul total este de ${totalPrice} lei.`,
-            // }, 'crU6K8bQnftB81z-j' )
+            emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
+              subject: `Comanda de la ${email}, metoda de livrare este : ${deliverySelected === "ramburs" ? "Ramburs" : "Ridicare din magazin."}`,
+              name : `${firstName} ${lastName}`,
+              message : `
+              Comanda contine :
+              ${stripeIdss()} `,
+              totalPrice : `Pretul total este de ${totalPrice} lei.`,
+            }, 'crU6K8bQnftB81z-j' )
   
           } 
 
@@ -720,33 +715,6 @@ export function ShoppingCartPage() {
         console.log("Stripe checkout error", error)
       }
 
-      function EmptyCart() {      
-          return(
-            <div className='emptyCartTextWrapper'>
-            <div className='emptyCartText'>
-              <div>
-            <h1>Your Cart is Empty </h1>
-              </div>
-
-              <div>
-            <p> <RiShoppingCartLine /> </p>
-              </div>
-
-            </div>
-
-            <div>
-              <HashLink className='cartBackToProduct' to="/#product" replace="true">Back to products</HashLink>
-            </div>
-
-            </div>
-          )
-      }
-
-      function stripeIdss(){
-        return cart.map(cart => `${cart.title} ${cart.kg}Kg (Cantitate : ${cart.quantity}) => ${cart.kg * cart.quantity} de ${cart.title})
-        `)
-      }
-
       function removeItemFromCart(item){
         if(user?.uid){
           const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
@@ -831,27 +799,38 @@ export function ShoppingCartPage() {
       }, [conditional, user])
 
       function onChangeQ(e){
+        console.log(e.target.value)
         return Number(e.target.value)
       }
 
 
       function quantityChange(e, item){
-        const userDoc = doc(db, `users/${user.uid}/cart/${item.title + item.kg}`)
-    
-        const newFields = {
-          quantity : onChangeQ(e)
+          const newFields = {
+            quantity : onChangeQ(e)
+          }
+
+        if(user?.uid){
+          const userDoc = doc(db, `users/${user.uid}/cart/${item.title + item.kg}`)
+          
+          updateDoc(userDoc, newFields)
         }
+        
+        if (!user?.uid){
+          const clientId = sessionStorage.getItem("clientId")
+          
+          const guestDoc = doc(db, `guestCarts/${clientId}`)
+          
+          updateDoc(guestDoc, newFields)
+        }
+        
     
-        updateDoc(userDoc, newFields)
 
         if(onChangeQ(e) === 0 ){
           if(user?.uid){
             const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
             
             deleteDoc(userDoc)
-          }
-          
-          if(!user?.uid){
+          }else if(!user?.uid){
             const clientId = sessionStorage.getItem("clientId")
             
             const userDoc= doc(db, `guestCarts/${clientId}/cart/${item.title+item.kg}`)

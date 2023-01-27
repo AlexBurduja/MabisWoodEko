@@ -4,7 +4,7 @@ import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
-import { collection, deleteDoc, doc,Firestore,getDoc,getDocs, query, setDoc, updateDoc, WriteBatch, writeBatch } from 'firebase/firestore';
+import { collection, deleteDoc, doc,getDoc,getDocs, updateDoc, writeBatch } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
@@ -805,49 +805,84 @@ export function ShoppingCartPage() {
 
 
       function quantityChange(e, item){
-          const newFields = {
-            quantity : onChangeQ(e)
-          }
 
         if(user?.uid){
           const userDoc = doc(db, `users/${user.uid}/cart/${item.title + item.kg}`)
           
-          updateDoc(userDoc, newFields)
-        }
-        
-        if (!user?.uid){
-          const clientId = sessionStorage.getItem("clientId")
-          
-          const guestDoc = doc(db, `guestCarts/${clientId}`)
-          
-          updateDoc(guestDoc, newFields)
-        }
-        
-    
+          const newFields = {
+              quantity : onChangeQ(e)
+            }
 
-        if(onChangeQ(e) === 0 ){
-          if(user?.uid){
-            const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
-            
-            deleteDoc(userDoc)
-          }else if(!user?.uid){
-            const clientId = sessionStorage.getItem("clientId")
-            
-            const userDoc= doc(db, `guestCarts/${clientId}/cart/${item.title+item.kg}`)
-            
-            deleteDoc(userDoc)
+          updateDoc(userDoc, newFields)
+          
+          if(onChangeQ(e) === 0){
+            if(e.target.value === "" || e.target.value === null){
+              return;
+            }else {
+              setTimeout(() => {
+                const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 
+                
+                deleteDoc(userDoc)
+
+                window.location.reload();
+              }, 1000)
+            }
           }
 
-          setInterval(() => {
-            window.location.reload();
-          }, 2000)
+          if(onChangeQ(e) > 0){
+            toast.warn("Cart is being updated!", {
+              autoClose: 500
+            })
+        
+            setInterval(() => {
+              window.location.reload();
+            }, 2000 )
+          }
+        }
+        
+        if(!user?.uid){
 
-        } else if(onChangeQ(e) > 0){
-          toast.warn("Cart is being updated!")
+            const clientId = sessionStorage.getItem("clientId")
+            
+            const guestDoc = doc(db, `guestCarts/${clientId}/cart/${item.title+item.kg}`)
+            
+            const newFields = {
+              quantity : onChangeQ(e)
+            }
 
-          setInterval(() => {
-            window.location.reload();
-          }, 2000)
+            if(onChangeQ(e) > 0 ){
+                toast.warn("Cart is being updated!", {
+                  autoClose: 500
+                })
+            
+                setInterval(() => {
+                  window.location.reload();
+                }, 2000 )
+
+            }
+
+            updateDoc(guestDoc, newFields)
+          
+          if(onChangeQ(e) === 0){
+            if(e.target.value === "" || e.target.value === null){
+              return
+            } else {
+              setTimeout(() => {
+
+                const clientId = sessionStorage.getItem("clientId") 
+                
+                const userDoc= doc(db, `guestCarts/${clientId}/cart/${item.title+item.kg}`)
+                
+                deleteDoc(userDoc)
+
+                window.location.reload();
+              }, 1000)
+            }
+            
+            // setInterval(() => {
+            //   window.location.reload();
+            // }, 2000)
+          }
         }
         
       }
@@ -904,15 +939,15 @@ export function ShoppingCartPage() {
              {item.price} {item.currency}
            </div>
 
-           <div className='column'>
+           <div className='column quantityFlex'>
              <p>Quantity</p>
 
              <div className='quantityColumn'>
-              <button onClick={() => quantityDown(item)}>-</button>
               
-              <input type="number" defaultValue={item.quantity} onChange={(e) => quantityChange(e, item)}/>
+              <button type='button' onClick={() => quantityDown(item)}>-</button>
+              <input type="text" pattern='\d*' defaultValue={item.quantity} onChange={(e) => quantityChange(e, item)} />
+              <button type='button' onClick={() => quantityUp(item)}>+</button>
               
-              <button onClick={() => quantityUp(item)}>+</button>
              </div>
            
            </div>
@@ -923,9 +958,8 @@ export function ShoppingCartPage() {
            </div>
 
 
-            <div className='column removeBtn'>
-           <button  onClick={() => removeItemFromCart(item)}>Remove</button>
-            </div>
+           <button className='removeBtn'  onClick={() => removeItemFromCart(item)}>Remove</button>
+          
 
          </div>
        </section>
@@ -1049,12 +1083,13 @@ export function ShoppingCartPage() {
              </div>
 
              <div className='deliveryOptions'>
-               <CountryDropdown value={country}
+               <CountryDropdown className="countryDrop" value={country}
               onChange={(e) => setCountry(e)}
 />
                <RegionDropdown country={country}
                value = {region}
-               onChange={handleRegionChange}/>
+               onChange={handleRegionChange}
+               className="regionDrop"/>
                <label htmlFor="delivery">Pay Method: </label>
                
                {country === "Romania" && (

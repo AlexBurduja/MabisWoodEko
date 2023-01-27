@@ -354,15 +354,117 @@ table:hover{
     font-size: 15px;
 }
 
-.quantityColumn input{
+.quantityColumn input {
     width: 40px;
+    height: 40px;
     text-align: center;
+}
+
+.removeBtn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    height: 30px;
+    width:  8vh;
+    min-width: 80px;
+
+    border: transparent;
+    background: linear-gradient(-130deg, rgba(48,48,230,1), rgb(15, 0, 70) );
+    border-radius: 10px;
+
+    color: white;
+    cursor: pointer;
+
+    font: inherit;
+    font-size: 14px;
+}
+
+.emptyCartText{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10%;
+}
+
+.emptyCartTextWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 250px;
+    padding-bottom: 10%;
+}
+
+
+
+.cartBackToProduct {
+    text-decoration: none;
+    border: 2px solid black;
+    padding: 20px;
+}
+
+.emptyCartTextWrapper button:hover {
+    color: white;
+    background-color: rgba(48, 48, 230, 1);
+}
+
+.emptyCartText p{
+    margin-top: 10px;
+    font-size: 40px;
+}
+
+.quantityColumn{
+    display: flex;
+    gap: 10px;
+}
+
+.quantityColumn button{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.quantityColumn input {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.countryDrop {
+    background-color: transparent;
+    font-style: inherit;
+    border-radius: 5px;
+}
+
+.regionDrop{
+    background-color: transparent;
+    font-style: inherit;
+    border-radius: 5px;
 }
 
 /* under 1400px */
 
 @media (max-width: 1400px)  {
+
     
+    .quantityColumn button {
+        width: 30px;
+        height: 30px;
+    }
+
+    .quantityColumn input {
+        height: 30px;
+        width: 30px;
+        font-size: 15px;
+    }
+
     .wrapper{
         display:flex;
         flex-direction: column;
@@ -428,91 +530,40 @@ table:hover{
         position: absolute;
         top: 10px;
         left: 10px;
-    }
-
-    .removeBtn button{
         height: 5vh;
         width:  10vh;
+    
+        border: transparent;
+        background: linear-gradient(-130deg, rgba(48,48,230,1), rgb(15, 0, 70) );
+        border-radius: 10px;
+
+        color: white;
+        cursor: pointer;
+
+        font: inherit;
+        font-size: 14px;
     }
     
-}
-
-.emptyCartText{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10%;
-}
-
-.emptyCartTextWrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 250px;
-    padding-bottom: 10%;
-}
-
-
-
-.cartBackToProduct {
-    text-decoration: none;
-    border: 2px solid black;
-    padding: 20px;
-}
-
-.emptyCartTextWrapper button:hover {
-    color: white;
-    background-color: rgba(48, 48, 230, 1);
-}
-
-.emptyCartText p{
-    margin-top: 10px;
-    font-size: 40px;
-}
-
-.removeBtn{
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
-
-.removeBtn button{
-    height: 4vh;
-    width:  7vh;
-
-    border: transparent;
-    background: linear-gradient(-130deg, rgba(48,48,230,1), rgb(15, 0, 70) );
-    border-radius: 10px;
-
-    color: white;
-    cursor: pointer;
-
-    font: inherit;
-    font-size: 14px;
-}
-
-.removeBtn button:hover{    
-    background: linear-gradient(-130deg, red, black);
-
-}
-
-.quantityColumn{
-    display: flex;
-    gap: 10px;
-}
-
-.quantityColumn button{
-    width: 2vw;
-    height: 3vh;
 }
 
 
 /* under 900px */
 
 @media  (max-width: 850px) {
+
+    .quantityColumn button {
+        width: 30px;
+        height: 30px;
+        background-color: transparent;
+        border: 1px solid black;
+    }
+
+    .quantityColumn input {
+        height: 30px;
+        width: 30px;
+        font-size: 15px;
+    }
+
     .removeBtn{
         position: absolute;
         top: 10px;
@@ -522,17 +573,6 @@ table:hover{
     .removeBtn button{
         height: 5vh;
         width:  10vh;
-    }
-
-    .quantityColumn{
-        display: flex;
-        align-items: center;
-        gap: 1vw;
-    }
-    
-    .quantityColumn button{
-        width: 5vw;
-        height: 3vh;
     }
 
     table, tr,th,td{

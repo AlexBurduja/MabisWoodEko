@@ -311,7 +311,7 @@ export function ProductCardComponent(props) {
 
   return (
         <>
-    <div id="product" className="cardDiv" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
+    <div id="product" className="cardDiv">
         <h2>{title}</h2>
         <img src={image} alt="productImage" />
         <p className="kgP">{kg} Kg</p>

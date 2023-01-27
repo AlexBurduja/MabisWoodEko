@@ -22,6 +22,7 @@ export function ShoppingCartPage() {
   const [ country, setCountry ] = useState("")
   const [ pickUp, setPickUp] = useState(false)
   const [deliverySelected, setDeliverySelected] = useState("card")
+  const [store, setStore] = useState("Bucuresti")
   const [ region, setRegion ] = useState("Select region")
   const [ disabled, setDisable ] = useState("disable")
   const [ conditional, setConditional] = useState("")
@@ -80,6 +81,10 @@ export function ShoppingCartPage() {
     }else {
       setPickUp(false);
     }
+  }
+
+  const handleStoreChange = (e) => {
+    setStore(e.target.value)
   }
 
   const handleRegionChange = (e) => {
@@ -276,7 +281,8 @@ export function ShoppingCartPage() {
 
       
       function stripeIdss(){
-        return cart.map(cart => `${cart.title} ${cart.kg}Kg (Cantitate : ${cart.quantity}) => ${cart.kg * cart.quantity} de ${cart.title})
+        return cart.map(cart => `${cart.title} ${cart.kg}Kg (Cantitate : ${cart.quantity}) => ${cart.kg * cart.quantity} Kg de ${cart.title})
+        
         `)
       }
       
@@ -565,11 +571,19 @@ export function ShoppingCartPage() {
             console.log("mailRamburs")
 
             emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
-              subject: `Comanda de la ${email}, metoda de livrare este : ${deliverySelected === "ramburs" ? "Ramburs" : "Ridicare din magazin."}`,
-              name : `${firstName} ${lastName}`,
-              message : `
-              Comanda contine :
-              ${stripeIdss()} `,
+              subject: `Comanda de la ${email}`,
+              metoda : `Metoda de livrare este : ${deliverySelected === "ramburs" ? "Ramburs" : `Ridicare din magazinul din <b>${store}</b>.`}`,
+
+              name : `${firstName} ${lastName} ( ${email} )
+              
+              Numar telefon: ${phoneNumber}
+              Strada : ${street} Nr.${streetNo} 
+              Bloc : ${block}
+              Apartament : ${apartamentNo}`,
+              
+              message : `Comanda contine :
+              ${stripeIdss()}`,
+              
               totalPrice : `Pretul total este de ${totalPrice} lei.`,
             }, 'crU6K8bQnftB81z-j' )
   
@@ -582,23 +596,6 @@ export function ShoppingCartPage() {
         } else {
           console.log('selected')
         }
-          
-        //     if(deliverySelected === "card"){
-        //       redirectToCheckout()
-        //       console.log("Stripe")
-        //     } else if(deliverySelected === "ramburs" || "pickUp") {
-        //       console.log('mail')
-
-        //     emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
-        //       subject: `Comanda de la ${email}`,
-        //       name : `${firstName} ${lastName}`,
-        //       message : `
-        //       Comanda contine :
-        //       ${stripeIdss()} `,
-        //       totalPrice : `Pretul total este de ${totalPrice} lei.`,
-        //     }, 'crU6K8bQnftB81z-j' )
-        //   }}}
-        // } else {
 
         function totalQ () {
           let total = 0
@@ -887,6 +884,8 @@ export function ShoppingCartPage() {
         
       }
 
+      console.log(pickUp)
+
   return (
     <>
     {loading === false && 
@@ -1107,9 +1106,9 @@ export function ShoppingCartPage() {
                )}
 
                {pickUp && (
-                 <select id='blabla'>
-                 <option value="bucuresti">Bucuresti</option>
-                 <option value="arges">Arges</option>
+                 <select id='magazine' value={store} onChange={handleStoreChange}>
+                 <option value="Bucuresti">Bucuresti</option>
+                 <option value="Arges">Arges</option>
                </select>
                )}
 

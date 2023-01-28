@@ -711,6 +711,10 @@ export function ShoppingCartPage() {
           
           deleteDoc(userDoc)
         }
+
+        setInterval(() => {
+          window.location.reload();
+        }, 1000)
       }
 
 

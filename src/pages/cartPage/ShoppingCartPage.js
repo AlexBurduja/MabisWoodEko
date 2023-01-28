@@ -571,44 +571,30 @@ export function ShoppingCartPage() {
             console.log("mailRamburs")
 
             emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
-              subject: `Comanda de la ${email}`,
+              subject : `Comanda de la ${email}`,
               metoda : `Metoda de livrare este : ${deliverySelected === "ramburs" ? "Ramburs" : `Ridicare din magazinul din <b>${store}</b>.`}`,
 
-              name : `${firstName} ${lastName} ( ${email} )
-              
-              Numar telefon: ${phoneNumber}
-              Strada : ${street} Nr.${streetNo} 
-              Bloc : ${block}
-              Apartament : ${apartamentNo}`,
+              company: `${isCompanyChecked ? `Nume Firma: ${companyName
+              }, CUI: ${companyCui}.` : `Persoana Fizica.` }`,
+
+              name : `<b>${firstName} ${lastName} ( ${email} )</b>`,
+              phone: `<b>${phoneNumber}</b>`,
+              street : `<b>${street}</b>`, 
+              streetNo: `<b>${streetNo}</b>`,
+              bloc : `<b>${block}</b>`,
+              apartNo : `<b>${apartamentNo}</b>`,
               
               message : `Comanda contine :
               ${stripeIdss()}`,
               
-              totalPrice : `Pretul total este de ${totalPrice} lei.`,
+              totalPrice : `Pretul total este de <b>${totalPrice} lei</b>.`,
             }, 'crU6K8bQnftB81z-j' )
   
           } 
 
         }
 
-        if (region === "Select region"){
-          console.log('empty')
-        } else {
-          console.log('selected')
-        }
-
-        function totalQ () {
-          let total = 0
-          cart.forEach(item => {
-            total += item.quantity
-          });
-          return total
-        }
-
-
-
         const handleEmailChange = e => {
-          // setEmailValidState(!validateEmail(e.target.value))
           setEmail(e.target.value)
 
         }
@@ -616,7 +602,6 @@ export function ShoppingCartPage() {
         const handleLastNameChange = (e) => {
           const input = e.target.value
           setLastName(input)
-          // validateLastName(input)
         }
 
         const handleFirstNameChange = (e) => {
@@ -626,14 +611,12 @@ export function ShoppingCartPage() {
 
           const input = e.target.value
           setFirstName(input)
-          // validateFirstName(input)
 
         }
 
         const handlePhoneNumberChange = (e) => {
           const input = e.target.value
           setPhoneNumber(input)
-          // validatePhoneNumber(input)
           if(user?.uid){
             setPhoneNumber(conditional.phoneNumber)
           }
@@ -642,7 +625,6 @@ export function ShoppingCartPage() {
         const handleStreetChange = (e) => {
           const input = e.target.value
           setStreet(input)
-          // validateStreet(input)
           if(user?.uid){
             setStreet(conditional.address)
           }
@@ -651,29 +633,32 @@ export function ShoppingCartPage() {
         const handleStreetNoChange = (e) => {
           const input = e.target.value
           setStreetNo(input)
-          // validateStreetNo(input)
         }
 
         const handleBlockChange = (e) => {
           const input = e.target.value
           setBlock(input)
-          // validateBlock(input)
         }
 
         const handleApartamentNo = (e) => {
           const input = e.target.value
           setApartamentNo(input)
-          // validateApartamentNo(input)
         }
 
         const handleCompanyNameChange = (e) => {
-
+          if(isCompanyChecked){
+            setCompanyName(e.target.value)
+          }
         }
 
         const handleCompanyCuiChange = (e) => {
-
+          if(isCompanyChecked){
+            setCompanyCui(e.target.value)
+          }
         }
 
+        console.log(companyCui)
+        console.log(companyName)
         
       let stripePromise;
 
@@ -884,8 +869,6 @@ export function ShoppingCartPage() {
         
       }
 
-      console.log(pickUp)
-
   return (
     <>
     {loading === false && 
@@ -1031,7 +1014,7 @@ export function ShoppingCartPage() {
 
        <div className='companyCheckbox'>
          <input type="checkbox" id='Company' name='company' checked={isCompanyChecked} onChange={() => setIsCompanyChecked(!isCompanyChecked)}></input>
-         <label htmlFor="Company" >Company</label>
+         <label htmlFor="Company" >Company ?</label>
        </div>
 
      {isCompanyChecked && (
@@ -1092,7 +1075,7 @@ export function ShoppingCartPage() {
                <label htmlFor="delivery">Pay Method: </label>
                
                {country === "Romania" && (
-                 <select disabled={disabled} id='delivery' onChange={handleDeliveryChange} value={deliverySelected}>
+                 <select disabled={disabled} id='delivery' onChange={handleDeliveryChange} className="regionDrop" value={deliverySelected}>
                  <option value="card">Credit Card</option>
                  <option value="ramburs">Ramburs (cash on delivery)</option>
                  <option value="pickUp">Pick up from one of our stores.</option>
@@ -1106,9 +1089,9 @@ export function ShoppingCartPage() {
                )}
 
                {pickUp && (
-                 <select id='magazine' value={store} onChange={handleStoreChange}>
-                 <option value="Bucuresti">Bucuresti</option>
-                 <option value="Arges">Arges</option>
+                 <select id='magazine' className="regionDrop" value={store} onChange={handleStoreChange}>
+                 <option value="Bucuresti" >Bucuresti</option>
+                 <option value="Arges" >Arges</option>
                </select>
                )}
 

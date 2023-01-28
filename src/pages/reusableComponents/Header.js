@@ -14,6 +14,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
+import { ShoppingCartMobile } from '../cartPage/ShoppingCartMobile';
 
 export function Header() {
 
@@ -141,11 +142,14 @@ useEffect(() => {
           {user?.uid && (
             <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{conditional.firstName}'s Profile</NavLink> </li>
           )}
-          <li className="item mobileCart"> <ShoppingCart/> </li>
           <LogInOrOutMobile/>
         </ul>
       </nav>
 </div>  
+
+      <div className='mobileCart'>
+        <ShoppingCartMobile/>  
+      </div>
 
   </section>
   );

@@ -1,14 +1,15 @@
 import { RiShoppingCartLine } from 'react-icons/ri';
 import { useState, useEffect, useContext } from 'react';
-import "./ShoppingCart.css"
+import "./ShoppingCartMobile.css"
 import { NavLink } from 'react-router-dom';
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+ 
 
 
-export function ShoppingCart() {
-  
+export function ShoppingCartMobile() {
+
 const { user } = useContext( FirebaseAuthContext )
 
 
@@ -52,25 +53,14 @@ useEffect(() => {
 let sum = 0
 const totalquantity = cart.forEach(value => sum+= value.quantity)
 
-console.log(sum)
-
-
-
-function ProductCount () {
-  if (sum === 1){
-    return <p>{sum} product</p>
-  } else {
-    return <p>{sum} products</p>
-  }
-}
-
-
 
   return (
   <NavLink to='/cart' id='cartNavlink' >
-    <section className='cartSection'>
+    <section className='cartSectionMobile'>
       <RiShoppingCartLine />
-          <ProductCount />
+      <div className='productCountMobileBackground'>
+          <p className='productCountMobile'>{sum}</p>
+      </div>
     </section>
   </NavLink>
   );

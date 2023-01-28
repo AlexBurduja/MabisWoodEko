@@ -657,20 +657,17 @@ export function ShoppingCartPage() {
           }
         }
 
-        console.log(companyCui)
-        console.log(companyName)
+      
         
-      let stripePromise;
-
-      const getStripe = () => {
+        let stripePromise;
+        
+        const getStripe = () => {
         if(!stripePromise){
           stripePromise = loadStripe("pk_test_51MQo3GLhCgTZCrVVShrOGDphb9M7MGq9YTOCW90JE5cVtrYsExpY49wClOSYqEn4Ezv9tGcuKIFtbBpSCIF1iDPT00wEyjkOIV")
         }
         return stripePromise
       }
 
-
-        
       const stripeIds = cart.map(item => item.stripeId)
       const itemQuantity = cart.map(item => item.quantity)
 

@@ -1,11 +1,13 @@
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useContext } from "react"
 import { useEffect, useState } from "react"
-import { LoginContext } from "../../App"
+import { FirebaseAuthContext } from "../../FirebaseAuthContext"
 import { ReviewPageComponent } from "./ReviewPageComponent"
 
 
 export function Reviewpagesomething(){
+
+    const { user } = useContext(FirebaseAuthContext)
 
     const [review, setReview] = useState([])
 
@@ -78,6 +80,10 @@ fetch(`http://localhost:3001/reviews`, {
     return (
 <>
         <section className="mainSection">
+        
+        {user?.uid ? 
+        
+            <>
         <div className="header">
             <h1>Review Page</h1>
             <h4>Here you can see how everyone reviewed our services!</h4>
@@ -97,6 +103,7 @@ fetch(`http://localhost:3001/reviews`, {
                 )}
             </AnimatePresence>
         </div>
+
                 <section>
 
                 <div className="reviewForm">
@@ -122,7 +129,10 @@ fetch(`http://localhost:3001/reviews`, {
                     <button onClick={postHandler}>Post</button>
                 </div>
                 </section>
-        </section>    
+                </>
+            : <p>You need to be logged in</p>}
+        </section>
+
         <div className="reviewGrid">
         {review.map((reviews) => {
             return (

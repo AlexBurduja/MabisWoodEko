@@ -130,7 +130,12 @@ fetch(`http://localhost:3001/reviews`, {
                 </div>
                 </section>
                 </>
-            : <p>You need to be logged in</p>}
+            : 
+            <div className="notLoggedIn">
+
+            <p>You have to <a href="/login">login</a> / <a href="/register">register</a>  to leave a review.</p>
+            
+            </div>}
         </section>
 
         <div className="reviewGrid">

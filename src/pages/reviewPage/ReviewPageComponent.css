@@ -177,3 +177,17 @@ div .reviewRatingSection_username{
     color: rgb(75, 238, 75);
     font-weight: bold;
 }
+
+.notLoggedIn{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    width: 100%;
+}
+
+.notLoggedIn a{
+    text-decoration: none;
+    color: red;
+}

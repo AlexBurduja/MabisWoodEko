@@ -662,7 +662,7 @@ export function ShoppingCartPage() {
         
         const getStripe = () => {
         if(!stripePromise){
-          stripePromise = loadStripe("pk_live_51MQo3GLhCgTZCrVVXxkoKyaLDQARjeJB9y013QpyH0wlCEiKAAmMWbTBH196nWjHutfDAOHSV8YsjH60T2mzSPcb00x0kmVCNK")
+          stripePromise = loadStripe("pk_test_51MQo3GLhCgTZCrVVShrOGDphb9M7MGq9YTOCW90JE5cVtrYsExpY49wClOSYqEn4Ezv9tGcuKIFtbBpSCIF1iDPT00wEyjkOIV")
         }
         return stripePromise
       }
@@ -681,9 +681,7 @@ export function ShoppingCartPage() {
       const checkoutOptions = {
         lineItems: items,
         mode: "payment",
-        automatic_tax:{
-          enabled: true
-        },
+        customerEmail: email,
         successUrl: `${window.location.origin}/succes`,
         cancelUrl: `${window.location.origin}/cancel`,
       }

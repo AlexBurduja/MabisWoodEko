@@ -1,6 +1,8 @@
+import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useContext } from "react"
 import { useEffect, useState } from "react"
+import { db } from "../../firebase-config"
 import { FirebaseAuthContext } from "../../FirebaseAuthContext"
 import { ReviewPageComponent } from "./ReviewPageComponent"
 
@@ -11,7 +13,11 @@ export function Reviewpagesomething(){
 
     const [review, setReview] = useState([])
 
+    const [ loading, setLoading ] = useState(false)
+
     const [ succes, setSucces ] = useState('')
+
+    const [conditional, setConditional] = useState([])
 
     const now = new Date();
     let minutes = now.getMinutes()
@@ -19,10 +25,29 @@ export function Reviewpagesomething(){
     minutes = minutes.toString().padStart(2, '0')
 
     useEffect(()=>{
-        fetch('http://localhost:3001/reviews')
-        .then(response => response.json())
-        .then ((reviews) => setReview(reviews))
-    }, [])
+        
+        const getReviews = async () => {
+            setLoading(true)
+            const ref = collection(db, 'reviews')
+
+            const data = await getDocs(ref)
+
+            setReview(data.docs.map((doc) => ({...doc.data(), id:doc.id})))
+
+            setLoading(false)
+        };
+        getReviews();
+    
+            const getDocument = async () => {
+              const ref = doc(db, 'users', user.uid)
+              
+              const document = await getDoc(ref)
+              
+              setConditional(document.data())
+            }
+            getDocument()
+
+    }, [user?.uid])
 
     // const { auth } = useContext(LoginContext)
     const [text, setText] = useState("");
@@ -48,33 +73,19 @@ event.preventDefault()
 const body = {
     reviewTitle: title,
     reviewText: text,
-    reviewRating: selected,
-    // userFirstName: auth.user.firstName,
-    // userLastName: auth.user.lastName,
+    reviewStar: selected,
+    firstName: conditional.firstName,
+    lastName: conditional.lastName,
     time : `${now.getDate()}.${now.getUTCMonth() + 1}.${now.getFullYear()} ${now.getHours()}:${minutes}` ,
-    // user: auth.user.id
+    user: user.uid
 }
 
-fetch(`http://localhost:3001/reviews`, {
-    method: "POST",
-    headers: {
-        "Content-Type" : "application/json",
-        // Authorization : `Bearer ${auth.accessToken}`
-    },
-    body: JSON.stringify(body)
-})
-.then(response => {
-    if(response.status === 201){
-        setSucces('Review Posted!')
-       
-        setTimeout(() => {
-            setSucces('');
-            window.location.reload();
-        }, 1500)
-    
-    }
-})
+const ref = doc(db, `reviews/${user.uid}`)
+
+setDoc(ref, body)
 }
+
+console.log(conditional.firstName)
 
 
     return (
@@ -142,14 +153,14 @@ fetch(`http://localhost:3001/reviews`, {
         {review.map((reviews) => {
             return (
                 <ReviewPageComponent
-                reviewTitle={reviews.reviewTitle}
+                reviewTitle = {reviews.reviewTitle}
                 reviewText = {reviews.reviewText}
-                rating = {reviews.reviewRating}
-                firstName={reviews?.userFirstName}
-                lastName={reviews.userLastName}
-                time={reviews.time}
-                id={reviews.id}
-                key={reviews.id}>
+                rating = {reviews.reviewStar}
+                firstName = {reviews?.firstName}
+                lastName = {reviews.lastName}
+                time = {reviews.time}
+                id = {reviews.id}
+                key = {reviews.id}>
                 </ReviewPageComponent>
             )
         })}

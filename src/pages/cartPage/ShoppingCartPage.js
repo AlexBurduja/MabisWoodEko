@@ -687,8 +687,6 @@ export function ShoppingCartPage() {
       }
 
       const redirectToCheckout = async () => {
-        console.log("redirectToCheckout")
-
         const stripe = await getStripe()
         const { error } = await stripe.redirectToCheckout(checkoutOptions)
         console.log("Stripe checkout error", error)

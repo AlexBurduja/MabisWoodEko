@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, setDoc} from "firebase/firestore"
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useContext } from "react"
 import { useEffect, useState } from "react"

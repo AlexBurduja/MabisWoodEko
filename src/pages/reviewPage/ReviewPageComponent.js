@@ -1,7 +1,5 @@
-import { useContext } from "react"
 import React from "react"
 import { RiStarFill, RiStarLine } from "react-icons/ri";
-import { LoginContext } from "../../App";
 import "./ReviewPageComponent.css"
 import { AiOutlineClose } from "react-icons/ai";
 

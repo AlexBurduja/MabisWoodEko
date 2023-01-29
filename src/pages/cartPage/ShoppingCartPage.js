@@ -565,7 +565,6 @@ export function ShoppingCartPage() {
           }
           
           if(deliverySelected === "card"){
-            
             redirectToCheckout()
           } else if(deliverySelected === "ramburs" || "pickUp") {
             console.log("mailRamburs")
@@ -663,7 +662,7 @@ export function ShoppingCartPage() {
         
         const getStripe = () => {
         if(!stripePromise){
-          stripePromise = loadStripe("pk_test_51MQo3GLhCgTZCrVVShrOGDphb9M7MGq9YTOCW90JE5cVtrYsExpY49wClOSYqEn4Ezv9tGcuKIFtbBpSCIF1iDPT00wEyjkOIV")
+          stripePromise = loadStripe("pk_live_51MQo3GLhCgTZCrVVXxkoKyaLDQARjeJB9y013QpyH0wlCEiKAAmMWbTBH196nWjHutfDAOHSV8YsjH60T2mzSPcb00x0kmVCNK")
         }
         return stripePromise
       }
@@ -682,6 +681,9 @@ export function ShoppingCartPage() {
       const checkoutOptions = {
         lineItems: items,
         mode: "payment",
+        automatic_tax:{
+          enabled: true
+        },
         successUrl: `${window.location.origin}/succes`,
         cancelUrl: `${window.location.origin}/cancel`,
       }
@@ -871,7 +873,7 @@ export function ShoppingCartPage() {
       }
 
   return (
-    <>
+    <div >
     {loading === false && 
      cart.length === 0 ?
      <div className='emptyCartTextWrapper'>
@@ -898,7 +900,7 @@ export function ShoppingCartPage() {
    <AiOutlineShopping />
    </div>
    <ToastContainer />
-   <section className='wrapper'>
+   <section className='wrapper' >
    <section className='cartPageLeftSection'>
    <h1>1. REVIEW YOUR ORDER </h1>
    <h3>Please check that you have the right quantity of every single item to avoid confusions at checkout, Thanks!</h3>
@@ -1112,6 +1114,6 @@ export function ShoppingCartPage() {
    </>
 
     }
-  </>
+  </div>
     )
 }

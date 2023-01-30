@@ -85,7 +85,8 @@ const ref = doc(db, `reviews/${user.uid}`)
 setDoc(ref, body)
 }
 
-console.log(conditional.firstName)
+
+console.log(review)
 
 
     return (

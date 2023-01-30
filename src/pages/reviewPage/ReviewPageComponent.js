@@ -19,163 +19,207 @@ function deleteHandler() {
 }
 
 
-function Hello(){
-                    if (rating === "1") {
-                        return (
-                            <section className="reviewRatingSection">
-                            <div className="reviewRatingSection_username">
-                                <p>
-                                    {lastName + " " + firstName?.substring(0,1) + ". "} <span>said  
-                                </span></p> 
-                            </div>
+// function Hello(){
+//                     if (rating === "1") {
+//                         return (
+//                             <section className="reviewRatingSection">
+//                             <div className="reviewRatingSection_username">
+//                                 <p>
+//                                     {lastName + " " + firstName?.substring(0,1) + ". "} <span>said  
+//                                 </span></p> 
+//                             </div>
                             
-                            <div className="reviewRatingSection_title">
-                                {reviewTitle}
-                            </div>
+//                             <div className="reviewRatingSection_title">
+//                                 {reviewTitle}
+//                             </div>
 
-                            <div className="reviewRatingSection_text">
-                                {reviewText}    
-                            </div>
+//                             <div className="reviewRatingSection_text">
+//                                 {reviewText}    
+//                             </div>
 
-                            <div className="reviewRatingSection_stars">
-                            <RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine /><RiStarLine />
-                            </div>
+//                             <div className="reviewRatingSection_stars">
+//                             <RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine /><RiStarLine />
+//                             </div>
                             
-                            <div className="reviewRatingSection_time">
-                                <p> Submitted at: {time}</p>
-                            </div>
+//                             <div className="reviewRatingSection_time">
+//                                 <p> Submitted at: {time}</p>
+//                             </div>
                             
-                                <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
+//                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                             
-                            </section>
-                        )
-                    }
+//                             </section>
+//                         )
+//                     }
 
-                    if(rating === "2"){
-                    return  (
-                        <section className="reviewRatingSection">
-                            <div className="reviewRatingSection_username">
-                                <p >
-                                    {lastName + " " + firstName?.substring(0,1) + ". " }<span>said  
-                                </span></p> 
-                            </div>
+//                     if(rating === "2"){
+//                     return  (
+//                         <section className="reviewRatingSection">
+//                             <div className="reviewRatingSection_username">
+//                                 <p >
+//                                     {lastName + " " + firstName?.substring(0,1) + ". " }<span>said  
+//                                 </span></p> 
+//                             </div>
                             
-                            <div className="reviewRatingSection_title">
-                                {reviewTitle}
-                            </div>
+//                             <div className="reviewRatingSection_title">
+//                                 {reviewTitle}
+//                             </div>
 
-                            <div className="reviewRatingSection_text">
-                                {reviewText}    
-                            </div>
+//                             <div className="reviewRatingSection_text">
+//                                 {reviewText}    
+//                             </div>
 
-                        <div className="reviewRatingSection_stars">
-                            <RiStarFill /><RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine />
-                        </div>
+//                         <div className="reviewRatingSection_stars">
+//                             <RiStarFill /><RiStarFill /><RiStarLine /><RiStarLine /><RiStarLine />
+//                         </div>
 
-                        <div className="reviewRatingSection_time">
-                                <p> Submitted at: {time}</p>
-                        </div>
+//                         <div className="reviewRatingSection_time">
+//                                 <p> Submitted at: {time}</p>
+//                         </div>
 
-                                <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
+//                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                         
-                        </section>
-                        )
-                    }
+//                         </section>
+//                         )
+//                     }
 
-                    if(rating === "3"){
-                        return (
-                            <section className="reviewRatingSection">
-                            <div className="reviewRatingSection_username">
-                                <p >
-                                    {lastName + " " + firstName?.substring(0,1) + ". "} <span>said  
-                                </span></p> 
-                            </div>
+//                     if(rating === "3"){
+//                         return (
+//                             <section className="reviewRatingSection">
+//                             <div className="reviewRatingSection_username">
+//                                 <p >
+//                                     {lastName + " " + firstName?.substring(0,1) + ". "} <span>said  
+//                                 </span></p> 
+//                             </div>
                             
-                            <div className="reviewRatingSection_title">
-                                {reviewTitle}
-                            </div>
+//                             <div className="reviewRatingSection_title">
+//                                 {reviewTitle}
+//                             </div>
 
-                            <div className="reviewRatingSection_text">
-                                {reviewText}    
-                            </div>
+//                             <div className="reviewRatingSection_text">
+//                                 {reviewText}    
+//                             </div>
                                 
-                            <div className="reviewRatingSection_stars">
-                                <RiStarFill /><RiStarFill /><RiStarFill /><RiStarLine /><RiStarLine />
-                            </div>
+//                             <div className="reviewRatingSection_stars">
+//                                 <RiStarFill /><RiStarFill /><RiStarFill /><RiStarLine /><RiStarLine />
+//                             </div>
 
-                            <div className="reviewRatingSection_time">
-                                <p> Submitted at: {time}</p>
-                            </div>
+//                             <div className="reviewRatingSection_time">
+//                                 <p> Submitted at: {time}</p>
+//                             </div>
 
-                                <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
+//                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                             
-                            </section>
-                        )
-                    }
+//                             </section>
+//                         )
+//                     }
 
-                    if(rating === "4"){
-                        return (
-                            <section className="reviewRatingSection">
-                            <div className="reviewRatingSection_username">
-                                <p >
-                                    {lastName + " " + firstName?.substring(0,1) + ". "} <span>said  
-                                </span></p> 
-                            </div>
+//                     if(rating === "4"){
+//                         return (
+//                             <section className="reviewRatingSection">
+//                             <div className="reviewRatingSection_username">
+//                                 <p >
+//                                     {lastName + " " + firstName?.substring(0,1) + ". "} <span>said  
+//                                 </span></p> 
+//                             </div>
                             
-                            <div className="reviewRatingSection_title">
-                                {reviewTitle}
-                            </div>
+//                             <div className="reviewRatingSection_title">
+//                                 {reviewTitle}
+//                             </div>
 
-                            <div className="reviewRatingSection_text">
-                                {reviewText}    
-                            </div>
+//                             <div className="reviewRatingSection_text">
+//                                 {reviewText}    
+//                             </div>
 
-                            <div className="reviewRatingSection_stars">
-                                <RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill /><RiStarLine />
-                            </div>
+//                             <div className="reviewRatingSection_stars">
+//                                 <RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill /><RiStarLine />
+//                             </div>
 
-                            <div className="reviewRatingSection_time">
-                                <p> Submitted at: {time}</p>
-                            </div>
+//                             <div className="reviewRatingSection_time">
+//                                 <p> Submitted at: {time}</p>
+//                             </div>
 
-                                <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
+//                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                             
-                            </section>
-                        )
-                    }
+//                             </section>
+//                         )
+//                     }
 
-                    if(rating === "5"){
-                        return(
-                            <section className="reviewRatingSection">
-                            <div className="reviewRatingSection_username">
-                                <p >
-                                    { lastName + " " + firstName?.substring(0,1) + "."} <span>said  
-                                </span></p> 
-                            </div>
+//                     if(rating === "5"){
+//                         return(
+//                             <section className="reviewRatingSection">
+//                             <div className="reviewRatingSection_username">
+//                                 <p >
+//                                     { lastName + " " + firstName?.substring(0,1) + "."} <span>said  
+//                                 </span></p> 
+//                             </div>
                             
-                            <div className="reviewRatingSection_title">
-                                {reviewTitle}
-                            </div>
+//                             <div className="reviewRatingSection_title">
+//                                 {reviewTitle}
+//                             </div>
 
-                            <div className="reviewRatingSection_text">
-                                {reviewText}    
-                            </div>
+//                             <div className="reviewRatingSection_text">
+//                                 {reviewText}    
+//                             </div>
 
-                            <div className="reviewRatingSection_stars">
-                                <RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill />
-                            </div>
+//                             <div className="reviewRatingSection_stars">
+//                                 <RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill /><RiStarFill />
+//                             </div>
 
-                            <div className="reviewRatingSection_time">
-                                <p> Submitted at: {time}</p>
-                            </div>
+//                             <div className="reviewRatingSection_time">
+//                                 <p> Submitted at: {time}</p>
+//                             </div>
 
-                                <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
+//                                 <button className="reviewDeleteButton" onClick={deleteHandler}><AiOutlineClose /></button>
                             
-                            </section>
-                        )
-                    }
-};
+//                             </section>
+//                         )
+//                     }
+// };
 
+function renderStars(rating) {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(<RiStarFill />);
+    }
+    for (let i = 0; i < 5 - rating; i++) {
+      stars.push(<RiStarLine />);
+    }
+    return stars;
+  }
+
+  function Hello() {
+    return (
+      <section className="reviewRatingSection">
+        <div className="reviewRatingSection_username">
+          <p>
+            {lastName + " " + firstName?.substring(0,1) + ". "} <span>said</span>
+          </p> 
+        </div>
+        
+        <div className="reviewRatingSection_title">
+          {reviewTitle}
+        </div>
+  
+        <div className="reviewRatingSection_text">
+          {reviewText}    
+        </div>
+  
+        <div className="reviewRatingSection_stars">
+          {renderStars(rating)}
+        </div>
+  
+        <div className="reviewRatingSection_time">
+          <p> Submitted at: {time}</p>
+        </div>
+  
+        <button className="reviewDeleteButton" onClick={deleteHandler}>
+          <AiOutlineClose />
+        </button>
+      </section>
+    );
+  }
+  
+    
     return(
         <>
                 <Hello />

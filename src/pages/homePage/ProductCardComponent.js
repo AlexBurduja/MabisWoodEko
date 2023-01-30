@@ -247,7 +247,6 @@ export function ProductCardComponent(props) {
       setDoc(doc(db,cartDoc,title+kg), newFields)
       notifyAdd();
       setCounter(counter + 1)
-      console.log(counter)
     } else {
       try {
         setDoc(doc(db, cartDoc, title+kg), newFields)

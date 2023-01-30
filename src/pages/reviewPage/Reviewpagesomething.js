@@ -1,7 +1,9 @@
-import { collection, doc, getDoc, getDocs, setDoc} from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, getDocs, setDoc, updateDoc} from "firebase/firestore"
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useContext } from "react"
 import { useEffect, useState } from "react"
+import Slider from "react-slick"
+import { toast } from "react-toastify"
 import { db } from "../../firebase-config"
 import { FirebaseAuthContext } from "../../FirebaseAuthContext"
 import { ReviewPageComponent } from "./ReviewPageComponent"
@@ -49,7 +51,6 @@ export function Reviewpagesomething(){
 
     }, [user?.uid])
 
-    // const { auth } = useContext(LoginContext)
     const [text, setText] = useState("");
     const [title, setTitle] = useState("");
     const options = ["1","2","3","4","5"];
@@ -67,7 +68,7 @@ function titleChange(event){
 setTitle(event.target.value)
 }
 
-function postHandler(event){
+const postHandler = async (event) =>{
 event.preventDefault()
 
 const body = {
@@ -80,14 +81,30 @@ const body = {
     user: user.uid
 }
 
-const ref = doc(db, `reviews/${user.uid}`)
+
+const ref = doc(db, `reviews/${title}`)
 
 setDoc(ref, body)
+
 }
 
 
-console.log(review)
+const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  }
 
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    setInterval(() => {
+      setCurrentIndex((currentIndex + 1) % review.length);
+    }, 3000);
+  }, [currentIndex, review.length]);
 
     return (
 <>
@@ -150,7 +167,8 @@ console.log(review)
             </div>}
         </section>
 
-        <div className="reviewGrid">
+        
+    <div className="reviewGrid">
         {review.map((reviews) => {
             return (
                 <ReviewPageComponent
@@ -163,9 +181,10 @@ console.log(review)
                 id = {reviews.id}
                 key = {reviews.id}>
                 </ReviewPageComponent>
-            )
-        })}
-        </div>
+
+)
+})}
+    </div>
 </>
     )
 }

@@ -12,7 +12,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 
 
-export function Form() {
+export function Register() {
 
 const [page, setPage] = useState(0)
 const [formData , setFormData] = useState({

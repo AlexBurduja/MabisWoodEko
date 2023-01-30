@@ -7,29 +7,34 @@ import { FirebaseAuthContext } from "./FirebaseAuthContext";
 
 export function CanNavigate({ children }){
     const { user } = useContext(FirebaseAuthContext)
-    const [ conditional, setConditional ] = useState({})
+    const [ conditional, setConditional ] = useState([])
+
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
 
-        if (user?.uid){
-        
+        if (user){
           const getDocument = async () => {
-            const ref = doc(db, 'users', user.uid)
+            const ref = doc(db, `users/${user.uid}`)
             
-            let document = await getDoc(ref)
+            const document = await getDoc(ref)
             
-            return document.data()
-            
+            setConditional(document.data())
           }
           getDocument()
-          .then(data => setConditional(data))
-        
         }
-      }, [user?.uid])
-
-      if(conditional.admin === true){
-        return (children);
-      } else {
-        return <Navigate to="/" replace={true} />
+      }, [user])
+      
+      console.log(conditional)
+      
+      if(Object.keys(conditional).length === 0){
+        return null;
       }
+
+        if(conditional.admin === true){
+          return (children);
+        } else {
+          return <Navigate to="/" replace={true} />
+        }
+
 }

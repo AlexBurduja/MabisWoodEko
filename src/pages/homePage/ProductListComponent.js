@@ -1,29 +1,13 @@
 import { collection, getDocs } from 'firebase/firestore';
-import { useContext, useEffect, useState } from 'react';
-import { LoginContext } from '../../App';
+import { useEffect, useState } from 'react';
 import { db } from '../../firebase-config';
-import { ShoppingCartPage } from '../cartPage/ShoppingCartPage';
 import { ProductCardComponent } from "./ProductCardComponent";
 import "./ProductCardComponentModal.css"
 
 export function ProductListComponent() {
 
-  const url = "http://localhost:3001";
-  const endpoint = "/product";
   const [products, setProducts] = useState([]);
 
-  // const { auth } = useContext(AuthContext)
-
-  ///Fetch Get RestApi
-  // useEffect(() => {
-  //   fetch(url + endpoint, {
-  //     headers: {
-  //       Authorization : `Bearer ${auth.accessToken}`
-  //     }
-  //   })
-  //     .then((response) => response.json())
-  //     .then((productsFromServer) => setProducts(productsFromServer));
-  // }, []);
 
   
   const ref = collection(db , 'products')

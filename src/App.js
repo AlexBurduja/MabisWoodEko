@@ -11,10 +11,9 @@ import { Login } from './pages/auth/Login';
 import { ProfilePage } from './pages/auth/ProfilePage.js';
 import { ReviewPage } from './pages/reviewPage/ReviewPage';
 import { AdminPanelList } from './pages/adminPanel/AdminPanelList';
-import { Form } from './pages/auth/Register/Form';
+import { Register } from './pages/auth/Register/Register';
 import { AuthProvider } from './FirebaseAuthContext';
 import { CanNavigate } from './CanNavigate';
-import { NotificationContainer } from 'react-notifications';
 
 export const LoginContext = React.createContext();
 
@@ -53,7 +52,7 @@ function App() {
               <ProfilePage /> 
               } ></Route>
 
-              <Route path = '/users' element={
+              <Route path = '/panel' element={
                 <CanNavigate>
                   <AdminPanelList />
                 </CanNavigate>
@@ -62,10 +61,9 @@ function App() {
             {/* <Route path = '/loginfirebase' element={ <Login /> }></Route> */}
             {/* <Route path = '/registerfirebase' element= { <Form/> }></Route>  */}
             <Route path = '/login' element={ <Login /> }></Route>
-            <Route path = '/register' element= { <Form/> }></Route>
+            <Route path = '/register' element= { <Register/> }></Route>
         </Routes>
       </BrowserRouter>
-      <NotificationContainer />
       </AuthProvider>
   )
 }

@@ -13,7 +13,6 @@ export function ReviewPage() {
     <>
       <TopScrollProgress />
       <Header />
-      <ReviewPageComponent />
       <Reviewpagesomething />
       <BackToTop />
       <PreFooter />

@@ -107,7 +107,7 @@ useEffect(() => {
         <NavLink className={activeClass} to='/reviews'>Reviews</NavLink>
         <NavLink className={activeClass} to='/contact'>Contact</NavLink>
         {conditional.admin === true && (
-          <NavLink className={activeClass} to='/users'>Panel</NavLink>
+          <NavLink className={activeClass} to='/panel'>Panel</NavLink>
         )}
         
         </div>

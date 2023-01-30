@@ -3,6 +3,7 @@ import "./AdminPanelComponent.css"
 import { GrContactInfo } from "react-icons/gr"
 import { AiOutlineCloseCircle, AiOutlineEye } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
+import { updateCurrentUser, updatePassword } from "firebase/auth";
 
 export function AdminPanelComponent(props) {
 

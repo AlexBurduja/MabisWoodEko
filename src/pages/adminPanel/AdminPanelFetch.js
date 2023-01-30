@@ -1,17 +1,25 @@
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { db } from "../../firebase-config";
 import { AdminPanelComponent } from "./AdminPanelComponent";
 
 export function AdminPanelFetch(){
     const [users , setUsers] = useState([])
     
+
     useEffect(() => {
-        fetch("http://localhost:3001/users")
-        .then(response => response.json())
-        .then(response => setUsers(response))
+        const getUsers = async () => {
+            const userDoc = collection(db, `users`)
+
+            const data = await getDocs(userDoc)
+
+            setUsers(data.docs.map((doc) => ({...doc.data(), id:doc.id})))
+        }
+        getUsers()
+
     }, []) 
         
-    console.log(users)
-
+console.log(users)
     return (
         <>
         <div className="userPageHeader">

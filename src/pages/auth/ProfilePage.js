@@ -1,35 +1,62 @@
-import { useContext,  useState } from "react";
+import { useContext,  useEffect,  useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../App";
 import { Header } from "../reusableComponents/Header";
 import { PreFooter } from "../reusableComponents/PreFooter";
 import "./ProfilePage.css"
 import { AnimatePresence, motion } from "framer-motion";
+import { FirebaseAuthContext } from "../../FirebaseAuthContext";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase-config";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { toast, ToastContainer } from "react-toastify";
+import { Footer } from "../reusableComponents/Footer";
 
 
 export function ProfilePage() {
-    const { auth } = useContext(LoginContext)
+    const { user } = useContext(FirebaseAuthContext)
     const navigate = useNavigate();
 
-    const [ username, setUsername ] = useState(auth.user.username)
-    const [ password, setPassword ] = useState(auth.user.password)
-    const [ firstName, setFirstName] = useState(auth.user.firstName)
-    const [ lastName, setLastName] = useState(auth.user.lastName)
-    const [ email, setEmail ] = useState(auth.user.email)
-    const [ confirmPassword, setConfirmPassword] = useState(auth.user.confirmPassword)
-
+    const [ password, setPassword ] = useState(user.password)
+    const [ email, setEmail ] = useState(user.email)
+    
     const [ passwordError, setPasswordError ] = useState('')
     const [ emailError, setEmailError ] = useState('')
     const [ usernameError, setUsernameError ] = useState('')
     const [ firstNameError, setFirstNameError ] = useState('')
     const [ lastNameError, setLastNameError ] = useState('')
-
+    
     const [succes, setSucces] = useState('');
     const [deleteMessage , setDeleteMessage] = useState('')
+    
+      const auth = getAuth()
 
-    function changeUsername(event) {
-        setUsername(event.target.value)
-    }
+      const triggetResetEmail = async () => {
+        sendPasswordResetEmail(auth, email)
+        
+        toast.warn("Password reset sent!")
+      }
+      
+    
+    
+    useEffect(() => {
+      if(user?.uid){
+        const getDocument = async () => {
+          const ref = doc(db, 'users', user.uid)
+          
+          const document = await getDoc(ref)
+          
+          setConditional(document.data())
+        }
+        getDocument()
+      }
+      
+    }, [user?.uid])
+    
+    const [conditional, setConditional] = useState([])
+    const [ firstName, setFirstName] = useState(conditional.firstName)
+    const [ lastName, setLastName] = useState(conditional.lastName)
+
 
     function changeFirstName(event){
       setFirstName(event.target.value)
@@ -39,10 +66,10 @@ export function ProfilePage() {
       setLastName(event.target.value)
     }
 
-    function changePassword(event) {
-        setPassword(event.target.value)
-        setConfirmPassword(event.target.value)
-    }
+    // function changePassword(event) {
+    //     setPassword(event.target.value)
+    //     setConfirmPassword(event.target.value)
+    // }
 
     function changeEmail(event){
         setEmail(event.target.value)
@@ -59,44 +86,25 @@ export function ProfilePage() {
     
         const emailValid = validateEmail(email)
     
-        const passwordValid = validatePassword(confirmPassword);
+        // const passwordValid = validatePassword(confirmPassword);
         
-        const usernameValid = validateUsername(username);
 
         // const firstnameValid = validateFirstName(firstName)
 
         // const lastnameValid = validateLastName(lastName)
     
-        if (!emailValid || !passwordValid || !usernameValid) {
+        if (!emailValid ) {
             return ;
         }
   
     const body = {
       firstName : firstName,
       lastName : lastName,
-      username : username,
       password : password,
       email : email,
-      confirmPassword : confirmPassword
     };
 
-    fetch(`http://localhost:3001/users/${auth.user.id}` ,{
-      method: "PATCH",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    } )
-    .then((response) => {
-      if(response.status === 200){
-        setModalSubmitButton(false)
-        setSucces("Succes!")
-        setTimeout(() => {
-          setSucces("")
-          navigate('/login')
-        }, 1500);
-      }
-    })
+    
 }
 
 
@@ -201,20 +209,6 @@ function validatePassword(password) {
 
 function deleteAccount(event) {
     event.preventDefault()
-
-    fetch(`http://localhost:3001/users/${auth.user.id}`, {
-        method: "DELETE"
-    })
-    .then(response => {
-      if(response.status === 200){
-        setDeleteMessage('Account deleted...back to register!')
-        setModalDeleteButton(false)
-        setTimeout(() => {
-          setDeleteMessage('')
-          navigate('/register')
-        }, 1500)
-      }
-    })
 }
 
 const [modalDeleteButton, setModalDeleteButton] = useState(false);
@@ -241,10 +235,12 @@ if(modalSubmitButton) {
   document.body.classList.remove('active-modal')
 };
 
+console.log(email)
     return (
         <>
         <Header />
-            <h1 className="profilePageh1">{auth.user.username}'s Profile Page</h1>
+            <h1 className="profilePageh1">{conditional.firstName}'s Profile Page</h1>
+            <ToastContainer />
           <AnimatePresence>
         {succes && (
             <motion.div
@@ -284,28 +280,33 @@ if(modalSubmitButton) {
               <p>After confirmation, you will be redirected to the login page in order to log in with your NEW credentials!</p>
 
             </div>
-            
             <div className="profilePageSection_div">
                 <form className="profilePageForm" onSubmit={handleSubmit}>
                     
-                        <label htmlFor="firstName">Firstname</label>
-                        <input type="text" id="firstName" defaultValue={auth.user.firstName} onChange={changeFirstName}></input>
+                        <label htmlFor="firstName">First name</label>
+                        <input type="text" id="firstName" defaultValue={conditional.firstName} onChange={changeFirstName}></input>
                         
-                        <label htmlFor="lastName">Lastname</label>
-                        <input type="text" id="lastName" defaultValue={auth.user.lastName} onChange={changeLastName}></input>
+                        <label htmlFor="lastName">Last name</label>
+                        <input type="text" id="lastName" defaultValue={conditional.lastName} onChange={changeLastName}></input>
+
+                        <label htmlFor="phoneNumber">Phone number</label>
+                        <input type="number" id="phoneNumber" defaultValue={conditional.phoneNumber}></input>
+
+                        <label htmlFor="street">Street</label>
+                        <input type="text" id="street" defaultValue={conditional.street}></input>
                         
-                        <label htmlFor="username">Username</label>
-                        <input type="text" id="username" defaultValue={auth.user.username} onChange={changeUsername}></input>
-
-                        <label htmlFor="email">Email</label>
-                        <input type="text" id="email" defaultValue={auth.user.email} onChange={changeEmail}></input>
-
-                        <label htmlFor="password">Password</label>
-                        <input type="text" id="password" defaultValue={auth.user.confirmPassword} onChange={changePassword}></input>
-
+                        <label htmlFor="streetNo">Street No.</label>
+                        <input type="text" id="streetNo" defaultValue={conditional.streetNo}></input>
+                        
+                        <label htmlFor="blockNo">Block No.</label>
+                        <input type="text" id="blockNo" defaultValue={conditional.block}></input>
+                        
+                        <label htmlFor="apartNo">Apartament No.</label>
+                        <input type="text" id="apartNo" defaultValue={conditional.block}></input>
                 </form>
                 
                 <button type="button" onClick={toggleModalSubmitButton}> Edit </button>
+                <button onClick={triggetResetEmail}>Reset password</button>
                 <button onClick={toggleModalDeleteButton}>Delete</button>
             </div>
 
@@ -326,12 +327,10 @@ if(modalSubmitButton) {
                         <p className="profileError">{firstNameError}</p>
                         <p>Your new Lastname: {lastName}</p>
                         <p className="profileError">{lastNameError}</p>
-                        <p>Your new username: {username}</p>
-                        <p className="profileError">{usernameError}</p>
                         <p>Your new email: {email}</p>
                         <p className="profileError">{emailError}</p>
-                        <p>Your new password: {confirmPassword}</p>
-                        <p className="profileError">{passwordError}</p>
+                        
+                        
 
                     <div className="modal3ButtonsWrapper"> 
                       <div className="modal3Buttons">
@@ -370,6 +369,7 @@ if(modalSubmitButton) {
                 )}
             </section>
         <PreFooter />
+        <Footer />
         </>
     )
 }

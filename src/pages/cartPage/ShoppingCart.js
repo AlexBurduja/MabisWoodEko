@@ -1,5 +1,5 @@
 import { RiShoppingCartLine } from 'react-icons/ri';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import "./ShoppingCart.css"
 import { NavLink } from 'react-router-dom';
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
@@ -11,7 +11,7 @@ export function ShoppingCart() {
   
 const { user } = useContext( FirebaseAuthContext )
 
-
+const [total, setTotal] = useState(0)
 const [ cart, setCart ] = useState([])
 
 
@@ -47,21 +47,18 @@ useEffect(() => {
     getCart()
   }
 
-}, [user])
+}, [user, cart.quantity])
 
-let sum = 0
-const totalquantity = cart.forEach(value => sum+= value.quantity)
+useEffect(() => {
+    let sum = cart.map(item => item.quantity).reduce((a, b) => a + b, 0);
+    console.log(sum)
+    setTotal(sum);
+}, [cart]);
 
-console.log(sum)
-
-
+console.log(total)
 
 function ProductCount () {
-  if (sum === 1){
-    return <p>{sum} product</p>
-  } else {
-    return <p>{sum} products</p>
-  }
+  return total === 1 ? <p>{total} product</p> : <p>{total} products</p>
 }
 
 

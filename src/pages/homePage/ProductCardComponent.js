@@ -4,7 +4,7 @@ import 'animate.css';
 import { AiFillEdit } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
 import { auth, db } from "../../firebase-config";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, FieldValue, getDoc, getDocs, increment, setDoc, updateDoc } from "firebase/firestore";
 import { storage } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
@@ -220,7 +220,7 @@ export function ProductCardComponent(props) {
   //   editProduct(id, title, image, kg, price, currency)
   // }
   
-  const [ counter, setCounter] = useState(1)
+  const [counter, setCounter] = useState(2)
     
     const addToCart = async () => {
       
@@ -230,30 +230,34 @@ export function ProductCardComponent(props) {
 
     const newFields = {
       title : title,
-      quantity: counter,
+      quantity: 1,
       price : price,
       currency: currency,
       kg: kg,
       stripeId : stripeId,
       image : url
     }
+
+    const existingDoc = {
+      quantity : counter
+    }
     
     const docRef = doc(db, cartDoc, title+kg);
     const docSnap = await getDoc(docRef)
-    const notify = () => toast(`Click one more time to add ${title} in your cart!`)
-    const notifyAdd = () => toast(`Now having ${counter} ${title} in your cart!`)
+    const notifyAdd = () => toast.success(`Now having ${counter} ${title} in your cart!`, {
+      autoClose: 2000
+    })
     
     if(docSnap.exists()){
-      setDoc(doc(db,cartDoc,title+kg), newFields)
-      notifyAdd();
+      console.log('clicked')
       setCounter(counter + 1)
+      updateDoc(doc(db,cartDoc,title+kg), existingDoc)
+      notifyAdd();
     } else {
-      try {
+      toast.success(`${title} added in cart!`, {
+        autoClose: 2000
+      })
         setDoc(doc(db, cartDoc, title+kg), newFields)
-      } catch(e) {
-        console.log(e.message)
-      }
-      notify()
     }
   
     
@@ -266,7 +270,7 @@ export function ProductCardComponent(props) {
 
     const newFields = {
       title : title,
-      quantity: counter,
+      quantity: 1,
       price : price,
       currency: currency,
       kg: kg,
@@ -274,33 +278,29 @@ export function ProductCardComponent(props) {
       image : url
     }
 
+    const existingDoc = {
+      quantity : counter
+    }
+
     const docRef = doc(db,cartDoc,title+kg);
     const docSnap = await getDoc(docRef)
-    
-    const notify = () => toast(`${title} added in cart.`)
-    const notifyAdd = () => toast(`One more ${title} in your cart!`)
 
     if(docSnap.exists()){
       setCounter(counter + 1)
-      setDoc(doc(db,cartDoc,title+kg), newFields)
-      notifyAdd()
+      updateDoc(doc(db,cartDoc,title+kg), existingDoc)
+      toast.success(`Now having ${counter} ${title} in your cart!`, {
+        autoClose: 2000})
     } else {
-      addInCart();
-      notify();
-      console.log(`Now having ${title} in your cart.`)
-    }
-
-      function addInCart(){
-      try {
-        setDoc(doc(db, cartDoc, title+kg), newFields)
-      } catch(e) {
-        console.log(e.message)
-      }
+      setDoc(doc(db, cartDoc, title+kg), newFields)
+      toast.success(`${title} added in cart!`, {
+        autoClose: 2000
+      })
     }
 
   }
   
 }
+console.log(counter)
 
   function deleteItem(){
     const userDoc = doc(db, `products/${title}`)

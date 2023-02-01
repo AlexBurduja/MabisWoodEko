@@ -6,12 +6,12 @@ import { PreFooter } from "../reusableComponents/PreFooter";
 import "./ProfilePage.css"
 import { AnimatePresence, motion } from "framer-motion";
 import { FirebaseAuthContext } from "../../FirebaseAuthContext";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase-config";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { toast, ToastContainer } from "react-toastify";
 import { Footer } from "../reusableComponents/Footer";
-
+import 'react-toastify/dist/ReactToastify.css';
 
 export function ProfilePage() {
     const { user } = useContext(FirebaseAuthContext)
@@ -20,15 +20,38 @@ export function ProfilePage() {
     const [ password, setPassword ] = useState(user.password)
     const [ email, setEmail ] = useState(user.email)
     
-    const [ passwordError, setPasswordError ] = useState('')
-    const [ emailError, setEmailError ] = useState('')
-    const [ usernameError, setUsernameError ] = useState('')
-    const [ firstNameError, setFirstNameError ] = useState('')
-    const [ lastNameError, setLastNameError ] = useState('')
-    
     const [succes, setSucces] = useState('');
     const [deleteMessage , setDeleteMessage] = useState('')
     
+//useStates for checks
+
+
+const [notifyLastNameNumbers, setNotifyLastNameNumbers] = useState(false);
+const [notifyLastNameSpecialChar, setNotifyLastNameChar] = useState(false);
+const [notifyLastNameUppercase, setNotifyLastNameUppercase] = useState(false)
+
+const [notifyFirstNameNumbers, setNotifyFirstNameNumbers] = useState(false)
+const [notifyFirstNameSpecialChar, setNotifyFirstNameSpecialChar] = useState(false)
+const [notifyFirstNameUppercase, setNotifyFirstNameUppercase] = useState(false)
+
+const [notifyPhoneDigits , setNotifyPhoneDigits] = useState(false)
+const [notifyLetterPhone, setNotifyLetterPhone] = useState(false)
+const [notifySpecialCharPhone, setNotifySpecialCharPhone] = useState(false)
+
+const [emailValidState, setEmailValidState] = useState(false)
+
+const [ notifyStreetNumbers , setNotifyStreetNumbers] = useState(false)
+const [ notifyStreetSpecialChar, setNotifyStreetSpecialChar] = useState(false)
+
+const [notifyLetterBlock , setNotifyLetterBlock] = useState(false)
+const [notifySpecialCharBlock, setNotifySpecialBlock] = useState(false)
+
+const [notifyLetterApartament, setNotifyLetterApartament] = useState(false)
+const [notifySpecialCharApartament, setNotifySpecialApartament] = useState(false)
+
+const [notifySpecialCharStreetNo, setNotifySpecialStreetNo] = useState(false)
+const [notifyLetterStreetNo, setNotifyLetterStreetNo] = useState(false)
+
       const auth = getAuth()
 
       const triggetResetEmail = async () => {
@@ -56,6 +79,22 @@ export function ProfilePage() {
     const [conditional, setConditional] = useState([])
     const [ firstName, setFirstName] = useState(conditional.firstName)
     const [ lastName, setLastName] = useState(conditional.lastName)
+    const [phoneNumber , setPhoneNumber] = useState("")
+    const [street, setStreet] = useState(conditional.street)
+    const [streetNo, setStreetNo] = useState(conditional.streetNo)
+    const [blockNo, setBlockNo] = useState(conditional.block)
+    const [apartNo, setApartNo] = useState(conditional.apartNo)
+
+    useEffect(() => {
+      setFirstName(conditional.firstName)
+      setLastName(conditional.lastName)
+      setPhoneNumber(conditional.phoneNumber)
+      setStreet(conditional.street)
+      setStreetNo(conditional.streetNo)
+      setBlockNo(conditional.block)
+      setApartNo(conditional.apartNo)
+    }, [conditional])
+  
 
 
     function changeFirstName(event){
@@ -65,11 +104,26 @@ export function ProfilePage() {
     function changeLastName(event){
       setLastName(event.target.value)
     }
+    
+    function changePhoneNumber(event){
+      setPhoneNumber(event.target.value)
+    }
 
-    // function changePassword(event) {
-    //     setPassword(event.target.value)
-    //     setConfirmPassword(event.target.value)
-    // }
+    function changeStreet(event){
+      setStreet(event.target.value)
+    }
+
+    function changeStreetNo(event){
+      setStreetNo(event.target.value)
+    }
+
+    function changeBlockNo(event){
+      setBlockNo(event.target.value)
+    }
+
+    function changeApartNo(event){
+      setApartNo(event.target.value)
+    }
 
     function changeEmail(event){
         setEmail(event.target.value)
@@ -77,135 +131,257 @@ export function ProfilePage() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        
-        setEmailError('');
-        setPasswordError('');
-        setUsernameError('');
-        setLastNameError('');
-        setFirstNameError('');
     
         const emailValid = validateEmail(email)
-    
-        // const passwordValid = validatePassword(confirmPassword);
-        
+        const firstnameValid = validateFirstName(firstName)
+        const lastnameValid = validateLastName(lastName)
+        const phoneNumberValid = validatePhoneNumber(phoneNumber)
+        const streetValid = validateStreet(street)
+        const streetNoValid = validateStreetNo(streetNo)
+        const blockValid = validateBlock(blockNo)
+        const apartNoValid = validateApartamentNo(apartNo)
 
-        // const firstnameValid = validateFirstName(firstName)
-
-        // const lastnameValid = validateLastName(lastName)
     
-        if (!emailValid ) {
+        if ( !firstnameValid || !lastnameValid || !phoneNumberValid || !streetValid || !streetNoValid || !blockValid || !apartNoValid ) {
             return ;
+        } else {
+          const body = {
+            apartNo : apartNo,
+            block : blockNo,
+            firstName : firstName,
+            lastName : lastName,
+            phoneNumber : phoneNumber,
+            street : street,
+            streetNo : streetNo
+          }
+          const ref = doc(db, `users/${user.uid}`)
+          updateDoc(ref, body)
+          toast.success("Profile Updated!", {
+            autoClose: 1000
+          })
         }
-  
-    const body = {
-      firstName : firstName,
-      lastName : lastName,
-      password : password,
-      email : email,
-    };
 
     
 }
 
 
-function validateEmail(email){
-    // eslint-disable-next-line no-control-regex
-    const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i;
+function validateEmail(registerEmail) {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    const emailValid = emailRegex.test(email);
-
-    if(!emailValid){
-        setEmailError("Please enter a valid email");
-    }
-
-    return emailValid;
+  return emailRegex.test(registerEmail);
 }
 
+function validateFirstName(firstName){
+const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
 
-function validateUsername(username){
-  const specialCharacterList = [
-    '!', '@', '#', '$', '%', '^', '&', '*'
-  ];
-
-  function containsNumber(str){
-    return /\d/.test(str)
-  }
-
-    if(!(username.length <=15)){
-        setUsernameError("Usernames need to have 15 characters or less!")
-
-      return false
-    }
-
-    for(let letter of username){
-
-   if(specialCharacterList.includes(letter)){
-      setUsernameError("Username cannot contain special characters")
-
-      return false
-  }
-
-  if(containsNumber(username)){
-    setUsernameError("Username cannot contain numbers!")
-
+if(firstName.length === 0){
     return false
   }
+
+if(firstName.match(/\d/)){
+  
+    toast.error("First name can't contain numbers!", {
+      autoClose: 6000,
+      className: "toastContainer"
+    })
+
+  return false
+} 
+
+ if(specialChars.test(firstName)){
+//   setFirstNameError("First name can't contain special characters!")
+
+  toast.error("First name can't contain special characters!", {
+    autoClose: 6000
+    })
+
+  return false
 }
+
+if(/[a-z]/.test(firstName.charAt(0))){
+    toast.error("First name's first character needs to be uppercase!", {
+      autoClose: 6000
+    })
+
+  return false
+}
+  return true;
+}
+
+function validateLastName(lastName){
+const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+
+if(lastName.length === 0 ){
+  return false
+}
+
+if(lastName.match(/\d/)){
+  
+  
+    toast.error("Last name can't contain numbers!", {
+      autoClose:6000
+    })
+  
+  return false
+} 
+
+if(specialChars.test(lastName)){
+  
+  
+    toast.error("Last name can't contain special characters!", {
+      autoClose: 6000
+    })
+
+  return false
+}
+
+if(/[a-z]/.test(lastName.charAt(0))){
+  
+    toast.error("Last name's first character needs to be uppercase!", {
+      autoClose: 6000
+    })
+
+  return false
+}
+
 
   return true;
 }
 
-function validatePassword(password) {
-    const specialCharacterList = [
-      '!', '@', '#', '$', '%', '^', '&', '*'
-    ];
+function validatePhoneNumber(phoneNumber){
+  const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
 
-    if (!(password.length >= 6)) {
-      setPasswordError('Password must contain at least 6 characters');
-
-      return false;
-    }
-
-    let hasUpperCaseCharacter = false;
-    let hasNumberCharacter = false;
-    let hasSpecialCharacter = false;
-
-    for (let letter of password) {
-      if (
-        !specialCharacterList.includes(letter) 
-        && Number.isNaN(Number(letter)) 
-        && letter === letter.toUpperCase()
-      ) {
-        hasUpperCaseCharacter = true;
-      }
-
-      if (typeof Number(letter) === 'number') {
-        hasNumberCharacter = true;
-      }
-
-      if (specialCharacterList.includes(letter)) {
-        hasSpecialCharacter = true;
-      }
-    }
-
-    if (!hasUpperCaseCharacter) {
-      setPasswordError('Your password must have at least one upper case character');
-    }
-
-    if (!hasNumberCharacter) {
-      setPasswordError('Your password must include at least one number');
-    }
-
-    if (!hasSpecialCharacter) {
-      setPasswordError('Your password must include at least one special character');
-    }
-
-    if (hasUpperCaseCharacter && hasNumberCharacter && hasSpecialCharacter) {
-      return true;
-    }
-
-    return false;
+  if(phoneNumber.length === 0){
+    return false
   }
+
+  if(phoneNumber.length > 10){
+
+      toast.error("Phone number can't exceed 10 digits!", {
+        autoClose: 6000
+      })
+
+    return false
+  }
+
+  if(/[a-zA-Z]/.test(phoneNumber)){
+      toast.error("Phone number can't contain letters!", {
+        autoClose: 6000
+      })
+    return false
+  }
+
+  if(specialChars.test(phoneNumber)){
+  
+      toast.error("Phone number can't contain special characters! No prefix needed!", {
+        autoClose:6000
+      })
+    
+    return false
+  } 
+
+  return true;
+}
+
+function validateStreet(street){
+
+  const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+
+  if(street.length === 0){
+    return false
+  }
+
+  if(street.match(/\d/)){
+    
+      toast.error("Street can't contain numbers! Input Street No.below.", {
+        autoClose: 6000
+      })
+    return false
+  }
+
+  if(specialChars.test(street)){
+      toast.error("Street can't contain special characters!", {
+        autoClose:6000
+      })
+    return false
+  }
+
+  return true
+}
+
+function validateStreetNo(streetNo){
+  const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+
+  if(streetNo.length === 0){
+    return false
+  }
+
+  if(/[a-zA-Z]/.test(streetNo)){
+
+      toast.error("Street No. can't contain letters!", {
+        autoClose: 6000
+      })
+    return false
+  }
+
+  if(specialChars.test(streetNo)){
+  
+      toast.error("Street No. can't contain special characters! No prefix needed!", {
+        autoClose:6000
+      })
+    return false
+}
+
+ return true
+}
+
+function validateBlock(block){
+  const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+
+  if(block.length === 0){
+    return false
+  }
+
+  if(/[a-zA-Z]/.test(block)){
+      toast.error("Phone number can't contain letters!", {
+        autoClose: 6000
+      })
+    return false
+  }
+
+  if(specialChars.test(block)){
+  
+      toast.error("Phone number can't contain special characters! No prefix needed!", {
+        autoClose:6000
+      })
+    return false
+}
+return true
+}
+
+function validateApartamentNo(apartamentNo){
+  const specialChars = /[`!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?~]/
+
+  if(apartamentNo.length === 0){
+    return false
+  }
+
+  if(/[a-zA-Z]/.test(apartamentNo)){
+      toast.error("Phone number can't contain letters!", {
+        autoClose: 6000
+      })
+    return false
+  }
+
+  if(specialChars.test(apartamentNo)){
+  
+      toast.error("Phone number can't contain special characters! No prefix needed!", {
+        autoClose:6000
+      })
+    return false
+}
+return true
+}
 
 function deleteAccount(event) {
     event.preventDefault()
@@ -235,12 +411,12 @@ if(modalSubmitButton) {
   document.body.classList.remove('active-modal')
 };
 
-console.log(email)
+
+
     return (
         <>
         <Header />
             <h1 className="profilePageh1">{conditional.firstName}'s Profile Page</h1>
-            <ToastContainer />
           <AnimatePresence>
         {succes && (
             <motion.div
@@ -284,35 +460,37 @@ console.log(email)
                 <form className="profilePageForm" onSubmit={handleSubmit}>
                     
                         <label htmlFor="firstName">First name</label>
-                        <input type="text" id="firstName" defaultValue={conditional.firstName} onChange={changeFirstName}></input>
+                        <input type="text" id="firstName" defaultValue={firstName} onChange={changeFirstName}></input>
                         
                         <label htmlFor="lastName">Last name</label>
-                        <input type="text" id="lastName" defaultValue={conditional.lastName} onChange={changeLastName}></input>
+                        <input type="text" id="lastName" defaultValue={lastName} onChange={changeLastName}></input>
 
                         <label htmlFor="phoneNumber">Phone number</label>
-                        <input type="number" id="phoneNumber" defaultValue={conditional.phoneNumber}></input>
+                        <input type="number" id="phoneNumber" defaultValue={phoneNumber} onChange={changePhoneNumber}></input>
 
                         <label htmlFor="street">Street</label>
-                        <input type="text" id="street" defaultValue={conditional.street}></input>
+                        <input type="text" id="street" defaultValue={street} onChange={changeStreet}></input>
                         
                         <label htmlFor="streetNo">Street No.</label>
-                        <input type="text" id="streetNo" defaultValue={conditional.streetNo}></input>
+                        <input type="text" id="streetNo" defaultValue={streetNo} onChange={changeStreetNo}></input>
                         
                         <label htmlFor="blockNo">Block No.</label>
-                        <input type="text" id="blockNo" defaultValue={conditional.block}></input>
+                        <input type="text" id="blockNo" defaultValue={blockNo} onChange={changeBlockNo}></input>
                         
                         <label htmlFor="apartNo">Apartament No.</label>
-                        <input type="text" id="apartNo" defaultValue={conditional.block}></input>
+                        <input type="text" id="apartNo" defaultValue={apartNo} onChange={changeApartNo}></input>
                 </form>
                 
                 <button type="button" onClick={toggleModalSubmitButton}> Edit </button>
                 <button onClick={triggetResetEmail}>Reset password</button>
+                <button> Change Email </button>
                 <button onClick={toggleModalDeleteButton}>Delete</button>
             </div>
 
 
 
                 {modalSubmitButton && (
+                  
                     <motion.div
                     initial={{opacity:0}}
                     animate={{opacity:1}}
@@ -321,14 +499,17 @@ console.log(email)
                         <div onClick={toggleModalSubmitButton} className="overlay"></div>
                     <div className="modal-content modal3">
                     <div>
-                        <h1>These will be your new credentials!</h1>
+                        <h1>Are you sure you want to change your credentials ?</h1>
                     </div>
-                        <p>Your new Firstname: {firstName}</p>
-                        <p className="profileError">{firstNameError}</p>
-                        <p>Your new Lastname: {lastName}</p>
-                        <p className="profileError">{lastNameError}</p>
-                        <p>Your new email: {email}</p>
-                        <p className="profileError">{emailError}</p>
+                      
+                    <p><span>First name: </span>{firstName}</p>
+                      
+                      <p><span>Last name: </span>{lastName}</p>
+                      
+                      <p><span>Phone number: </span>{phoneNumber}</p>
+                      
+                      <p><span>Street :</span>{street} No.{streetNo}</p>
+                      <p>Bl.{blockNo} Ap.{apartNo}</p>
                         
                         
 
@@ -339,7 +520,7 @@ console.log(email)
                       </div>
                     </div>
                     </div>
-
+                    <ToastContainer />
                     </motion.div>
                 )}
 
@@ -354,7 +535,10 @@ console.log(email)
                     <div className="modal-content modal4">
                     <div className="modal4_content_header">
                         <h1>Do you REALLY want to delete your account?</h1>
-                        <h3>We will miss you if you do that!</h3>
+                    </div>
+
+                    <div className="modal4Content">
+                      <h3>We will miss you if you do that!</h3>
                     </div>
 
                   

@@ -13,49 +13,44 @@ const { user } = useContext( FirebaseAuthContext )
 
 const [total, setTotal] = useState(0)
 const [ cart, setCart ] = useState([])
+const [cartState, setCartState] = useState(cart)
 
 
-useEffect(() => {
+const getCart = useCallback(async () =>{
   if(user?.uid){
 
-    const getCart = async () =>{
       
       const cartDoc = `users/${user.uid}/cart`
       const ref = collection(db, cartDoc)
       
       
       let data = await getDocs(ref)
-      
       setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
-    };
+
+        
+    } else {
+
+      const clientId = sessionStorage.getItem("clientId")
+  
+        const cartDoc = `guestCarts/${clientId}/cart`
+        const ref = collection(db, cartDoc)
+  
+        let data = await getDocs(ref)
+  
+        setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+
     
-    getCart()
   }
-
-  if(!user?.uid){
-    const clientId = sessionStorage.getItem("clientId")
-
-    const getCart = async () => {
-      const cartDoc = `guestCarts/${clientId}/cart`
-      const ref = collection(db, cartDoc)
-
-      let data = await getDocs(ref)
-
-      setCart(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
-    };
-
-    getCart()
-  }
-
-}, [user, cart.quantity])
+}, [user] )
 
 useEffect(() => {
-    let sum = cart.map(item => item.quantity).reduce((a, b) => a + b, 0);
-    console.log(sum)
-    setTotal(sum);
-}, [cart]);
+    getCart();
+}, [getCart])
 
-console.log(total)
+useEffect(() => {
+  const sum = cart.map(item => item.quantity).reduce((a, b) => a + b, 0);
+  setTotal(sum);
+}, [cart, total]);
 
 function ProductCount () {
   return total === 1 ? <p>{total} product</p> : <p>{total} products</p>

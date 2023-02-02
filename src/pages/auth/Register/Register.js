@@ -10,10 +10,13 @@ import "./RegisterMulti.css"
 import ParticlesBackground from '../../../particlesJS/particleJsComponent';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 
 
 export function Register() {
+
+  const navigate = useNavigate()
 
 const [page, setPage] = useState(0)
 const [formData , setFormData] = useState({
@@ -42,6 +45,12 @@ const PageDisplay = () => {
   }
 }
 
+const today = new Date();
+const date = today.toLocaleDateString();
+const time = today.toLocaleTimeString();
+
+console.log(`${date} ${time}`);
+
 const registerO = async (event) => {
   try{
     const user = await createUserWithEmailAndPassword(
@@ -58,8 +67,17 @@ const registerO = async (event) => {
       streetNo : formData.streetNo,
       apartNo : formData.apartNo,
       block : formData.block,
-      admin: false
+      admin: false,
+      createdAt: `${date} ${time}`
     })
+
+    toast.success("Thanks for taking your time with creating an account!", {
+      autoClose: 1000
+    })
+
+    setTimeout(() => {
+      navigate("/")
+    }, 1500)
 
   } catch (e){
     toast.error("Something went wrong! It's possible that this is caused because email is already existing!", {

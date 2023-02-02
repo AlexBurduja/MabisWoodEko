@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./AdminPanelComponent.css"
 import { GrContactInfo } from "react-icons/gr"
 import { AiOutlineCloseCircle, AiOutlineEye } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
-import { updateCurrentUser, updatePassword } from "firebase/auth";
+import { deleteUser } from "firebase/auth";
+import { deleteDoc, doc, updateDoc } from "@firebase/firestore";
+import { db } from "../../firebase-config";
+import { FirebaseAuthContext } from "../../FirebaseAuthContext";
 
 export function AdminPanelComponent(props) {
 
     const { id , admin , confirmPassword , created , password,  email , firstName , lastName , username } = props
+
+    const {user , conditional} = useContext(FirebaseAuthContext)
 
     const [modal, setModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
@@ -112,74 +117,45 @@ export function AdminPanelComponent(props) {
 
     }
 
-    function makeAdmin(){
+    function makeAdmin( id ){
         const body = {
             admin : true
         }
 
-        fetch(`http://localhost:3001/users/${id}`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(body)
-        })
-        .then(response => {
-            if(response.status === 200) {
-                setSucces(`${username} is Admin`)
-                setEditModal(false)
-
-                setInterval(() => {
-                    setSucces('')
-                    window.location.reload()
-
-                }, 1500)
-            }
-        })
+        const ref = doc(db, `users/${id}`)
+        
+        try {
+            updateDoc(ref, body)
+        } catch(e) {
+            console.log(e)
+        }
     }
 
-    function revokeAdmin(){
+    function revokeAdmin(id){
         const body = {
             admin : false
         }
 
-        fetch(`http://localhost:3001/users/${id}`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(body)
-        })
-        .then(response => {
-            if(response.status === 200) {
-                setSucces(`${username} is no longer Admin`)
-                setEditModal(false)
-    
-                setInterval(() => {
-                    setSucces('')
-                    window.location.reload()
-    
-                }, 1500)
-            }
-        })
+        const ref = doc(db, `users/${id}`)
+
+        try {
+            updateDoc(ref,body)
+        } catch(e) {
+            console.log(e)
+        }
     }
 
-    function adminDelete(){
-        fetch(`http://localhost:3001/users/${id}`, {
-            method: "DELETE"
-        })
-        .then(response => {
-            if(response.status === 200) {
-                setSucces(`${username} was deleted`)
-                setEditModal(false)
-    
-                setInterval(() => {
-                    setSucces('')
-                    window.location.reload()
-    
-                }, 1500)
-            }
-        })
+    const adminDelete = async (id) => {
+        // const ref = doc(db, `users/${id}`)
+        // deleteDoc(ref)
+
+        console.log(id)
+
+        // try{
+            deleteUser(id)
+        // } catch(e) {
+        //     console.log(e)
+        // }
     }
 
     return (
@@ -202,7 +178,7 @@ export function AdminPanelComponent(props) {
                     <div className="modal-content ">
                         <AiOutlineCloseCircle onClick={toggleModal} className="modal-content-x"/>
                         <div className="userModalHeader">
-                            <h1>{username}'s Account Info</h1>
+                            <h1>{firstName}'s Account Info</h1>
                         </div>
 
                         <div className="userModalContent">
@@ -211,13 +187,13 @@ export function AdminPanelComponent(props) {
 
                                 {!admin && (
                                     <div className="center makeAdmin">
-                                    <button  onClick={makeAdmin}>Assign as Admin</button>
+                                    <button  onClick={() => makeAdmin(id)}>Assign as Admin</button>
                                     </div>
                                 )}
 
                                 {admin && (
                                     <div className="center revokeAdmin">
-                                    <button onClick={revokeAdmin}>Revoke Admin</button>
+                                    <button onClick={() => revokeAdmin(id)}>Revoke Admin</button>
                                     </div>
                                 )}
                             </div>
@@ -319,7 +295,7 @@ export function AdminPanelComponent(props) {
         <div onClick={toggleDeleteModal} className="overlay"></div>
             <div className="modal-content ">
             <h1>Are you sure?</h1>
-            <p>You are about to permanently delete {username}'s profile.</p>
+            <p>You are about to permanently delete {firstName}'s profile.</p>
 
             {succes && (
                 <motion.p
@@ -332,7 +308,7 @@ export function AdminPanelComponent(props) {
             )}
             <div className="adminEditModalButtons">
                 <div>
-            <button type="submit" onClick={adminDelete}>Delete</button>
+            <button type="submit" onClick={adminDelete()}>Delete</button>
                 </div>
 
                 <div>

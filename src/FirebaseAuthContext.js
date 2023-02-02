@@ -1,11 +1,13 @@
+import { doc, getDoc } from "@firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import   { auth } from "./firebase-config"
+import   { auth, db } from "./firebase-config"
 
 export const FirebaseAuthContext = React.createContext();
 
 export const AuthProvider = ({children}) => {
     const [user,setUser] = useState({});
+    const [conditional, setConditional] = useState([])
 
     useEffect(() => {
 
@@ -14,15 +16,24 @@ export const AuthProvider = ({children}) => {
             console.log("User is not logged in.")
         });
 
+            const getDocument = async () => {
+                const ref = doc(db, 'users', user?.uid)
+                
+                const document = await getDoc(ref)
+                
+                setConditional(document.data())
+            }
+            getDocument()
+        
+
         return () => {
             unsubscribe();
         }
 
-
         
-    }, [])
+    }, [user?.uid])
 
     return (
-        <FirebaseAuthContext.Provider value={{ user }}>{children}</FirebaseAuthContext.Provider>
+        <FirebaseAuthContext.Provider value={{ user, conditional }}>{children}</FirebaseAuthContext.Provider>
     )
 }

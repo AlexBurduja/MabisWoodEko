@@ -1,11 +1,11 @@
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../firebase-config";
+import { FirebaseAuthContext } from "../../FirebaseAuthContext";
 import { AdminPanelComponent } from "./AdminPanelComponent";
 
 export function AdminPanelFetch(){
     const [users , setUsers] = useState([])
-    
 
     useEffect(() => {
         const getUsers = async () => {
@@ -33,12 +33,9 @@ console.log(users)
                     <AdminPanelComponent
                     id = {item.id}
                     admin = {item.admin}
-                    password = {item.password}
-                    confirmPassword = {item.confirmPassword}
                     email = {item.email}
                     firstName = {item.firstName}
                     lastName = {item.lastName}
-                    username = {item.username}
                     created = {item.createdAt}
                     key = {item.id}
                     ></AdminPanelComponent>

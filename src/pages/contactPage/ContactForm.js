@@ -6,14 +6,20 @@ import { BsFacebook } from "react-icons/bs"
 import { BsInstagram } from "react-icons/bs"
 import { FaTiktok } from "react-icons/fa"
 import emailjs from 'emailjs-com'
-import { HashLink } from "react-router-hash-link"
-import { useContext } from "react"
-import { LoginContext } from "../../App"
+import { useContext, useEffect, useState } from "react"
 import { FirebaseAuthContext } from "../../FirebaseAuthContext"
+// import { doc, getDoc } from "@firebase/firestore"
+// import { db } from "../../firebase-config"
 
 export function ContactForm() {
   
-  const {  user } = useContext( FirebaseAuthContext )
+  const { user, conditional } = useContext( FirebaseAuthContext )
+
+  const [fullName, setFullName] = useState(``)
+
+  useEffect(() => {
+      setFullName(`${conditional.firstName} ${conditional.lastName}`)
+  }, [conditional])
 
   function sendEmail(e) {
     e.preventDefault();
@@ -66,12 +72,12 @@ export function ContactForm() {
         </div>
           
         <div className='rightSide_inputs__input' >
-          <input name="name" type="text" required="required" ></input>
+          <input name="name" type="text" required="required" defaultValue={user?.uid ? fullName : ''}></input>
           <span>Full Name</span>
         </div>
 
         <div className='rightSide_inputs__input' >
-          <input name="email" type="text" required="required" ></input>
+          <input name="email" type="text" required="required" defaultValue={user?.uid ? user.email : ""}></input>
           <span>Email</span>
         </div>
 

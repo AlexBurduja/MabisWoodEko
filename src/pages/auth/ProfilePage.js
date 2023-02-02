@@ -8,56 +8,30 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FirebaseAuthContext } from "../../FirebaseAuthContext";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase-config";
-import { AuthCredential, EmailAuthCredential, getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { AuthCredential, EmailAuthCredential, getAuth, sendPasswordResetEmail, updateEmail } from "firebase/auth";
 import { toast, ToastContainer } from "react-toastify";
 import { Footer } from "../reusableComponents/Footer";
 import 'react-toastify/dist/ReactToastify.css';
+import TopScrollProgress from "../reusableComponents/TopScrollProgress";
+import { BackToTop } from "../reusableComponents/BackToTop";
 
 export function ProfilePage() {
     const { user } = useContext(FirebaseAuthContext)
     const navigate = useNavigate();
 
-    const [ password, setPassword ] = useState(user.password)
     const [ email, setEmail ] = useState(user.email)
-    
+    const [ oldEmail, setOldEmail ] = useState("")
+    const [newEmail, setNewEmail] = useState("")
+
     const [succes, setSucces] = useState('');
     const [deleteMessage , setDeleteMessage] = useState('')
     
-//useStates for checks
-
-
-const [notifyLastNameNumbers, setNotifyLastNameNumbers] = useState(false);
-const [notifyLastNameSpecialChar, setNotifyLastNameChar] = useState(false);
-const [notifyLastNameUppercase, setNotifyLastNameUppercase] = useState(false)
-
-const [notifyFirstNameNumbers, setNotifyFirstNameNumbers] = useState(false)
-const [notifyFirstNameSpecialChar, setNotifyFirstNameSpecialChar] = useState(false)
-const [notifyFirstNameUppercase, setNotifyFirstNameUppercase] = useState(false)
-
-const [notifyPhoneDigits , setNotifyPhoneDigits] = useState(false)
-const [notifyLetterPhone, setNotifyLetterPhone] = useState(false)
-const [notifySpecialCharPhone, setNotifySpecialCharPhone] = useState(false)
-
-const [emailValidState, setEmailValidState] = useState(false)
-
-const [ notifyStreetNumbers , setNotifyStreetNumbers] = useState(false)
-const [ notifyStreetSpecialChar, setNotifyStreetSpecialChar] = useState(false)
-
-const [notifyLetterBlock , setNotifyLetterBlock] = useState(false)
-const [notifySpecialCharBlock, setNotifySpecialBlock] = useState(false)
-
-const [notifyLetterApartament, setNotifyLetterApartament] = useState(false)
-const [notifySpecialCharApartament, setNotifySpecialApartament] = useState(false)
-
-const [notifySpecialCharStreetNo, setNotifySpecialStreetNo] = useState(false)
-const [notifyLetterStreetNo, setNotifyLetterStreetNo] = useState(false)
-
       const auth = getAuth()
 
       const triggetResetEmail = async () => {
         sendPasswordResetEmail(auth, email)
         
-        toast.warn("Password reset sent!")
+        toast.warn(`Password reset sent to ${email}!`)
       }
       
     
@@ -125,14 +99,17 @@ const [notifyLetterStreetNo, setNotifyLetterStreetNo] = useState(false)
       setApartNo(event.target.value)
     }
 
-    function changeEmail(event){
-        setEmail(event.target.value)
+    function changeOldEmail(event){
+        setOldEmail(event.target.value)
+    }
+
+    function changeNewEmail(event){
+      setNewEmail(event.target.value)
     }
 
     function handleSubmit(event) {
         event.preventDefault();
     
-        const emailValid = validateEmail(email)
         const firstnameValid = validateFirstName(firstName)
         const lastnameValid = validateLastName(lastName)
         const phoneNumberValid = validatePhoneNumber(phoneNumber)
@@ -165,10 +142,10 @@ const [notifyLetterStreetNo, setNotifyLetterStreetNo] = useState(false)
 }
 
 
-function validateEmail(registerEmail) {
+function validateEmail(newEmail) {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  return emailRegex.test(registerEmail);
+  return emailRegex.test(newEmail);
 }
 
 function validateFirstName(firstName){
@@ -409,12 +386,41 @@ if(modalSubmitButton) {
   document.body.classList.add('active-modal')
 } else {
   document.body.classList.remove('active-modal')
+}
+;
+const [modalEditEmail, setModalEditEmail] = useState(false);
+
+const toggleModalEditEmail = () => {
+  setModalEditEmail(!modalEditEmail)
 };
 
-console.log()
+if(modalEditEmail) {
+  document.body.classList.add('active-modal')
+} else {
+  document.body.classList.remove('active-modal')
+};
+
+function submitEmailChange() {
+  const emailValid = validateEmail(newEmail)
+  if(oldEmail !== user.email) {
+    toast.error("Current email is not correct!", {
+      autoClose: 1000
+    })
+  } else if (!emailValid) {
+    toast.error("New email is not correct. Example : example@gmail.com", {
+      autoClose: 1500
+    })
+  } else if (emailValid || oldEmail === user.email){
+      updateEmail(auth.currentUser, newEmail).then(() => toast.success("Email changed! Back to login!")).catch((error) => console.log(error))
+      
+  };
+
+}
 
     return (
         <>
+        <TopScrollProgress />
+        <BackToTop />
         <Header />
             <h1 className="profilePageh1">{conditional.firstName}'s Profile Page</h1>
           <AnimatePresence>
@@ -483,7 +489,7 @@ console.log()
                 
                 <button type="button" onClick={toggleModalSubmitButton}> Edit </button>
                 <button onClick={triggetResetEmail}>Reset password</button>
-                <button> Change Email </button>
+                <button onClick={toggleModalEditEmail}> Change Email </button>
                 <button onClick={toggleModalDeleteButton}>Delete</button>
             </div>
 
@@ -517,6 +523,45 @@ console.log()
                       <div className="modal3Buttons">
                         <button type="submit" onClick={handleSubmit} >Confirm</button>
                         <button onClick={toggleModalSubmitButton}>Cancel</button>
+                      </div>
+                    </div>
+                    </div>
+                    <ToastContainer />
+                    </motion.div>
+                )}
+
+                {modalEditEmail && (
+                  
+                    <motion.div
+                    initial={{opacity:0}}
+                    animate={{opacity:1}}
+                    exit={{opacity:0}}
+                    className="modal">
+                        <div onClick={toggleModalEditEmail} className="overlay"></div>
+                    <div className="modal-content modal5">
+                    <div>
+                        <h1>Do you want to change your email ?</h1>
+                    </div>
+                      
+                    <form className="emailModal">
+                    
+                    <div>
+                        <label htmlFor="email">Current Email</label>
+                        <input type="text" id="email" defaultValue={oldEmail} onChange={changeOldEmail}></input>
+                    </div>
+                    
+                    <div>
+                        <label htmlFor="email">New Email</label>
+                        <input type="text" id="email" defaultValue={newEmail} onChange={changeNewEmail}></input>
+                    </div>    
+                    </form>  
+
+                        
+
+                    <div className="modal3ButtonsWrapper"> 
+                      <div className="modal3Buttons">
+                        <button type="submit" onClick={submitEmailChange} >Confirm</button>
+                        <button onClick={toggleModalEditEmail}>Cancel</button>
                       </div>
                     </div>
                     </div>

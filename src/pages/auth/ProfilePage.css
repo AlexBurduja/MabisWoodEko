@@ -95,7 +95,7 @@
     gap: 10px;
 }
 
-form label{
+.profilePageForm label{
     position: relative;
     width: 200px;
     top: 20px;
@@ -114,6 +114,45 @@ form label{
     border-right: transparent;
     outline: none;
     padding: 10px 0 0 0;
+}
+
+.modal5{
+    height: 20%;
+    width: 90%;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* position: absolute;   */
+}
+
+.emailModal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.emailModal input {
+    width: 250px;
+    height: 40px;
+    font-family: inherit;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    outline: none;
+    padding: 10px 0 0 0;
+}
+
+.emailModal label {
+    position: relative;
+    width: 200px;
+    top: 0;
+    font-size: 25;
 }
 
 

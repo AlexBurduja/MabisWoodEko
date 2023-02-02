@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FirebaseAuthContext } from "../../FirebaseAuthContext";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase-config";
-import { AuthCredential, EmailAuthCredential, getAuth, sendPasswordResetEmail, updateEmail } from "firebase/auth";
+import { AuthCredential, deleteUser, EmailAuthCredential, getAuth, sendPasswordResetEmail, updateEmail } from "firebase/auth";
 import { toast, ToastContainer } from "react-toastify";
 import { Footer } from "../reusableComponents/Footer";
 import 'react-toastify/dist/ReactToastify.css';
@@ -28,7 +28,7 @@ export function ProfilePage() {
     
       const auth = getAuth()
 
-      const triggetResetEmail = async () => {
+      const triggetResetEmail = async () => {        
         sendPasswordResetEmail(auth, email)
         
         toast.warn(`Password reset sent to ${email}!`)
@@ -60,6 +60,7 @@ export function ProfilePage() {
     const [apartNo, setApartNo] = useState(conditional.apartNo)
 
     useEffect(() => {
+      setEmail(user.email)
       setFirstName(conditional.firstName)
       setLastName(conditional.lastName)
       setPhoneNumber(conditional.phoneNumber)
@@ -362,6 +363,7 @@ return true
 
 function deleteAccount(event) {
     event.preventDefault()
+    
 }
 
 const [modalDeleteButton, setModalDeleteButton] = useState(false);
@@ -422,6 +424,7 @@ function submitEmailChange() {
         <TopScrollProgress />
         <BackToTop />
         <Header />
+        <ToastContainer />
             <h1 className="profilePageh1">{conditional.firstName}'s Profile Page</h1>
           <AnimatePresence>
         {succes && (
@@ -464,7 +467,10 @@ function submitEmailChange() {
             </div>
             <div className="profilePageSection_div">
                 <form className="profilePageForm" onSubmit={handleSubmit}>
-                    
+
+                        <label htmlFor="emailHeader">Email</label>
+                        <input type="text" id="emailHeader" value={email} disabled={true}></input>
+                        
                         <label htmlFor="firstName">First name</label>
                         <input type="text" id="firstName" defaultValue={firstName} onChange={changeFirstName}></input>
                         
@@ -489,7 +495,7 @@ function submitEmailChange() {
                 
                 <button type="button" onClick={toggleModalSubmitButton}> Edit </button>
                 <button onClick={triggetResetEmail}>Reset password</button>
-                <button onClick={toggleModalEditEmail}> Change Email </button>
+                {/* <button onClick={toggleModalEditEmail}> Change Email </button> */}
                 <button onClick={toggleModalDeleteButton}>Delete</button>
             </div>
 

@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FirebaseAuthContext } from "../../FirebaseAuthContext";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase-config";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { AuthCredential, EmailAuthCredential, getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { toast, ToastContainer } from "react-toastify";
 import { Footer } from "../reusableComponents/Footer";
 import 'react-toastify/dist/ReactToastify.css';
@@ -411,7 +411,7 @@ if(modalSubmitButton) {
   document.body.classList.remove('active-modal')
 };
 
-
+console.log()
 
     return (
         <>

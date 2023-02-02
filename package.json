@@ -33,7 +33,7 @@
     "react-notifications": "^1.7.4",
     "react-progressbar-on-scroll": "^2.0.0",
     "react-responsive-carousel": "^3.2.23",
-    "react-router-dom": "^6.4.3",
+    "react-router-dom": "^6.8.0",
     "react-router-hash-link": "^2.4.3",
     "react-scripts": "^5.0.1",
     "react-slick": "^0.29.0",

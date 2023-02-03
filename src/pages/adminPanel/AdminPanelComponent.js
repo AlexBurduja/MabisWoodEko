@@ -7,19 +7,20 @@ import { deleteUser } from "firebase/auth";
 import { deleteDoc, doc, updateDoc } from "@firebase/firestore";
 import { db } from "../../firebase-config";
 import { FirebaseAuthContext } from "../../FirebaseAuthContext";
+import Loading from "../reusableComponents/Loading";
 
 export function AdminPanelComponent(props) {
 
     const { id , admin , confirmPassword , created , password,  email , firstName , lastName , username } = props
 
-    const {user , conditional} = useContext(FirebaseAuthContext)
+
+    // const {user , conditional} = useContext(FirebaseAuthContext)
 
     const [modal, setModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
 
     const [succes, setSucces] = useState('')
-
 
     const toggleModal = () => {
       setModal(!modal)
@@ -145,21 +146,25 @@ export function AdminPanelComponent(props) {
         }
     }
 
-    const adminDelete = async (id) => {
-        // const ref = doc(db, `users/${id}`)
-        // deleteDoc(ref)
 
-        console.log(id)
+    const adminDelete = async (user) => {
+        // const ref = doc(db, `users/${userId}`)
+        // deleteDoc(ref, userId)
 
         // try{
-            deleteUser(id)
+         deleteUser('P5qyx86lTrUH7S5XZyZYyA5Goku2')
+         .then(() => console.log("Deleted"))
+         .catch((error) => console.error("Error deleting", error))
         // } catch(e) {
-        //     console.log(e)
+            // console.log(e)
         // }
     }
 
+    
+
     return (
         <>
+        
         <div className="userRow">
             <div className="userRowRow">
                 <button onClick={toggleModal}> <GrContactInfo /> </button>
@@ -308,7 +313,7 @@ export function AdminPanelComponent(props) {
             )}
             <div className="adminEditModalButtons">
                 <div>
-            <button type="submit" onClick={adminDelete()}>Delete</button>
+            <button type="submit" onClick={adminDelete}>Delete</button>
                 </div>
 
                 <div>
@@ -321,9 +326,9 @@ export function AdminPanelComponent(props) {
         
         )}
     </AnimatePresence>
+
         </>
 
 )
-
 
 }

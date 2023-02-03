@@ -2,10 +2,12 @@ import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { db } from "../../firebase-config";
 import { FirebaseAuthContext } from "../../FirebaseAuthContext";
+import Loading from "../reusableComponents/Loading";
 import { AdminPanelComponent } from "./AdminPanelComponent";
 
 export function AdminPanelFetch(){
     const [users , setUsers] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const getUsers = async () => {
@@ -14,13 +16,15 @@ export function AdminPanelFetch(){
             const data = await getDocs(userDoc)
 
             setUsers(data.docs.map((doc) => ({...doc.data(), id:doc.id})))
+            setLoading(false)
         }
         getUsers()
 
     }, []) 
-        
-console.log(users)
+    
     return (
+        <>
+        {loading ? <Loading /> : 
         <>
         <div className="userPageHeader">
             <h1>Users</h1>
@@ -42,6 +46,8 @@ console.log(users)
                     )
                 })}
         </section>
+        </>
+        }
         </>
     )
 }

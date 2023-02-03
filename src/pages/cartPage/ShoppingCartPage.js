@@ -14,6 +14,7 @@ import emailjs from "emailjs-com"
 import LoadingSpinner from './LoadingSpinner';
 import { toast, ToastContainer } from 'react-toastify';
 import { isEmpty } from '@firebase/util';
+import Loading from '../reusableComponents/Loading';
 
 export function ShoppingCartPage() {
   const { user } = useContext( FirebaseAuthContext )
@@ -889,7 +890,7 @@ export function ShoppingCartPage() {
      </div>
 
      </div> 
-     : loading ? <LoadingSpinner /> : 
+     : loading ? <Loading /> : 
      <>
      <div className='pageHeader'>
    <h1>Your cart</h1>

@@ -14,6 +14,7 @@ import { AdminPanelList } from './pages/adminPanel/AdminPanelList';
 import { Register } from './pages/auth/Register/Register';
 import { AuthProvider } from './FirebaseAuthContext';
 import { CanNavigate } from './CanNavigate';
+import Loading from './pages/reusableComponents/Loading';
 
 export const LoginContext = React.createContext();
 
@@ -30,7 +31,10 @@ function App() {
         <Homepage />
       }>
       </Route>
-          
+
+            <Route path='/loading' element={
+              <Loading />
+            }></Route>
 
             <Route path='/cart' element={ 
               <CartPage />

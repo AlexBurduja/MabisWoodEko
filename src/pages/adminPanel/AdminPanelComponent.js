@@ -268,16 +268,7 @@ export function AdminPanelComponent(props) {
             <div className="modal-content">
             <h1>Are you sure?</h1>
             <p>You are about to permanently delete {firstName}'s profile.</p>
-
-            {succes && (
-                <motion.p
-                initial={{opacity:0}}
-                animate={{opacity:1}}
-                exit={{opacity:0}}
-                className='stateMessage'>
-                    {succes}
-                </motion.p>
-            )}
+            
             <div className="adminEditModalButtons">
                 <div>
             <button type="submit" onClick={adminDelete}>Delete</button>

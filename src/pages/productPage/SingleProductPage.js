@@ -4,31 +4,34 @@ import { LoginContext } from "../../App";
 import "./SingleProductPage.css"
 import { motion } from "framer-motion";
 import { HashLink } from "react-router-hash-link/dist/react-router-hash-link.cjs.production";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
+import Loading from "../reusableComponents/Loading";
 
 export function SingleProductPage() {
 
   let { id } = useParams();
   const [productDetails, setproductDetails] = useState({})
+  const [loading, setLoading] = useState(true)
 
 useEffect(() => {
 
-  const ref = collection(db, `/products/${id}`, id)
+  const ref = doc(db, `/products/${id}`)
   
     const getProduct = async () => {
-      const data = await getDocs(ref)
-      
-      setproductDetails(data.docs.map((doc) => doc.data()))
+      const data = await getDoc(ref)
+  
+    setproductDetails(data.data())
+    setLoading(false)
     }
     
     getProduct();
-  }, [])
+  }, [id])
     
-
   
   return (
-    
+    <>
+    {loading ? <Loading /> : 
     <section>
       <div className="product">
 
@@ -59,5 +62,7 @@ useEffect(() => {
       
       </div>
     </section>
+  }
+    </>
   );
 }

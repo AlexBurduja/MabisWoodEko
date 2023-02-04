@@ -3,9 +3,10 @@
 }
 
 .imageSection img{
-    width: 100%;
+    width: 100vw;
     height: 300px;
     filter: brightness(50%);
+    object-fit: fill;
 }
 
 .imageSection{

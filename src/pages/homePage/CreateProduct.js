@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./CreateProduct.css"
 import 'animate.css';
 import { motion, AnimatePresence } from "framer-motion";
-import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { auth, db, storage } from "../../firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
@@ -142,7 +142,7 @@ export function CreateProduct(){
     event.preventDefault()
 
     try {
-      setDoc(doc(db, 'products', title), {
+      setDoc(doc(collection(db, 'products')), {
       title:title,
       kg:kg,
       price:price,
@@ -201,7 +201,7 @@ export function CreateProduct(){
 
                     <div className="modal-content-inputs_div">
                       <label htmlFor="title">Title :</label>
-                      <input id="title" onChange={titleChange} onChangerequired></input>
+                      <input id="title" onChange={titleChange} required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">

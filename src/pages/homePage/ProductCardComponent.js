@@ -300,13 +300,15 @@ export function ProductCardComponent(props) {
   }
   
 }
-console.log(counter)
 
-  function deleteItem(){
-    const userDoc = doc(db, `products/${title}`)
+
+  function deleteItem(id){
+    const userDoc = doc(db, `products/${id}`)
 
     deleteDoc(userDoc)
   }
+
+  console.log(id)
 
   return (
         <>
@@ -402,7 +404,7 @@ console.log(counter)
                   </div>
 
                   <div className="modal-content-buttons">
-                  <button  className="modal-content-button_delete" onClick={deleteItem}>Delete Item</button>
+                  <button  className="modal-content-button_delete" onClick={() => deleteItem(id)}>Delete Item</button>
                   <button className="modal-content-button_save" onClick={update} >Save Changes</button>
                   </div>
                   

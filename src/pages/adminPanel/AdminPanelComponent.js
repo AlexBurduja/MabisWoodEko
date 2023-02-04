@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./AdminPanelComponent.css"
 import { GrContactInfo } from "react-icons/gr"
 import { AiOutlineCloseCircle, AiOutlineEye } from "react-icons/ai";
@@ -11,10 +11,10 @@ import Loading from "../reusableComponents/Loading";
 
 export function AdminPanelComponent(props) {
 
-    const { id , admin , confirmPassword , created , password,  email , firstName , lastName , username } = props
+    const { id , admin , phoneNumber, street, streetNo, apartNo, blockNo, created , email , firstName , lastName  } = props
 
 
-    // const {user , conditional} = useContext(FirebaseAuthContext)
+    const {user , conditional} = useContext(FirebaseAuthContext)
 
     const [modal, setModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
@@ -57,10 +57,6 @@ export function AdminPanelComponent(props) {
       setPasswordShow(!passwordShow)
     }
 
-    function changeUsername(event) {
-        setUsername(event.target.value)
-    }
-
     function changeFirstName(event){
       setFirstName(event.target.value)
     }
@@ -69,52 +65,29 @@ export function AdminPanelComponent(props) {
       setLastName(event.target.value)
     }
 
-    function changePassword(event) {
-        setPassword(event.target.value)
-        setConfirmPassword(event.target.value)
+    function changeEmail(event){
+        setNewEmail(event.target.value)
     }
 
-    function changeEmail(event){
-        setEmail(event.target.value)
-    }
+    // const [email, setEmail] = useState(conditional.email)
+
+    // console.log(conditional.email)
     
-    const [ newUsername, setUsername ] = useState(username)
-    const [ newPassword, setPassword ] = useState(password)
     const [ newFirstName, setFirstName] = useState(firstName)
     const [ newLastName, setLastName] = useState(lastName)
-    const [ newEmail, setEmail ] = useState(email)
-    const [ newConfirmPassword, setConfirmPassword] = useState(confirmPassword)
+    const [ newEmail, setNewEmail ] = useState(email)
+
 
     function oonSubmit(event){
         event.preventDefault();
 
+
     const body = {
         firstName : newFirstName,
         lastName : newLastName,
-        username : newUsername,
-        password : newPassword,
         email : newEmail,
-        confirmPassword : newConfirmPassword
       };
   
-      fetch(`http://localhost:3001/users/${id}` ,{
-        method: "PATCH",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-      } )
-      .then(response => {
-        if(response.status === 200){
-            setSucces(`You edited ${username}'s credentials`)
-
-            setInterval(() => {
-                setSucces('')
-                window.location.reload()
-
-            }, 1500)
-        }
-      })
 
     }
 
@@ -148,19 +121,12 @@ export function AdminPanelComponent(props) {
 
 
     const adminDelete = async (user) => {
-        // const ref = doc(db, `users/${userId}`)
-        // deleteDoc(ref, userId)
+        const ref = doc(db, `users/${user}`)
+        deleteDoc(ref)
 
-        // try{
-         deleteUser('P5qyx86lTrUH7S5XZyZYyA5Goku2')
-         .then(() => console.log("Deleted"))
-         .catch((error) => console.error("Error deleting", error))
-        // } catch(e) {
-            // console.log(e)
-        // }
     }
 
-    
+
 
     return (
         <>
@@ -168,7 +134,7 @@ export function AdminPanelComponent(props) {
         <div className="userRow">
             <div className="userRowRow">
                 <button onClick={toggleModal}> <GrContactInfo /> </button>
-                <p> {firstName} "{username}" {lastName}</p>
+                <p> {firstName} {lastName}</p>
             </div>
         </div>
         <AnimatePresence>
@@ -180,7 +146,7 @@ export function AdminPanelComponent(props) {
              exit={{opacity:0}} 
              className="modal">
                 <div onClick={toggleModal} className="overlay"></div>
-                    <div className="modal-content ">
+                    <div className="modal-content modal-content-main">
                         <AiOutlineCloseCircle onClick={toggleModal} className="modal-content-x"/>
                         <div className="userModalHeader">
                             <h1>{firstName}'s Account Info</h1>
@@ -230,20 +196,31 @@ export function AdminPanelComponent(props) {
                                 <input defaultValue={firstName} onChange={changeFirstName}></input>
                             </div>
                             
-                            <div className="userModalContentUsername">
-                                <p>Username</p>
-                                <input defaultValue={username} onChange={changeUsername}></input>
+                            <div className="userModalContentFirstLastName">
+                                <p>Phone Number</p>
+                                <input defaultValue={phoneNumber} onChange={changeFirstName}></input>
                             </div>
-
-                            <div className="userPasswordDiv">
-                                <div className="userPasswordInput">
-                                    <p>Password</p>
-                                    <input id='userPassword' type={passwordShow ? "text" : "password"} defaultValue={confirmPassword} onChange={changePassword} ></input>
-                                    <div>
-                                        <p className="userPasswordEyeIcon" onClick={togglePassword}><AiOutlineEye/></p>
-                                    </div>
-                                </div>
+                            
+                            <div className="userModalContentFirstLastName">
+                                <p>Street</p>
+                                <input defaultValue={street} onChange={changeFirstName}></input>
                             </div>
+                            
+                            <div className="userModalContentFirstLastName">
+                                <p>Street No.</p>
+                                <input defaultValue={streetNo} onChange={changeFirstName}></input>
+                            </div>
+                            
+                            <div className="userModalContentFirstLastName">
+                                <p>Block</p>
+                                <input defaultValue={blockNo} onChange={changeFirstName}></input>
+                            </div>
+                            
+                            <div className="userModalContentFirstLastName">
+                                <p>Apartament No.</p>
+                                <input defaultValue={apartNo} onChange={changeFirstName}></input>
+                            </div>
+                            
                         <div className="adminPanelButtons">
                             <button type="button" onClick={toggleEditModal}>Edit</button>
                             <button type="button" onClick={toggleDeleteModal}>Delete</button>
@@ -265,19 +242,9 @@ export function AdminPanelComponent(props) {
             exit={{opacity:0}} 
             className="modal">
         <div onClick={toggleEditModal} className="overlay"></div>
-            <div className="modal-content ">
+            <div className="modal-content">
             <h1>Are you sure?</h1>
-            <p>You are about to edit {username}'s account.</p>
-
-            {succes && (
-                <motion.p
-                initial={{opacity:0}}
-                animate={{opacity:1}}
-                exit={{opacity:0}}
-                className='stateMessage'>
-                    {succes}
-                </motion.p>
-            )}
+            <p>You are about to edit {firstName}'s account.</p>
 
         <div className="adminEditModalButtons">
             <button type="submit" onClick={oonSubmit}>Confirm</button>
@@ -298,7 +265,7 @@ export function AdminPanelComponent(props) {
             exit={{opacity:0}} 
             className="modal">
         <div onClick={toggleDeleteModal} className="overlay"></div>
-            <div className="modal-content ">
+            <div className="modal-content">
             <h1>Are you sure?</h1>
             <p>You are about to permanently delete {firstName}'s profile.</p>
 

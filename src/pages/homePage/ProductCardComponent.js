@@ -330,7 +330,7 @@ console.log(counter)
         {modalEdit && (
           <div className="modal">
             <div onClick={toggleModalEdit} className="overlay"></div>
-              <div className="modal-content ">
+              <div className="modal-content modal-content-main">
                 <h1>Edit product</h1>
                   <p className="modal-content_p">Here you can change anything that you want regarding your product..</p>
                   

@@ -179,7 +179,7 @@ export function CreateProduct(){
       {modal2 && (
         <div className="modal">
           <div onClick={toggleModal2} className="overlay"></div>
-            <div className="modal-content modal2">
+            <div className="modal-content modal2 modal-content-main">
               <h1 >Create product.</h1>
               <p className="modal-content_p">All fields need to be completed.</p>
 

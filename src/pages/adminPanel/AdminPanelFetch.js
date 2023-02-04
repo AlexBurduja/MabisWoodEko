@@ -41,6 +41,11 @@ export function AdminPanelFetch(){
                     firstName = {item.firstName}
                     lastName = {item.lastName}
                     created = {item.createdAt}
+                    street = {item.street}
+                    streetNo = {item.streetNo}
+                    apartNo = {item.apartNo}
+                    blockNo = {item.block}
+                    phoneNumber = {item.phoneNumber}
                     key = {item.id}
                     ></AdminPanelComponent>
                     )

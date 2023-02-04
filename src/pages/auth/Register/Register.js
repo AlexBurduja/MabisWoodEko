@@ -60,6 +60,7 @@ const registerO = async (event) => {
     );
 
     await setDoc(doc(db,"users", user._tokenResponse.localId), {
+      email : formData.email,
       firstName : formData.firstName,
       lastName : formData.lastName,
       phoneNumber : formData.phoneNumber,

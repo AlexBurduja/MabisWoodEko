@@ -2,12 +2,12 @@
     text-decoration: none;
 }
 
-.imageSection img{
-    width: 100vw;
-    height: 300px;
-    filter: brightness(50%);
-    object-fit: fill;
-}
+    .imageSection img{
+        width: 100vw;
+        height: 300px;
+        filter: brightness(50%);
+        object-fit: fill;
+    }
 
 .imageSection{
     position: relative;

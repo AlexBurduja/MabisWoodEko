@@ -45,11 +45,13 @@ export function ProductCardComponent(props) {
   }, [])
 
   const useClientId = () => {
-    const [clientId, setClientId] = useState(sessionStorage.getItem("clientId"));
-  
-    const generateId = () => Math.random().toString(36).substring(2, 18);
 
+      const [clientId, setClientId] = useState(sessionStorage.getItem("clientId"));
+      
+      const generateId = () => Math.random().toString(36).substring(2, 18);
     
+      
+      
     useEffect(() => {
       if (!clientId) {
         const newClientId = generateId();
@@ -102,24 +104,6 @@ export function ProductCardComponent(props) {
   const [succes, setSucces] = useState('')
   const [ deleteSucces, setDeleteSucces ] = useState('')
   ///// End of Modal
-
-  // const { auth } = useContext( AuthContext )
-
-  // useEffect(() => {
-  //   fetch(productDetailUrl + endpoint + "/" + id, {
-  //     headers: {
-  //     }
-  //   })
-  //   .then((response) => response.json())
-  //   .then((product) => {
-  //     setTitle(product.title);
-  //     setPrice(product.price);
-  //     setKg(product.kg)
-  //     setCurrency(product.currency)
-  //     setImage(product.image)
-  //     setDescription(product.description)
-  //   }) 
-  // }, [id])
 
   const [ firebaseImg, setFirebaseImg] = useState(null)
   const [url, setUrl] = useState(image)
@@ -307,8 +291,6 @@ export function ProductCardComponent(props) {
 
     deleteDoc(userDoc)
   }
-
-  console.log(id)
 
   return (
         <>

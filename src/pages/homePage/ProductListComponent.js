@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { db } from '../../firebase-config';
 import { ProductCardComponent } from "./ProductCardComponent";
 import "./ProductCardComponentModal.css"
+import Loading  from "../reusableComponents/Loading"
 
 export function ProductListComponent() {
 
   const [products, setProducts] = useState([]);
-
+  const [loading, setLoading] = useState(true)
 
   
   const ref = collection(db , 'products')
@@ -17,6 +18,7 @@ useEffect(() => {
     const data = await getDocs(ref)
 
     setProducts(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+    setLoading(false)
   }
 
   getProducts();
@@ -26,6 +28,7 @@ useEffect(() => {
   return (
     <section className='listComponent'>
       <header>Products</header>
+      {loading ? <Loading /> :
       <div className='gridUl'>
         {products.map((product) => {
           return (
@@ -44,6 +47,7 @@ useEffect(() => {
             )
           })}
       </div>
+      }
     </section>
 
     )

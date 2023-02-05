@@ -6,7 +6,7 @@ export function Image() {
   return (
     <section className='imageSection'>
       <div>
-        <img src={warehousePhoto} alt="backgroundPhoto"/>
+        <img srcSet="" alt="backgroundPhoto"/>
       </div>
 
     <div className='imageInfo'>

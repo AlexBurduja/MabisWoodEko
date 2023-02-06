@@ -687,10 +687,14 @@ export function ShoppingCartPage() {
         cancelUrl: `${window.location.origin}/cancel`,
       }
 
+      const [loadingStripe, setLoadingStripe] = useState(false)
+
       const redirectToCheckout = async () => {
+        setLoadingStripe(true)
         const stripe = await getStripe()
         const { error } = await stripe.redirectToCheckout(checkoutOptions)
         console.log("Stripe checkout error", error)
+        setLoadingStripe(false)
       }
 
       function removeItemFromCart(item){
@@ -1100,7 +1104,9 @@ export function ShoppingCartPage() {
                  <div className='react-icons'>
                  <FaCcApplePay /> <FaCcPaypal /> <FaCcVisa /> <FaCcAmazonPay /> <FaCcAmex />
                  </div>
-               <button onClick={checkout}>Checkout</button>
+               
+               <button onClick={checkout}>{loadingStripe ? `Loading...` : `Checkout`}</button>
+               
                </div>
              </div>
            </div>

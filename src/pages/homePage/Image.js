@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import warehousePhotoBig from "../../publicResources/warehousePngBig.webp"
 import warehousePhotoMedium from "../../publicResources/warehousePngMedium.webp"

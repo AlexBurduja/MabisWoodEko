@@ -568,17 +568,7 @@ export function ShoppingCartPage() {
           if(deliverySelected === "card"){
             redirectToCheckout()
 
-            emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
-              subject: `Comanda de la ${email} (${firstName} ${lastName})`,
-              metoda: `${firstName} ${lastName} a facut o plata in valoare de 3 RON`,
-              
-              name : `Nume : ${firstName} ${lastName} ( ${email} )`,
-              phone: `Telefon : <b>${phoneNumber}</b>`,
-              street : `Strada :<b>${street}</b>`,
-              streetNo: `Nr. Strazii: <b>${streetNo}</b>`,
-              bloc : `Bloc : <b>${block}</b>`,
-              apartNo : `Apartament : <b>${apartamentNo}</b>`,
-            }, 'crU6K8bQnftB81z-j')
+           
             
           } else if(deliverySelected === "ramburs" || "pickUp") {
             console.log("mailRamburs")
@@ -707,8 +697,22 @@ export function ShoppingCartPage() {
       const redirectToCheckout = async () => {
         setLoadingStripe(true)
         const stripe = await getStripe()
-        const { error } = await stripe.redirectToCheckout(checkoutOptions)
-        console.log("Stripe checkout error", error)
+        const { error, paymentIntent } = await stripe.redirectToCheckout(checkoutOptions)
+        if (error){
+          console.log("Stripe checkout error", error)
+        } else if (paymentIntent && paymentIntent.status === "succeeded"){
+          emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
+            subject: `Comanda de la ${email} (${firstName} ${lastName})`,
+            metoda: `${firstName} ${lastName} a facut o plata in valoare de 3 RON`,
+            
+            name : `Nume : ${firstName} ${lastName} ( ${email} )`,
+            phone: `Telefon : <b>${phoneNumber}</b>`,
+            street : `Strada :<b>${street}</b>`,
+            streetNo: `Nr. Strazii: <b>${streetNo}</b>`,
+            bloc : `Bloc : <b>${block}</b>`,
+            apartNo : `Apartament : <b>${apartamentNo}</b>`,
+          }, 'crU6K8bQnftB81z-j')
+        }
         setLoadingStripe(false)
       }
 

@@ -659,14 +659,13 @@ export function ShoppingCartPage() {
             setCompanyCui(e.target.value)
           }
         }
-
       
         
         let stripePromise;
         
         const getStripe = () => {
         if(!stripePromise){
-          stripePromise = loadStripe("pk_test_51MQo3GLhCgTZCrVVShrOGDphb9M7MGq9YTOCW90JE5cVtrYsExpY49wClOSYqEn4Ezv9tGcuKIFtbBpSCIF1iDPT00wEyjkOIV")
+          stripePromise = loadStripe("pk_live_51MQo3GLhCgTZCrVVXxkoKyaLDQARjeJB9y013QpyH0wlCEiKAAmMWbTBH196nWjHutfDAOHSV8YsjH60T2mzSPcb00x0kmVCNK")
         }
         return stripePromise
       }
@@ -697,10 +696,9 @@ export function ShoppingCartPage() {
       const redirectToCheckout = async () => {
         setLoadingStripe(true)
         const stripe = await getStripe()
-        const { error, paymentIntent } = await stripe.redirectToCheckout(checkoutOptions)
-        if (error){
-          console.log("Stripe checkout error", error)
-        } else if (paymentIntent && paymentIntent.status === "succeeded"){
+        const { error } = await stripe.redirectToCheckout(checkoutOptions)
+        setLoadingStripe(false)
+        if(!error){
           emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
             subject: `Comanda de la ${email} (${firstName} ${lastName})`,
             metoda: `${firstName} ${lastName} a facut o plata in valoare de 3 RON`,
@@ -712,8 +710,11 @@ export function ShoppingCartPage() {
             bloc : `Bloc : <b>${block}</b>`,
             apartNo : `Apartament : <b>${apartamentNo}</b>`,
           }, 'crU6K8bQnftB81z-j')
+        } else {
+          emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
+            subject: `Comanda de la ${email} (${firstName} ${lastName})`
+          }, 'crU6K8bQnftB81z-j')
         }
-        setLoadingStripe(false)
       }
 
       function removeItemFromCart(item){

@@ -717,6 +717,22 @@ export function ShoppingCartPage() {
         } 
       }
 
+      const listenToWebhook = async () => {
+        const response = await fetch("https://us-central1-pelets-af6eb.cloudfunctions.net/ext-firestore-stripe-payments-handleWebhookEvents", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            "whsec_tZAhGOgbfNvqybx5qkOrKm08wxmsvM8C": "whsec_tZAhGOgbfNvqybx5qkOrKm08wxmsvM8C"
+          }),
+        });
+      
+        const data = await response.json();
+      
+        console.log(data);
+      };
+
       function removeItemFromCart(item){
         if(user?.uid){
           const userDoc = doc(db, `users/${user?.uid}/cart/${item.title+item.kg}`) 

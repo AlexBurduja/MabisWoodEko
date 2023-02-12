@@ -15,6 +15,7 @@ import { Register } from './pages/auth/Register/Register';
 import { AuthProvider } from './FirebaseAuthContext';
 import { CanNavigate } from './CanNavigate';
 import Loading from './pages/reusableComponents/Loading';
+import SuccessPage from './pages/reusableComponents/SuccessPage';
 
 export const LoginContext = React.createContext();
 
@@ -60,6 +61,10 @@ function App() {
                 <CanNavigate>
                   <AdminPanelList />
                 </CanNavigate>
+              }></Route>
+
+              <Route path='/success' element={ 
+                <SuccessPage /> 
               }></Route>
 
             {/* <Route path = '/loginfirebase' element={ <Login /> }></Route> */}

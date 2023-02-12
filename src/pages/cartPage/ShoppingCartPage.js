@@ -15,6 +15,8 @@ import LoadingSpinner from './LoadingSpinner';
 import { toast, ToastContainer } from 'react-toastify';
 import { isEmpty } from '@firebase/util';
 import Loading from '../reusableComponents/Loading';
+import { Route } from 'react-router-dom';
+import SuccessPage from '../reusableComponents/SuccessPage';
 
 export function ShoppingCartPage() {
   const { user } = useContext( FirebaseAuthContext )
@@ -807,6 +809,22 @@ export function ShoppingCartPage() {
         }
       }
 
+      const handleSuccess = () => {
+        console.log('Hi')
+      //   emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
+      //     subject: `Comanda de la ${email} (${firstName} ${lastName})`,
+      //     metoda: `${firstName} ${lastName} a facut o plata in valoare de 3 RON`,
+          
+      //     name : `Nume : ${firstName} ${lastName} ( ${email} )`,
+      //     phone: `Telefon : <b>${phoneNumber}</b>`,
+      //     street : `Strada :<b>${street}</b>`,
+      //     streetNo: `Nr. Strazii: <b>${streetNo}</b>`,
+      //   bloc : `Bloc : <b>${block}</b>`,
+      //   apartNo : `Apartament : <b>${apartamentNo}</b>`,
+      // }, 'crU6K8bQnftB81z-j')
+
+      }
+
       useEffect(() => {
         if(user?.uid){
           setEmail(user.email)
@@ -1153,6 +1171,7 @@ export function ShoppingCartPage() {
    </>
 
     }
+  <Route path='/success' render={(props) => <SuccessPage {...props} handleSuccess={handleSuccess}/>}/>
   </div>
     )
 }

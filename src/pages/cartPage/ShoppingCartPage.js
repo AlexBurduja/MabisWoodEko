@@ -571,8 +571,18 @@ export function ShoppingCartPage() {
           if(deliverySelected === "card"){
             redirectToCheckout()
 
-           
-            
+              localStorage.setItem("email", email);
+              localStorage.setItem("firstName", firstName);
+              localStorage.setItem("lastName", lastName);
+              localStorage.setItem("phoneNumber", phoneNumber);
+              localStorage.setItem("street", street);
+              localStorage.setItem("streetNo", streetNo);
+              localStorage.setItem("block", block);
+              localStorage.setItem("apartamentNo", apartamentNo);
+              localStorage.setItem("isCompanyChecked", isCompanyChecked);
+              localStorage.setItem("companyName", companyName);
+              localStorage.setItem("companyCui", companyCui);
+      
           } else if(deliverySelected === "ramburs" || "pickUp") {
             console.log("mailRamburs")
 
@@ -814,17 +824,17 @@ export function ShoppingCartPage() {
 
       const handleSuccess = () => {
         console.log('Hi')
-      //   emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
-      //     subject: `Comanda de la ${email} (${firstName} ${lastName})`,
-      //     metoda: `${firstName} ${lastName} a facut o plata in valoare de 3 RON`,
+        emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
+          subject: `Comanda de la ${email} (${firstName} ${lastName})`,
+          metoda: `${firstName} ${lastName} a facut o plata in valoare de 3 RON`,
           
-      //     name : `Nume : ${firstName} ${lastName} ( ${email} )`,
-      //     phone: `Telefon : <b>${phoneNumber}</b>`,
-      //     street : `Strada :<b>${street}</b>`,
-      //     streetNo: `Nr. Strazii: <b>${streetNo}</b>`,
-      //   bloc : `Bloc : <b>${block}</b>`,
-      //   apartNo : `Apartament : <b>${apartamentNo}</b>`,
-      // }, 'crU6K8bQnftB81z-j')
+          name : `Nume : ${firstName} ${lastName} ( ${email} )`,
+          phone: `Telefon : <b>${phoneNumber}</b>`,
+          street : `Strada :<b>${street}</b>`,
+          streetNo: `Nr. Strazii: <b>${streetNo}</b>`,
+        bloc : `Bloc : <b>${block}</b>`,
+        apartNo : `Apartament : <b>${apartamentNo}</b>`,
+      }, 'crU6K8bQnftB81z-j')
 
       }
 
@@ -1097,24 +1107,14 @@ export function ShoppingCartPage() {
    </div>
    </div>
 
-   <Link to={{
-  pathname: '/success',
-  state: {
-    email,
-    firstName,
-    lastName,
-    phoneNumber,
-    street,
-    streetNo,
-    block,
-    apartamentNo,
-    isCompanyChecked,
-    companyName,
-    companyCui
-  }
-}}>
+   {/* <Link
+  to={{
+    pathname: "/success",
+    search: `?email=${email}&firstName=${firstName}&lastName=${lastName}&phoneNumber=${phoneNumber}&street=${street}&streetNo=${streetNo}&block=${block}&apartamentNo=${apartamentNo}&isCompanyChecked=${isCompanyChecked}&companyName=${companyName}&companyCui=${companyCui}`
+  }}
+>
   <button>Go to Success Page</button>
-</Link>
+</Link> */}
 
      <section className='checkoutTab'>
        <div className='checkoutTab_header'>

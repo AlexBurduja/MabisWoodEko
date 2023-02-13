@@ -1,6 +1,6 @@
 import './App.css';
 import React from "react"
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, createBrowserRouter } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { Homepage } from './pages/homePage/Homepage'
@@ -16,16 +16,18 @@ import { AuthProvider } from './FirebaseAuthContext';
 import { CanNavigate } from './CanNavigate';
 import Loading from './pages/reusableComponents/Loading';
 import SuccessPage from './pages/reusableComponents/SuccessPage';
+import { createBrowserHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 export const LoginContext = React.createContext();
 
-
+const history = createBrowserHistory()
 
 function App() {
 
   return (
         <AuthProvider>
-    <BrowserRouter>
+    <BrowserRouter >
         <Routes>
 
       <Route path='/' element = {
@@ -64,11 +66,9 @@ function App() {
               }></Route>
 
               <Route path='/success' element={ 
-                <SuccessPage /> 
+                <SuccessPage/> 
               }></Route>
 
-            {/* <Route path = '/loginfirebase' element={ <Login /> }></Route> */}
-            {/* <Route path = '/registerfirebase' element= { <Form/> }></Route>  */}
             <Route path = '/login' element={ <Login /> }></Route>
             <Route path = '/register' element= { <Register/> }></Route>
         </Routes>

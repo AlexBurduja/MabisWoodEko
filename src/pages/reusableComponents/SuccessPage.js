@@ -1,24 +1,25 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import '../cartPage/ShoppingCartPage'
 import emailjs from "emailjs-com"
 
-const SuccessPage = () => {
+const hi = (email, firstName, lastName, phoneNumber, street, streetNo, block, apartamentNo) => {
+  emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
+    subject: `Comanda de la ${email} (${firstName} ${lastName})`,
+    metoda: `${firstName} ${lastName} a facut o plata in valoare de 3 RON`,
 
-  // const { search } = useLocation();
-  // const params = new URLSearchParams(search);
-  // const email = params.get("email");
-  // const firstName = params.get("firstName");
-  // const lastName = params.get("lastName");
-  // const phoneNumber = params.get("phoneNumber");
-  // const street = params.get("street");
-  // const streetNo = params.get("streetNo");
-  // const block = params.get("block");
-  // const apartamentNo = params.get("apartamentNo");
-  // const isCompanyChecked = params.get("isCompanyChecked");
-  // const companyName = params.get("companyName");
-  // const companyCui = params.get("companyCui");
+    name : `Nume : ${firstName} ${lastName} ( ${email} )`,
+    phone: `Telefon : <b>${phoneNumber}</b>`,
+    street : `Strada :<b>${street}</b>`,
+    streetNo: `Nr. Strazii: <b>${streetNo}</b>`,
+    bloc : `Bloc : <b>${block}</b>`,
+    apartNo : `Apartament : <b>${apartamentNo}</b>`,
+  }, 'crU6K8bQnftB81z-j')
+};
+
+
+const SuccessPage = () => {
 
   const email = localStorage.getItem("email");
   const firstName = localStorage.getItem("firstName");
@@ -32,21 +33,28 @@ const SuccessPage = () => {
   const companyName = localStorage.getItem("companyName");
   const companyCui = localStorage.getItem("companyCui");
   
+  const [hasRun, setHasRun] = useState(false);
+
   console.log(email, firstName, lastName, phoneNumber, street, streetNo, block, apartamentNo, isCompanyChecked, companyName, companyCui)
   
+  // const hi = useCallback(() => {
+  //   emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
+  //     subject: `Comanda de la ${email} (${firstName} ${lastName})`,
+  //     metoda: `${firstName} ${lastName} a facut o plata in valoare de 3 RON`,
+  
+  //     name : `Nume : ${firstName} ${lastName} ( ${email} )`,
+  //     phone: `Telefon : <b>${phoneNumber}</b>`,
+  //     street : `Strada :<b>${street}</b>`,
+  //     streetNo: `Nr. Strazii: <b>${streetNo}</b>`,
+  //     bloc : `Bloc : <b>${block}</b>`,
+  //     apartNo : `Apartament : <b>${apartamentNo}</b>`,
+  //   }, 'crU6K8bQnftB81z-j')
+  // }, [email, firstName, lastName, phoneNumber, street, streetNo, block, apartamentNo]);
+  
   useEffect(() => {
-    emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
-      subject: `Comanda de la ${email} (${firstName} ${lastName})`,
-      metoda: `${firstName} ${lastName} a facut o plata in valoare de 3 RON`,
-      
-      name : `Nume : ${firstName} ${lastName} ( ${email} )`,
-      phone: `Telefon : <b>${phoneNumber}</b>`,
-      street : `Strada :<b>${street}</b>`,
-      streetNo: `Nr. Strazii: <b>${streetNo}</b>`,
-    bloc : `Bloc : <b>${block}</b>`,
-    apartNo : `Apartament : <b>${apartamentNo}</b>`,
-  }, 'crU6K8bQnftB81z-j')
-  }, [])
+    hi(email, firstName, lastName, phoneNumber, street, streetNo, block, apartamentNo);
+    setHasRun(true)
+  }, [email, firstName,lastName,phoneNumber,street,streetNo,block,apartamentNo]);
 
     return (
     <div>

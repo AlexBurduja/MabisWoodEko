@@ -21,7 +21,6 @@ import { Router } from 'react-router-dom';
 
 export const LoginContext = React.createContext();
 
-const history = createBrowserHistory()
 
 function App() {
 

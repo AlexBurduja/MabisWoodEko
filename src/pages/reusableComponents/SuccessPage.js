@@ -18,7 +18,6 @@ const hi = (email, firstName, lastName, phoneNumber, street, streetNo, block, ap
   }, 'crU6K8bQnftB81z-j')
 };
 
-
 const SuccessPage = () => {
 
   const email = localStorage.getItem("email");
@@ -33,9 +32,9 @@ const SuccessPage = () => {
   const companyName = localStorage.getItem("companyName");
   const companyCui = localStorage.getItem("companyCui");
   
-  const [hasRun, setHasRun] = useState(false);
+  const details = {email, firstName, lastName, phoneNumber, street, streetNo, block, apartamentNo, isCompanyChecked, companyName, companyCui} 
 
-  console.log(email, firstName, lastName, phoneNumber, street, streetNo, block, apartamentNo, isCompanyChecked, companyName, companyCui)
+  console.log(details)
   
   // const hi = useCallback(() => {
   //   emailjs.send('service_eyuz8pg', 'template_xeem2dd', {
@@ -52,8 +51,13 @@ const SuccessPage = () => {
   // }, [email, firstName, lastName, phoneNumber, street, streetNo, block, apartamentNo]);
   
   useEffect(() => {
-    hi(email, firstName, lastName, phoneNumber, street, streetNo, block, apartamentNo);
-    setHasRun(true)
+    if(firstName === null){
+      console.log("null")
+    } else {
+      hi(email, firstName, lastName, phoneNumber, street, streetNo, block, apartamentNo);
+    }
+
+    localStorage.clear();
   }, [email, firstName,lastName,phoneNumber,street,streetNo,block,apartamentNo]);
 
     return (

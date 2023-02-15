@@ -1,13 +1,12 @@
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { LoginContext } from "../../App";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import './loginCss.css'
 import logo from "../../publicResources/logoMabis.svg"
 import { AiOutlineEye } from "react-icons/ai"
 import ParticlesBackground from "../../particlesJS/particleJsComponent";
 import { NavLink } from "react-router-dom";
-import { signInWithCredential, signInWithEmailAndPassword } from "firebase/auth";
+import {signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
 
 export function Login(){
@@ -138,7 +137,7 @@ export function Login(){
         <div className="leftRegion">
 
         <div>
-          <img className="loginLogo" src={logo}></img>
+          <img className="loginLogo" src={logo} alt="logo"></img>
         </div>
 
         <div>
@@ -161,7 +160,7 @@ export function Login(){
             <section  className="loginForm">
 
                 <div className="inputBoxes">
-                    <input id="email" type="text" onChange={emailChangeHandler} autoComplete required></input>
+                    <input id="email" type="text" onChange={emailChangeHandler} autoComplete="true" required></input>
                     <span>Email</span>
                     <p className="error">{emailError}</p>
                 </div>
@@ -187,6 +186,7 @@ export function Login(){
             <div>
                 
                 <p> Don't have an account? <NavLink to="/register">Register</NavLink> </p>
+                <p>Forgot password ? <NavLink to="/forgotpassword">Reset password</NavLink></p>
             </div>
             </div>
         </div>

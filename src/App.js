@@ -19,6 +19,7 @@ import SuccessPage from './pages/reusableComponents/SuccessPage';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 import CancelPage from './pages/reusableComponents/CancelPage';
+import ForgotPassPage from './pages/auth/ForgotPassPage';
 
 export const LoginContext = React.createContext();
 
@@ -74,6 +75,7 @@ function App() {
               }></Route>
 
             <Route path = '/login' element={ <Login /> }></Route>
+            <Route path ='/forgotpassword' element= { <ForgotPassPage  />}></Route>
             <Route path = '/register' element= { <Register/> }></Route>
         </Routes>
       </BrowserRouter>

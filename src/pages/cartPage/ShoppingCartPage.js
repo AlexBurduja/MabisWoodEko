@@ -612,7 +612,6 @@ export function ShoppingCartPage() {
 
         const handleEmailChange = e => {
           setEmail(e.target.value)
-
         }
 
         const handleLastNameChange = (e) => {
@@ -621,6 +620,7 @@ export function ShoppingCartPage() {
         }
 
         const handleFirstNameChange = (e) => {
+          
           if(user?.uid){
             setFirstName(conditional.firstName)
           }
@@ -633,6 +633,7 @@ export function ShoppingCartPage() {
         const handlePhoneNumberChange = (e) => {
           const input = e.target.value
           setPhoneNumber(input)
+
           if(user?.uid){
             setPhoneNumber(conditional.phoneNumber)
           }
@@ -678,7 +679,7 @@ export function ShoppingCartPage() {
         
         const getStripe = () => {
         if(!stripePromise){
-          stripePromise = loadStripe("pk_live_51MQo3GLhCgTZCrVVXxkoKyaLDQARjeJB9y013QpyH0wlCEiKAAmMWbTBH196nWjHutfDAOHSV8YsjH60T2mzSPcb00x0kmVCNK")
+          stripePromise = loadStripe("pk_test_51MQo3GLhCgTZCrVVShrOGDphb9M7MGq9YTOCW90JE5cVtrYsExpY49wClOSYqEn4Ezv9tGcuKIFtbBpSCIF1iDPT00wEyjkOIV")
         }
         return stripePromise
       }
@@ -703,8 +704,6 @@ export function ShoppingCartPage() {
         billingAddressCollection : 'required',
         shippingAddressCollection: { allowedCountries : ['AC', 'AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'AT', 'AU', 'AW', 'AX', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BL', 'BM', 'BN', 'BO', 'BQ', 'BR', 'BS', 'BT', 'BV', 'BW', 'BY', 'BZ', 'CA', 'CD', 'CF', 'CG', 'CH', 'CI', 'CK', 'CL', 'CM', 'CN', 'CO', 'CR', 'CV', 'CW', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'EH', 'ER', 'ES', 'ET', 'FI', 'FJ', 'FK', 'FO', 'FR', 'GA', 'GB', 'GD', 'GE', 'GF', 'GG', 'GH', 'GI', 'GL', 'GM', 'GN', 'GP', 'GQ', 'GR', 'GS', 'GT', 'GU', 'GW', 'GY', 'HK', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IM', 'IN', 'IO', 'IQ', 'IS', 'IT', 'JE', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KR', 'KW', 'KY', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MF', 'MG', 'MK', 'ML', 'MM', 'MN', 'MO', 'MQ', 'MR', 'MS', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NC', 'NE', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NU', 'NZ', 'OM', 'PA', 'PE', 'PF', 'PG', 'PH', 'PK', 'PL', 'PM', 'PN', 'PR', 'PS', 'PT', 'PY', 'QA', 'RE', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SE', 'SG', 'SH', 'SI', 'SJ', 'SK', 'SL', 'SM', 'SN', 'SO', 'SR', 'SS', 'ST', 'SV', 'SX', 'SZ', 'TA', 'TC', 'TD', 'TF', 'TG', 'TH', 'TJ', 'TK', 'TL', 'TM', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VN', 'VU', 'WF', 'WS', 'XK', 'YE', 'YT', 'ZA', 'ZM', 'ZW', 'ZZ'] }
       }
-
-      console.log(email)
 
       const [loadingStripe, setLoadingStripe] = useState(false)
 
@@ -833,6 +832,48 @@ export function ShoppingCartPage() {
           setBlock(conditional.block)
           setApartamentNo(conditional.apartNo)
         }
+
+        const emailFromLocal = localStorage.getItem('email')
+        const firstNameFromLocal = localStorage.getItem('firstName')
+        const lastNameFromLocal = localStorage.getItem('lastName')
+        const phoneFromLocal = localStorage.getItem('phoneNumber')
+        const streetFromLocal = localStorage.getItem('street')
+        const streetNoFromLocal = localStorage.getItem('streetNo')
+        const blockFromLocal = localStorage.getItem('block')
+        const apartamentNoFromLocal = localStorage.getItem('apartamentNo')
+
+        if(emailFromLocal && emailFromLocal.length > 0){
+          setEmail(emailFromLocal)
+        }
+
+        if(firstNameFromLocal && firstNameFromLocal.length > 0){
+          setFirstName(firstNameFromLocal)
+        }
+
+        if(lastNameFromLocal && lastNameFromLocal.length > 0){
+          setLastName(lastNameFromLocal)
+        }
+
+        if(phoneFromLocal && phoneFromLocal.length > 0){
+          setPhoneNumber(phoneFromLocal)
+        }
+
+        if(streetFromLocal && streetFromLocal.length > 0){
+          setStreet(streetFromLocal)
+        }
+
+        if(streetNoFromLocal && streetNoFromLocal.length > 0){
+          setStreetNo(streetNoFromLocal)
+        }
+
+        if(blockFromLocal && blockFromLocal.length > 0){
+          setBlock(blockFromLocal)
+        }
+
+        if(apartamentNoFromLocal && apartamentNoFromLocal.length > 0){
+          setApartamentNo(apartamentNoFromLocal)
+        }
+
       }, [conditional, user])
 
       function onChangeQ(e){
@@ -1021,7 +1062,7 @@ export function ShoppingCartPage() {
 
    <div className="deliveryAddress_inputs">
      <div className='deliveryAddress_inputs__input' >
-       <input type="text" required="required" defaultValue={email} onChange={handleEmailChange} ></input>
+       <input type="email" required="required" defaultValue={email} onChange={handleEmailChange} ></input>
        <span>Email Address</span>
      </div>
 

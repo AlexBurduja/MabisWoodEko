@@ -18,6 +18,7 @@ import Loading from './pages/reusableComponents/Loading';
 import SuccessPage from './pages/reusableComponents/SuccessPage';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
+import CancelPage from './pages/reusableComponents/CancelPage';
 
 export const LoginContext = React.createContext();
 
@@ -66,6 +67,10 @@ function App() {
 
               <Route path='/success' element={ 
                 <SuccessPage/> 
+              }></Route>
+
+              <Route path='/cancel' element={
+                <CancelPage />
               }></Route>
 
             <Route path = '/login' element={ <Login /> }></Route>

@@ -13,15 +13,14 @@ export const AuthProvider = ({children}) => {
 
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
-            console.log("User is not logged in.")
         });
 
             const getDocument = async () => {
-                const ref = doc(db, 'users', user?.uid)
-                
-                const document = await getDoc(ref)
-                
-                setConditional(document.data())
+                if (user?.uid) {
+                    const ref = doc(db, 'users', user.uid);
+                    const document = await getDoc(ref);
+                    setConditional(document.data());
+                  }
             }
             getDocument()
         

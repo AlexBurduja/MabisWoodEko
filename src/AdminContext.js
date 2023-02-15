@@ -26,6 +26,7 @@ export function AdminContext(props) {
       getDocument()
       .then(data => {
         setConditional(data)
+        console.log(data)
       })
     }
 

@@ -28,10 +28,12 @@ export function ProfilePage() {
     
       const auth = getAuth()
 
-      const triggetResetEmail = async () => {        
-        sendPasswordResetEmail(auth, email)
+      const triggetResetEmail = async () => {
+        sendPasswordResetEmail(auth, email, { url: 'http://localhost:3000/login' })
         
-        toast.warn(`Password reset sent to ${email}!`)
+        toast.success(`Password reset sent to ${email}!`)
+        
+        navigate('/login')
       }
       
     

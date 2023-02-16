@@ -4,7 +4,7 @@ import { GrContactInfo } from "react-icons/gr"
 import { AiOutlineCloseCircle, AiOutlineEye } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
 import { deleteUser } from "firebase/auth";
-import { deleteDoc, doc, updateDoc } from "@firebase/firestore";
+import { deleteDoc, doc, setDoc, updateDoc } from "@firebase/firestore";
 import { db } from "../../firebase-config";
 import { FirebaseAuthContext } from "../../FirebaseAuthContext";
 import Loading from "../reusableComponents/Loading";
@@ -78,18 +78,24 @@ export function AdminPanelComponent(props) {
     const [ newEmail, setNewEmail ] = useState(email)
 
 
-    function oonSubmit(event){
+    const oonSubmit = (event) => (id) => {
         event.preventDefault();
+        
 
-
-    const body = {
-        firstName : newFirstName,
-        lastName : newLastName,
-        email : newEmail,
-      };
+        const body = {
+            firstName : newFirstName,
+            lastName : newLastName,
+            email : newEmail,
+        };
   
+      const ref = doc(db, `users/${id}`)
+      
+      updateDoc(ref, body)
 
+        console.log(id)
     }
+
+    console.log(newFirstName)
 
     function makeAdmin( id ){
         const body = {
@@ -125,7 +131,6 @@ export function AdminPanelComponent(props) {
         deleteDoc(ref)
 
     }
-
 
 
     return (
@@ -180,7 +185,7 @@ export function AdminPanelComponent(props) {
                                     {succes}
                                 </motion.p>
                             )}
-                        <form className="adminPanelForm" onSubmit={oonSubmit}>
+                        <form className="adminPanelForm" onSubmit={(event) => oonSubmit(event, id)}>
                             <div className="userModalContentEmail">
                                 <p>Email</p>
                                 <input defaultValue={email} onChange={changeEmail}></input>

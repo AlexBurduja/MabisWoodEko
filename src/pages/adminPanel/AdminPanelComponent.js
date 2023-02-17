@@ -78,9 +78,7 @@ export function AdminPanelComponent(props) {
     const [ newEmail, setNewEmail ] = useState(email)
 
 
-    const oonSubmit = (event) => (id) => {
-        event.preventDefault();
-        
+    const oonSubmit = (id) => {
 
         const body = {
             firstName : newFirstName,
@@ -92,7 +90,8 @@ export function AdminPanelComponent(props) {
       
       updateDoc(ref, body)
 
-        console.log(id)
+      console.log(id)
+
     }
 
     console.log(newFirstName)
@@ -185,7 +184,7 @@ export function AdminPanelComponent(props) {
                                     {succes}
                                 </motion.p>
                             )}
-                        <form className="adminPanelForm" onSubmit={(event) => oonSubmit(event, id)}>
+                        <form className="adminPanelForm">
                             <div className="userModalContentEmail">
                                 <p>Email</p>
                                 <input defaultValue={email} onChange={changeEmail}></input>
@@ -252,7 +251,7 @@ export function AdminPanelComponent(props) {
             <p>You are about to edit {firstName}'s account.</p>
 
         <div className="adminEditModalButtons">
-            <button type="submit" onClick={oonSubmit}>Confirm</button>
+            <button type="submit" onClick={() => oonSubmit(id)}>Confirm</button>
             <button onClick={toggleEditModal}>Take me back</button>
         </div>
             </div>

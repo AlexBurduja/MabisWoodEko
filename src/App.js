@@ -16,10 +16,10 @@ import { AuthProvider } from './FirebaseAuthContext';
 import { CanNavigate } from './CanNavigate';
 import Loading from './pages/reusableComponents/Loading';
 import SuccessPage from './pages/reusableComponents/SuccessPage';
-import { createBrowserHistory } from 'history';
-import { Router } from 'react-router-dom';
 import CancelPage from './pages/reusableComponents/CancelPage';
 import ForgotPassPage from './pages/auth/ForgotPassPage';
+import { CookiePolicy } from './CookiePolicy';
+import PrivacyPolicy from './PrivacyPolicy';
 
 export const LoginContext = React.createContext();
 
@@ -74,6 +74,14 @@ function App() {
                 <CancelPage />
               }></Route>
 
+              <Route path='/cookiepolicy' element={
+                <CookiePolicy />
+              }></Route>
+              
+              <Route path='/privacypolicy' element={
+                <PrivacyPolicy />
+              }></Route>
+
             <Route path = '/login' element={ <Login /> }></Route>
             <Route path ='/forgotpassword' element= { <ForgotPassPage  />}></Route>
             <Route path = '/register' element= { <Register/> }></Route>
@@ -82,6 +90,8 @@ function App() {
       </AuthProvider>
   )
 }
+
+
 
 export default App;
 

@@ -19,7 +19,7 @@ import SuccessPage from './pages/reusableComponents/SuccessPage';
 import CancelPage from './pages/reusableComponents/CancelPage';
 import ForgotPassPage from './pages/auth/ForgotPassPage';
 import { CookiePolicy } from './CookiePolicy';
-import PrivacyPolicy from './PrivacyPolicy';
+import { PrivacyPolicy } from './PrivacyPolicy';
 
 export const LoginContext = React.createContext();
 

@@ -1,31 +1,16 @@
+import React from 'react'
 import { useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-import './PrivacyPolicyCss.css';
+import { Document, Page, pdfjs } from 'react-pdf'
 
-function PrivacyPolicy() {
-  const url = './publicResources/Cookie Policy Mabis Wood Eko.pdf';
+const pdf= './publicResources/Privacy Policy Mabis Wood Eko (2).pdf';
+export function PrivacyPolicy() {
   
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-
-  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-  
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
+  pdfjs.GlobalWorkerOptions.workerSrc = 
+  `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
   return (
-    <>
-    <Document file={'./publicResources/Cookiee.pdf'} onLoadSuccess={onDocumentLoadSuccess}>
-      <Page pageNumber={1} />
-      <Page pageNumber={2} />
+    <Document file={'https://firebasestorage.googleapis.com/v0/b/pelets-af6eb.appspot.com/o/legal%2FPrivacy%20Policy%20Mabis%20Wood%20Eko.pdf?alt=media&token=8352d367-a1b0-4f85-ac0c-56678044fece'} options={{}} >
+      <Page pageNumber={1}/>
     </Document>
-
-    <p>
-    Page {pageNumber} of {numPages}
-    </p>
-    </>
-  );
+  )
 }
-
-export default PrivacyPolicy;

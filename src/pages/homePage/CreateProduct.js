@@ -25,31 +25,11 @@ export function CreateProduct(){
   const [ succes, setSucces ] = useState('')
 
   // const [user , setUser] = useState({})
-  const [conditional , setConditional ] = useState(false)
-
-  const { user } = useContext(FirebaseAuthContext)
+  const { user, conditional } = useContext(FirebaseAuthContext)
 
   // console.log(user.uid)
   
   
-  useEffect(() => {
-    if(user?.uid){
-
-      const ref = doc(db, 'users', user.uid)
-      
-  const getDocument = async () => {
-    
-    let document = await getDoc(ref)
-    
-    return document.data().admin
-  }
-  
-  getDocument()
-  .then(data => {
-    setConditional(data)
-  })
-}
-}, [user?.uid])
 
 
 
@@ -170,7 +150,7 @@ export function CreateProduct(){
   return (
     
     <>
-    {conditional === true && (
+    {conditional.admin === true && (
       <div className="createProductButtonWrapper">
         <button className="createProductButton" onClick={toggleModal2}>Create Product</button>
       </div>

@@ -20,29 +20,10 @@ export function ProductCardComponent(props) {
   const { title ,kg, currency,  price, image, description, id, stripeId } = props
 
   // const [user , setUser] = useState({})
-  const [conditional , setConditional ] = useState(false)
   
 
-  const { user } = useContext(FirebaseAuthContext)
+  const { user, conditional } = useContext(FirebaseAuthContext)
   
-  useEffect(() => {
-
-    if (user?.uid){
-    
-      const getDocument = async () => {
-        const ref = doc(db, 'users', user.uid)
-        
-        let document = await getDoc(ref)
-        
-        return document.data()
-        
-      }
-
-      
-      getDocument()
-      .then(data => setConditional(data))
-    }
-  }, [])
 
   const useClientId = () => {
 
@@ -305,7 +286,7 @@ export function ProductCardComponent(props) {
     
         <a href={`products/${id}`} className="viewMoreButton"> View more </a>
 
-        {conditional.admin && (
+        {conditional?.admin && (
           <button onClick={toggleModalEdit} className="edit-btn">< AiFillEdit /></button>
         )}
       

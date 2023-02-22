@@ -19,11 +19,12 @@ import { ShoppingCartMobile } from '../cartPage/ShoppingCartMobile';
 export function Header() {
 
   // const [user , setUser] = useState({})
-  const [conditional , setConditional ] = useState([])
+  // const [conditional , setConditional ] = useState([])
   const [ data , setData ] = useState({})
   
-  const { user } = useContext(FirebaseAuthContext)
+  const { user, conditional } = useContext(FirebaseAuthContext)
 
+  console.log(conditional)
 
   const logOut = async () => {
     await signOut(auth)
@@ -32,31 +33,13 @@ export function Header() {
   }
  
 
-useEffect(() => {
-
-  if (user?.uid){
-  
-    const getDocument = async () => {
-      const ref = doc(db, 'users', user.uid)
-      
-      let document = await getDoc(ref)
-      
-      return document.data()
-      
-    }
-    getDocument()
-    .then(data => setConditional(data))
-  }
-  
-}, [user?.uid])
-
             
           
 
   function LogInOrOut() {
     if (user?.uid){
       return (
-        <div className='headerLogin'>     
+        <div className='headerLogin'>
       <div className='headerLoginIcons'>
         <NavLink to="/profile"> <CgProfile /> </NavLink>
         </div>

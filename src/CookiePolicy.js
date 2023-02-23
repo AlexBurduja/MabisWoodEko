@@ -1,4 +1,5 @@
 import React from 'react'
+import './PrivacyPolicyCss.css'
 
 export function CookiePolicy() {
   return (

@@ -1,12 +1,8 @@
 import React from 'react'
-import { useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf'
+import './PrivacyPolicyCss.css'
 
-const pdf= './publicResources/Privacy Policy Mabis Wood Eko (2).pdf';
 export function PrivacyPolicy() {
-  
-  pdfjs.GlobalWorkerOptions.workerSrc = 
-  `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 
   return (
     <div className='divPrivacy'>

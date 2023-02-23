@@ -20,7 +20,8 @@ import CancelPage from './pages/reusableComponents/CancelPage';
 import ForgotPassPage from './pages/auth/ForgotPassPage';
 import { CookiePolicy } from './CookiePolicy';
 import { PrivacyPolicy } from './PrivacyPolicy';
-
+import { TermsAndConditions } from './TermsAndConditions';
+import { ReturnPolicy } from './ReturnPolicy'
 export const LoginContext = React.createContext();
 
 
@@ -82,6 +83,14 @@ function App() {
                 <PrivacyPolicy />
               }></Route>
 
+              <Route path="/termsandconditions" element={
+                <TermsAndConditions />
+              }></Route>
+
+              <Route path='/returnpolicy' element={
+                <ReturnPolicy />
+              }></Route>
+
             <Route path = '/login' element={ <Login /> }></Route>
             <Route path ='/forgotpassword' element= { <ForgotPassPage  />}></Route>
             <Route path = '/register' element= { <Register/> }></Route>
@@ -90,8 +99,6 @@ function App() {
       </AuthProvider>
   )
 }
-
-
 
 export default App;
 

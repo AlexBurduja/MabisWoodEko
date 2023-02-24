@@ -1,15 +1,14 @@
 import "./ContactForm.css"
 import { IoIosCall } from 'react-icons/io'
 import { FiMail } from 'react-icons/fi'
-import { GrLocationPin } from 'react-icons/gr'
+import { BsPinMapFill } from 'react-icons/bs'
 import { BsFacebook } from "react-icons/bs"
 import { BsInstagram } from "react-icons/bs"
 import { FaTiktok } from "react-icons/fa"
+import { BsWhatsapp } from "react-icons/bs"
 import emailjs from 'emailjs-com'
 import { useContext, useEffect, useState } from "react"
 import { FirebaseAuthContext } from "../../FirebaseAuthContext"
-// import { doc, getDoc } from "@firebase/firestore"
-// import { db } from "../../firebase-config"
 
 export function ContactForm() {
   
@@ -24,13 +23,16 @@ export function ContactForm() {
   function sendEmail(e) {
     e.preventDefault();
 
-    emailjs.sendForm('service_eyuz8pg', 'template_xeem2dd', e.target, 'crU6K8bQnftB81z-j')
+    emailjs.sendForm('service_eyuz8pg', 'template_1fljmwu', e.target, 'crU6K8bQnftB81z-j')
       .then((result) => {
           console.log(result.text);
       }, (error) => {
           console.log(error.text);
       });
   }
+
+  const phoneNumber = '+40721648424';
+  const whatsappLink = `https://wa.me/${phoneNumber}`;
   
   return (
     <section id="contact" className="contactFormWrapper">
@@ -41,9 +43,10 @@ export function ContactForm() {
         </div>
 
         <div className="leftSide_footer">
-          <p><span> <IoIosCall /> </span> +40123456789</p>
-          <p><span> <FiMail /> </span> hello@mail.com</p>
-          <p><span> <GrLocationPin /> </span> Strada BlaBla Nr.13 </p>
+          <p><span> <IoIosCall /> </span> <a href="tel:+40721648424">+40721648424</a> </p>
+          <p><span><BsWhatsapp /> <a href={whatsappLink}>+40721648424</a> </span></p>
+          <p><span> <FiMail /> </span> <a href="mailto:dan@mabiswood.ro">dan@mabiswood.ro</a> </p>
+          <p><span> <BsPinMapFill /> </span> Sat. Bogati, Comuna. Bogati, Strada. Alunis, Nr. 190B, Judetul. Arges</p>
         </div>
 
           <div className="leftSide_footer_icons">

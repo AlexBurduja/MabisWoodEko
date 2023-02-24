@@ -1,0 +1,161 @@
+.aboutSection h1{
+    font-size: 50px;
+    text-align: center;
+    background-color: #DFDEDE;
+    padding: 50px;
+}
+
+.aboutWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 100px;
+    margin-top: 50px;
+}
+
+.aboutWrapper p {
+    width: 500px;
+    font-size: 21px;
+}
+
+.aboutWrapperWrapper{
+    display: flex;
+    width: 100%;
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.aboutWrapperWrapperSecond{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    justify-content: center;
+    gap: 100px;
+    align-items: center;
+}
+
+.carouselMainDiv{
+    display: none;
+}
+
+@media (max-width:900px){    
+    .photo1,
+    .photo2,
+    .photo3 {
+        display: none;
+    }
+
+    .aboutWrapperWrapper {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        gap: 50px;
+    }
+
+    .aboutWrapperWrapper p {
+        width: 95%;
+        margin-left: 2.5%;
+        text-align: center;
+    }
+
+    .aboutWrapperWrapperSecond {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        gap: 0px;
+    }
+
+    .aboutWrapperWrapperSecond p {
+        width: 95%;
+        margin-left: 2.5%;
+        text-align: center;
+    }
+
+    .aboutWrapper {
+        gap: 0px;
+    }
+
+    .carouselMainDiv {
+        display: block;
+        max-width: 800px;
+        margin: 0 auto;
+        overflow: hidden;
+        padding-bottom: 20px;
+        position: relative;
+    }
+
+    .carouselMainDiv h2{
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .sliderElement{
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+
+    .carouselDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 19;
+    }
+
+    .carouselDiv img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+    }
+
+    .carouselDiv p{
+        color: red;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .carouselDiv svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.274);
+        border: transparent;
+        color: #fff;
+        border-radius: 50%;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 1;
+        transition: background-color 0.2s ease-in-out;
+      }
+      
+      .arrow:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      
+      .prev {
+        left: 10px;
+      }
+      
+      .next {
+        right: 10px;
+      }
+
+
+}

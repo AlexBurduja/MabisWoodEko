@@ -31,7 +31,11 @@
     font-size: 25px;
 }
 .leftSide_footer span {
-    color: black;
+    color: white;
+}
+
+.leftSide_footer a{
+    color: white;
 }
 
 .leftSide > div:first-of-type > p:first-of-type {

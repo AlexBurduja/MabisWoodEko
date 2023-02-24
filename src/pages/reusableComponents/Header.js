@@ -18,13 +18,20 @@ import { ShoppingCartMobile } from '../cartPage/ShoppingCartMobile';
 
 export function Header() {
 
-  // const [user , setUser] = useState({})
-  // const [conditional , setConditional ] = useState([])
   const [ data , setData ] = useState({})
   
   const { user, conditional } = useContext(FirebaseAuthContext)
 
-  console.log(conditional)
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'England');
+
+  useEffect(() => {
+    localStorage.setItem('language', language);
+  }, [language]);
+
+  function handleLanguageChange(event) {
+    setLanguage(event.target.value);
+    window.location.reload()
+  }
 
   const logOut = async () => {
     await signOut(auth)
@@ -32,10 +39,6 @@ export function Header() {
     window.location.reload()
   }
  
-
-            
-          
-
   function LogInOrOut() {
     if (user?.uid){
       return (
@@ -86,7 +89,7 @@ export function Header() {
     <div className='desktopAnchors'>
       <div className='nav_anchors '>
         <NavLink className={activeClass} to='/'>Home</NavLink>
-        <NavLink className={activeClass} to='/e'>About</NavLink>
+        <NavLink className={activeClass} to='/about'>About</NavLink>
         <NavLink className={activeClass} to='/reviews'>Reviews</NavLink>
         <NavLink className={activeClass} to='/contact'>Contact</NavLink>
         {conditional.admin === true && (
@@ -129,6 +132,12 @@ export function Header() {
         </ul>
       </nav>
 </div>  
+
+            
+<select value={language} onChange={handleLanguageChange}>
+        <option value="England">England</option>
+        <option value="Romania">Romania</option>
+      </select>
 
       <div className='mobileCart'>
         <ShoppingCartMobile/>  

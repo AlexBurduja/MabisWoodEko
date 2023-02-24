@@ -18,12 +18,14 @@ import Loading from './pages/reusableComponents/Loading';
 import SuccessPage from './pages/reusableComponents/SuccessPage';
 import CancelPage from './pages/reusableComponents/CancelPage';
 import ForgotPassPage from './pages/auth/ForgotPassPage';
-import { CookiePolicy } from './CookiePolicy';
-import { PrivacyPolicy } from './PrivacyPolicy';
-import { TermsAndConditions } from './TermsAndConditions';
-import { ReturnPolicy } from './ReturnPolicy'
-export const LoginContext = React.createContext();
+import { CookiePolicy } from './pages/legal/CookiePolicy';
+import { PrivacyPolicy } from './pages/legal/PrivacyPolicy';
+import { TermsAndConditions } from './pages/legal/TermsAndConditions';
+import { ReturnPolicy } from './pages/legal/ReturnPolicy'
+import { AboutPage } from './pages/about/AboutPage';
 
+
+export const LoginContext = React.createContext();
 
 function App() {
 
@@ -32,10 +34,15 @@ function App() {
     <BrowserRouter >
         <Routes>
 
-      <Route path='/' element = {
-        <Homepage />
-      }>
-      </Route>
+            <Route path='/' element = {
+              <Homepage />
+            }>
+            </Route>
+            
+            <Route path='/about' element= {
+              <AboutPage />
+            }></Route>
+
 
             <Route path='/loading' element={
               <Loading />

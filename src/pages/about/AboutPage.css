@@ -42,6 +42,84 @@
     display: none;
 }
 
+.carouselMainDiv {
+    display: block;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.carouselMainDiv h2{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.sliderElement{
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+.carouselDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.carouselDiv img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.carouselDiv p{
+    color: red;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.carouselDiv svg {
+    width: 40px;
+    height: 40px;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.274);
+    border: transparent;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+
 @media (max-width:900px){    
     .photo1,
     .photo2,

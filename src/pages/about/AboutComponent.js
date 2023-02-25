@@ -197,7 +197,7 @@ export function AboutComponent (){
 
 
     {conditional.admin  && (
-        <div>
+        <div style={{textAlign: 'center', marginTop: '50px'}}>
             <div className='imageSection'>
                 <input type="file" onChange={handleImageChange}></input>
                 {imgUrl && <img src={imgUrl} alt="preview" width="350px" />}
@@ -206,8 +206,8 @@ export function AboutComponent (){
         </div>
     )}
 
-    <div className='carouselMainDiv'>
-
+    <div className='carouselMainDiv' style={{ display : conditional.admin ? 'block' : 'none'}}>
+        
         <h2>Photos</h2>
 
 {loading ? <Loading /> : 

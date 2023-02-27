@@ -2,11 +2,15 @@ import { addDoc, collection, doc, getDoc, getDocs, setDoc, updateDoc} from "fire
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useContext } from "react"
 import { useEffect, useState } from "react"
-import Slider from "react-slick"
 import { toast } from "react-toastify"
 import { db } from "../../firebase-config"
 import { FirebaseAuthContext } from "../../FirebaseAuthContext"
 import { ReviewPageComponent } from "./ReviewPageComponent"
+
+import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Loading from "../reusableComponents/Loading"
 
 
 export function Reviewpagesomething(){
@@ -91,12 +95,23 @@ setDoc(ref, body)
 
 const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
+    autoplay : true,
+    autoplaySpeed: 3000,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
-  }
+    slidesToScroll: 1,
+    // prevArrow: <CustomPrevArrow />,
+    // nextArrow: <CustomNextArrow />,
+  };
 
+
+  const groupedReviews = [[], [], [], [], []]; // Initialize an array of arrays for each star rating
+
+  review.forEach((review) => {
+    const starRating = parseInt(review.reviewStar);
+    groupedReviews[starRating - 1].push(review);
+  });
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -105,6 +120,12 @@ const settings = {
       setCurrentIndex((currentIndex + 1) % review.length);
     }, 3000);
   }, [currentIndex, review.length]);
+
+  const countsByRating = review.reduce((counts, review) => {
+    const rating = review.reviewStar;
+    counts[rating] = (counts[rating] || 0) + 1;
+    return counts;
+  }, {});
 
     return (
 <>
@@ -168,23 +189,33 @@ const settings = {
         </section>
 
         
-    <div className="reviewGrid">
-        {review.map((reviews) => {
-            return (
+        {/* <div className="reviewGrid"> */}
+    {groupedReviews.map((reviews, index) => {
+      return (
+        <div key={index}>
+          <h2>{`${index + 1}-star Reviews (${countsByRating[index + 1]})`}</h2>
+          {reviews.length > 0 ? (
+            <Slider {...settings}>
+              {reviews.map((review) => (
                 <ReviewPageComponent
-                reviewTitle = {reviews.reviewTitle}
-                reviewText = {reviews.reviewText}
-                rating = {reviews.reviewStar}
-                firstName = {reviews?.firstName}
-                lastName = {reviews.lastName}
-                time = {reviews.time}
-                id = {reviews.id}
-                key = {reviews.id}>
-                </ReviewPageComponent>
-
-)
-})}
-    </div>
+                  reviewTitle={review.reviewTitle}
+                  reviewText={review.reviewText}
+                  rating={review.reviewStar}
+                  firstName={review?.firstName}
+                  lastName={review.lastName}
+                  time={review.time}
+                  id={review.id}
+                  key={review.id}
+                />
+              ))}
+            </Slider>
+          ) : (
+            <p>No reviews available.</p>
+          )}
+        </div>
+      );
+    })}
+  {/* </div> */}
 </>
     )
 }

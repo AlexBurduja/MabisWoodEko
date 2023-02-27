@@ -43,7 +43,6 @@ function App() {
               <AboutPage />
             }></Route>
 
-
             <Route path='/loading' element={
               <Loading />
             }></Route>

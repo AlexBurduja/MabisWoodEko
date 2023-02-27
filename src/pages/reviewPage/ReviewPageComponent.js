@@ -31,9 +31,30 @@ function renderStars(rating) {
     return stars;
   }
 
-    
+  const settings = {
+    dots: true,
+    infinite: true,
+    autoplay : true,
+    autoplaySpeed: 3000,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    // prevArrow: <CustomPrevArrow />,
+    // nextArrow: <CustomNextArrow />,
+  };
+  
+
+
     return(
         <>
+        
+    <div className='carouselMainDiv' >
+        
+
+        {/* <Slider className='sliderElement' {...settings}> */}
+        
+            
+            
               <section className="reviewRatingSection">
         <div className="reviewRatingSection_username">
           <p>
@@ -61,6 +82,10 @@ function renderStars(rating) {
           <AiOutlineClose />
         </button>
       </section>
+
+        {/* </Slider> */}
+
+    </div>
         </>
     )
 }

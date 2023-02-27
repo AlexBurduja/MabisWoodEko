@@ -99,12 +99,8 @@
 }
 
 .reviewGrid{
-    display: grid;
-    justify-items: center;
-    justify-content: center;
-    margin-top: 100px;
-    grid-template-columns: repeat(auto-fit, minmax(450px,0.5fr));
-    gap: 100px;
+    display: flex;
+    gap:10px;
 }
 
 .reviewRatingSection{
@@ -112,7 +108,8 @@
     position: relative;
     flex-direction: column;
     justify-content: center;
-    width: 65%;
+    margin-left: 5%;
+    width: 90%;
     height: 330px;
     text-align: center;
     gap: 25px;

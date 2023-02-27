@@ -3,22 +3,19 @@ import { RiStarFill, RiStarLine } from "react-icons/ri";
 import "./ReviewPageComponent.css"
 import { AiOutlineClose } from "react-icons/ai";
 import Slider from "react-slick";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase-config";
 
 
 export function ReviewPageComponent(props) {
 
     const { reviewTitle, reviewText, rating, firstName, lastName, time, id  } = props
 
-    // const { auth } = useContext(LoginContext)
 
-
-function deleteHandler() {
-     fetch(`http://localhost:3001/reviews/${id}`,{
-            
-                 method: "DELETE"
-             })
-        window.location.reload();
+function deleteHandler(id) {
+  deleteDoc(doc(db, 'reviews', id))  
 }
+
 
 function renderStars(rating) {
     const stars = [];
@@ -78,7 +75,7 @@ function renderStars(rating) {
           <p> Submitted at: {time}</p>
         </div>
   
-        <button className="reviewDeleteButton" onClick={deleteHandler}>
+        <button className="reviewDeleteButton" onClick={() => deleteHandler(id)}>
           <AiOutlineClose />
         </button>
       </section>

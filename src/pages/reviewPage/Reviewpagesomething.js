@@ -91,20 +91,38 @@ const ref = doc(db, `reviews/${title}`)
 setDoc(ref, body)
 
 }
-
+const [slidesToShow, setSlidesToShow] = useState(3);
 
 const settings = {
-    dots: true,
-    infinite: true,
-    autoplay : true,
-    autoplaySpeed: 3000,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+  dots: true,
+  infinite: true,
+  autoplay : true,
+  autoplaySpeed: 3000,
+  speed: 500,
+  slidesToShow: slidesToShow,
+  slidesToScroll: 1,
     // prevArrow: <CustomPrevArrow />,
-    // nextArrow: <CustomNextArrow />,
+    // nextArrow: <CustomNextArrow />
   };
 
+  
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1000) {
+        setSlidesToShow(1);
+      } else if (window.innerWidth > 1000) {
+        setSlidesToShow(3)
+      }
+    };
+  
+    window.addEventListener('resize', handleResize);
+  
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [slidesToShow]);
+  
 
   const groupedReviews = [[], [], [], [], []]; // Initialize an array of arrays for each star rating
 
@@ -195,7 +213,7 @@ const settings = {
         <div key={index}>
           <h2>{`${index + 1}-star Reviews (${countsByRating[index + 1]})`}</h2>
           {reviews.length > 0 ? (
-            <Slider {...settings}>
+            <Slider {...settings} className='slider'>
               {reviews.map((review) => (
                 <ReviewPageComponent
                   reviewTitle={review.reviewTitle}
@@ -206,8 +224,8 @@ const settings = {
                   time={review.time}
                   id={review.id}
                   key={review.id}
-                />
-              ))}
+                  />
+                  ))}
             </Slider>
           ) : (
             <p>No reviews available.</p>

@@ -2,7 +2,6 @@ import { addDoc, collection, doc, getDoc, getDocs, setDoc, updateDoc} from "fire
 import { motion, AnimatePresence } from "framer-motion"
 import React, { useCallback, useContext } from "react"
 import { useEffect, useState } from "react"
-import { toast } from "react-toastify"
 import { db } from "../../firebase-config"
 import { FirebaseAuthContext } from "../../FirebaseAuthContext"
 import { ReviewPageComponent } from "./ReviewPageComponent"
@@ -152,7 +151,7 @@ const settings = {
   
 
   const groupedReviews = [[], [], [], [], []]; // Initialize an array of arrays for each star rating
-
+  
   review.forEach((review) => {
     const starRating = parseInt(review.reviewStar);
     groupedReviews[starRating - 1].push(review);
@@ -172,9 +171,22 @@ const settings = {
         
             <>
         <div className="header">
+          {localStorage.getItem('language') === "Romania" ? 
+          <>
+              <h1>Pagina de revizuire</h1>
+              <h4>Aici puteti vedea cum toata lumea a revizuit serviciile noastre!</h4>
+              <h4>Lasati o revizuire completand formularul de mai jos!</h4>
+          </>
+          
+          : 
+
+          <>
             <h1>Review Page</h1>
             <h4>Here you can see how everyone reviewed our services!</h4>
             <h4>Be sure to leave one yourself by completing the form below!</h4>
+          </>
+
+          }
 
             <AnimatePresence>
                 {succes && (
@@ -197,7 +209,7 @@ const settings = {
                 
                 <div className="reviewInputBoxes">
                     <input id="text" type="text" onChange={titleChange} required></input>
-                    <span>Title</span>
+                    {localStorage.getItem("language") === 'Romania' ? <span>Titlu</span> : <span>Title</span> }
                 </div>
                 
                 <div className="reviewInputBoxes">
@@ -213,7 +225,7 @@ const settings = {
                     <option value="5">★★★★★</option>
                 </select>
 
-                    <button onClick={postHandler}>Post</button>
+                    <button onClick={postHandler}>{localStorage.getItem('language') === 'Romania' ? 'Posteaza' : 'Post'}</button>
                 </div>
                 </section>
                 </>
@@ -230,10 +242,22 @@ const settings = {
         {loading ? (
   <Loading />
 ) : (
-  groupedReviews.map((reviews, index) => {
+  groupedReviews
+  .sort((a,b) => b[0]?.reviewStar - a[0]?.reviewStar)
+  .map((reviews, index) => {
     return (
-      <div key={index}>
-        <h2>{`${index + 1}-star Reviews (${countsByRating[index + 1]})`}</h2>
+      <div key={index} className='lmao'>
+        {reviews.length > 0 && reviews[0].reviewStar ? (
+            localStorage.getItem('language') === 'Romania' ? <h2 className="reviewTitles">{`Recenzii de ${reviews[0].reviewStar} stele (${countsByRating[reviews[0].reviewStar]})`} </h2> : 
+            
+            <h2 className="reviewTitles">
+            {`${reviews[0].reviewStar}-star Reviews (${countsByRating[reviews[0].reviewStar]})`}
+              </h2>
+            
+            
+        ) : (
+          <p>No reviews available.</p>
+        )}
         {reviews.length > 0 ? (
           <Slider {...settings} className='slider'>
             {reviews.map((review) => (

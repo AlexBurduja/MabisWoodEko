@@ -37,7 +37,14 @@ function renderStars(rating) {
 
         <div className="reviewRatingSection_username">
           <p>
-            {lastName + " " + firstName?.substring(0,1) + ". "} <span>said</span>
+            {lastName + " " + firstName?.substring(0,1) + ". "} {localStorage.getItem('language') === "Romania" ? 
+            <span> 
+              a spus
+            </span> 
+            : 
+            <span>
+              said
+            </span> }
           </p> 
         </div>
         
@@ -54,7 +61,11 @@ function renderStars(rating) {
         </div>
   
         <div className="reviewRatingSection_time">
+          {localStorage.getItem('language') === "Romania" ? <p>Creat la : {time}</p> 
+          : 
           <p> Submitted at: {time}</p>
+          }
+          
         </div>
   
         <button className="reviewDeleteButton" onClick={() => deleteHandler(id)}>

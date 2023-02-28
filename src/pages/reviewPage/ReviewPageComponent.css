@@ -110,7 +110,7 @@
     justify-content: center;
     margin-left: 5%;
     width: 90%;
-    height: 330px;
+    height: 300px;
     text-align: center;
     gap: 25px;
     background-color: #e0e0e0;
@@ -119,9 +119,11 @@
     margin-top: 50px;
 }
 
-/* .slider{
-    position: relative;
-} */
+.reviewTitles{
+    text-align: center;
+    margin-top: 50px;
+    font-size: 35px;
+}
 
 .arrow {
     position: absolute;
@@ -147,12 +149,13 @@
   }
   
   button.prev {
-    left: 50px;
+    left: 20px;
   }
   
   button.next {
-    right: 50px;
+    right: 20px;
   }
+
 
 .reviewRatingSection:hover{
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -168,7 +171,7 @@
 
 
 div .reviewRatingSection_username{
-    font-size: 30px;
+    font-size: 25px;
     width: 90%;
     position: absolute;
     left: 0;

@@ -11,13 +11,11 @@ import { HashLink } from 'react-router-hash-link';
 import { loadStripe } from '@stripe/stripe-js';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import emailjs from "emailjs-com"
-import LoadingSpinner from './LoadingSpinner';
 import { toast, ToastContainer } from 'react-toastify';
 import { isEmpty } from '@firebase/util';
 import Loading from '../reusableComponents/Loading';
-import { Route } from 'react-router-dom';
-import SuccessPage from '../reusableComponents/SuccessPage';
-import { Link } from 'react-router-dom';
+import {AiFillCreditCard} from 'react-icons/ai'
+import { FaGooglePay } from 'react-icons/fa'
 
 export function ShoppingCartPage() {
   const { user } = useContext( FirebaseAuthContext )
@@ -972,7 +970,7 @@ export function ShoppingCartPage() {
      <div className='emptyCartTextWrapper'>
      <div className='emptyCartText'>
        <div>
-     <h1>Your Cart is Empty </h1>
+     <h1>{localStorage.getItem('language') === 'Romania' ? 'Cosul dvs. este gol' : 'Your cart is empty!'}</h1>
        </div>
 
        <div>
@@ -982,7 +980,7 @@ export function ShoppingCartPage() {
      </div>
 
      <div>
-       <HashLink className='cartBackToProduct' to="/#product" replace="true">Back to products</HashLink>
+       <HashLink className='cartBackToProduct' to="/#product" replace="true">{localStorage.getItem('language') === 'Romania' ? 'Catre produse.' : 'Back to products.'} Back to products</HashLink>
      </div>
 
      </div> 
@@ -995,8 +993,8 @@ export function ShoppingCartPage() {
    <ToastContainer />
    <section className='wrapper' >
    <section className='cartPageLeftSection'>
-   <h1>1. REVIEW YOUR ORDER </h1>
-   <h3>Please check that you have the right quantity of every single item to avoid confusions at checkout, Thanks!</h3>
+   <h1>{localStorage.getItem('language') === 'Romania' ? '1. VERIFICA-TI COMANDA.' : '1. REVIEW YOUR ORDER'} </h1>
+   <h3>{localStorage.getItem('language') === 'Romania' ? 'Va rugam sa verificati daca aveti cantitatea potrivita din fiecare articol pentru a evita confuziile la finalizare, multumim!' : 'Please check that you have the right quantity of every single item to avoid confusions at checkout, Thanks!'} </h3>
 
 
    {cart.map((item) => {
@@ -1013,12 +1011,12 @@ export function ShoppingCartPage() {
            </div>
 
            <div className='column'>
-             <p>Each</p>
+             <p>{localStorage.getItem('language') === 'Romania' ? 'Pret produs' : 'Each' }</p>
              {item.price} {item.currency}
            </div>
 
            <div className='column quantityFlex'>
-             <p>Quantity</p>
+             <p>{localStorage.getItem('language') === 'Romania' ? 'Cantitate' : 'Quantity'}</p>
 
              <div className='quantityColumn'>
               
@@ -1035,9 +1033,7 @@ export function ShoppingCartPage() {
              {item.quantity * item.price} {item.currency}
            </div>
 
-
-           <button className='removeBtn'  onClick={() => removeItemFromCart(item)}>Remove</button>
-          
+           <button className='removeBtn'  onClick={() => removeItemFromCart(item)}>{localStorage.getItem('language') ? 'Sterge' : 'Remove'}</button>
 
          </div>
        </section>
@@ -1045,7 +1041,7 @@ export function ShoppingCartPage() {
        })}
 
    <div className='productCartFooter'>
-   <button className="emptyCartButton" onClick={deleteCart}>Empty Cart</button>
+   <button className="emptyCartButton" onClick={deleteCart}>{localStorage.getItem('language') ? 'Goleste Cosul' : 'Empty Cart'}</button>
      <ProductCount />
      <p>Total: {totalPrice} RON</p>
    </div>
@@ -1053,9 +1049,9 @@ export function ShoppingCartPage() {
    <section className='deliveryAddress'>
    <div className='deliveryAddress_wrapper'>
    <div className='deliveryAddress_header'>
-     <h1>2. DELIVERY ADDRESS</h1>
-     <h3>Please check that all the informations are valid and correct, Thanks!</h3>
-     <h5>All fields need to be completed!</h5>
+     <h1>2. {localStorage.getItem('language') === 'Romania' ? 'DATE CLIENT' : 'CLIENT DETAILS'}</h1>
+     <h3>{localStorage.getItem('language') === 'Romania' ? 'Va rugam sa verificati daca toate datele sunt valide/corecte, Multumim!' : 'Please check that all the informations are valid and correct, Thanks!'}</h3>
+     <h5>{localStorage.getItem('language') === 'Romania' ? 'Completarea este obligatorie!' : 'All fields need to be completed!'}</h5>
    </div>
 
    <ToastContainer />
@@ -1069,23 +1065,23 @@ export function ShoppingCartPage() {
      <div className='deliveryAddress_inputs__input input2' >
        <div>
          <input type="text" defaultValue={firstName} onChange={handleFirstNameChange} required="required" ></input>
-         <span>First name</span>
+         <span>{localStorage.getItem('language') === 'Romania' ? 'Nume' : 'First name'}</span>
        </div>
 
        <div className='lastNameInput'>
          <input type="text" defaultValue={lastName} onChange={(e) => handleLastNameChange(e)} required="required" ></input>
-         <span>Last name</span>
+         <span>{localStorage.getItem('language') ? 'Prenume' : 'Last name'}</span>
        </div>
      </div>
 
      <div className='deliveryAddress_inputs__input' >
        <input type="number" defaultValue={phoneNumber} onChange={handlePhoneNumberChange} required="required"></input>
-       <span>Telephone</span>
+       <span>{localStorage.getItem('language') === 'Romania' ? 'Telefon' : 'Telephone'}</span>
      </div>
      
      <div className='deliveryAddress_inputs__input' >
        <input type="text" defaultValue={street} onChange={handleStreetChange} required="required"></input>
-       <span>Street</span>
+       <span>{localStorage.getItem('language') === 'Romania' ? 'Strada' : 'Street'}</span>
      </div>
 
 
@@ -1093,24 +1089,24 @@ export function ShoppingCartPage() {
 
        <div className='lastNameInput'>
          <input type="text" defaultValue={streetNo} onChange={handleStreetNoChange} required="required"></input>
-         <span>Street No.</span>
+         <span>{localStorage.getItem('language') === 'Romania' ? 'Nr. Strada' : 'Street No.'}</span>
        </div>
 
        <div className='lastNameInput'>
          <input type="text" defaultValue={block} onChange={handleBlockChange} required="required"></input>
-         <span>Block</span>
+         <span>{localStorage.getItem('language') === 'Romania' ? 'Bloc' : 'Block'}</span>
        </div>
 
      </div>
      
      <div className='deliveryAddress_inputs__input'>
          <input type="text" defaultValue ={apartamentNo} onChange={handleApartamentNo} required="required"></input>
-         <span>Apartament No.</span>
+         <span>{localStorage.getItem('language') === 'Romania' ? 'Nr. Apartament' : 'Apartament No.'}</span>
      </div>
 
        <div className='companyCheckbox'>
          <input type="checkbox" id='Company' name='company' checked={isCompanyChecked} onChange={() => setIsCompanyChecked(!isCompanyChecked)}></input>
-         <label htmlFor="Company" >Company ?</label>
+         <label htmlFor="Company" >{localStorage.getItem('language') === 'Romania' ? 'Companie ?' : 'Company ?'}</label>
        </div>
 
      {isCompanyChecked && (
@@ -1119,12 +1115,12 @@ export function ShoppingCartPage() {
 
        <div className='lastNameInput'>
          <input type="text" defaultValue={companyName} onChange={handleCompanyNameChange} required="required"></input>
-         <span>Name</span>
+         <span>{localStorage.getItem('language') === 'Romania' ? 'Nume companie' : 'Company Name'}</span>
        </div>
 
        <div className='lastNameInput'>
          <input type="text" defaultValue={companyCui} onChange={handleCompanyCuiChange} required="required"></input>
-         <span>ID / CUI</span>
+         <span>{localStorage.getItem('language') === 'Romania' ? 'CUI' : 'ID'}</span>
        </div>
 
        </div>
@@ -1132,19 +1128,10 @@ export function ShoppingCartPage() {
    </div>
    </div>
 
-   {/* <Link
-  to={{
-    pathname: "/success",
-    search: `?email=${email}&firstName=${firstName}&lastName=${lastName}&phoneNumber=${phoneNumber}&street=${street}&streetNo=${streetNo}&block=${block}&apartamentNo=${apartamentNo}&isCompanyChecked=${isCompanyChecked}&companyName=${companyName}&companyCui=${companyCui}`
-  }}
->
-  <button>Go to Success Page</button>
-</Link> */}
-
      <section className='checkoutTab'>
        <div className='checkoutTab_header'>
-         <h1>3. CHECKOUT</h1>
-         <h3>Order summary</h3>
+         <h1>3. {localStorage.getItem('language') === 'Romania' ? 'CUMPARA' : 'CHECKOUT'}</h1>
+         <h3>{localStorage.getItem('language') === 'Romania' ? 'Sumar comanda' : 'Order summary'}</h3>
        </div>
 
        <section className='doamneAjuta'>
@@ -1164,8 +1151,8 @@ export function ShoppingCartPage() {
            <div className='productCheckoutPage_footer'>
                <h1>Total</h1>
              <div className='totalQuantityPrice'>
-               <p>Products: <span>{totalQuantity}</span></p>
-               <p>Sub-total: <span>{totalPrice}</span> RON</p>
+               <p>{localStorage.getItem('language') === 'Romania' ? 'Produse:' : 'Products: '} <span>{totalQuantity}</span></p>
+               <p>{localStorage.getItem('language') === 'Romania' ? 'Subtotal:' : 'Sub-total:'} <span>{totalPrice}</span> RON</p>
              </div>
 
              <div className='deliveryOptions'>
@@ -1180,9 +1167,9 @@ export function ShoppingCartPage() {
                
                {country === "Romania" && (
                  <select disabled={disabled} id='delivery' onChange={handleDeliveryChange} className="regionDrop" value={deliverySelected}>
-                 <option value="card">Credit Card</option>
-                 <option value="ramburs">Ramburs (cash on delivery)</option>
-                 <option value="pickUp">Pick up from one of our stores.</option>
+                 <option value="card">{localStorage.getItem('language') === 'Romania' ? 'Card' : 'Credit Card'}</option>
+                 <option value="ramburs">{localStorage.getItem('language') === 'Romania' ? 'Ramburs' : 'Cash on delivery'}</option>
+                 <option value="pickUp">{localStorage.getItem('language') === 'Romania' ? 'Ridicati din unul dintre magazinele noastre.' : 'Pick up from one of our stores.'}</option>
                </select>
                )}
 
@@ -1200,9 +1187,9 @@ export function ShoppingCartPage() {
                )}
 
                <div className='deliveryFooter'>
-                 <p>WE ACCEPT:</p>
+                 <p>{localStorage.getItem('language') === 'Romania' ? 'ACCEPTAM:' : 'WE ACCEPT:'}</p>
                  <div className='react-icons'>
-                 <FaCcApplePay /> <FaCcPaypal /> <FaCcVisa /> <FaCcAmazonPay /> <FaCcAmex />
+                 <FaCcApplePay /> <FaGooglePay /> <AiFillCreditCard />
                  </div>
                
                <button onClick={checkout}>{loadingStripe ? `Loading...` : `Checkout`}</button>

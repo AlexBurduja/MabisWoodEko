@@ -169,7 +169,7 @@ export function AboutComponent (){
             
             <div>
                 {localStorage.getItem('language') === 'Romania' ? 
-                <p>Cu un teren și un depozit în orașul <strong>Bogati</strong> din <strong>Arges</strong>, am inceput productia cu ajutorul unei echipe de <strong>6</strong> persoane <strong>dedicate</strong> si utilaje <strong>profesionale</strong>. <strong>Prefectionismul</strong> nostru ne-a condus sa testam produsele și sa gasim formula <strong>perfecta</strong> pentru a oferi <strong>confort</strong> si <strong>satisfactie</strong> clientilor nostri. Acum, ne propunem sa aducem acest confort în casele dvs. prin intermediul <strong>peletilor</strong> nostri de inalta calitate.</p>
+                <p>Cu un teren si un depozit în orasul <strong>Bogati</strong> din <strong>Arges</strong>, am inceput productia cu ajutorul unei echipe de <strong>6</strong> persoane <strong>dedicate</strong> si utilaje <strong>profesionale</strong>. <strong>Prefectionismul</strong> nostru ne-a condus sa testam produsele și sa gasim formula <strong>perfecta</strong> pentru a oferi <strong>confort</strong> si <strong>satisfactie</strong> clientilor nostri. Acum, ne propunem sa aducem acest confort în casele dvs. prin intermediul <strong>peletilor</strong> nostri de inalta calitate.</p>
                 
                 : 
                 

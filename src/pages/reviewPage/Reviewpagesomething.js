@@ -1,16 +1,20 @@
 import { addDoc, collection, doc, getDoc, getDocs, setDoc, updateDoc} from "firebase/firestore"
 import { motion, AnimatePresence } from "framer-motion"
-import React, { useContext } from "react"
+import React, { useCallback, useContext } from "react"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { db } from "../../firebase-config"
 import { FirebaseAuthContext } from "../../FirebaseAuthContext"
 import { ReviewPageComponent } from "./ReviewPageComponent"
+import './ReviewPageComponent.css'
 
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Loading from "../reusableComponents/Loading"
+
+import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { AiOutlineArrowRight } from 'react-icons/ai'
 
 
 export function Reviewpagesomething(){
@@ -91,22 +95,41 @@ const ref = doc(db, `reviews/${title}`)
 setDoc(ref, body)
 
 }
-const [slidesToShow, setSlidesToShow] = useState(3);
+
+const [slidesToShow, setSlidesToShow] = useState(1);
+
+const CustomPrevArrow = React.memo((props) => {
+  const { onClick } = props;
+  return (
+    <button onClick={onClick} className="arrow prev">
+      <AiOutlineArrowLeft />
+    </button>
+  );
+});
+
+const CustomNextArrow = React.memo((props) => {
+  const { onClick } = props;
+  return (
+    <button onClick={onClick} className="arrow next">
+      <AiOutlineArrowRight />
+    </button>
+  );
+});
+
 
 const settings = {
   dots: true,
   infinite: true,
-  autoplay : true,
+  // autoplay : true,
   autoplaySpeed: 3000,
   speed: 500,
   slidesToShow: slidesToShow,
   slidesToScroll: 1,
-    // prevArrow: <CustomPrevArrow />,
-    // nextArrow: <CustomNextArrow />
+  prevArrow: <CustomPrevArrow />,
+  nextArrow: <CustomNextArrow />,
   };
 
   
-
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 1000) {
@@ -115,13 +138,17 @@ const settings = {
         setSlidesToShow(3)
       }
     };
-  
-    window.addEventListener('resize', handleResize);
-  
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener('load', handleResize)
+    
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('load', handleResize)
     };
-  }, [slidesToShow]);
+  }, [setSlidesToShow]);
   
 
   const groupedReviews = [[], [], [], [], []]; // Initialize an array of arrays for each star rating
@@ -130,14 +157,6 @@ const settings = {
     const starRating = parseInt(review.reviewStar);
     groupedReviews[starRating - 1].push(review);
   });
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    setInterval(() => {
-      setCurrentIndex((currentIndex + 1) % review.length);
-    }, 3000);
-  }, [currentIndex, review.length]);
 
   const countsByRating = review.reduce((counts, review) => {
     const rating = review.reviewStar;
@@ -208,31 +227,35 @@ const settings = {
 
         
         {/* <div className="reviewGrid"> */}
-    {groupedReviews.map((reviews, index) => {
-      return (
-        <div key={index}>
-          <h2>{`${index + 1}-star Reviews (${countsByRating[index + 1]})`}</h2>
-          {reviews.length > 0 ? (
-            <Slider {...settings} className='slider'>
-              {reviews.map((review) => (
-                <ReviewPageComponent
-                  reviewTitle={review.reviewTitle}
-                  reviewText={review.reviewText}
-                  rating={review.reviewStar}
-                  firstName={review?.firstName}
-                  lastName={review.lastName}
-                  time={review.time}
-                  id={review.id}
-                  key={review.id}
-                  />
-                  ))}
-            </Slider>
-          ) : (
-            <p>No reviews available.</p>
-          )}
-        </div>
-      );
-    })}
+        {loading ? (
+  <Loading />
+) : (
+  groupedReviews.map((reviews, index) => {
+    return (
+      <div key={index}>
+        <h2>{`${index + 1}-star Reviews (${countsByRating[index + 1]})`}</h2>
+        {reviews.length > 0 ? (
+          <Slider {...settings} className='slider'>
+            {reviews.map((review) => (
+              <ReviewPageComponent
+                reviewTitle={review.reviewTitle}
+                reviewText={review.reviewText}
+                rating={review.reviewStar}
+                firstName={review?.firstName}
+                lastName={review.lastName}
+                time={review.time}
+                id={review.id}
+                key={review.id}
+              />
+            ))}
+          </Slider>
+        ) : (
+          <p>No reviews available.</p>
+        )}
+      </div>
+    );
+  })
+)}
   {/* </div> */}
 </>
     )

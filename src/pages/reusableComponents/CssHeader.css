@@ -219,10 +219,34 @@
   width: 100px;
 }
   
+.selectItemMobile{
+  width: 90%;
+  height: 30px;
+  text-align: center;
+  background-color: transparent;
+  border: 2px solid black;
+}
+
+.selectItemDesktop{
+  display: none;
+}
 
 /* Greater than 760px (desktop & rest) */
 @media only screen and (min-width: 850px){
-    
+  
+    .selectItemMobile{
+      display: none;
+    }
+
+    .selectItemDesktop{
+      display: block;
+      padding: 5px 10px;
+      border: 2px solid black;
+      background-color: transparent;
+      font-style: inherit;
+      cursor: pointer;
+    }
+
     .hamburger{
         display: none;
     }

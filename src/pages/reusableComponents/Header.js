@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
 import { ShoppingCartMobile } from '../cartPage/ShoppingCartMobile';
+import ReactFlagsSelect from 'react-flags-select';
 
 export function Header() {
 
@@ -24,6 +25,10 @@ export function Header() {
 
   const [language, setLanguage] = useState(localStorage.getItem('language') || 'England');
 
+  const onSelect = (code) => setLanguage(code)
+
+  console.log(language)
+
   useEffect(() => {
     localStorage.setItem('language', language);
   }, [language]);
@@ -32,6 +37,8 @@ export function Header() {
     setLanguage(event.target.value);
     window.location.reload()
   }
+
+  console.log(language)
 
   const logOut = async () => {
     await signOut(auth)
@@ -103,8 +110,27 @@ export function Header() {
       <ShoppingCart/>
     </div>
 
+{/* 
+    <select className='selectItemDesktop' value={language} onChange={handleLanguageChange}>
+        <option value="England" ></option>
+
+        <option value="Romania" ></option>
+    
+    </select> */}
+
+    {/* <ReactFlagsSelect 
+      selected={language}
+      onSelect={onSelect}
+      countries={["RO", "US"]}
+      showSelectedLabel={false}
+      showSecondarySelectedLabel={false}
+    /> */}
+      
       <LogInOrOut />
-          
+
+    <div className='mobileCart'>
+        <ShoppingCartMobile/>  
+      </div>          
 
     <div className='hamburger'>
         <input type="checkbox" id="navi-toggle" className="checkbox" />
@@ -116,6 +142,7 @@ export function Header() {
 
       <nav className="nav">
         <ul className="list">
+
           <li className="item"> <NavLink className={activeClassHamburger} to='/'>Home</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/about'>About</NavLink> </li>
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
@@ -123,25 +150,37 @@ export function Header() {
           
           {conditional.admin === true && (
             <li className='item'><NavLink className={activeClassHamburger} to='/users'>Panel</NavLink> </li>
-          )}
-          
+            )}
+
+
           {user?.uid && (
             <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{conditional.firstName}'s Profile</NavLink> </li>
           )}
+
+
+          {/* <div className='item'>
+            <p>Language: </p>
+            <select className='selectItemMobile' value={language} onChange={handleLanguageChange}>
+            <option value="England">England</option>
+            <option value="Romania">Romania</option>
+            </select>            
+          </div> */}
+
+          <ReactFlagsSelect
+                  className='item'
+                  selected={language}
+                  onSelect={onSelect}
+                  countries={["RO", "US"]}
+                  showSelectedLabel={false}
+                  customLabels={{ RO: "Romania"}}
+                  
+                />
+              
           <LogInOrOutMobile/>
         </ul>
       </nav>
 </div>  
-
-            
-<select value={language} onChange={handleLanguageChange}>
-        <option value="England">England</option>
-        <option value="Romania">Romania</option>
-      </select>
-
-      <div className='mobileCart'>
-        <ShoppingCartMobile/>  
-      </div>
+      
 
   </section>
   );

@@ -152,7 +152,10 @@ export function CreateProduct(){
     <>
     {conditional.admin === true && (
       <div className="createProductButtonWrapper">
-        <button className="createProductButton" onClick={toggleModal2}>Create Product</button>
+        <button className="createProductButton" onClick={toggleModal2}>{localStorage.getItem('language') === "RO" ? 'Creează Produs' :
+ localStorage.getItem('language') === "IT" ? 'Crea Prodotto' :
+ localStorage.getItem('language') === "DE" ? 'Produkt erstellen' :
+ 'Create Product'}</button>
       </div>
     )}
 
@@ -160,8 +163,18 @@ export function CreateProduct(){
         <div className="modal">
           <div onClick={toggleModal2} className="overlay"></div>
             <div className="modal-content modal2 modal-content-main">
-              <h1 >Create product.</h1>
-              <p className="modal-content_p">All fields need to be completed.</p>
+              <h1 >
+                {localStorage.getItem('language') === "RO" ? 'Creează Produs' :
+                localStorage.getItem('language') === "IT" ? 'Crea Prodotto' :
+                localStorage.getItem('language') === "DE" ? 'Produkt erstellen' :
+                'Create Product'}
+              </h1>
+            <p className="modal-content_p">
+              {localStorage.getItem('language') === "RO" ? 'Toate câmpurile trebuie completate.' :
+              localStorage.getItem('language') === "IT" ? 'Tutti i campi devono essere completati.' :
+              localStorage.getItem('language') === "DE" ? 'Alle Felder müssen ausgefüllt werden.' :
+              'All fields need to be completed.'}
+            </p>
 
               <AnimatePresence>
                   {succes && (
@@ -180,7 +193,12 @@ export function CreateProduct(){
                 <div className="modal-content-inputs">
 
                     <div className="modal-content-inputs_div">
-                      <label htmlFor="title">Title :</label>
+                      <label htmlFor="title">
+                        {localStorage.getItem('language') === "RO" ? 'Titlu :' :
+                        localStorage.getItem('language') === "IT" ? 'Titolo :' :
+                        localStorage.getItem('language') === "DE" ? 'Titel :' :
+                        'Title :'}
+                      </label>
                       <input id="title" onChange={titleChange} required></input>
                     </div>
 
@@ -190,28 +208,54 @@ export function CreateProduct(){
                     </div>
 
                     <div className="modal-content-inputs_div">
-                      <label htmlFor="price">Price :</label>
+                      <label htmlFor="price">
+                        {localStorage.getItem('language') === "RO" ? 'Preț :' :
+                        localStorage.getItem('language') === "IT" ? 'Prezzo :' :
+                        localStorage.getItem('language') === "DE" ? 'Preis :' :
+                        'Price :'}
+                      </label>
                       <input id="price" type="number" onChange={priceChange} required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
-                      <label htmlFor="currency">Currency :</label>
+                      <label htmlFor="currency">
+                        {localStorage.getItem('language') === "RO" ? 'Monedă :' :
+                        localStorage.getItem('language') === "IT" ? 'Valuta :' :
+                        localStorage.getItem('language') === "DE" ? 'Währung :' :
+                        'Currency :'}
+                      </label>
                       <input id="currency" onChange={currencyChange}  required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
-                      <label htmlFor="description">Description :</label>
+                      <label htmlFor="description">
+                        {localStorage.getItem('language') === "RO" ? 'Descriere :' :
+                        localStorage.getItem('language') === "IT" ? 'Descrizione :' :
+                        localStorage.getItem('language') === "DE" ? 'Beschreibung :' :
+                        'Description :'}
+                      </label>
                       <input id="description" onChange={descriptionChange} required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
-                      <label htmlFor="image">Image :</label>
+                      <label htmlFor="image">
+                        {localStorage.getItem('language') === "RO" ? 'Imagine :' :
+                        localStorage.getItem('language') === "IT" ? 'Immagine :' :
+                        localStorage.getItem('language') === "DE" ? 'Bild :' :
+                        'Image :'}
+
+                      </label>
                       <input type="url" onChange={imageChange} id="image" required></input>
                     </div>
 
                     <div className="modal-content-inputs_div">
                       <input type="file" onChange={handleImageChange}></input>
-                      <button onClick={handleSubmit}>Upload Image</button>
+                      <button onClick={handleSubmit}>
+                        {localStorage.getItem('language') === "RO" ? 'Încărcați imaginea' :
+                        localStorage.getItem('language') === "IT" ? 'Carica immagine' :
+                        localStorage.getItem('language') === "DE" ? 'Bild hochladen' :
+                        'Upload Image'}
+                      </button>
                     </div>
 
 
@@ -219,7 +263,12 @@ export function CreateProduct(){
 
                 <div className="modal-content-button_create">
               
-                <button type="submit" onClick={submit} className="modal-content-button_save">Create Product</button>
+                <button type="submit" onClick={submit} className="modal-content-button_save">
+                  {localStorage.getItem('language') === "RO" ? 'Creează Produs' :
+                  localStorage.getItem('language') === "IT" ? 'Crea Prodotto' :
+                  localStorage.getItem('language') === "DE" ? 'Produkt erstellen' :
+                  'Create Product'}
+                </button>
               
               
               </div>

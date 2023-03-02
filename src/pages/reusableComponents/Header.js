@@ -25,20 +25,16 @@ export function Header() {
 
   const [language, setLanguage] = useState(localStorage.getItem('language') || 'English');
 
-  const onSelect = (code) => setLanguage(code)
+  const onSelect = (code) => { 
+    setLanguage(code)
+    window.location.reload();
+  }
 
   console.log(language)
 
   useEffect(() => {
     localStorage.setItem('language', language);
   }, [language]);
-
-  function handleLanguageChange(event) {
-    setLanguage(event.target.value);
-    window.location.reload()
-  }
-
-  console.log(language)
 
   const logOut = async () => {
     await signOut(auth)
@@ -55,15 +51,22 @@ export function Header() {
         </div>
 
         <div className='headerLoginText'>
-        <p>Hi, {conditional.firstName}</p> 
-        <button className='logoutButtonHeader' onClick={logOut} >Log Out </button>
+        <p>{localStorage.getItem('language') === "RO" ? 'Salut' : localStorage.getItem('language') === "IT" ? "Ciao" : localStorage.getItem('language') === "DE" ? "Hallo" : "Hi" }, {conditional.firstName}</p> 
+        <button className='logoutButtonHeader' onClick={logOut}>{
+          localStorage.getItem('language') === "RO" ? 'Delogheaza-te' 
+        : localStorage.getItem('language') === "IT" ? "Disconnettersi"
+        : localStorage.getItem('language') === "DE" ? 'Ausloggen' 
+        : 'Log Out'} </button>
       </div>
 
         </div>
       )
     } else {
       return (
-        <button className='loginButtonHeader'><NavLink to="/login">Log in</NavLink></button>
+        <button className='loginButtonHeader'><NavLink to="/login">{localStorage.getItem('language') === "RO" ? 'Conecteaza-te' :
+        localStorage.getItem('language') === "IT" ? 'Accedi' :
+        localStorage.getItem('language') === "DE" ? 'Anmelden' :
+        'Log in'}</NavLink></button>
       )
     }
   }
@@ -71,11 +74,18 @@ export function Header() {
   function LogInOrOutMobile(){
     if(user?.uid){
       return(
-        <button className='logoutButtonHamburger' onClick={logOut}>Log Out</button>
+        <button className='logoutButtonHamburger' onClick={logOut}>{
+          localStorage.getItem('language') === "RO" ? 'Delogheaza-te' 
+        : localStorage.getItem('language') === "IT" ? "Disconnettersi"
+        : localStorage.getItem('language') === "DE" ? 'Ausloggen' 
+        : 'Log Out'}</button>
       ) 
     } else {
       return(
-        <button className='logoutButtonHamburger'><NavLink to="/login"> Log in </NavLink></button>
+        <button className='logoutButtonHamburger'><NavLink to="/login"> {localStorage.getItem('language') === "RO" ? 'Conectează-te' :
+        localStorage.getItem('language') === "IT" ? 'Accedi' :
+        localStorage.getItem('language') === "DE" ? 'Anmelden' :
+        'Log in'} </NavLink></button>
       )
       }
     }
@@ -85,6 +95,35 @@ export function Header() {
 
   const activeClassHamburger = ({isActiveHamburger}) => isActiveHamburger ? "activeClassHamburger" : "link";
 
+  useEffect(() => {
+    const checkbox = document.querySelector('#navi-toggle');
+    const body = document.querySelector('body');
+  
+    const handleCheckboxClick = () => {
+      if (checkbox.checked) {
+        body.classList.add('no-scroll');
+      } else {
+        body.classList.remove('no-scroll');
+      }
+    };
+  
+    const handleNavLinkClick = () => {
+      body.classList.remove('no-scroll');
+    };
+  
+    checkbox.addEventListener('click', handleCheckboxClick);
+    document.querySelectorAll('.item a').forEach(link => {
+      link.addEventListener('click', handleNavLinkClick);
+    });
+  
+    return () => {
+      checkbox.removeEventListener('click', handleCheckboxClick);
+      document.querySelectorAll('.item a').forEach(link => {
+        link.removeEventListener('click', handleNavLinkClick);
+      });
+    };
+  }, []);
+  
 
   return (
     <section id="home" className='flex'>
@@ -95,14 +134,41 @@ export function Header() {
 
     <div className='desktopAnchors'>
       <div className='nav_anchors '>
-        <NavLink className={activeClass} to='/'>Home</NavLink>
-        <NavLink className={activeClass} to='/about'>About</NavLink>
-        <NavLink className={activeClass} to='/reviews'>Reviews</NavLink>
-        <NavLink className={activeClass} to='/contact'>Contact</NavLink>
-        {conditional.admin === true && (
-          <NavLink className={activeClass} to='/panel'>Panel</NavLink>
-        )}
+        <NavLink className={activeClass} to='/'>{
+          localStorage.getItem('language') === "RO" ? 'Acasa' :
+          localStorage.getItem('language') === "IT" ? 'Home' :
+          localStorage.getItem('language') === "DE" ? 'Zuhause' :
+          'Home'}
+        </NavLink>
         
+        <NavLink className={activeClass} to='/about'>{localStorage.getItem('language') === "RO" ? 'Despre' :
+          localStorage.getItem('language') === "IT" ? 'Informazioni' :
+          localStorage.getItem('language') === "DE" ? 'Über' :
+          'About'}
+        </NavLink>
+
+        <NavLink className={activeClass} to='/reviews'>
+          {localStorage.getItem('language') === "RO" ? 'Recenzii' :
+          localStorage.getItem('language') === "IT" ? 'Recensioni' :
+          localStorage.getItem('language') === "DE" ? 'Bewertungen' :
+          'Reviews'}
+        </NavLink>
+
+        <NavLink className={activeClass} to='/contact'>
+          {localStorage.getItem('language') === "RO" ? 'Contact' :
+          localStorage.getItem('language') === "IT" ? 'Contatto' :
+          localStorage.getItem('language') === "DE" ? 'Kontakt' :
+          'Contact'}
+        </NavLink>
+
+        {conditional.admin === true && (
+          <NavLink className={activeClass} to='/panel'>
+            {localStorage.getItem('language') === "RO" ? 'Panou' :
+            localStorage.getItem('language') === "IT" ? 'Pannello' :
+            localStorage.getItem('language') === "DE" ? 'Panel' :
+            'Panel'}
+          </NavLink>
+        )}        
         </div>
     </div>
 
@@ -119,7 +185,7 @@ export function Header() {
       <ReactFlagsSelect
                   selected={language}
                   onSelect={onSelect}
-                  countries={["RO", "GB"]}
+                  countries={["RO", "GB", "IT", "DE"]}
                   fullWidth={true}
                   showOptionLabel={false}
                   showSelectedLabel={false}
@@ -138,17 +204,41 @@ export function Header() {
       <nav className="nav">
         <ul className="list">
 
-          <li className="item"> <NavLink className={activeClassHamburger} to='/'>Home</NavLink> </li>
-          <li className="item"> <NavLink className={activeClassHamburger} to='/about'>About</NavLink> </li>
-          <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>Reviews</NavLink> </li>
-          <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>Contact</NavLink> </li>
+          <li className="item"> <NavLink className={activeClassHamburger} to='/'>{
+          localStorage.getItem('language') === "RO" ? 'Acasa' :
+          localStorage.getItem('language') === "IT" ? 'Home' :
+          localStorage.getItem('language') === "DE" ? 'Zuhause' :
+          'Home'}</NavLink> </li>
+
+          <li className="item"> <NavLink className={activeClassHamburger} to='/about'>{localStorage.getItem('language') === "RO" ? 'Despre' :
+          localStorage.getItem('language') === "IT" ? 'Informazioni' :
+          localStorage.getItem('language') === "DE" ? 'Über' :
+          'About'}</NavLink> </li>
+
+          <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>{localStorage.getItem('language') === "RO" ? 'Recenzii' :
+          localStorage.getItem('language') === "IT" ? 'Recensioni' :
+          localStorage.getItem('language') === "DE" ? 'Bewertungen' :
+          'Reviews'}</NavLink> </li>
+
+          <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>{localStorage.getItem('language') === "RO" ? 'Contact' :
+          localStorage.getItem('language') === "IT" ? 'Contatto' :
+          localStorage.getItem('language') === "DE" ? 'Kontakt' :
+          'Contact'}</NavLink> </li>
           
           {conditional.admin === true && (
-            <li className='item'><NavLink className={activeClassHamburger} to='/users'>Panel</NavLink> </li>
+            <li className='item'><NavLink className={activeClassHamburger} to='/users'>{localStorage.getItem('language') === "RO" ? 'Panou' :
+            localStorage.getItem('language') === "IT" ? 'Pannello' :
+            localStorage.getItem('language') === "DE" ? 'Panel' :
+            'Panel'}</NavLink> </li>
             )}
 
           {user?.uid && (
-            <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{conditional.firstName}'s Profile</NavLink> </li>
+            <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>
+              {localStorage.getItem('language') === "RO" ? `Profilul lui ${conditional.firstName}` :
+              localStorage.getItem('language') === "IT" ? `Profilo di ${conditional.firstName}` :
+              localStorage.getItem('language') === "DE" ? `${conditional.firstName}'s Profil` :
+              `${conditional.firstName}'s Profile`}
+              </NavLink> </li>
           )}
      
           <LogInOrOutMobile/>

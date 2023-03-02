@@ -53,7 +53,13 @@ useEffect(() => {
 }, [cart, total]);
 
 function ProductCount () {
-  return total === 1 ? <p>{total} product</p> : <p>{total} products</p>
+  return <p>{localStorage.getItem('language') === "RO" ?
+  (total === 1 ? `${total} produs` : `${total} produse`) :
+ localStorage.getItem('language') === "IT" ?
+  (total === 1 ? `${total} prodotto` : `${total} prodotti`) :
+ localStorage.getItem('language') === "DE" ?
+  (total === 1 ? `${total} produkt` : `${total} produkte`) :
+ (total === 1 ? `${total} product` : `${total} products`)}</p>
 }
 
 

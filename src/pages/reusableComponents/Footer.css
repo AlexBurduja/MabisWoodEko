@@ -109,20 +109,21 @@
     gap: 50px;
 }
 
-.socialMediaDiv__socials div svg{
+.socialMediaDiv__socials div svg {
     font-size: 35px;
     color: rgba(48, 48, 230,1);
 }
 
-.socialMediaDiv__socials div svg :hover{
+.socialMediaDiv__socials div svg :hover {
     transition: ease 200ms;
     color: red;
 }
 
-.socialMediaDiv__credits{
+.socialMediaDiv__credits {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 
@@ -144,4 +145,9 @@
         align-items: center;
         margin-bottom: 20px;
     }
+
+    .litigiiDiv{
+        flex-direction: column;
+    }
+
 }

@@ -15,6 +15,8 @@ const { user } = useContext( FirebaseAuthContext )
 
 const [ cart, setCart ] = useState([])
 
+const [total, setTotal] = useState(0)
+
 
 useEffect(() => {
   if(user?.uid){
@@ -50,8 +52,11 @@ useEffect(() => {
 
 }, [user])
 
-let sum = 0
-const totalquantity = cart.forEach(value => sum+= value.quantity)
+useEffect(() => {
+  const sum = cart.map(item => item.quantity).reduce((a, b) => a + b, 0);
+  setTotal(sum);
+}, [cart, total]);
+
 
 
   return (
@@ -59,7 +64,7 @@ const totalquantity = cart.forEach(value => sum+= value.quantity)
     <section className='cartSectionMobile'>
       <RiShoppingCartLine />
       <div className='productCountMobileBackground'>
-          <p className='productCountMobile'>{sum}</p>
+          <p className='productCountMobile' >{total}</p>
       </div>
     </section>
   </NavLink>

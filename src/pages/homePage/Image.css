@@ -46,8 +46,8 @@ span.woodColor{
 
 .imageButtons button{
     font-size: 1rem;
-    width: 8rem;
-    height: 2rem;
+    width: 12rem;
+    height: 2rem;   
     cursor: pointer;
     text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35)
 }

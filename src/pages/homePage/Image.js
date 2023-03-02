@@ -20,12 +20,29 @@ export function Image() {
 
     <div className='imageInfo'>
       <p>Mabis <span className='woodColor'>Wood</span><span className='ekoColor'> Eko</span>,</p>
-      <p>The best pelets in town.</p>
+
+      {localStorage.getItem('language') === "RO" ? 'Cei mai buni peleti din oras.' :
+      localStorage.getItem('language') === "IT" ? 'Il miglior pellet in città.' :
+      localStorage.getItem('language') === "DE" ? 'Die besten Pellets der Stadt.' :
+      'The best pelets in town.'}
     </div>
 
     <div className='imageButtons'>
-      <button>About us</button>
-      <button><NavLink to="/contact"> Contact Us </NavLink></button>
+      <button>
+        <NavLink to='/about'>
+          {localStorage.getItem('language') === "RO" ? 'Despre noi' :
+          localStorage.getItem('language') === "IT" ? 'Chi siamo' :
+          localStorage.getItem('language') === "DE" ? 'Über uns' :
+          'About us'}
+        </NavLink>
+      </button>
+      <button >
+      <NavLink to="/contact">  
+        {localStorage.getItem('language') === "RO" ? 'Contacteaza-ne' :
+        localStorage.getItem('language') === "IT" ? 'Contattaci' :
+        localStorage.getItem('language') === "DE" ? 'Kontaktiere uns' :
+        'Contact us'}
+      </NavLink></button>
     </div>
     </section>
   );

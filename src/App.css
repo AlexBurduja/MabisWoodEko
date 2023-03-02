@@ -13,6 +13,10 @@
        url('./publicResources/fonts/montserrat-v25-latin-regular.svg#Montserrat') format('svg'); /* Legacy iOS */
 }
 
+button {
+  font-family: inherit;
+}
+
 * {
   margin: 0;
   padding: 0;

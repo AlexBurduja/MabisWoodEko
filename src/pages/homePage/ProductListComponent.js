@@ -27,7 +27,12 @@ useEffect(() => {
   
   return (
     <section className='listComponent'>
-      <header>Products</header>
+      <header>
+        {localStorage.getItem('language') === "RO" ? 'Produse' :
+        localStorage.getItem('language') === "IT" ? 'Prodotti' :
+        localStorage.getItem('language') === "DE" ? 'Produkte' :
+        'Products'}
+      </header>
       {loading ? <Loading /> :
       <div className='gridUl'>
         {products.map((product) => {

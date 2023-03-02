@@ -23,7 +23,7 @@ export function Header() {
   
   const { user, conditional } = useContext(FirebaseAuthContext)
 
-  const [language, setLanguage] = useState(localStorage.getItem('language') || 'England');
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'English');
 
   const onSelect = (code) => setLanguage(code)
 
@@ -109,28 +109,24 @@ export function Header() {
     <div className='desktopCart'> 
       <ShoppingCart/>
     </div>
-
-{/* 
-    <select className='selectItemDesktop' value={language} onChange={handleLanguageChange}>
-        <option value="England" ></option>
-
-        <option value="Romania" ></option>
-    
-    </select> */}
-
-    {/* <ReactFlagsSelect 
-      selected={language}
-      onSelect={onSelect}
-      countries={["RO", "US"]}
-      showSelectedLabel={false}
-      showSecondarySelectedLabel={false}
-    /> */}
       
       <LogInOrOut />
 
     <div className='mobileCart'>
         <ShoppingCartMobile/>  
-      </div>          
+      </div>
+
+      <ReactFlagsSelect
+                  selected={language}
+                  onSelect={onSelect}
+                  countries={["RO", "GB"]}
+                  fullWidth={true}
+                  showOptionLabel={false}
+                  showSelectedLabel={false}
+                  showSecondaryOptionLabel={false}
+                  className='custom-flags-select'
+                  customLabels={{ RO: "Romanian", GB: 'English'}}
+      />          
 
     <div className='hamburger'>
         <input type="checkbox" id="navi-toggle" className="checkbox" />
@@ -138,7 +134,6 @@ export function Header() {
           <span className="icon">&nbsp;</span>
         </label>
       <div className="background">&nbsp;</div>
-
 
       <nav className="nav">
         <ul className="list">
@@ -152,36 +147,15 @@ export function Header() {
             <li className='item'><NavLink className={activeClassHamburger} to='/users'>Panel</NavLink> </li>
             )}
 
-
           {user?.uid && (
             <li className='item'> <NavLink className={activeClassHamburger} to='/profile'>{conditional.firstName}'s Profile</NavLink> </li>
           )}
-
-
-          {/* <div className='item'>
-            <p>Language: </p>
-            <select className='selectItemMobile' value={language} onChange={handleLanguageChange}>
-            <option value="England">England</option>
-            <option value="Romania">Romania</option>
-            </select>            
-          </div> */}
-
-          <ReactFlagsSelect
-                  className='item'
-                  selected={language}
-                  onSelect={onSelect}
-                  countries={["RO", "US"]}
-                  showSelectedLabel={false}
-                  customLabels={{ RO: "Romania"}}
-                  
-                />
-              
+     
           <LogInOrOutMobile/>
         </ul>
       </nav>
 </div>  
       
-
   </section>
   );
 }

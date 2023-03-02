@@ -149,7 +149,7 @@ export function AboutComponent (){
 
     return (
     <section className='aboutSection'>
-    <h1>{localStorage.getItem('language') === 'Romania' ? "Povestea Noastra" : "Our Story" }</h1>
+    <h1>{localStorage.getItem('language') === 'RO' ? "Povestea Noastra" : "Our Story" }</h1>
 
     <div className='aboutWrapper'>
         <div className='aboutWrapperWrapper'>
@@ -158,7 +158,7 @@ export function AboutComponent (){
             </div>
             
             <div>
-                {localStorage.getItem('language') === 'Romania' ? <p>Avand <strong>15 ani</strong> de experienta in producția de mobilier din lemn si <strong>70</strong> de <strong>colegi dedicati</strong>, ne-am concentrat asupra unei noi afaceri - productia de <strong>peleti</strong> si <strong>brichete</strong>. In timpul unei vacante in Grecia, am intalnit o persoana care ne-a inspirat sa aducem în Romania o masina care transforma <strong>crengile uscate în rumegus de lemn</strong>. Dupa cercetari, am descoperit ca acest rumegus poate fi transformat în <strong>peleti</strong> și <strong>brichete</strong>, produse care sunt foarte cautate pe piata.</p> : <p>With <strong>15 years</strong> of experience in manufacturing wooden furniture and <strong>70 dedicated colleagues</strong>, we shifted our focus to a new business venture - the production of <strong>pellets</strong> and <strong>briquettes</strong>. During a vacation in Greece, we met someone who inspired us to bring a machine that transforms <strong>dry branches into wood chips</strong> to Romania. After research, we discovered that these wood chips can be transformed into <strong>pellets and briquettes</strong>, products that are in high demand on the market.</p>} 
+                {localStorage.getItem('language') === 'RO' ? <p>Avand <strong>15 ani</strong> de experienta in producția de mobilier din lemn si <strong>70</strong> de <strong>colegi dedicati</strong>, ne-am concentrat asupra unei noi afaceri - productia de <strong>peleti</strong> si <strong>brichete</strong>. In timpul unei vacante in Grecia, am intalnit o persoana care ne-a inspirat sa aducem în Romania o masina care transforma <strong>crengile uscate în rumegus de lemn</strong>. Dupa cercetari, am descoperit ca acest rumegus poate fi transformat în <strong>peleti</strong> și <strong>brichete</strong>, produse care sunt foarte cautate pe piata.</p> : <p>With <strong>15 years</strong> of experience in manufacturing wooden furniture and <strong>70 dedicated colleagues</strong>, we shifted our focus to a new business venture - the production of <strong>pellets</strong> and <strong>briquettes</strong>. During a vacation in Greece, we met someone who inspired us to bring a machine that transforms <strong>dry branches into wood chips</strong> to Romania. After research, we discovered that these wood chips can be transformed into <strong>pellets and briquettes</strong>, products that are in high demand on the market.</p>} 
             </div>
         </div>
 
@@ -168,7 +168,7 @@ export function AboutComponent (){
             </div>
             
             <div>
-                {localStorage.getItem('language') === 'Romania' ? 
+                {localStorage.getItem('language') === 'RO' ? 
                 <p>Cu un teren si un depozit în orasul <strong>Bogati</strong> din <strong>Arges</strong>, am inceput productia cu ajutorul unei echipe de <strong>6</strong> persoane <strong>dedicate</strong> si utilaje <strong>profesionale</strong>. <strong>Prefectionismul</strong> nostru ne-a condus sa testam produsele și sa gasim formula <strong>perfecta</strong> pentru a oferi <strong>confort</strong> si <strong>satisfactie</strong> clientilor nostri. Acum, ne propunem sa aducem acest confort în casele dvs. prin intermediul <strong>peletilor</strong> nostri de inalta calitate.</p>
                 
                 : 
@@ -183,7 +183,7 @@ export function AboutComponent (){
             </div>
             
             <div>
-                {localStorage.getItem('language') === "Romania" ? 
+                {localStorage.getItem('language') === "RO" ? 
                 <p>Suntem mandrii sa spunem ca suntem dedicati furnizarii de <strong>produse de calitate superioara</strong> și de <strong>servicii exceptionale</strong> clientilor nostri. Ne concentram intotdeauna pe imbunatatirea <strong>proceselor de productie</strong> si utilizam <strong>tehnologii avansate</strong> pentru a ne asigura ca <strong>peletii</strong> si <strong>brichetele</strong> noastre sunt produse cu <strong>precizie si eficienta</strong>. Suntem, de asemenea, preocupati de impactul pe care il avem asupra mediului inconjurator. Folosim materii prime de <strong>inalta calitate</strong> si <strong>resurse regenerabile</strong> pentru a produce <strong>peletii</strong> si <strong>brichetele</strong> noastre, iar, obiectivul nostru este de a reduce <strong>emisiile de carbon</strong> prin utilizarea de metode <strong>sustenabile si eficiente din punct de vedere energetic</strong></p>
 
                 :
@@ -208,7 +208,7 @@ export function AboutComponent (){
 
     <div className='carouselMainDiv' style={{ display : conditional.admin ? 'block' : 'none'}}>
         
-        <h2>Photos</h2>
+        <h2>{localStorage.getItem('language') === "RO" ? 'Poze' : 'Photos'} </h2>
 
 {loading ? <Loading /> : 
         <Slider className='sliderElement' {...settings}>

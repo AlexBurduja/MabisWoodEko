@@ -150,7 +150,7 @@ const settings = {
   }, [setSlidesToShow]);
   
 
-  const groupedReviews = [[], [], [], [], []]; // Initialize an array of arrays for each star rating
+  const groupedReviews = [ [], [], [], [], [] ]; // Initialize an array of arrays for each star rating
   
   review.forEach((review) => {
     const starRating = parseInt(review.reviewStar);

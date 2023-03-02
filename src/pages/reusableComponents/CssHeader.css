@@ -10,7 +10,7 @@
 }
 
 .logo{
-    width: 40vw;
+    width: 30vw;
     max-width: 250px;
     /* margin-left: -20px; */
 }
@@ -229,6 +229,40 @@
 
 .selectItemDesktop{
   display: none;
+}
+
+.selectItemMobile {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 12px 30px 12px 40px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.selectItemMobile:focus {
+  outline: none;
+}
+
+.ReactFlagsSelect-module_selectOptionValue__vS99-{
+  justify-content: center;
+}
+
+ button#rfs-btn.ReactFlagsSelect-module_selectBtn__19wW7::after {
+  display: none;
+}
+
+button#rfs-btn.ReactFlagsSelect-module_selectBtn__19wW7 {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Greater than 760px (desktop & rest) */

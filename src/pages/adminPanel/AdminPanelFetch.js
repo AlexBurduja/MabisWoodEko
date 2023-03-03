@@ -27,8 +27,31 @@ export function AdminPanelFetch(){
         {loading ? <Loading /> : 
         <>
         <div className="userPageHeader">
-            <h1>Users</h1>
-            <h3>Here you can see everyone that created a profile on the site and all informations about their account.</h3>
+        {localStorage.getItem('language') === 'FR' ? 
+    <>
+      <h1>Utilisateurs</h1>
+      <h3>Ici, vous pouvez voir tous ceux qui ont créé un profil sur le site et toutes les informations concernant leur compte.</h3>
+    </> :
+ localStorage.getItem('language') === 'RO' ?
+    <>
+      <h1>Utilizatori</h1>
+      <h3>Aici puteți vedea toți cei care și-au creat un profil pe site și toate informațiile despre contul lor.</h3>
+    </> :
+ localStorage.getItem('language') === 'DE' ?
+    <>
+      <h1>Benutzer</h1>
+      <h3>Hier können Sie alle Personen sehen, die ein Profil auf der Website erstellt haben, sowie alle Informationen zu ihrem Konto.</h3>
+    </> :
+ localStorage.getItem('language') === 'IT' ?
+    <>
+      <h1>Utenti</h1>
+      <h3>Qui puoi vedere tutti coloro che hanno creato un profilo sul sito e tutte le informazioni sul loro account.</h3>
+    </> :
+    <>
+      <h1>Users</h1>
+      <h3>Here you can see everyone that created a profile on the site and all informations about their account.</h3>
+    </>
+}
         </div>
         
         <section className="adminPanel">

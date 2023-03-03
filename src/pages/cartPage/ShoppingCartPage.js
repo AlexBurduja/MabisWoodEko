@@ -955,9 +955,6 @@ export function ShoppingCartPage() {
               }, 1000)
             }
             
-            // setInterval(() => {
-            //   window.location.reload();
-            // }, 2000)
           }
         }
         
@@ -970,7 +967,11 @@ export function ShoppingCartPage() {
      <div className='emptyCartTextWrapper'>
      <div className='emptyCartText'>
        <div>
-     <h1>{localStorage.getItem('language') === 'Romania' ? 'Cosul dvs. este gol' : 'Your cart is empty!'}</h1>
+     <h1><h1>{localStorage.getItem('language') === "FR" ? "Votre panier est vide !" 
+     : localStorage.getItem('language') === "RO" ? "Cosul dvs. este gol!" 
+     : localStorage.getItem('language') === "DE" ? "Ihr Warenkorb ist leer!" 
+     : localStorage.getItem('language') === "IT" ? "Il tuo carrello è vuoto!" 
+     : "Your cart is empty!"}</h1></h1>
        </div>
 
        <div>
@@ -980,21 +981,44 @@ export function ShoppingCartPage() {
      </div>
 
      <div>
-       <HashLink className='cartBackToProduct' to="/#product" replace="true">{localStorage.getItem('language') === 'Romania' ? 'Catre produse.' : 'Back to products.'} Back to products</HashLink>
+      <HashLink className='cartBackToProduct' to="/#product" replace="true">
+        {localStorage.getItem('language') === "FR" ? "Retour aux produits." :
+        localStorage.getItem('language') === "RO" ? "Înapoi la produse." :
+        localStorage.getItem('language') === "DE" ? "Zurück zu den Produkten." :
+        localStorage.getItem('language') === "IT" ? "Torna ai prodotti." :
+        "Back to products."}
+      </HashLink>
      </div>
 
      </div> 
      : loading ? <Loading /> : 
      <>
      <div className='pageHeader'>
-   <h1>Your cart</h1>
+   <h1>{localStorage.getItem('language') === "FR" ? "Votre panier" :
+  localStorage.getItem('language') === "RO" ? "Cosul dvs." :
+  localStorage.getItem('language') === "DE" ? "Ihr Warenkorb" :
+  localStorage.getItem('language') === "IT" ? "Il tuo carrello" :
+  "Your cart"}</h1>
    <AiOutlineShopping />
    </div>
    <ToastContainer />
    <section className='wrapper' >
    <section className='cartPageLeftSection'>
-   <h1>{localStorage.getItem('language') === 'Romania' ? '1. VERIFICA-TI COMANDA.' : '1. REVIEW YOUR ORDER'} </h1>
-   <h3>{localStorage.getItem('language') === 'Romania' ? 'Va rugam sa verificati daca aveti cantitatea potrivita din fiecare articol pentru a evita confuziile la finalizare, multumim!' : 'Please check that you have the right quantity of every single item to avoid confusions at checkout, Thanks!'} </h3>
+   <h1>
+    {localStorage.getItem('language') === "FR" ? "1. VÉRIFIER VOTRE COMMANDE" :
+    localStorage.getItem('language') === "RO" ? "1. REVIZUITI COMANDA" :
+    localStorage.getItem('language') === "DE" ? "1. ÜBERPRÜFEN SIE IHRE BESTELLUNG" :
+    localStorage.getItem('language') === "IT" ? "1. RIVEDI IL TUO ORDINE" :
+    "1. REVIEW YOUR ORDER"}
+  </h1>
+
+   <h3> 
+    {localStorage.getItem('language') === "FR" ? "Veuillez vérifier que vous avez la bonne quantité pour chaque article afin d'éviter toute confusion lors du paiement. Merci!" :
+    localStorage.getItem('language') === "RO" ? "Va rugam sa verificati ca aveti cantitatea corecta pentru fiecare articol pentru a evita confuziile la finalizarea comenzii. Mulțumim!" :
+    localStorage.getItem('language') === "DE" ? "Bitte überprüfen Sie, ob Sie die richtige Menge an jedem Artikel haben, um Verwirrungen an der Kasse zu vermeiden. Danke!" :
+    localStorage.getItem('language') === "IT" ? "Si prega di controllare di avere la quantità corretta di ciascun articolo per evitare confusione al momento del checkout, Grazie!" :
+    "Please check that you have the right quantity of every single item to avoid confusions at checkout, Thanks!"}
+  </h3>
 
 
    {cart.map((item) => {
@@ -1011,12 +1035,24 @@ export function ShoppingCartPage() {
            </div>
 
            <div className='column'>
-             <p>{localStorage.getItem('language') === 'Romania' ? 'Pret produs' : 'Each' }</p>
+             <p>
+              {localStorage.getItem('language') === "FR" ? "Chaque" :
+              localStorage.getItem('language') === "RO" ? "Fiecare" :
+              localStorage.getItem('language') === "DE" ? "Jeder" :
+              localStorage.getItem('language') === "IT" ? "Ogni" :
+              "Each"}
+            </p>
              {item.price} {item.currency}
            </div>
 
            <div className='column quantityFlex'>
-             <p>{localStorage.getItem('language') === 'Romania' ? 'Cantitate' : 'Quantity'}</p>
+             <p>
+              {localStorage.getItem('language') === "FR" ? "Quantité" :
+              localStorage.getItem('language') === "RO" ? "Cantitate" :
+              localStorage.getItem('language') === "DE" ? "Menge" :
+              localStorage.getItem('language') === "IT" ? "Quantità" :
+              "Quantity"}
+            </p>
 
              <div className='quantityColumn'>
               
@@ -1029,11 +1065,24 @@ export function ShoppingCartPage() {
            </div>
 
            <div className='column'>
-             <p>Total</p>
+             <p>
+              {localStorage.getItem('language') === "FR" ? "Total" :
+              localStorage.getItem('language') === "RO" ? "Total" :
+              localStorage.getItem('language') === "DE" ? "Summe" :
+              localStorage.getItem('language') === "IT" ? "Totale" :
+              "Total"}
+            </p>
              {item.quantity * item.price} {item.currency}
            </div>
 
-           <button className='removeBtn'  onClick={() => removeItemFromCart(item)}>{localStorage.getItem('language') ? 'Sterge' : 'Remove'}</button>
+           <button className='removeBtn'  onClick={() => removeItemFromCart(item)}>
+            {localStorage.getItem('language') === "FR" ? "Retirer" :
+              localStorage.getItem('language') === "RO" ? "Elimina" :
+              localStorage.getItem('language') === "DE" ? "Entfernen" :
+              localStorage.getItem('language') === "IT" ? "Rimuovere" :
+              "Remove"}
+
+           </button>
 
          </div>
        </section>
@@ -1041,7 +1090,14 @@ export function ShoppingCartPage() {
        })}
 
    <div className='productCartFooter'>
-   <button className="emptyCartButton" onClick={deleteCart}>{localStorage.getItem('language') ? 'Goleste Cosul' : 'Empty Cart'}</button>
+   <button className="emptyCartButton" onClick={deleteCart}>
+   {localStorage.getItem('language') === "FR" ? "Panier vide" :
+ localStorage.getItem('language') === "RO" ? "Goliti cosul" :
+ localStorage.getItem('language') === "DE" ? "Warenkorb leer" :
+ localStorage.getItem('language') === "IT" ? "Carrello vuoto" :
+ "Empty Cart"}
+
+   </button>
      <ProductCount />
      <p>Total: {totalPrice} RON</p>
    </div>
@@ -1049,9 +1105,23 @@ export function ShoppingCartPage() {
    <section className='deliveryAddress'>
    <div className='deliveryAddress_wrapper'>
    <div className='deliveryAddress_header'>
-     <h1>2. {localStorage.getItem('language') === 'Romania' ? 'DATE CLIENT' : 'CLIENT DETAILS'}</h1>
-     <h3>{localStorage.getItem('language') === 'Romania' ? 'Va rugam sa verificati daca toate datele sunt valide/corecte, Multumim!' : 'Please check that all the informations are valid and correct, Thanks!'}</h3>
-     <h5>{localStorage.getItem('language') === 'Romania' ? 'Completarea este obligatorie!' : 'All fields need to be completed!'}</h5>
+     <h1>2. {localStorage.getItem('language') === "FR" ? "DÉTAILS DU CLIENT" :
+  localStorage.getItem('language') === "RO" ? "DETALII CLIENT" :
+  localStorage.getItem('language') === "DE" ? "KUNDENANGABEN" :
+  localStorage.getItem('language') === "IT" ? "DETTAGLI CLIENTE" :
+  "CLIENT DETAILS"}
+  </h1>
+     <h3>{localStorage.getItem('language') === "FR" ? "Veuillez vérifier que toutes les informations sont valides et correctes, Merci !" :
+localStorage.getItem('language') === "RO" ? "Vă rugăm să verificați că toate informațiile sunt valide și corecte, Mulțumim!" :
+localStorage.getItem('language') === "DE" ? "Bitte überprüfen Sie, ob alle Informationen gültig und korrekt sind. Danke!" :
+localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le informazioni siano valide e corrette, Grazie!" :
+"Please check that all the informations are valid and correct, Thanks!"}
+</h3>
+     <h5>{localStorage.getItem('language') === "FR" ? "Tous les champs doivent être remplis!" :
+  localStorage.getItem('language') === "RO" ? "Campurile trebuie completate." :
+  localStorage.getItem('language') === "DE" ? "Alle Felder müssen ausgefüllt werden!" :
+  localStorage.getItem('language') === "IT" ? "Tutti i campi devono essere compilati!" :
+  "All fields need to be completed!"}</h5>
    </div>
 
    <ToastContainer />
@@ -1065,23 +1135,39 @@ export function ShoppingCartPage() {
      <div className='deliveryAddress_inputs__input input2' >
        <div>
          <input type="text" defaultValue={firstName} onChange={handleFirstNameChange} required="required" ></input>
-         <span>{localStorage.getItem('language') === 'Romania' ? 'Nume' : 'First name'}</span>
+         <span>{localStorage.getItem('language') === 'FR' ? 'Prénom' :
+                                localStorage.getItem('language') === 'RO' ? 'Prenume' :
+                                localStorage.getItem('language') === 'DE' ? 'Vorname' :
+                                localStorage.getItem('language') === 'IT' ? 'Nome' :
+                                'First name'}</span>
        </div>
 
        <div className='lastNameInput'>
          <input type="text" defaultValue={lastName} onChange={(e) => handleLastNameChange(e)} required="required" ></input>
-         <span>{localStorage.getItem('language') ? 'Prenume' : 'Last name'}</span>
+         <span>{localStorage.getItem('language') === 'FR' ? 'Famille Nom' :
+                                localStorage.getItem('language') === 'RO' ? 'Nume de familie' :
+                                localStorage.getItem('language') === 'DE' ? 'Nachname' :
+                                localStorage.getItem('language') === 'IT' ? 'Cognome' :
+                                'Last name'}</span>
        </div>
      </div>
 
      <div className='deliveryAddress_inputs__input' >
        <input type="number" defaultValue={phoneNumber} onChange={handlePhoneNumberChange} required="required"></input>
-       <span>{localStorage.getItem('language') === 'Romania' ? 'Telefon' : 'Telephone'}</span>
+       <span>{localStorage.getItem('language') === 'FR' ? 'Numéro de téléphone' :
+                                localStorage.getItem('language') === 'RO' ? 'Număr de telefon' :
+                                localStorage.getItem('language') === 'DE' ? 'Telefonnummer' :
+                                localStorage.getItem('language') === 'IT' ? 'Numero di telefono' :
+                                'Phone number'}</span>
      </div>
      
      <div className='deliveryAddress_inputs__input' >
        <input type="text" defaultValue={street} onChange={handleStreetChange} required="required"></input>
-       <span>{localStorage.getItem('language') === 'Romania' ? 'Strada' : 'Street'}</span>
+       <span>{localStorage.getItem('language') === 'FR' ? 'Rue' :
+                                localStorage.getItem('language') === 'RO' ? 'Strada' :
+                                localStorage.getItem('language') === 'DE' ? 'Straße' :
+                                localStorage.getItem('language') === 'IT' ? 'Via' :
+                                'Street'}</span>
      </div>
 
 
@@ -1089,19 +1175,31 @@ export function ShoppingCartPage() {
 
        <div className='lastNameInput'>
          <input type="text" defaultValue={streetNo} onChange={handleStreetNoChange} required="required"></input>
-         <span>{localStorage.getItem('language') === 'Romania' ? 'Nr. Strada' : 'Street No.'}</span>
+         <span>{localStorage.getItem('language') === 'FR' ? 'Rue No.' :
+                                localStorage.getItem('language') === 'RO' ? 'Nr. Strada' :
+                                localStorage.getItem('language') === 'DE' ? 'Hausnummer' :
+                                localStorage.getItem('language') === 'IT' ? 'Via No.' :
+                                'Street No.'}</span>
        </div>
 
        <div className='lastNameInput'>
          <input type="text" defaultValue={block} onChange={handleBlockChange} required="required"></input>
-         <span>{localStorage.getItem('language') === 'Romania' ? 'Bloc' : 'Block'}</span>
+         <span>{localStorage.getItem('language') === 'FR' ? 'Bloc' :
+                                localStorage.getItem('language') === 'RO' ? 'Bloc' :
+                                localStorage.getItem('language') === 'DE' ? 'Block' :
+                                localStorage.getItem('language') === 'IT' ? 'Blocco' :
+                                'Block'}</span>
        </div>
 
      </div>
      
      <div className='deliveryAddress_inputs__input'>
          <input type="text" defaultValue ={apartamentNo} onChange={handleApartamentNo} required="required"></input>
-         <span>{localStorage.getItem('language') === 'Romania' ? 'Nr. Apartament' : 'Apartament No.'}</span>
+         <span>{localStorage.getItem('language') === 'FR' ? 'Appartement No.' :
+                                localStorage.getItem('language') === 'RO' ? 'Numarul apartamentului' :
+                                localStorage.getItem('language') === 'DE' ? 'Wohnungsnummer' :
+                                localStorage.getItem('language') === 'IT' ? 'Appartamento N.' :
+                                'Apartament No.'}</span>
      </div>
 
        <div className='companyCheckbox'>

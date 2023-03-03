@@ -38,8 +38,19 @@ export function ContactForm() {
     <section id="contact" className="contactFormWrapper">
       <div className="leftSide">
         <div className="leftSide_header">
-          <h1>Get in touch</h1>
-          <p>Fill up the form and our team will get back to you within 24 hours</p>
+        <h1>{localStorage.getItem('language') === 'FR' ? 'Contactez-nous' : 
+      localStorage.getItem('language') === 'RO' ? 'Contactați-ne' :
+      localStorage.getItem('language') === 'DE' ? 'Kontakt aufnehmen' :
+      localStorage.getItem('language') === 'IT' ? 'Contattaci' :
+      'Get in touch'}
+</h1>
+<p>
+  {localStorage.getItem('language') === 'FR' ? 'Remplissez le formulaire et notre équipe vous répondra dans les 24 heures' : 
+   localStorage.getItem('language') === 'RO' ? 'Completați formularul și echipa noastră vă va răspunde în decurs de 24 de ore' :
+   localStorage.getItem('language') === 'DE' ? 'Füllen Sie das Formular aus und unser Team wird sich innerhalb von 24 Stunden bei Ihnen melden' :
+   localStorage.getItem('language') === 'IT' ? 'Compila il modulo e il nostro team ti risponderà entro 24 ore' :
+   'Fill up the form and our team will get back to you within 24 hours'}
+</p>
         </div>
 
         <div className="leftSide_footer">
@@ -66,17 +77,32 @@ export function ContactForm() {
       </div>
 
       <div className="rightSide">
-        <h1>Contact Us</h1>
+        <h1>{localStorage.getItem('language') === 'FR' ? 'Contactez-nous' :
+            localStorage.getItem('language') === 'RO' ? 'Contactați-ne' :
+            localStorage.getItem('language') === 'DE' ? 'Kontakt aufnehmen' :
+            localStorage.getItem('language') === 'IT' ? 'Contattaci' :
+            'Contact Us'}
+        </h1>
         <form onSubmit={sendEmail}>
         
         <div className='rightSide_inputs__input' >
           <input type="text" required="required" name="subject" autoComplete="off" ></input>
-          <span>Subject</span>
+          <span>{localStorage.getItem('language') === 'FR' ? 'Sujet' :
+                localStorage.getItem('language') === 'RO' ? 'Subiect' :
+                localStorage.getItem('language') === 'DE' ? 'Betreff' :
+                localStorage.getItem('language') === 'IT' ? 'Oggetto' :
+                'Subject'}
+          </span>
         </div>
           
         <div className='rightSide_inputs__input' >
           <input name="name" type="text" required="required" defaultValue={user?.uid ? fullName : ''}></input>
-          <span>Full Name</span>
+          <span>{localStorage.getItem('language') === 'FR' ? 'Nom complet' :
+                localStorage.getItem('language') === 'RO' ? 'Nume complet' :
+                localStorage.getItem('language') === 'DE' ? 'Name' :
+                localStorage.getItem('language') === 'IT' ? 'Nome completo' :
+                'Full Name'}
+          </span>
         </div>
 
         <div className='rightSide_inputs__input' >
@@ -86,10 +112,20 @@ export function ContactForm() {
 
         <div className='rightSide_inputs__input' >
           <input name="message" type="text" required="required" autoComplete="off"></input>
-          <span>Message</span>
+          <span>{localStorage.getItem('language') === 'FR' ? 'Message' :
+                localStorage.getItem('language') === 'RO' ? 'Mesaj' :
+                localStorage.getItem('language') === 'DE' ? 'Nachricht' :
+                localStorage.getItem('language') === 'IT' ? 'Messaggio' :
+                'Message'}
+          </span>
         </div>
         
-          <button type="submit"> Send Message </button>
+          <button type="submit"> {localStorage.getItem('language') === 'FR' ? 'Envoyer le message' :
+                                  localStorage.getItem('language') === 'RO' ? 'Trimite mesajul' :
+                                  localStorage.getItem('language') === 'DE' ? 'Nachricht senden' :
+                                  localStorage.getItem('language') === 'IT' ? 'Invia messaggio' :
+                                  'Send Message'} 
+          </button>
 
         </form>
       </div>

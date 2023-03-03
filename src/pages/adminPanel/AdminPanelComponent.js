@@ -158,22 +158,45 @@ export function AdminPanelComponent(props) {
 
                         <div className="userModalContent">
                             <div className="userModalContentAdmin">
-                                <p className={admin ? 'red' : 'black'}>{admin ? 'Currently Admin' : 'Not Admin'}</p>
+                                <p className={admin ? 'red' : 'black'}>{
+                                admin 
+                                ? localStorage.getItem('language') === "FR" ? "Actuellement admin" 
+                                : localStorage.getItem('language') === "RO" ? "Admin curent" 
+                                : localStorage.getItem('language') === "DE" ? "Derzeitiger Admin" 
+                                : localStorage.getItem('language') === "IT" ? "Attualmente amministratore" 
+                                : "Currently Admin" 
+                                : localStorage.getItem('language') === "FR" ? "Non admin" 
+                                : localStorage.getItem('language') === "RO" ? "Nu este admin" 
+                                : localStorage.getItem('language') === "DE" ? "Kein Admin" 
+                                : localStorage.getItem('language') === "IT" ? "Non admin" 
+                                : "Not Admin"}</p>
 
                                 {!admin && (
                                     <div className="center makeAdmin">
-                                    <button  onClick={() => makeAdmin(id)}>Assign as Admin</button>
+                                    <button onClick={() => makeAdmin(id)}>{localStorage.getItem('language') === "FR" ? "Assigner comme admin" 
+                                    : localStorage.getItem('language') === "RO" ? "Atribuie ca admin" 
+                                    : localStorage.getItem('language') === "DE" ? "Als Admin zuweisen" 
+                                    : localStorage.getItem('language') === "IT" ? "Assegna come admin" 
+                                    : "Assign as Admin"}</button>
                                     </div>
                                 )}
 
                                 {admin && (
                                     <div className="center revokeAdmin">
-                                    <button onClick={() => revokeAdmin(id)}>Revoke Admin</button>
+                                    <button onClick={() => revokeAdmin(id)}>{localStorage.getItem('language') === "FR" ? "Révoquer l'admin" 
+                                    : localStorage.getItem('language') === "RO" ? "Revoca admin" 
+                                    : localStorage.getItem('language') === "DE" ? "Adminrechte entziehen" 
+                                    : localStorage.getItem('language') === "IT" ? "Revoca admin" 
+                                    : "Revoke Admin"}</button>
                                     </div>
                                 )}
                             </div>
 
-                            <p>Account created at : <span className="createdAt">{created}</span></p>
+                            <p><span className="createdAt">{localStorage.getItem('language') === "FR" ? "Créé le" 
+                            : localStorage.getItem('language') === "RO" ? "Creat in" 
+                            : localStorage.getItem('language') === "DE" ? "Konto erstellt am" 
+                            : localStorage.getItem('language') === "IT" ? "Account creato il" 
+                            : "Account created at"} {created}</span></p>
 
                             {succes && (
                                 <motion.p
@@ -191,43 +214,104 @@ export function AdminPanelComponent(props) {
                             </div>
                             
                             <div className="userModalContentFirstLastName">
-                                <p>Last Name</p>
+                            <p>{localStorage.getItem('language') === 'FR' ? 'Nom de famille' :
+                                localStorage.getItem('language') === 'RO' ? 'Nume de familie' :
+                                localStorage.getItem('language') === 'DE' ? 'Nachname' :
+                                localStorage.getItem('language') === 'IT' ? 'Cognome' :
+                                'Last name'}
+                            </p>
                                 <input defaultValue={lastName} onChange={changeLastName}></input>
                             </div>
                             
                             <div className="userModalContentFirstLastName">
-                                <p>First Name</p>
+                            <p>{localStorage.getItem('language') === 'FR' ? 'Prénom' :
+                                localStorage.getItem('language') === 'RO' ? 'Prenume' :
+                                localStorage.getItem('language') === 'DE' ? 'Vorname' :
+                                localStorage.getItem('language') === 'IT' ? 'Nome' :
+                                'First name'}
+                            </p>
+
                                 <input defaultValue={firstName} onChange={changeFirstName}></input>
                             </div>
                             
                             <div className="userModalContentFirstLastName">
-                                <p>Phone Number</p>
+                                
+                            <p>{localStorage.getItem('language') === 'FR' ? 'Numéro de téléphone' :
+                                localStorage.getItem('language') === 'RO' ? 'Număr de telefon' :
+                                localStorage.getItem('language') === 'DE' ? 'Telefonnummer' :
+                                localStorage.getItem('language') === 'IT' ? 'Numero di telefono' :
+                                'Phone number'}
+                            </p>
                                 <input defaultValue={phoneNumber} onChange={changeFirstName}></input>
                             </div>
                             
                             <div className="userModalContentFirstLastName">
-                                <p>Street</p>
+                            <p>{localStorage.getItem('language') === 'FR' ? 'Rue' :
+                                localStorage.getItem('language') === 'RO' ? 'Strada' :
+                                localStorage.getItem('language') === 'DE' ? 'Straße' :
+                                localStorage.getItem('language') === 'IT' ? 'Via' :
+                                'Street'}
+                            </p>
                                 <input defaultValue={street} onChange={changeFirstName}></input>
                             </div>
                             
                             <div className="userModalContentFirstLastName">
-                                <p>Street No.</p>
+                            <p>{localStorage.getItem('language') === 'FR' ? 'Numéro de rue' :
+                                localStorage.getItem('language') === 'RO' ? 'Numărul străzii' :
+                                localStorage.getItem('language') === 'DE' ? 'Hausnummer' :
+                                localStorage.getItem('language') === 'IT' ? 'Numero civico' :
+                                'Street No.'}
+                            </p>
                                 <input defaultValue={streetNo} onChange={changeFirstName}></input>
                             </div>
                             
                             <div className="userModalContentFirstLastName">
-                                <p>Block</p>
+                                
+                            <p>{localStorage.getItem('language') === 'FR' ? 'Bloc' :
+                                localStorage.getItem('language') === 'RO' ? 'Bloc' :
+                                localStorage.getItem('language') === 'DE' ? 'Block' :
+                                localStorage.getItem('language') === 'IT' ? 'Blocco' :
+                                'Block'}
+                            </p>
                                 <input defaultValue={blockNo} onChange={changeFirstName}></input>
                             </div>
                             
                             <div className="userModalContentFirstLastName">
-                                <p>Apartament No.</p>
+                            <p>{localStorage.getItem('language') === 'FR' ? 'Numéro d\'appartement' :
+                                localStorage.getItem('language') === 'RO' ? 'Numarul apartamentului' :
+                                localStorage.getItem('language') === 'DE' ? 'Wohnungsnummer' :
+                                localStorage.getItem('language') === 'IT' ? 'Numero dell\'appartamento' :
+                                'Apartament No.'}
+                            </p>
                                 <input defaultValue={apartNo} onChange={changeFirstName}></input>
                             </div>
                             
                         <div className="adminPanelButtons">
-                            <button type="button" onClick={toggleEditModal}>Edit</button>
-                            <button type="button" onClick={toggleDeleteModal}>Delete</button>
+                        {localStorage.getItem('language') === 'FR' ? 
+                            <>
+                                <button type="button" onClick={toggleEditModal}>Modifier</button>
+                                <button type="button" onClick={toggleDeleteModal}>Supprimer</button>
+                            </> :
+                        localStorage.getItem('language') === 'RO' ?
+                            <>
+                                <button type="button" onClick={toggleEditModal}>Editează</button>
+                                <button type="button" onClick={toggleDeleteModal}>Șterge</button>
+                            </> :
+                        localStorage.getItem('language') === 'DE' ?
+                            <>
+                                <button type="button" onClick={toggleEditModal}>Bearbeiten</button>
+                                <button type="button" onClick={toggleDeleteModal}>Löschen</button>
+                            </> :
+                        localStorage.getItem('language') === 'IT' ?
+                            <>
+                                <button type="button" onClick={toggleEditModal}>Modifica</button>
+                                <button type="button" onClick={toggleDeleteModal}>Elimina</button>
+                            </> :
+                            <>
+                                <button type="button" onClick={toggleEditModal}>Edit</button>
+                                <button type="button" onClick={toggleDeleteModal}>Delete</button>
+                            </>
+                        }
                         </div>
                         </form>
                         </div>
@@ -247,12 +331,58 @@ export function AdminPanelComponent(props) {
             className="modal">
         <div onClick={toggleEditModal} className="overlay"></div>
             <div className="modal-content">
-            <h1>Are you sure?</h1>
-            <p>You are about to edit {firstName}'s account.</p>
+            {localStorage.getItem('language') === 'FR' ? 
+    <>
+      <h1>Êtes-vous sûr ?</h1>
+      <p>Vous êtes sur le point de modifier le compte de {firstName}.</p>
+    </> :
+ localStorage.getItem('language') === 'RO' ?
+    <>
+      <h1>Sunteti sigur?</h1>
+      <p>Sunteti pe cale sa modificati contul lui {firstName}.</p>
+    </> :
+ localStorage.getItem('language') === 'DE' ?
+    <>
+      <h1>Sind Sie sicher?</h1>
+      <p>Sie sind dabei, das Konto von {firstName} zu bearbeiten.</p>
+    </> :
+ localStorage.getItem('language') === 'IT' ?
+    <>
+      <h1>Sei sicuro?</h1>
+      <p>Stai per modificare l'account di {firstName}.</p>
+    </> :
+    <>
+      <h1>Are you sure?</h1>
+      <p>You are about to edit {firstName}'s account.</p>
+    </>
+}
 
         <div className="adminEditModalButtons">
-            <button type="submit" onClick={() => oonSubmit(id)}>Confirm</button>
-            <button onClick={toggleEditModal}>Take me back</button>
+        {localStorage.getItem('language') === 'FR' ? 
+    <>
+      <button type="submit" onClick={() => oonSubmit(id)}>Confirmer</button>
+      <button onClick={toggleEditModal}>Retour</button>
+    </> :
+ localStorage.getItem('language') === 'RO' ?
+    <>
+      <button type="submit" onClick={() => oonSubmit(id)}>Confirmati</button>
+      <button onClick={toggleEditModal}>Inapoi</button>
+    </> :
+ localStorage.getItem('language') === 'DE' ?
+    <>
+      <button type="submit" onClick={() => oonSubmit(id)}>Bestätigen</button>
+      <button onClick={toggleEditModal}>Zurück</button>
+    </> :
+ localStorage.getItem('language') === 'IT' ?
+    <>
+      <button type="submit" onClick={() => oonSubmit(id)}>Conferma</button>
+      <button onClick={toggleEditModal}>Torna indietro</button>
+    </> :
+    <>
+      <button type="submit" onClick={() => oonSubmit(id)}>Confirm</button>
+      <button onClick={toggleEditModal}>Take me back</button>
+    </>
+}
         </div>
             </div>
             
@@ -270,8 +400,31 @@ export function AdminPanelComponent(props) {
             className="modal">
         <div onClick={toggleDeleteModal} className="overlay"></div>
             <div className="modal-content">
-            <h1>Are you sure?</h1>
-            <p>You are about to permanently delete {firstName}'s profile.</p>
+            {localStorage.getItem('language') === 'FR' ? 
+    <>
+      <h1>Êtes-vous sûr ?</h1>
+      <p>Vous êtes sur le point de supprimer définitivement le profil de {firstName}.</p>
+    </> :
+ localStorage.getItem('language') === 'RO' ?
+    <>
+      <h1>Sunteti sigur?</h1>
+      <p>Sunteti pe cale sa stergeti definitiv profilul lui {firstName}.</p>
+    </> :
+ localStorage.getItem('language') === 'DE' ?
+    <>
+      <h1>Sind Sie sicher?</h1>
+      <p>Sie sind dabei, das Profil von {firstName} dauerhaft zu löschen.</p>
+    </> :
+ localStorage.getItem('language') === 'IT' ?
+    <>
+      <h1>Sei sicuro?</h1>
+      <p>Stai per eliminare definitivamente il profilo di {firstName}.</p>
+    </> :
+    <>
+      <h1>Are you sure?</h1>
+      <p>You are about to permanently delete {firstName}'s profile.</p>
+    </>
+}
             
             <div className="adminEditModalButtons">
                 <div>

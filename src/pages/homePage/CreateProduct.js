@@ -155,6 +155,7 @@ export function CreateProduct(){
         <button className="createProductButton" onClick={toggleModal2}>{localStorage.getItem('language') === "RO" ? 'Creează Produs' :
  localStorage.getItem('language') === "IT" ? 'Crea Prodotto' :
  localStorage.getItem('language') === "DE" ? 'Produkt erstellen' :
+ localStorage.getItem('language') === "FR" ? 'Créer un produit' :
  'Create Product'}</button>
       </div>
     )}
@@ -167,12 +168,14 @@ export function CreateProduct(){
                 {localStorage.getItem('language') === "RO" ? 'Creează Produs' :
                 localStorage.getItem('language') === "IT" ? 'Crea Prodotto' :
                 localStorage.getItem('language') === "DE" ? 'Produkt erstellen' :
+                localStorage.getItem('language') === "FR" ? 'Créer un produit' :
                 'Create Product'}
               </h1>
             <p className="modal-content_p">
               {localStorage.getItem('language') === "RO" ? 'Toate câmpurile trebuie completate.' :
               localStorage.getItem('language') === "IT" ? 'Tutti i campi devono essere completati.' :
               localStorage.getItem('language') === "DE" ? 'Alle Felder müssen ausgefüllt werden.' :
+              localStorage.getItem('language') === "FR" ? 'Tous les champs doivent être remplis' :
               'All fields need to be completed.'}
             </p>
 
@@ -197,6 +200,7 @@ export function CreateProduct(){
                         {localStorage.getItem('language') === "RO" ? 'Titlu :' :
                         localStorage.getItem('language') === "IT" ? 'Titolo :' :
                         localStorage.getItem('language') === "DE" ? 'Titel :' :
+                        localStorage.getItem('language') === "FR" ? 'Titre :' :
                         'Title :'}
                       </label>
                       <input id="title" onChange={titleChange} required></input>
@@ -212,6 +216,7 @@ export function CreateProduct(){
                         {localStorage.getItem('language') === "RO" ? 'Preț :' :
                         localStorage.getItem('language') === "IT" ? 'Prezzo :' :
                         localStorage.getItem('language') === "DE" ? 'Preis :' :
+                        localStorage.getItem('language') === "FR" ? 'Prix :' :
                         'Price :'}
                       </label>
                       <input id="price" type="number" onChange={priceChange} required></input>
@@ -222,6 +227,7 @@ export function CreateProduct(){
                         {localStorage.getItem('language') === "RO" ? 'Monedă :' :
                         localStorage.getItem('language') === "IT" ? 'Valuta :' :
                         localStorage.getItem('language') === "DE" ? 'Währung :' :
+                        localStorage.getItem('language') === "FR" ? 'Monnaie :' :
                         'Currency :'}
                       </label>
                       <input id="currency" onChange={currencyChange}  required></input>
@@ -232,6 +238,7 @@ export function CreateProduct(){
                         {localStorage.getItem('language') === "RO" ? 'Descriere :' :
                         localStorage.getItem('language') === "IT" ? 'Descrizione :' :
                         localStorage.getItem('language') === "DE" ? 'Beschreibung :' :
+                        localStorage.getItem('language') === "FR" ? 'Description :' :
                         'Description :'}
                       </label>
                       <input id="description" onChange={descriptionChange} required></input>
@@ -254,6 +261,7 @@ export function CreateProduct(){
                         {localStorage.getItem('language') === "RO" ? 'Încărcați imaginea' :
                         localStorage.getItem('language') === "IT" ? 'Carica immagine' :
                         localStorage.getItem('language') === "DE" ? 'Bild hochladen' :
+                        localStorage.getItem('language') === "FR" ? 'Télécharger une image' :
                         'Upload Image'}
                       </button>
                     </div>
@@ -267,6 +275,7 @@ export function CreateProduct(){
                   {localStorage.getItem('language') === "RO" ? 'Creează Produs' :
                   localStorage.getItem('language') === "IT" ? 'Crea Prodotto' :
                   localStorage.getItem('language') === "DE" ? 'Produkt erstellen' :
+                  localStorage.getItem('language') === "FR" ? 'Créer un produit' :
                   'Create Product'}
                 </button>
               

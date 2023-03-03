@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { RiStarFill, RiStarLine } from "react-icons/ri";
 import "./ReviewPageComponent.css"
 import { AiOutlineClose } from "react-icons/ai";
-import Slider from "react-slick";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
@@ -37,14 +36,12 @@ function renderStars(rating) {
 
         <div className="reviewRatingSection_username">
           <p>
-            {lastName + " " + firstName?.substring(0,1) + ". "} {localStorage.getItem('language') === "Romania" ? 
-            <span> 
-              a spus
-            </span> 
-            : 
-            <span>
-              said
-            </span> }
+            {lastName + " " + firstName?.substring(0,1) + ". "} { localStorage.getItem('language') === 'FR' ? <span>a dit</span>
+                  : localStorage.getItem('language') === 'GB' ? <span>said</span>
+                  : localStorage.getItem('language') === 'RO' ? <span>a spus</span>
+                  : localStorage.getItem('language') === 'DE' ? <span>sagte</span>
+                  : localStorage.getItem('language') === 'IT' ? <span>ha detto</span>
+                  : <span>said</span> } 
           </p> 
         </div>
         
@@ -61,9 +58,13 @@ function renderStars(rating) {
         </div>
   
         <div className="reviewRatingSection_time">
-          {localStorage.getItem('language') === "Romania" ? <p>Creat la : {time}</p> 
-          : 
-          <p> Submitted at: {time}</p>
+          {
+            localStorage.getItem('language') === 'FR' ? <p>Soumis à : {time}</p>
+            : localStorage.getItem('language') === 'GB' ? <p>Submitted at: {time}</p>
+            : localStorage.getItem('language') === 'RO' ? <p>Înaintat la: {time}</p>
+            : localStorage.getItem('language') === 'DE' ? <p>Eingereicht am: {time}</p>
+            : localStorage.getItem('language') === 'IT' ? <p>Inviato il: {time}</p>
+            : <p>Submitted at: {time}</p>
           }
           
         </div>

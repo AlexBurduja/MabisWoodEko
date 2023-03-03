@@ -24,6 +24,7 @@ export function Image() {
       {localStorage.getItem('language') === "RO" ? 'Cei mai buni peleti din oras.' :
       localStorage.getItem('language') === "IT" ? 'Il miglior pellet in città.' :
       localStorage.getItem('language') === "DE" ? 'Die besten Pellets der Stadt.' :
+      localStorage.getItem('language') === "FR" ? 'Les meilleurs pellets de la ville.':
       'The best pelets in town.'}
     </div>
 
@@ -33,6 +34,7 @@ export function Image() {
           {localStorage.getItem('language') === "RO" ? 'Despre noi' :
           localStorage.getItem('language') === "IT" ? 'Chi siamo' :
           localStorage.getItem('language') === "DE" ? 'Über uns' :
+          localStorage.getItem('language') === "FR" ? "À propos de nous" :
           'About us'}
         </NavLink>
       </button>
@@ -41,6 +43,7 @@ export function Image() {
         {localStorage.getItem('language') === "RO" ? 'Contacteaza-ne' :
         localStorage.getItem('language') === "IT" ? 'Contattaci' :
         localStorage.getItem('language') === "DE" ? 'Kontaktiere uns' :
+        localStorage.getItem('language') === "FR" ? 'Contactez-nous' :
         'Contact us'}
       </NavLink></button>
     </div>

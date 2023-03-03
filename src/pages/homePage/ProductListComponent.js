@@ -31,6 +31,7 @@ useEffect(() => {
         {localStorage.getItem('language') === "RO" ? 'Produse' :
         localStorage.getItem('language') === "IT" ? 'Prodotti' :
         localStorage.getItem('language') === "DE" ? 'Produkte' :
+        localStorage.getItem('language') === "FR" ? 'Des produits' :
         'Products'}
       </header>
       {loading ? <Loading /> :

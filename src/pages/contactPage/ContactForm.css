@@ -19,17 +19,14 @@
     width: 35%;
 }
 
-.leftSide{
-
-}
-
 .leftSide_footer {
     display: flex;
     flex-direction: column;
-    gap: 20px;
     align-items: flex-start;
-    font-size: 25px;
+    gap: 20px;
+    font-size: 22px;
 }
+
 .leftSide_footer span {
     color: white;
 }
@@ -157,6 +154,10 @@
         font-size: 3.5vw;
     }
         
+    .leftSide_footer{
+        justify-content: center;
+        align-items: center;
+    }
 
 
     .leftSide_footer_icons{

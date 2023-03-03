@@ -59,6 +59,8 @@ function ProductCount () {
   (total === 1 ? `${total} prodotto` : `${total} prodotti`) :
  localStorage.getItem('language') === "DE" ?
   (total === 1 ? `${total} produkt` : `${total} produkte`) :
+  localStorage.getItem('language') === "FR" ? 
+  (total === 1 ? `${total} produit` : `${total} produits`) :
  (total === 1 ? `${total} product` : `${total} products`)}</p>
 }
 

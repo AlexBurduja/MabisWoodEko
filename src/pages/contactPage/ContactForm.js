@@ -44,7 +44,7 @@ export function ContactForm() {
 
         <div className="leftSide_footer">
           <p><span> <IoIosCall /> </span> <a href="tel:+40721648424">+40721648424</a> </p>
-          <p><span><BsWhatsapp /> <a href={whatsappLink}>+40721648424</a> </span></p>
+          <p><span><BsWhatsapp /> </span> <a href={whatsappLink}>+40721648424</a> </p>
           <p><span> <FiMail /> </span> <a href="mailto:dan@mabiswood.ro">dan@mabiswood.ro</a> </p>
           <p><span> <BsPinMapFill /> </span> Sat. Bogati, Comuna. Bogati, Strada. Alunis, Nr. 190B, Judetul. Arges</p>
         </div>

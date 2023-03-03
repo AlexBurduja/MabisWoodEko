@@ -23,7 +23,7 @@ export function Header() {
   
   const { user, conditional } = useContext(FirebaseAuthContext)
 
-  const [language, setLanguage] = useState(localStorage.getItem('language') || 'English');
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'GB');
 
   const onSelect = (code) => { 
     setLanguage(code)
@@ -51,11 +51,13 @@ export function Header() {
         </div>
 
         <div className='headerLoginText'>
-        <p>{localStorage.getItem('language') === "RO" ? 'Salut' : localStorage.getItem('language') === "IT" ? "Ciao" : localStorage.getItem('language') === "DE" ? "Hallo" : "Hi" }, {conditional.firstName}</p> 
+        <p>{localStorage.getItem('language') === "RO" ? 'Salut' : localStorage.getItem('language') === "IT" ? "Ciao" : localStorage.getItem('language') === "DE" ? "Hallo" : 
+        localStorage.getItem('language') === "FR" ? "Salut" : "Hi" }, {conditional.firstName}</p> 
         <button className='logoutButtonHeader' onClick={logOut}>{
           localStorage.getItem('language') === "RO" ? 'Delogheaza-te' 
         : localStorage.getItem('language') === "IT" ? "Disconnettersi"
-        : localStorage.getItem('language') === "DE" ? 'Ausloggen' 
+        : localStorage.getItem('language') === "DE" ? 'Ausloggen'
+        : localStorage.getItem('language') === "FR" ? 'Se déconnecter' 
         : 'Log Out'} </button>
       </div>
 
@@ -66,6 +68,7 @@ export function Header() {
         <button className='loginButtonHeader'><NavLink to="/login">{localStorage.getItem('language') === "RO" ? 'Conecteaza-te' :
         localStorage.getItem('language') === "IT" ? 'Accedi' :
         localStorage.getItem('language') === "DE" ? 'Anmelden' :
+        localStorage.getItem('language') === "FR" ? 'Connexion' :
         'Log in'}</NavLink></button>
       )
     }
@@ -77,7 +80,8 @@ export function Header() {
         <button className='logoutButtonHamburger' onClick={logOut}>{
           localStorage.getItem('language') === "RO" ? 'Delogheaza-te' 
         : localStorage.getItem('language') === "IT" ? "Disconnettersi"
-        : localStorage.getItem('language') === "DE" ? 'Ausloggen' 
+        : localStorage.getItem('language') === "DE" ? 'Ausloggen'
+        : localStorage.getItem('language') === "FR" ? 'Se déconnecter' 
         : 'Log Out'}</button>
       ) 
     } else {
@@ -85,6 +89,7 @@ export function Header() {
         <button className='logoutButtonHamburger'><NavLink to="/login"> {localStorage.getItem('language') === "RO" ? 'Conectează-te' :
         localStorage.getItem('language') === "IT" ? 'Accedi' :
         localStorage.getItem('language') === "DE" ? 'Anmelden' :
+        localStorage.getItem('language') === "FR" ? 'Connexion' :
         'Log in'} </NavLink></button>
       )
       }
@@ -138,12 +143,14 @@ export function Header() {
           localStorage.getItem('language') === "RO" ? 'Acasa' :
           localStorage.getItem('language') === "IT" ? 'Home' :
           localStorage.getItem('language') === "DE" ? 'Zuhause' :
+          localStorage.getItem('language') === "FR" ? "Accueil" : 
           'Home'}
         </NavLink>
         
         <NavLink className={activeClass} to='/about'>{localStorage.getItem('language') === "RO" ? 'Despre' :
           localStorage.getItem('language') === "IT" ? 'Informazioni' :
           localStorage.getItem('language') === "DE" ? 'Über' :
+          localStorage.getItem('language') === "FR" ? 'À propos' :
           'About'}
         </NavLink>
 
@@ -151,11 +158,12 @@ export function Header() {
           {localStorage.getItem('language') === "RO" ? 'Recenzii' :
           localStorage.getItem('language') === "IT" ? 'Recensioni' :
           localStorage.getItem('language') === "DE" ? 'Bewertungen' :
+          localStorage.getItem('language') === 'FR' ? 'Commentaires' :
           'Reviews'}
         </NavLink>
 
         <NavLink className={activeClass} to='/contact'>
-          {localStorage.getItem('language') === "RO" ? 'Contact' :
+          {localStorage.getItem('language') === "RO" || "FR" ? 'Contact' :
           localStorage.getItem('language') === "IT" ? 'Contatto' :
           localStorage.getItem('language') === "DE" ? 'Kontakt' :
           'Contact'}
@@ -166,6 +174,7 @@ export function Header() {
             {localStorage.getItem('language') === "RO" ? 'Panou' :
             localStorage.getItem('language') === "IT" ? 'Pannello' :
             localStorage.getItem('language') === "DE" ? 'Panel' :
+            localStorage.getItem('language') === 'FR' ? 'Panneau' :
             'Panel'}
           </NavLink>
         )}        
@@ -185,7 +194,7 @@ export function Header() {
       <ReactFlagsSelect
                   selected={language}
                   onSelect={onSelect}
-                  countries={["RO", "GB", "IT", "DE"]}
+                  countries={["RO", "GB", "IT", "DE", "FR"]}
                   fullWidth={true}
                   showOptionLabel={false}
                   showSelectedLabel={false}
@@ -208,19 +217,22 @@ export function Header() {
           localStorage.getItem('language') === "RO" ? 'Acasa' :
           localStorage.getItem('language') === "IT" ? 'Home' :
           localStorage.getItem('language') === "DE" ? 'Zuhause' :
+          localStorage.getItem('language') === "FR" ? "Accueil" :
           'Home'}</NavLink> </li>
 
           <li className="item"> <NavLink className={activeClassHamburger} to='/about'>{localStorage.getItem('language') === "RO" ? 'Despre' :
           localStorage.getItem('language') === "IT" ? 'Informazioni' :
           localStorage.getItem('language') === "DE" ? 'Über' :
+          localStorage.getItem('language') === "FR" ? 'À propos' :
           'About'}</NavLink> </li>
 
           <li className="item"> <NavLink className={activeClassHamburger} to='/reviews'>{localStorage.getItem('language') === "RO" ? 'Recenzii' :
           localStorage.getItem('language') === "IT" ? 'Recensioni' :
           localStorage.getItem('language') === "DE" ? 'Bewertungen' :
+          localStorage.getItem('language') === 'FR' ? 'Commentaires' :
           'Reviews'}</NavLink> </li>
 
-          <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>{localStorage.getItem('language') === "RO" ? 'Contact' :
+          <li className="item"> <NavLink className={activeClassHamburger} to='/contact'>{localStorage.getItem('language') === "RO" || "FR" ? 'Contact' :
           localStorage.getItem('language') === "IT" ? 'Contatto' :
           localStorage.getItem('language') === "DE" ? 'Kontakt' :
           'Contact'}</NavLink> </li>
@@ -229,6 +241,7 @@ export function Header() {
             <li className='item'><NavLink className={activeClassHamburger} to='/users'>{localStorage.getItem('language') === "RO" ? 'Panou' :
             localStorage.getItem('language') === "IT" ? 'Pannello' :
             localStorage.getItem('language') === "DE" ? 'Panel' :
+            localStorage.getItem('language') === 'FR' ? 'Panneau' :
             'Panel'}</NavLink> </li>
             )}
 
@@ -237,6 +250,7 @@ export function Header() {
               {localStorage.getItem('language') === "RO" ? `Profilul lui ${conditional.firstName}` :
               localStorage.getItem('language') === "IT" ? `Profilo di ${conditional.firstName}` :
               localStorage.getItem('language') === "DE" ? `${conditional.firstName}'s Profil` :
+              localStorage.getItem('language') === 'FR' ? `Profil d'${conditional.firstName}` :
               `${conditional.firstName}'s Profile`}
               </NavLink> </li>
           )}

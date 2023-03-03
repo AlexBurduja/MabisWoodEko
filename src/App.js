@@ -24,7 +24,6 @@ import { TermsAndConditions } from './pages/legal/TermsAndConditions';
 import { ReturnPolicy } from './pages/legal/ReturnPolicy'
 import { AboutPage } from './pages/about/AboutPage';
 
-
 export const LoginContext = React.createContext();
 
 function App() {

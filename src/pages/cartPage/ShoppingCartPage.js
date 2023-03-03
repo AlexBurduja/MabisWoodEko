@@ -1154,20 +1154,22 @@ localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le 
 
      <div className='deliveryAddress_inputs__input' >
        <input type="number" defaultValue={phoneNumber} onChange={handlePhoneNumberChange} required="required"></input>
-       <span>{localStorage.getItem('language') === 'FR' ? 'Numéro de téléphone' :
-                                localStorage.getItem('language') === 'RO' ? 'Număr de telefon' :
-                                localStorage.getItem('language') === 'DE' ? 'Telefonnummer' :
-                                localStorage.getItem('language') === 'IT' ? 'Numero di telefono' :
-                                'Phone number'}</span>
+       <span>
+        {localStorage.getItem('language') === 'FR' ? 'Numéro de téléphone' :
+        localStorage.getItem('language') === 'RO' ? 'Număr de telefon' :
+        localStorage.getItem('language') === 'DE' ? 'Telefonnummer' :
+        localStorage.getItem('language') === 'IT' ? 'Numero di telefono' :
+        'Phone number'}</span>
      </div>
      
      <div className='deliveryAddress_inputs__input' >
        <input type="text" defaultValue={street} onChange={handleStreetChange} required="required"></input>
-       <span>{localStorage.getItem('language') === 'FR' ? 'Rue' :
-                                localStorage.getItem('language') === 'RO' ? 'Strada' :
-                                localStorage.getItem('language') === 'DE' ? 'Straße' :
-                                localStorage.getItem('language') === 'IT' ? 'Via' :
-                                'Street'}</span>
+       <span>
+        {localStorage.getItem('language') === 'FR' ? 'Rue' :
+        localStorage.getItem('language') === 'RO' ? 'Strada' :
+        localStorage.getItem('language') === 'DE' ? 'Straße' :
+        localStorage.getItem('language') === 'IT' ? 'Via' :
+        'Street'}</span>
      </div>
 
 
@@ -1213,12 +1215,17 @@ localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le 
 
        <div className='lastNameInput'>
          <input type="text" defaultValue={companyName} onChange={handleCompanyNameChange} required="required"></input>
-         <span>{localStorage.getItem('language') === 'Romania' ? 'Nume companie' : 'Company Name'}</span>
+        <span>{localStorage.getItem('language') === "FR" ? 'Nom de l\'entreprise' :
+                localStorage.getItem('language') === "RO" ? 'Numele companiei' :
+                localStorage.getItem('language') === "DE" ? 'Firmenname' :
+                localStorage.getItem('language') === "IT" ? 'Nome della società' :
+                'Company Name'}
+        </span>
        </div>
 
        <div className='lastNameInput'>
          <input type="text" defaultValue={companyCui} onChange={handleCompanyCuiChange} required="required"></input>
-         <span>{localStorage.getItem('language') === 'Romania' ? 'CUI' : 'ID'}</span>
+         <span>{localStorage.getItem('language') === 'RO' ? 'CUI' : 'ID'}</span>
        </div>
 
        </div>
@@ -1228,8 +1235,13 @@ localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le 
 
      <section className='checkoutTab'>
        <div className='checkoutTab_header'>
-         <h1>3. {localStorage.getItem('language') === 'Romania' ? 'CUMPARA' : 'CHECKOUT'}</h1>
-         <h3>{localStorage.getItem('language') === 'Romania' ? 'Sumar comanda' : 'Order summary'}</h3>
+         <h1>3. {localStorage.getItem('language') === 'RO' ? 'CUMPARA' : 'CHECKOUT'}</h1>
+         <h3>{localStorage.getItem('language') === 'RO' ? 'Sumar comandă' :
+              localStorage.getItem('language') === 'FR' ? 'Récapitulatif de commande' :
+              localStorage.getItem('language') === 'DE' ? 'Bestellübersicht' :
+              localStorage.getItem('language') === 'IT' ? 'Riepilogo ordine' :
+              'Order summary'}
+         </h3>
        </div>
 
        <section className='doamneAjuta'>
@@ -1247,7 +1259,13 @@ localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le 
              )
            })}
            <div className='productCheckoutPage_footer'>
-               <h1>Total</h1>
+               <h1>
+               {localStorage.getItem('language') === "FR" ? "Total" :
+              localStorage.getItem('language') === "RO" ? "Total" :
+              localStorage.getItem('language') === "DE" ? "Summe" :
+              localStorage.getItem('language') === "IT" ? "Totale" :
+              "Total"}
+               </h1>
              <div className='totalQuantityPrice'>
                <p>{localStorage.getItem('language') === 'Romania' ? 'Produse:' : 'Products: '} <span>{totalQuantity}</span></p>
                <p>{localStorage.getItem('language') === 'Romania' ? 'Subtotal:' : 'Sub-total:'} <span>{totalPrice}</span> RON</p>
@@ -1261,19 +1279,46 @@ localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le 
                value = {region}
                onChange={handleRegionChange}
                className="regionDrop"/>
-               <label htmlFor="delivery">Pay Method: </label>
+               <label htmlFor="delivery">
+               {localStorage.getItem('language') === 'FR' ? 'Méthode de paiement' :
+                localStorage.getItem('language') === 'RO' ? 'Metoda de plată' :
+                localStorage.getItem('language') === 'DE' ? 'Zahlungsmethode' :
+                localStorage.getItem('language') === 'IT' ? 'Metodo di pagamento' :
+                'Pay Method:'}
+               </label>
                
                {country === "Romania" && (
                  <select disabled={disabled} id='delivery' onChange={handleDeliveryChange} className="regionDrop" value={deliverySelected}>
-                 <option value="card">{localStorage.getItem('language') === 'Romania' ? 'Card' : 'Credit Card'}</option>
-                 <option value="ramburs">{localStorage.getItem('language') === 'Romania' ? 'Ramburs' : 'Cash on delivery'}</option>
-                 <option value="pickUp">{localStorage.getItem('language') === 'Romania' ? 'Ridicati din unul dintre magazinele noastre.' : 'Pick up from one of our stores.'}</option>
+                 <option value="card">{
+                  localStorage.getItem('language') === 'RO' ? 'Card de credit' :
+                  localStorage.getItem('language') === 'FR' ? 'Carte de crédit' :
+                  localStorage.getItem('language') === 'DE' ? 'Kreditkarte' :
+                  localStorage.getItem('language') === 'IT' ? 'Carta di credito:' : "Credit Card"}
+                 </option>
+                 <option value="ramburs">
+                  {localStorage.getItem('language') === 'FR' ? 'Paiement à la livraison.'
+                : localStorage.getItem('language') === 'RO' ? 'Plata la livrare.'
+                : localStorage.getItem('language') === 'DE' ? 'Zahlung bei Lieferung.'
+                : localStorage.getItem('language') === 'IT' ? 'Pagamento alla consegna.'
+                : 'Cash on delivery:'}
+                  </option>
+                 <option value="pickUp">{localStorage.getItem('language') === 'FR' ? 'Retrait en magasin disponible.' :
+localStorage.getItem('language') === 'RO' ? 'Ridicare din unul din magazinele noastre.' :
+localStorage.getItem('language') === 'DE' ? 'Abholung in einem unserer Geschäfte.' :
+localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi' :
+'Pick up from one of our stores.'}</option>
                </select>
                )}
 
                {!(country === "Romania") && (
                  <select disabled={disabled} id='delivery'>
-                 <option value="card">Credit Card</option>
+                 <option value="card">
+                 {
+                  localStorage.getItem('language') === 'RO' ? 'Card de credit' :
+                  localStorage.getItem('language') === 'FR' ? 'Carte de crédit' :
+                  localStorage.getItem('language') === 'DE' ? 'Kreditkarte' :
+                  localStorage.getItem('language') === 'IT' ? 'Carta di credito:' : "Credit Card"}
+                 </option>
                </select>
                )}
 
@@ -1285,12 +1330,29 @@ localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le 
                )}
 
                <div className='deliveryFooter'>
-                 <p>{localStorage.getItem('language') === 'Romania' ? 'ACCEPTAM:' : 'WE ACCEPT:'}</p>
+                <p>{localStorage.getItem('language') === 'FR' ? 'NOUS ACCEPTONS :' :
+                    localStorage.getItem('language') === 'RO' ? 'ACCEPTĂM :' :
+                    localStorage.getItem('language') === 'DE' ? 'WIR AKZEPTIEREN :' :
+                    localStorage.getItem('language') === 'IT' ? 'ACCETTIAMO :' :
+                    'WE ACCEPT :'}
+                </p>
                  <div className='react-icons'>
                  <FaCcApplePay /> <FaGooglePay /> <AiFillCreditCard />
                  </div>
                
-               <button onClick={checkout}>{loadingStripe ? `Loading...` : `Checkout`}</button>
+               <button onClick={checkout}>{loadingStripe ? 
+                (localStorage.getItem('language') === 'Romania' ? 'Se încarcă...' :
+                localStorage.getItem('language') === 'France' ? 'Chargement...' :
+                localStorage.getItem('language') === 'Germany' ? 'Wird geladen...' :
+                localStorage.getItem('language') === 'Italy' ? 'Caricamento...' :
+                'Loading...') 
+                : 
+                (localStorage.getItem('language') === 'Romania' ? 'Finalizează comanda' :
+                localStorage.getItem('language') === 'France' ? 'Passer à la caisse' :
+                localStorage.getItem('language') === 'Germany' ? 'Zur Kasse' :
+                localStorage.getItem('language') === 'Italy' ? 'Checkout' :
+                'Checkout')}
+              </button>
                
                </div>
              </div>

@@ -1267,8 +1267,17 @@ localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le 
               "Total"}
                </h1>
              <div className='totalQuantityPrice'>
-               <p>{localStorage.getItem('language') === 'Romania' ? 'Produse:' : 'Products: '} <span>{totalQuantity}</span></p>
-               <p>{localStorage.getItem('language') === 'Romania' ? 'Subtotal:' : 'Sub-total:'} <span>{totalPrice}</span> RON</p>
+               <p>{ localStorage.getItem('language') === 'RO' ? 'Produse:' :
+                     localStorage.getItem('language') === 'FR' ? 'Produits :' :
+                     localStorage.getItem('language') === 'DE' ? 'Produkte:' :
+                     localStorage.getItem('language') === 'IT' ? 'Prodotti :' :
+                     'Products :'} <span>{totalQuantity}</span>  </p>
+               <p>{localStorage.getItem('language') === 'RO' ? 'Subtotal:' :
+                  localStorage.getItem('language') === 'FR' ? 'Sous-total :' :
+                  localStorage.getItem('language') === 'DE' ? 'Zwischensumme:' :
+                  localStorage.getItem('language') === 'GB' ? 'Sub-total :' :
+                  localStorage.getItem('language') === 'IT' ? 'Subtotale :' :
+                  'Sub-total :'} <span>{totalPrice}</span> RON</p>
              </div>
 
              <div className='deliveryOptions'>

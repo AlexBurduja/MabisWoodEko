@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 function Adress({formData, setFormData}) {
 
@@ -16,6 +17,11 @@ function Adress({formData, setFormData}) {
 
   function saveBlock(event){
     setFormData({...formData, block: event.target.value})
+  }
+
+  function saveCheck(event){
+    const { checked } = event.target
+    setFormData({...formData, check: checked})
   }
 
   
@@ -41,6 +47,12 @@ function Adress({formData, setFormData}) {
             <input type="text" required value={formData.apartNo} onChange={saveApartamentNo}/>
             <span>Apartament No.</span>
         </div>
+
+<div>
+        <input type='checkbox' id='check' onClick={saveCheck}></input>
+        <label htmlFor='check'>I have read and I agree to the <NavLink to=''>terms and conditions</NavLink>, <NavLink to=''>privacy policy</NavLink>, <NavLink to=''>return policy</NavLink>.</label>
+</div>
+
     
     </div>
   )

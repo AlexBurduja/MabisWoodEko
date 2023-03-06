@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from 'react';
 import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
-import { FaCcVisa, FaCcPaypal, FaCcApplePay, FaCcAmazonPay, FaCcAmex } from 'react-icons/fa'
+import { FaCcVisa, FaCcMastercard, FaCcApplePay, FaAlipay } from 'react-icons/fa'
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
 import { collection, deleteDoc, doc,getDoc,getDocs, updateDoc, writeBatch } from 'firebase/firestore';
 import { db } from '../../firebase-config';
@@ -1155,10 +1155,10 @@ localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le 
      <div className='deliveryAddress_inputs__input' >
        <input type="number" defaultValue={phoneNumber} onChange={handlePhoneNumberChange} required="required"></input>
        <span>
-        {localStorage.getItem('language') === 'FR' ? 'Numéro de téléphone' :
+        {localStorage.getItem('language') === 'FR' ? 'Téléphone' :
         localStorage.getItem('language') === 'RO' ? 'Număr de telefon' :
         localStorage.getItem('language') === 'DE' ? 'Telefonnummer' :
-        localStorage.getItem('language') === 'IT' ? 'Numero di telefono' :
+        localStorage.getItem('language') === 'IT' ? 'Telefono' :
         'Phone number'}</span>
      </div>
      
@@ -1282,12 +1282,22 @@ localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le 
 
              <div className='deliveryOptions'>
                <CountryDropdown className="countryDrop" value={country}
+              defaultOptionLabel = {localStorage.getItem('language') === "RO" ? "Alege tara" :
+                                    localStorage.getItem('language') === "FR" ? 'Choisissez le pays' : 
+                                    localStorage.getItem('language') === 'IT' ? 'Seleziona il paese' :
+                                  localStorage.getItem('language') === "DE" ? 'Land auswählen' :
+                                  "Select Country"}
               onChange={(e) => setCountry(e)}
 />
                <RegionDropdown country={country}
                value = {region}
                onChange={handleRegionChange}
-               className="regionDrop"/>
+               className="regionDrop"
+               defaultOptionLabel = {localStorage.getItem('language') === "RO" ? "Alege orasul" :
+               localStorage.getItem('language') === "FR" ? 'Choisissez une région' : 
+               localStorage.getItem('language') === 'IT' ? 'Seleziona regione' :
+             localStorage.getItem('language') === "DE" ? 'Region wählen' :
+             "Select Region"}/>
                <label htmlFor="delivery">
                {localStorage.getItem('language') === 'FR' ? 'Méthode de paiement' :
                 localStorage.getItem('language') === 'RO' ? 'Metoda de plată' :
@@ -1338,7 +1348,7 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                </select>
                )}
 
-               <div className='deliveryFooter'>
+               <div className='deliveryFooter'> 
                 <p>{localStorage.getItem('language') === 'FR' ? 'NOUS ACCEPTONS :' :
                     localStorage.getItem('language') === 'RO' ? 'ACCEPTĂM :' :
                     localStorage.getItem('language') === 'DE' ? 'WIR AKZEPTIEREN :' :
@@ -1346,7 +1356,7 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                     'WE ACCEPT :'}
                 </p>
                  <div className='react-icons'>
-                 <FaCcApplePay /> <FaGooglePay /> <AiFillCreditCard />
+                 <FaCcApplePay /> <FaGooglePay /> <AiFillCreditCard /> <FaCcMastercard /> <FaCcVisa />
                  </div>
                
                <button onClick={checkout}>{loadingStripe ? 

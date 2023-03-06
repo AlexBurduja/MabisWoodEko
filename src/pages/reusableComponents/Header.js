@@ -19,8 +19,6 @@ import ReactFlagsSelect from 'react-flags-select';
 
 export function Header() {
 
-  const [ data , setData ] = useState({})
-  
   const { user, conditional } = useContext(FirebaseAuthContext)
 
   const [language, setLanguage] = useState(localStorage.getItem('language') || 'GB');
@@ -30,9 +28,8 @@ export function Header() {
     window.location.reload();
   }
 
-  console.log(language)
 
-  useEffect(() => {
+  useEffect(() => { 
     localStorage.setItem('language', language);
   }, [language]);
 
@@ -199,6 +196,7 @@ export function Header() {
                   showOptionLabel={false}
                   showSelectedLabel={false}
                   showSecondaryOptionLabel={false}
+                  placeholder = "S"
                   className='custom-flags-select'
                   customLabels={{ RO: "Romanian", GB: 'English'}}
       />          

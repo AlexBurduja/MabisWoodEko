@@ -1,14 +1,13 @@
 import { useContext,  useEffect,  useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../../App";
 import { Header } from "../reusableComponents/Header";
 import { PreFooter } from "../reusableComponents/PreFooter";
 import "./ProfilePage.css"
 import { AnimatePresence, motion } from "framer-motion";
 import { FirebaseAuthContext } from "../../FirebaseAuthContext";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../../firebase-config";
-import { AuthCredential, deleteUser, EmailAuthCredential, getAuth, sendPasswordResetEmail, updateEmail } from "firebase/auth";
+import {  db } from "../../firebase-config";
+import { getAuth, sendPasswordResetEmail, updateEmail } from "firebase/auth";
 import { toast, ToastContainer } from "react-toastify";
 import { Footer } from "../reusableComponents/Footer";
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,9 +21,6 @@ export function ProfilePage() {
     const [ email, setEmail ] = useState(user.email)
     const [ oldEmail, setOldEmail ] = useState("")
     const [newEmail, setNewEmail] = useState("")
-
-    const [succes, setSucces] = useState('');
-    const [deleteMessage , setDeleteMessage] = useState('')
     
       const auth = getAuth()
 
@@ -427,44 +423,22 @@ function submitEmailChange() {
         <BackToTop />
         <Header />
         <ToastContainer />
-            <h1 className="profilePageh1">{conditional.firstName}'s Profile Page</h1>
-          <AnimatePresence>
-        {succes && (
-            <motion.div
-            initial={{opacity: 0}}
-            animate={{opacity:1}}
-            exit={{opacity:0}}
-            transition={{ease:"easeOut", duration: 0.5}}
-            className="succesMessage"
-            >
-              {succes}
-            </motion.div>
-        )}
-          </AnimatePresence>
-          
-          <AnimatePresence>
-        {deleteMessage && (
-            <motion.div
-            initial={{opacity: 0}}
-            animate={{opacity:1}}
-            exit={{opacity:0}}
-            transition={{ease:"easeOut", duration: 0.5}}
-            className="deleteMessage"
-            >
-              {deleteMessage}
-            </motion.div>
-        )}
-          </AnimatePresence>
+            <h1 className="profilePageh1">{conditional.firstName}'s Profile Page</h1>  
             
             <section className="profilePageSection">
             
             <div className="profilePageSection_divL">
               
-              <h2>Informations regarding profile changes!</h2>
+              <h2>{localStorage.getItem('language') === 'RO' ? 'Informatii despre profilul tau'
+  : localStorage.getItem('language') === 'DE' ? 'Informationen zu Ihrem Profil'
+  : localStorage.getItem('language') === 'FR' ? 'Informations concernant votre profil'
+  : localStorage.getItem('language') === 'IT' ? 'Informazioni sul tuo profilo' :
+  'Information regarding your profile'}</h2>
               
-              <p>If you wish to edit your profile credentials, change the fields to what your new credentials want to be, after that, click the "EDIT" button, then, you need to confirm your new credentials, and that is it! You are good to go!</p>
-              
-              <p>After confirmation, you will be redirected to the login page in order to log in with your NEW credentials!</p>
+              <p>{localStorage.getItem('language') === 'RO' ? 'Daca doresti sa iti editezi datele de autentificare, modifica campurile cu noile informatii, apoi apasa butonul "EDITEAZA". In final, trebuie doar sa confirmi noile date de autentificare si gata! Esti pregatit sa continui!'
+  : localStorage.getItem('language') === 'DE' ? 'Wenn Sie Ihre Anmeldeinformationen bearbeiten möchten, ändern Sie die Felder entsprechend den gewünschten neuen Anmeldeinformationen und klicken Sie dann auf die Schaltfläche "BEARBEITEN". Anschließend müssen Sie Ihre neuen Anmeldeinformationen bestätigen, und das war\'s! Sie sind bereit loszulegen!'
+  : localStorage.getItem('language') === 'FR' ? 'Si vous souhaitez modifier vos informations d\'identification, modifiez les champs avec les nouvelles informations, puis cliquez sur le bouton "MODIFIER". Ensuite, vous devez confirmer vos nouvelles informations d\'identification, et c\'est tout ! Vous êtes prêt à continuer !'
+  : localStorage.getItem('language') === 'IT' ? 'Se desideri modificare le tue credenziali del profilo, modifica i campi con le nuove informazioni, quindi fai clic sul pulsante "MODIFICA". Successivamente, è necessario confermare le nuove credenziali e poi sei a posto! Sei pronto a continuare!' : "If you wish to edit your profile credentials, change the fields to what your new credentials want to be, after that, click the 'EDIT' button, then, you need to confirm your new credentials, and that is it! You are good to go!"}</p>
 
             </div>
             <div className="profilePageSection_div">
@@ -473,25 +447,53 @@ function submitEmailChange() {
                         <label htmlFor="emailHeader">Email</label>
                         <input type="text" id="emailHeader" value={email} disabled={true}></input>
                         
-                        <label htmlFor="firstName">First name</label>
+                        <label htmlFor="firstName">{localStorage.getItem('language') === 'FR' ? 'Prénom' :
+                                localStorage.getItem('language') === 'RO' ? 'Prenume' :
+                                localStorage.getItem('language') === 'DE' ? 'Vorname' :
+                                localStorage.getItem('language') === 'IT' ? 'Nome' :
+                                'First name'}</label>
                         <input type="text" id="firstName" defaultValue={firstName} onChange={changeFirstName}></input>
                         
-                        <label htmlFor="lastName">Last name</label>
+                        <label htmlFor="lastName">{localStorage.getItem('language') === 'FR' ? 'Famille Nom' :
+                                localStorage.getItem('language') === 'RO' ? 'Nume de familie' :
+                                localStorage.getItem('language') === 'DE' ? 'Nachname' :
+                                localStorage.getItem('language') === 'IT' ? 'Cognome' :
+                                'Last name'}</label>
                         <input type="text" id="lastName" defaultValue={lastName} onChange={changeLastName}></input>
 
-                        <label htmlFor="phoneNumber">Phone number</label>
+                        <label htmlFor="phoneNumber">{localStorage.getItem('language') === 'FR' ? 'Téléphone' :
+        localStorage.getItem('language') === 'RO' ? 'Număr de telefon' :
+        localStorage.getItem('language') === 'DE' ? 'Telefonnummer' :
+        localStorage.getItem('language') === 'IT' ? 'Telefono' :
+        'Phone number'}</label>
                         <input type="number" id="phoneNumber" defaultValue={phoneNumber} onChange={changePhoneNumber}></input>
 
-                        <label htmlFor="street">Street</label>
+                        <label htmlFor="street">{localStorage.getItem('language') === 'FR' ? 'Rue' :
+        localStorage.getItem('language') === 'RO' ? 'Strada' :
+        localStorage.getItem('language') === 'DE' ? 'Straße' :
+        localStorage.getItem('language') === 'IT' ? 'Via' :
+        'Street'}</label>
                         <input type="text" id="street" defaultValue={street} onChange={changeStreet}></input>
                         
-                        <label htmlFor="streetNo">Street No.</label>
+                        <label htmlFor="streetNo">{localStorage.getItem('language') === 'FR' ? 'Rue No.' :
+                                localStorage.getItem('language') === 'RO' ? 'Nr. Strada' :
+                                localStorage.getItem('language') === 'DE' ? 'Hausnummer' :
+                                localStorage.getItem('language') === 'IT' ? 'Via No.' :
+                                'Street No.'}</label>
                         <input type="text" id="streetNo" defaultValue={streetNo} onChange={changeStreetNo}></input>
                         
-                        <label htmlFor="blockNo">Block No.</label>
+                        <label htmlFor="blockNo">{localStorage.getItem('language') === 'FR' ? 'Bloc' :
+                                localStorage.getItem('language') === 'RO' ? 'Bloc' :
+                                localStorage.getItem('language') === 'DE' ? 'Block' :
+                                localStorage.getItem('language') === 'IT' ? 'Blocco' :
+                                'Block'}</label>
                         <input type="text" id="blockNo" defaultValue={blockNo} onChange={changeBlockNo}></input>
                         
-                        <label htmlFor="apartNo">Apartament No.</label>
+                        <label htmlFor="apartNo">{localStorage.getItem('language') === 'FR' ? 'Appartement No.' :
+                                localStorage.getItem('language') === 'RO' ? 'Numarul apartamentului' :
+                                localStorage.getItem('language') === 'DE' ? 'Wohnungsnummer' :
+                                localStorage.getItem('language') === 'IT' ? 'Appartamento N.' :
+                                'Apartament No.'}</label>
                         <input type="text" id="apartNo" defaultValue={apartNo} onChange={changeApartNo}></input>
                 </form>
                 
@@ -516,14 +518,34 @@ function submitEmailChange() {
                         <h1>Are you sure you want to change your credentials ?</h1>
                     </div>
                       
-                    <p><span>First name: </span>{firstName}</p>
+                    <p><span>{localStorage.getItem('language') === 'FR' ? 'Prénom: ' :
+                                localStorage.getItem('language') === 'RO' ? 'Prenume: ' :
+                                localStorage.getItem('language') === 'DE' ? 'Vorname: ' :
+                                localStorage.getItem('language') === 'IT' ? 'Nome: ' :
+                                'First name: '} </span>{firstName}</p>
                       
-                      <p><span>Last name: </span>{lastName}</p>
+                      <p><span>{localStorage.getItem('language') === 'FR' ? 'Famille Nom :' :
+                                localStorage.getItem('language') === 'RO' ? 'Nume de familie :' :
+                                localStorage.getItem('language') === 'DE' ? 'Nachname :' :
+                                localStorage.getItem('language') === 'IT' ? 'Cognome :' :
+                                'Last name :'} </span>{lastName}</p>
                       
-                      <p><span>Phone number: </span>{phoneNumber}</p>
+                      <p><span>{localStorage.getItem('language') === 'FR' ? 'Téléphone: ' :
+        localStorage.getItem('language') === 'RO' ? 'Număr de telefon: ' :
+        localStorage.getItem('language') === 'DE' ? 'Telefonnummer: ' :
+        localStorage.getItem('language') === 'IT' ? 'Telefono: ' :
+        'Phone number: '}</span>{phoneNumber}</p>
                       
-                      <p><span>Street :</span>{street} No.{streetNo}</p>
-                      <p>Bl.{blockNo} Ap.{apartNo}</p>
+                      <p><span>{localStorage.getItem('language') === 'FR' ? 'Rue: ' :
+        localStorage.getItem('language') === 'RO' ? 'Strada: ' :
+        localStorage.getItem('language') === 'DE' ? 'Straße: ' :
+        localStorage.getItem('language') === 'IT' ? 'Via: ' :
+        'Street: '}</span>{street} No.{streetNo}</p>
+                      <p>Bl.{blockNo} {localStorage.getItem('language') === 'FR' ? 'Appartement No.: ' :
+                                localStorage.getItem('language') === 'RO' ? 'Numarul apartamentului: ' :
+                                localStorage.getItem('language') === 'DE' ? 'Wohnungsnummer: ' :
+                                localStorage.getItem('language') === 'IT' ? 'Appartamento N.: ' :
+                                'Apartament No.: '}{apartNo}</p>
                         
                         
 

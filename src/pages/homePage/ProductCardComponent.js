@@ -281,10 +281,18 @@ export function ProductCardComponent(props) {
         <p className="kgP">{kg} Kg</p>
         <p className="priceCurrencyP">{price} {currency}</p>
 
-        <button  className="cardDivButton" onClick={addToCart}>Add to cart</button>
+        <button  className="cardDivButton" onClick={addToCart}>{localStorage.getItem('language') === 'FR' ? 'Ajouter au panier' :
+ localStorage.getItem('language') === 'RO' ? 'Adaugă în coș' :
+ localStorage.getItem('language') === 'DE' ? 'Warenkorb Legen' :
+ localStorage.getItem('language') === 'IT' ? 'Aggiungi al carrello' :
+ 'Add to cart'}</button>
         <ToastContainer />
     
-        <a href={`products/${id}`} className="viewMoreButton"> View more </a>
+        <a href={`products/${id}`} className="viewMoreButton"> {localStorage.getItem('language') === 'FR' ? 'Voir plus' :
+ localStorage.getItem('language') === 'RO' ? 'Vezi mai multe' :
+ localStorage.getItem('language') === 'DE' ? 'Mehr anzeigen' :
+ localStorage.getItem('language') === 'IT' ? 'Vedi di più' :
+ 'View more'} </a>
 
         {conditional?.admin && (
           <button onClick={toggleModalEdit} className="edit-btn">< AiFillEdit /></button>
@@ -298,34 +306,6 @@ export function ProductCardComponent(props) {
               <div className="modal-content modal-content-main">
                 <h1>Edit product</h1>
                   <p className="modal-content_p">Here you can change anything that you want regarding your product..</p>
-                  
-                  <AnimatePresence>
-                  {succes && (
-                    <motion.h3
-                    initial={{opacity:0}}
-                    animate={{opacity:1}}
-                    exit={{opacity:0}}
-                    transition={{ease:"easeIn", duration:1.5}}
-                    className="editModalSucces"
-                    >
-                      {succes}
-                    </motion.h3>
-                  )}
-                  </AnimatePresence>
-
-                  <AnimatePresence>
-                  {deleteSucces && (
-                    <motion.h3
-                    initial={{opacity:0}}
-                    animate={{opacity:1}}
-                    exit={{opacity:0}}
-                    transition={{ease:"easeIn", duration:1.5}}
-                    className="editModalDeleteSucces"
-                    >
-                      {deleteSucces}
-                    </motion.h3>
-                  )}
-                  </AnimatePresence>
 
                   <div className="modal-content-inputs">
                     

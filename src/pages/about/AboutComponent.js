@@ -60,7 +60,6 @@ export function AboutComponent (){
 
     const handleSubmit = async () => {
         let convertApi = ConvertApi.auth('Af27QSYWI7JGHdxc')
-        // let convertApi = ConvertApi.auth('Af27QSYWI7JGHdxc')
         let params = convertApi.createParams()
         params.add('file', firebaseImg);
         let result = await convertApi.convert('jpg', 'webp', params)
@@ -149,7 +148,12 @@ export function AboutComponent (){
 
     return (
     <section className='aboutSection'>
-    <h1>{localStorage.getItem('language') === 'RO' ? "Povestea Noastra" : "Our Story" }</h1>
+    <h1>{localStorage.getItem('language') === 'FR' ? 'À propos de nous' : 
+          localStorage.getItem('language') === 'RO' ? 'Despre noi' :
+          localStorage.getItem('language') === 'DE' ? 'Über uns' :
+          localStorage.getItem('language') === 'IT' ? 'Chi siamo' :
+          'About us'}
+    </h1>
 
     <div className='aboutWrapper'>
         <div className='aboutWrapperWrapper'>

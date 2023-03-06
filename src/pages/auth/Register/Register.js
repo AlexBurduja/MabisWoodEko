@@ -28,11 +28,12 @@ const [formData , setFormData] = useState({
   streetNo: '',
   apartNo: '',
   block : '',
-  phoneNumber : ''
+  phoneNumber : '',
+  check : false
 })
 
 
-const FormTitles = ["Sign Up", "Personal Info", "Adress"]
+const FormTitles = ["Sign Up", "Personal Info", "Address"]
 
 const PageDisplay = () => {
   if (page === 0){
@@ -85,6 +86,7 @@ const registerO = async (event) => {
     })
   }
 }
+
 
 const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
 const upperCaseRegex = /[A-Z]/;
@@ -400,13 +402,16 @@ function page2(){
     return true
   }
 
-  if(!strretValid || !streetNoValid || !apartamentValid || !blockValid){
+  if(!strretValid || !streetNoValid || !apartamentValid || !blockValid || !formData.check === true){
+    // console.log('not checked')
     return
   } else {
     registerO()
-    // console.log("Registered")
+    console.log("Registered")
   }
 }
+
+console.log(formData)
 
 
   return (

@@ -16,6 +16,7 @@ import { isEmpty } from '@firebase/util';
 import Loading from '../reusableComponents/Loading';
 import {AiFillCreditCard} from 'react-icons/ai'
 import { FaGooglePay } from 'react-icons/fa'
+import GoogleMapReact from 'google-map-react';
 
 export function ShoppingCartPage() {
   const { user } = useContext( FirebaseAuthContext )
@@ -960,6 +961,55 @@ export function ShoppingCartPage() {
         
       }
 
+      const Marker = (props) => {
+        const { text } = props;
+      
+        return (
+          <div className='mapMarkerDiv'>
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="25px" width="25px" xmlns="http://www.w3.org/2000/svg"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"></path></svg>
+            <div style={{ backgroundColor: 'white', padding: '5px', borderRadius: '5px' }}>
+              {text}
+            </div>
+          </div>
+        );
+      };
+    
+    
+      const locations = [
+        {
+          id: 1,
+          name: 'Bucharest',
+          address: 'Bucharest, Romania',
+          latitude: 44.47639,
+          longitude: 26.15962
+        },
+        {
+          id: 2,
+          name: 'Arges',
+          address: 'Arges, Romania',
+          latitude: 45.11712,
+          longitude: 24.37353
+        }
+      ];
+    
+      const [center, setCenter] = useState({lat: 45.9442858, lng: 25.0094303})
+      const [zoom , setZoom] = useState(6)
+    
+      const [selectedMarker, setSelectedMarker] = useState('');
+    
+      const handleClickBucharest = () => {
+        setSelectedMarker('Bucuresti');
+        setZoom(18)
+        setCenter({lat: locations[0].latitude, lng: locations[0].longitude})
+      }
+    
+      const handleClickArges = () => {
+        setSelectedMarker('Arges');
+        setZoom(18)
+        setCenter({lat: locations[1].latitude, lng: locations[1].longitude})
+      }
+
+
   return (
     <div >
     {loading === false && 
@@ -1342,10 +1392,27 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                )}
 
                {pickUp && (
-                 <select id='magazine' className="regionDrop" value={store} onChange={handleStoreChange}>
-                 <option value="Bucuresti" >Bucuresti</option>
-                 <option value="Arges" >Arges</option>
-               </select>
+                 <div style={{ height: "200px", width: "100%" }}>
+                 <GoogleMapReact
+                   bootstrapURLKeys={{ key: "AIzaSyCi2gGmWbowIepm4OWPweRvPeJx6hsILXQ" }}
+                   center={center}
+                   zoom={zoom}
+                 >
+                   <Marker
+                     lat={locations[0].latitude}
+                     lng={locations[0].longitude}
+                     text="Bucuresti"
+                   />
+                   <Marker
+                     lat={locations[1].latitude}
+                     lng={locations[1].longitude}
+                     text="Arges"
+                   />
+                 </GoogleMapReact>
+                 
+                 <button onClick={handleClickBucharest}>Bucuresti</button>
+                 <button onClick={handleClickArges}>Arges</button>
+                   </div>
                )}
 
                <div className='deliveryFooter'> 
@@ -1359,7 +1426,7 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                  <FaCcApplePay /> <FaGooglePay /> <AiFillCreditCard /> <FaCcMastercard /> <FaCcVisa />
                  </div>
                
-               <button onClick={checkout}>{loadingStripe ? 
+               <button className='checkoutButton' onClick={checkout}>{loadingStripe ? 
                 (localStorage.getItem('language') === 'Romania' ? 'Se încarcă...' :
                 localStorage.getItem('language') === 'France' ? 'Chargement...' :
                 localStorage.getItem('language') === 'Germany' ? 'Wird geladen...' :

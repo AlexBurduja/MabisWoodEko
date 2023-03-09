@@ -236,7 +236,7 @@ export function Header() {
           'Contact'}</NavLink> </li>
           
           {conditional.admin === true && (
-            <li className='item'><NavLink className={activeClassHamburger} to='/users'>{localStorage.getItem('language') === "RO" ? 'Panou' :
+            <li className='item'><NavLink className={activeClassHamburger} to='/panel'>{localStorage.getItem('language') === "RO" ? 'Panou' :
             localStorage.getItem('language') === "IT" ? 'Pannello' :
             localStorage.getItem('language') === "DE" ? 'Panel' :
             localStorage.getItem('language') === 'FR' ? 'Panneau' :

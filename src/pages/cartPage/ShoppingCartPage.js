@@ -987,13 +987,14 @@ export function ShoppingCartPage() {
           id: 2,
           name: 'Arges',
           address: 'Arges, Romania',
-          latitude: 45.11712,
-          longitude: 24.37353
+          latitude: 44.88932095525005,
+          longitude: 25.137240790315126
         }
       ];
     
       const [center, setCenter] = useState({lat: 45.9442858, lng: 25.0094303})
       const [zoom , setZoom] = useState(6)
+      const [bounds, setBounds] = useState({})
     
       const [selectedMarker, setSelectedMarker] = useState('');
     
@@ -1009,7 +1010,7 @@ export function ShoppingCartPage() {
         setCenter({lat: locations[1].latitude, lng: locations[1].longitude})
       }
 
-
+    
   return (
     <div >
     {loading === false && 
@@ -1195,7 +1196,7 @@ localStorage.getItem('language') === "IT" ? "Per favore, controlla che tutte le 
        <div className='lastNameInput'>
          <input type="text" defaultValue={lastName} onChange={(e) => handleLastNameChange(e)} required="required" ></input>
          <span>{localStorage.getItem('language') === 'FR' ? 'Famille Nom' :
-                                localStorage.getItem('language') === 'RO' ? 'Nume de familie' :
+                                localStorage.getItem('language') === 'RO' ? 'Nume' :
                                 localStorage.getItem('language') === 'DE' ? 'Nachname' :
                                 localStorage.getItem('language') === 'IT' ? 'Cognome' :
                                 'Last name'}</span>
@@ -1392,16 +1393,23 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                )}
 
                {pickUp && (
+                <>
                  <div style={{ height: "200px", width: "100%" }}>
                  <GoogleMapReact
                    bootstrapURLKeys={{ key: "AIzaSyCi2gGmWbowIepm4OWPweRvPeJx6hsILXQ" }}
                    center={center}
                    zoom={zoom}
+                   onChange={({ center, zoom, bounds }) => {
+                    setCenter(center);
+                    setZoom(zoom);
+                    setBounds(bounds);
+                  }}
                  >
                    <Marker
                      lat={locations[0].latitude}
                      lng={locations[0].longitude}
                      text="Bucuresti"
+                     fixed={true}
                    />
                    <Marker
                      lat={locations[1].latitude}
@@ -1409,15 +1417,65 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                      text="Arges"
                    />
                  </GoogleMapReact>
+                  </div>
                  
-                 <button onClick={handleClickBucharest}>Bucuresti</button>
-                 <button onClick={handleClickArges}>Arges</button>
-                   </div>
+                    <div className='googleMapDiv'>
+                      <div className='selectionMapDiv'>
+                        <div>
+                          <p>Bucuresti</p>
+                          <p>Strada. Hispania Nr.36, 022633</p>
+                        </div>
+
+                      <div className='selectionMapDiv__buttons'>
+                        <a href={`https://goo.gl/maps/MemUAUBPwZshs4oNA`} rel='noreferrer noopener' target='_blank' >
+                          {
+                          localStorage.getItem('language') === 'RO' ? 'Locatie' :
+                          localStorage.getItem('language') === 'FR' ? 'Emplacement' :
+                          localStorage.getItem('language') === 'DE' ? 'Standort' :
+                          localStorage.getItem('language') === 'IT' ? 'Posizione' : 'Location'
+                          }
+                        </a>
+                        
+                        <button onClick={handleClickBucharest}>
+                          {localStorage.getItem('language') === 'RO' ? 'Selecteaza' :
+                          localStorage.getItem('language') === 'FR' ? 'Sélectionner' :
+                          localStorage.getItem('language') === 'DE' ? 'Auswählen' :
+                          localStorage.getItem('language') === 'IT' ? 'Seleziona' : 'Select'}
+                        </button>
+                      </div>
+                      </div>
+
+                      <div className='selectionMapDiv'>
+                        <div>
+                          <p>Arges</p>
+                          <p>DC97A, Bogati, 115502</p>
+                        </div>
+
+                      <div className='selectionMapDiv__buttons'>
+                        <a href='https://goo.gl/maps/gq9XcA8aSvxiC6hB8' target='_blank' rel='noopener noreferrer'>
+                          {
+                            localStorage.getItem('language') === 'RO' ? 'Locatie' :
+                            localStorage.getItem('language') === 'FR' ? 'Emplacement' :
+                          localStorage.getItem('language') === 'DE' ? 'Standort' :
+                          localStorage.getItem('language') === 'IT' ? 'Posizione' : 'Location'
+                          }
+                        </a>
+                        <button onClick={handleClickArges}>
+                          {localStorage.getItem('language') === 'RO' ? 'Selecteaza' :
+                          localStorage.getItem('language') === 'FR' ? 'Sélectionner' :
+                          localStorage.getItem('language') === 'DE' ? 'Auswählen' :
+                          localStorage.getItem('language') === 'IT' ? 'Seleziona' : 'Select'}
+                        </button>
+                      </div>
+                      
+                      </div>
+                    </div>
+                    </>
                )}
 
                <div className='deliveryFooter'> 
                 <p>{localStorage.getItem('language') === 'FR' ? 'NOUS ACCEPTONS :' :
-                    localStorage.getItem('language') === 'RO' ? 'ACCEPTĂM :' :
+                    localStorage.getItem('language') === 'RO' ? 'ACCEPTAM :' :
                     localStorage.getItem('language') === 'DE' ? 'WIR AKZEPTIEREN :' :
                     localStorage.getItem('language') === 'IT' ? 'ACCETTIAMO :' :
                     'WE ACCEPT :'}

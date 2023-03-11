@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from 'react';
 import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
-import { FaCcVisa, FaCcMastercard, FaCcApplePay, FaAlipay } from 'react-icons/fa'
+import { FaCcVisa, FaCcMastercard, FaCcApplePay } from 'react-icons/fa'
 import { FirebaseAuthContext } from '../../FirebaseAuthContext';
 import { collection, deleteDoc, doc,getDoc,getDocs, updateDoc, writeBatch } from 'firebase/firestore';
 import { db } from '../../firebase-config';
@@ -17,8 +17,11 @@ import Loading from '../reusableComponents/Loading';
 import {AiFillCreditCard} from 'react-icons/ai'
 import { FaGooglePay } from 'react-icons/fa'
 import GoogleMapReact from 'google-map-react';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import "leaflet/dist/leaflet.css";
 
 export function ShoppingCartPage() {
+
   const { user } = useContext( FirebaseAuthContext )
   
   const [ cart, setCart ] = useState([])
@@ -961,18 +964,18 @@ export function ShoppingCartPage() {
         
       }
 
-      const Marker = (props) => {
-        const { text } = props;
+      // const Marker = (props) => {
+      //   const { text } = props;
       
-        return (
-          <div className='mapMarkerDiv'>
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="25px" width="25px" xmlns="http://www.w3.org/2000/svg"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"></path></svg>
-            <div style={{ backgroundColor: 'white', padding: '5px', borderRadius: '5px' }}>
-              {text}
-            </div>
-          </div>
-        );
-      };
+      //   return (
+      //     <div className='mapMarkerDiv'>
+      //       <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="25px" width="25px" xmlns="http://www.w3.org/2000/svg"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"></path></svg>
+      //       <div style={{ backgroundColor: 'white', padding: '5px', borderRadius: '5px' }}>
+      //         {text}
+      //       </div>
+      //     </div>
+      //   );
+      // };
     
     
       const locations = [
@@ -1010,6 +1013,16 @@ export function ShoppingCartPage() {
         setCenter({lat: locations[1].latitude, lng: locations[1].longitude})
       }
 
+
+      const [mapCenter, setMapCenter] = useState([45.186902, 24.971836]); // default center
+      const [markers, setMarkers] = useState([
+        { name: 'Arges', position: [45.126948, 24.360449] },
+        { name: 'Bucharest', position: [44.4268, 26.1025] },
+      ]);
+    
+      const handleMarkerClick = (marker) => {
+        setMapCenter(marker.position);
+      };
     
   return (
     <div >
@@ -1394,8 +1407,8 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
 
                {pickUp && (
                 <>
-                 <div style={{ height: "200px", width: "100%" }}>
-                 <GoogleMapReact
+                <div style={{ width: '100%', height: '300px' }}>
+                 {/* <GoogleMapReact
                    bootstrapURLKeys={{ key: "AIzaSyCi2gGmWbowIepm4OWPweRvPeJx6hsILXQ" }}
                    center={center}
                    zoom={zoom}
@@ -1416,10 +1429,23 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                      lng={locations[1].longitude}
                      text="Arges"
                    />
-                 </GoogleMapReact>
+                 </GoogleMapReact> */}
+
+                <MapContainer style={{width: '100%', height: '100%'}} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+                  <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker title='Bita' position={[51.505, -0.09]}>
+                    <Popup >
+                      A pretty CSS3 popup. Easily customizable.
+                    </Popup>
+                  </Marker>
+                </MapContainer>
+
+
                   </div>
                  
-                    <div className='googleMapDiv'>
+                    {/* <div className='googleMapDiv'>
                       <div className='selectionMapDiv'>
                         <div>
                           <p>Bucuresti</p>
@@ -1469,7 +1495,7 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                       </div>
                       
                       </div>
-                    </div>
+                    </div> */}
                     </>
                )}
 

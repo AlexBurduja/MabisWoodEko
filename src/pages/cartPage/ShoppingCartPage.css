@@ -507,6 +507,12 @@ table:hover{
     padding: 5px 10px;
 }
 
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+  display: block;
+  margin: auto;
+}
+
 /* under 1400px */
 
 @media (max-width: 1400px)  {

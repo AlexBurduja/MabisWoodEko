@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { useContext, useEffect, useState } from 'react';
+import { React, useContext, useEffect, useState } from 'react';
 import "./ShoppingCartPage.css"
 import { AiOutlineShopping } from 'react-icons/ai'
 import { FaCcVisa, FaCcMastercard, FaCcApplePay } from 'react-icons/fa'
@@ -18,9 +18,21 @@ import {AiFillCreditCard} from 'react-icons/ai'
 import { FaGooglePay } from 'react-icons/fa'
 import GoogleMapReact from 'google-map-react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import L from 'leaflet'
 import "leaflet/dist/leaflet.css";
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 export function ShoppingCartPage() {
+
+  const markerIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  });
 
   const { user } = useContext( FirebaseAuthContext )
   
@@ -1435,9 +1447,9 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
-                  <Marker title='Bita' position={[51.505, -0.09]}>
+                  <Marker icon={markerIcon} position={[51.505, -0.09]}>
                     <Popup >
-                      A pretty CSS3 popup. Easily customizable.
+                      Bucuresti
                     </Popup>
                   </Marker>
                 </MapContainer>

@@ -18,7 +18,7 @@ import {AiFillCreditCard} from 'react-icons/ai'
 import { FaGooglePay } from 'react-icons/fa'
 import GoogleMapReact from 'google-map-react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import L from 'leaflet'
+import L, { Map, map } from 'leaflet'
 import "leaflet/dist/leaflet.css";
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -1007,16 +1007,14 @@ export function ShoppingCartPage() {
         }
       ];
     
-      const [center, setCenter] = useState({lat: 45.9442858, lng: 25.0094303})
+      const [center, setCenter] = useState([45.9442858,25.0094303])
       const [zoom , setZoom] = useState(6)
       const [bounds, setBounds] = useState({})
     
       const [selectedMarker, setSelectedMarker] = useState('');
     
       const handleClickBucharest = () => {
-        setSelectedMarker('Bucuresti');
-        setZoom(18)
-        setCenter({lat: locations[0].latitude, lng: locations[0].longitude})
+        setCenter([locations[0].latitude, locations[0].longitude])
       }
     
       const handleClickArges = () => {
@@ -1026,15 +1024,6 @@ export function ShoppingCartPage() {
       }
 
 
-      const [mapCenter, setMapCenter] = useState([45.186902, 24.971836]); // default center
-      const [markers, setMarkers] = useState([
-        { name: 'Arges', position: [45.126948, 24.360449] },
-        { name: 'Bucharest', position: [44.4268, 26.1025] },
-      ]);
-    
-      const handleMarkerClick = (marker) => {
-        setMapCenter(marker.position);
-      };
     
   return (
     <div >
@@ -1443,21 +1432,25 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                    />
                  </GoogleMapReact> */}
 
-                <MapContainer style={{width: '100%', height: '100%'}} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+                <MapContainer style={{width: '100%', height: '100%'}} center={center} zoom={zoom} scrollWheelZoom={false}>
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
-                  <Marker icon={markerIcon} position={[51.505, -0.09]}>
+                  <Marker icon={markerIcon} position={[locations[0].latitude, locations[0].longitude]}>
                     <Popup >
                       Bucuresti
                     </Popup>
                   </Marker>
+                  
+                  <Marker icon={markerIcon} position={[locations[1].latitude, locations[1].longitude]}>
+                    <Popup >
+                      Arges
+                    </Popup>
+                  </Marker>
                 </MapContainer>
-
-
                   </div>
                  
-                    {/* <div className='googleMapDiv'>
+                   <div className='googleMapDiv'>
                       <div className='selectionMapDiv'>
                         <div>
                           <p>Bucuresti</p>
@@ -1507,7 +1500,8 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                       </div>
                       
                       </div>
-                    </div> */}
+                      </div>
+                    
                     </>
                )}
 

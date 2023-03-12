@@ -1409,6 +1409,7 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                {pickUp && (
                 <>
                 <div style={{ width: '100%', height: '300px' }}>
+                
                  {/* <GoogleMapReact
                    bootstrapURLKeys={{ key: "AIzaSyCi2gGmWbowIepm4OWPweRvPeJx6hsILXQ" }}
                    center={center}

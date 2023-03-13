@@ -11,9 +11,10 @@ export function ProductListComponent() {
   const [loading, setLoading] = useState(true)
 
   
+  
+  useEffect(() => {
   const ref = collection(db , 'products')
 
-useEffect(() => {
   const getProducts = async () => {
     const data = await getDocs(ref)
 
@@ -35,11 +36,11 @@ useEffect(() => {
         'Products'}
       </header>
       {loading ? <Loading /> :
-      <div className='gridUl'>
+      <div className='gridUl' >
         {products.map((product) => {
           return (
-            <>
                 <ProductCardComponent
+                key={product.id}
                 title={product.title}
                 kg={product.kg}
                 currency={product.currency}
@@ -49,7 +50,6 @@ useEffect(() => {
                 stripeId = {product.stripeId}
                 id={product.id}>
                 </ProductCardComponent>
-              </>
             )
           })}
           </div>

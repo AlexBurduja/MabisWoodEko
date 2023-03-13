@@ -282,7 +282,7 @@ export function ProductCardComponent(props) {
         <p className="priceCurrencyP">{price} {currency}</p>
 
         <button  className="cardDivButton" onClick={addToCart}>{localStorage.getItem('language') === 'FR' ? 'Ajouter au panier' :
- localStorage.getItem('language') === 'RO' ? 'Adaugă în coș' :
+ localStorage.getItem('language') === 'RO' ? 'Adauga în cos' :
  localStorage.getItem('language') === 'DE' ? 'Warenkorb Legen' :
  localStorage.getItem('language') === 'IT' ? 'Aggiungi al carrello' :
  'Add to cart'}</button>

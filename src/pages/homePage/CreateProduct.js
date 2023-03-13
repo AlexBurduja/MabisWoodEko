@@ -152,7 +152,7 @@ export function CreateProduct(){
     <>
     {conditional.admin === true && (
       <div className="createProductButtonWrapper">
-        <button className="createProductButton" onClick={toggleModal2}>{localStorage.getItem('language') === "RO" ? 'Creează Produs' :
+        <button className="createProductButton" onClick={toggleModal2}>{localStorage.getItem('language') === "RO" ? 'Creeaza Produs' :
  localStorage.getItem('language') === "IT" ? 'Crea Prodotto' :
  localStorage.getItem('language') === "DE" ? 'Produkt erstellen' :
  localStorage.getItem('language') === "FR" ? 'Créer un produit' :
@@ -165,7 +165,7 @@ export function CreateProduct(){
           <div onClick={toggleModal2} className="overlay"></div>
             <div className="modal-content modal2 modal-content-main">
               <h1 >
-                {localStorage.getItem('language') === "RO" ? 'Creează Produs' :
+                {localStorage.getItem('language') === "RO" ? 'Creeaza Produs' :
                 localStorage.getItem('language') === "IT" ? 'Crea Prodotto' :
                 localStorage.getItem('language') === "DE" ? 'Produkt erstellen' :
                 localStorage.getItem('language') === "FR" ? 'Créer un produit' :
@@ -224,7 +224,7 @@ export function CreateProduct(){
 
                     <div className="modal-content-inputs_div">
                       <label htmlFor="currency">
-                        {localStorage.getItem('language') === "RO" ? 'Monedă :' :
+                        {localStorage.getItem('language') === "RO" ? 'Moneda :' :
                         localStorage.getItem('language') === "IT" ? 'Valuta :' :
                         localStorage.getItem('language') === "DE" ? 'Währung :' :
                         localStorage.getItem('language') === "FR" ? 'Monnaie :' :
@@ -258,7 +258,7 @@ export function CreateProduct(){
                     <div className="modal-content-inputs_div">
                       <input type="file" onChange={handleImageChange}></input>
                       <button onClick={handleSubmit}>
-                        {localStorage.getItem('language') === "RO" ? 'Încărcați imaginea' :
+                        {localStorage.getItem('language') === "RO" ? 'Incarcați imaginea' :
                         localStorage.getItem('language') === "IT" ? 'Carica immagine' :
                         localStorage.getItem('language') === "DE" ? 'Bild hochladen' :
                         localStorage.getItem('language') === "FR" ? 'Télécharger une image' :
@@ -272,7 +272,7 @@ export function CreateProduct(){
                 <div className="modal-content-button_create">
               
                 <button type="submit" onClick={submit} className="modal-content-button_save">
-                  {localStorage.getItem('language') === "RO" ? 'Creează Produs' :
+                  {localStorage.getItem('language') === "RO" ? 'Creeaza Produs' :
                   localStorage.getItem('language') === "IT" ? 'Crea Prodotto' :
                   localStorage.getItem('language') === "DE" ? 'Produkt erstellen' :
                   localStorage.getItem('language') === "FR" ? 'Créer un produit' :

@@ -22,6 +22,7 @@ import L, { Map, map } from 'leaflet'
 import "leaflet/dist/leaflet.css";
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import { useNavigate } from 'react-router-dom';
 
 export function ShoppingCartPage() {
 
@@ -90,6 +91,8 @@ export function ShoppingCartPage() {
   const [notifyLetterStreetNo, setNotifyLetterStreetNo] = useState(false)
 
   const [fiirstName , setFiirstName] = useState(conditional.firstName)
+
+  const navigate = useNavigate()
 
   const handleDeliveryChange = (e) =>{
     setDeliverySelected(e.target.value)
@@ -303,6 +306,39 @@ export function ShoppingCartPage() {
         
         `)
       }
+
+      const deleteCartUponSuccess = async () => {
+      
+        if(user?.uid){
+          
+          const userDoc = collection(db, `users/${user.uid}/cart`)
+          
+          const q =await getDocs(userDoc)
+          
+          const batch = writeBatch(db)
+          q.forEach(doc => {
+          batch.delete(doc.ref)
+        })
+        
+        batch.commit()
+      }
+  
+      if(!user?.uid){
+        const clientId = sessionStorage.getItem("clientId")
+  
+        const userDoc = collection(db, `guestCarts/${clientId}/cart`)
+        
+        const q =await getDocs(userDoc)
+        
+        const batch = writeBatch(db)
+        q.forEach(doc => {
+          batch.delete(doc.ref)
+        })
+        
+        batch.commit()
+      }
+  
+    }
       
       const checkout = () => {
         const emailValid = validateEmail(email)
@@ -575,7 +611,7 @@ export function ShoppingCartPage() {
           return true
           }
 
-          if(!emailValid || !firstNameValid || !lastNameValid || !phoneValid || !streetValid || !streetNoValid || !blockValid || !apartamentNoValid || isEmpty(country) || region === "Select region"){
+          if(!emailValid || !firstNameValid || !lastNameValid || !phoneValid || !streetValid || !streetNoValid || !blockValid || !apartamentNoValid || isEmpty(country) || region === "Select region" || isEmpty(selectedMarker)){
             toast.error("One or more fields are empty!", {
               autoClose: 6000
             })
@@ -598,11 +634,10 @@ export function ShoppingCartPage() {
               localStorage.setItem("companyCui", companyCui);
       
           } else if(deliverySelected === "ramburs" || "pickUp") {
-            console.log("mailRamburs")
 
             emailjs.send('service_eyuz8pg' , 'template_xeem2dd', {
               subject : `Comanda de la ${email}`,
-              metoda : `Metoda de livrare este : ${deliverySelected === "ramburs" ? "Ramburs" : `Ridicare din magazinul din <b>${store}</b>.`}`,
+              metoda : `Metoda de livrare este : ${deliverySelected === "ramburs" ? "Ramburs" : `Ridicare din magazinul din <b>${selectedMarker}</b>.`}`,
 
               company: `${isCompanyChecked ? `Nume Firma: ${companyName
               }, CUI: ${companyCui}.` : `Persoana Fizica.` }`,
@@ -619,7 +654,24 @@ export function ShoppingCartPage() {
               
               totalPrice : `Pretul total este de <b>${totalPrice} lei</b>.`,
             }, 'crU6K8bQnftB81z-j' )
-  
+            
+            toast.success(
+            localStorage.getItem('language') === "FR" ? "Merci pour votre commande ! Vous serez bientôt contacté(e) par notre équipe !" :
+            localStorage.getItem('language') === "RO" ? "Multumim pentru comanda! Veti fi contactat in curand de catre echipa noastra!" :
+            localStorage.getItem('language') === "DE" ? "Vielen Dank für Ihre Bestellung! Sie werden bald von unserem Team kontaktiert!" :
+            localStorage.getItem('language') === "IT" ? "Grazie per l'ordine! Sarete presto contattati dal nostro team!" :
+            "Thanks for the order! You will soon be contacted by our team!", {
+              autoClose: 4000
+            })
+
+        
+            
+            setTimeout(() => {
+              deleteCartUponSuccess();
+              navigate('/')
+
+          }, 5000)
+
           } 
 
         }
@@ -992,14 +1044,12 @@ export function ShoppingCartPage() {
     
       const locations = [
         {
-          id: 1,
           name: 'Bucharest',
           address: 'Bucharest, Romania',
           latitude: 44.47639,
           longitude: 26.15962
         },
         {
-          id: 2,
           name: 'Arges',
           address: 'Arges, Romania',
           latitude: 44.88932095525005,
@@ -1014,15 +1064,19 @@ export function ShoppingCartPage() {
       const [selectedMarker, setSelectedMarker] = useState('');
     
       const handleClickBucharest = () => {
+        setSelectedMarker('Bucuresti')
         setCenter([locations[0].latitude, locations[0].longitude])
+        setZoom(17)
       }
     
       const handleClickArges = () => {
         setSelectedMarker('Arges');
-        setZoom(18)
+        setZoom(16)
         setCenter({lat: locations[1].latitude, lng: locations[1].longitude})
       }
 
+      
+      console.log(selectedMarker)
 
     
   return (
@@ -1032,11 +1086,11 @@ export function ShoppingCartPage() {
      <div className='emptyCartTextWrapper'>
      <div className='emptyCartText'>
        <div>
-     <h1><h1>{localStorage.getItem('language') === "FR" ? "Votre panier est vide !" 
+     <h1>{localStorage.getItem('language') === "FR" ? "Votre panier est vide !" 
      : localStorage.getItem('language') === "RO" ? "Cosul dvs. este gol!" 
      : localStorage.getItem('language') === "DE" ? "Ihr Warenkorb ist leer!" 
      : localStorage.getItem('language') === "IT" ? "Il tuo carrello è vuoto!" 
-     : "Your cart is empty!"}</h1></h1>
+     : "Your cart is empty!"}</h1>
        </div>
 
        <div>
@@ -1433,7 +1487,7 @@ localStorage.getItem('language') === 'IT' ? 'Ritiro presso uno dei nostri negozi
                    />
                  </GoogleMapReact> */}
 
-                <MapContainer style={{width: '100%', height: '100%'}} center={center} zoom={zoom} scrollWheelZoom={false}>
+                <MapContainer style={{width: '100%', height: '100%'}} center={center} zoom={zoom} key={center}>
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
